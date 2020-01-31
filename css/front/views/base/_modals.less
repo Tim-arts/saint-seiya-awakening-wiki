@@ -1,0 +1,35 @@
+.modal {
+    cursor: pointer;
+
+    .modal-content {
+        background-color: @grey-dark-1;
+        cursor: default;
+
+        .modal-header {
+            border-bottom-color: @success;
+
+            .modal-title {
+                color: @success;
+            }
+
+            .close {
+                text-shadow: none;
+                will-change: opacity;
+                transition: opacity @time-transition-05 @transition-1;
+
+                span {
+                    color: @success;
+                    vertical-align: text-top;
+                }
+            }
+        }
+
+        .modal-footer {
+            border-top-color: transparent;
+        }
+    }
+
+    &.show {
+        overflow-y: hidden;
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "shrine": {
+        "name": "Shrine",
+        "data": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "multiple": true
+    },
+    "titans": {
+        "name": "Titans",
+        "data": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "multiple": true
+    },
+    "shop": {
+        "name": "Shop",
+        "data": false
+    }
+}

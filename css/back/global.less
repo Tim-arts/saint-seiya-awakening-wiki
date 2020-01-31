@@ -1,0 +1,181 @@
+@import "../base";
+
+@link-hover: lighten(@grey-medium-3, 3%);
+
+body {
+    background: url("https://res.cloudinary.com/dowdeo3ja/image/upload/q_auto,f_auto/back/background.jpg");
+    background-size: cover;
+}
+
+.wrapper {
+    display: flex;
+    height: 100vh;
+    align-items: stretch;
+    perspective: 1500px;
+
+    #sidebar {
+        width: @sidebar-width;
+        background-color: @grey-medium-3;
+        position: relative;
+        will-change: margin-left;
+        transition: margin-left @time-transition-05 @transition-1;
+
+        #sidebar-collapse {
+            position: absolute;
+            right: -28px;
+            top: 20px;
+            background-color: @grey-medium-3;
+            padding: 5px;
+            border-radius: 0 @radius-double @radius-double 0;
+            z-index: 1;
+
+            i {
+                font-size: 18px;
+                color: @white;
+                position: relative;
+                top: 2px;
+                will-change: color;
+                transition: color @time-transition-05 @transition-1;
+            }
+
+            &:hover {
+                i {
+                    color: @success;
+                }
+            }
+        }
+
+        .sidebar-header {
+            padding: 15px;
+
+            img {
+                border-radius: @radius-circled;
+            }
+
+            h3 {
+                margin-left: 15px;
+                margin-bottom: 0;
+                vertical-align: -2px;
+            }
+        }
+
+        .sidebar-menu {
+            width: @sidebar-width;
+            border-bottom: 1px solid @grey-dark-1;
+
+            p {
+                color: #fff;
+                padding: 10px;
+            }
+
+            li {
+                a {
+                    padding: 10px 15px;
+                    display: block;
+
+                    &:hover {
+                        background: @link-hover;
+                    }
+                }
+
+                ul {
+                    li {
+                        a {
+                            padding: 10px 30px;
+
+                            i, span {
+                                vertical-align: middle;
+                            }
+
+                            i {
+                                font-size: 22px;
+                            }
+
+                            span {
+                                font-size: 12px;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+
+                &.active a, & a.active {
+                    color: @success;
+                    background: @link-hover;
+                }
+            }
+        }
+
+        &.active {
+            margin-left: -250px;
+        }
+
+        .version {
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+
+            p {
+                font-size: 12px;
+            }
+        }
+    }
+
+    #content {
+        padding: 20px 60px;
+        position: relative;
+        will-change: width;
+        transition: width @time-transition-05 @transition-1;
+        flex: 1 1 auto;
+        overflow: auto;
+
+        form {
+            width: 100%;
+
+            h1 {
+                i {
+                    position: relative;
+                    top: 5px;
+                }
+
+                span {
+                    display: inline-block;
+                }
+            }
+
+            label {
+                color: @success;
+
+                &.pointer {
+                    will-change: color;
+                    transition: color @transition-1 @time-transition-05;
+
+                    &:hover {
+                        color: @white;
+                    }
+                }
+            }
+
+            textarea {
+                min-height: 100px;
+            }
+
+            .form-control {
+                color: @white;
+                background: @grey-dark-1;
+                border: 2px solid fade(@gold, 20%);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+
+        &.active {
+            margin-left: 0;
+        }
+    }
+}

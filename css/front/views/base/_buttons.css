@@ -1,0 +1,21 @@
+.custom-theme .no-border-x {
+  border-left: none;
+  border-right: none;
+}
+.custom-theme .no-border-y {
+  border-top: none;
+  border-bottom: none;
+}
+.custom-theme .no-borders {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+.custom-theme.theme-1 {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+/*# sourceMappingURL=_buttons.css.map */

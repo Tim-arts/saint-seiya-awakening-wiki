@@ -1,0 +1,48 @@
+@import (reference) "../../front/modules/base/_colors";
+@import (reference) "../../front/modules/base/_variables";
+
+form {
+    .thumb-container {
+        position: relative;
+
+        label {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            cursor: pointer;
+        }
+
+        img {
+            height: @img-min-height;
+            opacity: 1;
+            position: absolute;
+            top: -40px;
+            right: 15px;
+            will-change: opacity;
+            transition: opacity @transition-1 @time-transition-05;
+
+            &:hover {
+                opacity: .5;
+            }
+
+            &.not-input-file {
+                top: -10px;
+            }
+        }
+    }
+
+    select {
+        cursor: pointer;
+        overflow-y: hidden;
+
+        &.form-control[multiple] {
+            height: 160px;
+        }
+
+        &:focus {
+            option:checked {
+                background: @grey-medium-1;
+            }
+        }
+    }
+}

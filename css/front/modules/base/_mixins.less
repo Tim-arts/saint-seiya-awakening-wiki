@@ -1,0 +1,98 @@
+/*************************************/
+/*************************************/
+/*************************************/
+
+/********* MIXINS ********/
+
+/*************************************/
+/*************************************/
+/*************************************/
+
+/* Text color constructor */
+.CreateNewTextColor (@name; @color) {
+    .text-@{name} {
+        color: @color;
+    }
+}
+
+/* Background-color constructor */
+.CreateNewBGColor (@name; @color) {
+    .bg-@{name} {
+        background-color: @color;
+    }
+}
+
+/* Background-color constructor */
+.CreateNewBGGradient (@name; @gradient) {
+    .bg-gradient-@{name} {
+        background: @gradient;
+    }
+}
+
+.CreateNewBGGradientHover (@name; @img) {
+    .bg-gradient-hover-@{name} {
+        &:hover {
+            background-image: @img;
+        }
+    }
+}
+
+/* Hover focus */
+.hover-focus (@content) {
+    &:hover,
+    &:focus {
+        @content();
+    }
+}
+
+/* Placeholder */
+.placeholder(@color) {
+    &::placeholder {
+        color: @color;
+    }
+}
+
+/* Spacings */
+.CreateNewEmptySpace (@space; @value) {
+    .e-s-@{space} {
+        padding-top: @value / 2;
+        padding-bottom: @value / 2;
+    }
+}
+
+.CreateNewMargin (@space; @value; @keyword; @direction; @breakpoint) {
+    .m@{keyword}-@{breakpoint}-@{space} {
+        margin-@{direction}: @value;
+    }
+}
+
+.CreateCustomClassMargin (@space; @name; @value; @keyword) {
+    & when (@keyword = x) {
+        .@{name}-m@{keyword}-@{space} {
+            margin-left: @value;
+            margin-right: @value;
+        }
+    }
+
+    & when (@keyword = y) {
+        .@{name}-m@{keyword}-@{space} {
+            margin-top: @value;
+            margin-bottom: @value;
+        }
+    }
+}
+
+/* Borders */
+.CreateNewBorderColor (@name; @color) {
+    .border-color-@{name} {
+        border-color: @color;
+    }
+}
+
+.CreateColumn (@property; @size) {
+    .col-@{property}-@{size} {
+        -ms-flex:0 0 100%;
+        flex:0 0 100%;
+        max-width:100%
+    }
+}

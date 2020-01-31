@@ -1,0 +1,25 @@
+@import (reference) url("../../modules/base/_colors");
+@import (reference) url("../../modules/base/_variables");
+
+footer {
+    background-color: @grey-medium-1;
+
+    a {
+        will-change: color;
+        transition: color @transition-1 @time-transition-05;
+
+        .text-green();
+
+        &:hover {
+            .text-white();
+        }
+    }
+
+    strong {
+        .text-white();
+    }
+
+    @media (max-width: @breakpoint-sm) {
+        font-size: 14px;
+    }
+}

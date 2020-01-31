@@ -1,0 +1,268 @@
+[
+    {
+        "_id": "0ba6a50c-07a1-48a3-b083-ea772470555e",
+        "basic_attributes": {
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                }
+            },
+            "types": [
+                "c.atk",
+                "choose an attribute"
+            ]
+        },
+        "obtainment_system": {
+            "shrine": [
+                ""
+            ],
+            "titans": [
+                ""
+            ],
+            "shop": false
+        },
+        "name": "eagle_eye_cosmo_name",
+        "slug": "eagle-eye",
+        "slug_underscore": "eagle_eye",
+        "description": "eagle_eye_cosmo_description",
+        "bonus_attributes": {
+            "type": "choose a bonus attribute",
+            "value": ""
+        },
+        "type": "solar",
+        "exclusive_cn": false,
+        "__v": 0
+    },
+    {
+        "_id": "1ad4bef5-92c7-486e-975b-07ec89fbe0e8",
+        "basic_attributes": {
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "12.92%",
+                        "43"
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "11.84%",
+                        "39"
+                    ]
+                }
+            },
+            "types": [
+                "c.atk",
+                "c.def"
+            ]
+        },
+        "obtainment_system": {
+            "shrine": [
+                ""
+            ],
+            "titans": [
+                "Tuesday",
+                "Saturday",
+                "Sunday"
+            ],
+            "shop": false
+        },
+        "name": "c_stone_cosmo_name",
+        "slug": "c-stone",
+        "slug_underscore": "c_stone",
+        "description": "c_stone_cosmo_description",
+        "bonus_attributes": {
+            "type": "c.atk",
+            "value": "10%"
+        },
+        "type": "solar",
+        "exclusive_cn": false,
+        "__v": 0
+    },
+    {
+        "_id": "300b99e3-2267-4b88-8749-32227a0abb4b",
+        "basic_attributes": {
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                }
+            },
+            "types": [
+                "c.atk",
+                "choose an attribute"
+            ]
+        },
+        "obtainment_system": {
+            "shrine": [
+                "Friday",
+                "Sunday"
+            ],
+            "titans": [
+                "Sunday"
+            ],
+            "shop": false
+        },
+        "name": "rosary_cosmo_name",
+        "slug": "rosary",
+        "slug_underscore": "rosary",
+        "description": "rosary_cosmo_description",
+        "bonus_attributes": {
+            "type": "choose a bonus attribute",
+            "value": ""
+        },
+        "type": "solar",
+        "exclusive_cn": false,
+        "__v": 0
+    },
+    {
+        "_id": "798c47f6-08e7-4e4b-a7e0-3b5dc2054454",
+        "basic_attributes": {
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "348",
+                        "3.60%"
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "319",
+                        "3.30%"
+                    ]
+                }
+            },
+            "types": [
+                "p.atk",
+                "p.crit effect"
+            ]
+        },
+        "obtainment_system": {
+            "shrine": [
+                ""
+            ],
+            "titans": [
+                "Wednesday",
+                "Saturday",
+                "Sunday"
+            ],
+            "shop": false
+        },
+        "name": "fire_drop_cosmo_name",
+        "slug": "fire-drop",
+        "slug_underscore": "fire_drop",
+        "description": "fire_drop_cosmo_description",
+        "bonus_attributes": {
+            "type": "hp",
+            "value": "10%"
+        },
+        "type": "solar",
+        "exclusive_cn": false,
+        "__v": 0
+    },
+    {
+        "_id": "ca975afd-832c-4e07-b9cc-0d9a55ef906f",
+        "basic_attributes": {
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "",
+                        ""
+                    ]
+                }
+            },
+            "types": [
+                "c.atk",
+                "choose an attribute"
+            ]
+        },
+        "obtainment_system": {
+            "shrine": [
+                "Friday",
+                "Sunday"
+            ],
+            "titans": [
+                "Sunday"
+            ],
+            "shop": false
+        },
+        "name": "hummingbird_cosmo_name",
+        "slug": "hummingbird",
+        "slug_underscore": "hummingbird",
+        "description": "hummingbird_cosmo_description",
+        "bonus_attributes": {
+            "type": "choose a bonus attribute",
+            "value": ""
+        },
+        "type": "star",
+        "exclusive_cn": false,
+        "__v": 0
+    },
+    {
+        "_id": "e04b6c0f-829b-4b78-8b7f-430fb45dd1ad",
+        "basic_attributes": {
+            "types": [
+                "p.def",
+                "c.def"
+            ],
+            "values": {
+                "SS": {
+                    "level_10": [
+                        "11.76%",
+                        "11.76%"
+                    ]
+                },
+                "S": {
+                    "level_10": [
+                        "10.78%",
+                        "10.78%"
+                    ]
+                }
+            }
+        },
+        "obtainment_system": {
+            "shrine": [
+                ""
+            ],
+            "titans": [
+                "Friday",
+                "Saturday",
+                "Sunday"
+            ],
+            "shop": false
+        },
+        "name": "anti_stick_cosmo_name",
+        "slug": "anti-stick",
+        "slug_underscore": "anti_stick",
+        "description": "anti_stick_cosmo_description",
+        "bonus_attributes": {
+            "type": "choose a bonus attribute",
+            "value": "15%"
+        },
+        "type": "solar",
+        "exclusive_cn": false,
+        "__v": 0
+    }
+]

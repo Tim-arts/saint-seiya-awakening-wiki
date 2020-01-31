@@ -1,0 +1,51 @@
+.anim-fade-in {
+  animation-duration: 2s;
+  animation-name: fade-in;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.anim-fade-out {
+  animation-duration: 2s;
+  animation-name: fade-out;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.anim-load-in {
+  animation-duration: 8s;
+  animation-name: load-in;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes load-in {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    width: 100vw;
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=_animations.css.map */

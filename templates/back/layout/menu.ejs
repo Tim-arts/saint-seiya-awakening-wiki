@@ -1,0 +1,183 @@
+<nav id="sidebar">
+    <div id="sidebar-collapse" class="pointer">
+        <i class="material-icons">close</i>
+    </div>
+    <div class="sidebar-header">
+        <a href="/">
+            <img class="d-inline-block" src="<%- cloudinary.url("favicon/ssa.png", {secure: true}) %>" alt="Logo" />
+        </a>
+        <h3 class="text-white d-inline-block h6">SSAW - Back</h3>
+    </div>
+    <ul class="sidebar-menu list-unstyled">
+        <%
+            let entries = [
+                {
+                    name: "Accueil",
+                    url: "/back/",
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                },
+                {
+                    name: "News",
+                    url: "news",
+                    dropdown: [
+                        {
+                            url: "/back/add-news",
+                            icon: "fiber_new",
+                            title: "Ajouter une actualité",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        },
+                        {
+                            url: "/back/manage-news",
+                            icon: "developer_board",
+                            title: "Gérer les actualités",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        }
+                    ],
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                },
+                {
+                    name: "Saints",
+                    url: "saints-menu",
+                    dropdown: [
+                        {
+                            url: "/back/add-saint",
+                            icon: "person",
+                            title: "Ajouter un saint",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        },
+                        {
+                            url: "/back/manage-saints",
+                            icon: "developer_board",
+                            title: "Gérer les saints",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        }
+                    ],
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                },
+                {
+                    name: "Cosmos",
+                    url: "cosmos-menu",
+                    dropdown: [
+                        {
+                            url: "/back/add-cosmo",
+                            icon: "sports_volleyball",
+                            title: "Ajouter une cosmo",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        },
+                        {
+                            url: "/back/manage-cosmos",
+                            icon: "developer_board",
+                            title: "Gérer les cosmos",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        }
+                    ],
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                },
+                {
+                    name: "Skills",
+                    url: "skills-menu",
+                    dropdown: [
+                        {
+                            url: "/back/add-skill",
+                            icon: "flash_on",
+                            title: "Ajouter un skill",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        },
+                        {
+                            url: "/back/manage-skills",
+                            icon: "developer_board",
+                            title: "Gérer les skills",
+                            visibility: [
+                                "production",
+                                "development"
+                            ]
+                        }
+                    ],
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                },
+                {
+                    name: "Déconnexion",
+                    url: "https://log:out@saint-seiya-awakening-wiki.herokuapp.com/",
+                    visibility: [
+                        "production"
+                    ]
+                }
+            ];
+        %>
+        <%
+            if (locals.cosmo) {
+                let currentObject = entries[Number(data.activeIndex.split(".")[0])];
+                currentObject["dropdown"] = [...currentObject["dropdown"], ...data.dropdown];
+            }
+        %>
+
+        <% for (let i = 0, iCount = entries.length; i < iCount; i++) { %>
+            <% let category = entries[i] %>
+            <% let displayCategory = category.visibility.indexOf(process.env.NODE_ENV) > -1 %>
+            <% let activeCategory = data.activeIndex == i ? "active" : "" %>
+            <% let activeSubcategory = String(data.activeIndex).split(".")[0] == i ? "show" : "" %>
+
+            <% if (displayCategory) { %>
+                <li>
+                    <% if (!category.dropdown) { %>
+                        <a href="<%= category.url %>" class="<%= activeCategory %>">
+                            <%= category.name %>
+                        </a>
+                    <% } else { %>
+                        <a href="#<%= category.url %>" data-toggle="collapse" aria-expanded="false"><%= category.name %></a>
+                        <ul id="<%= category.url %>" class="collapse list-unstyled show <%= activeSubcategory %>">
+                            <% for (let j = 0, jCount = category.dropdown.length; j < jCount; j++) { %>
+                                <% let subcategory = category.dropdown[j] %>
+                                <li>
+                                    <a href="<%= subcategory.url %>" class="<%= data.activeIndex == (i + "." + j) ? "active": "" %>">
+                                        <i class="material-icons"<%= subcategory.iconStyle ? " style=transform:" + subcategory.iconStyle : "" %>><%= subcategory.icon %></i>
+                                        <span><%= subcategory.title %></span>
+                                    </a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </li>
+            <% } %>
+        <% } %>
+    </ul>
+    <div class="version text-center">
+        <p class="text-white">Version <%= global.utils.version %></p>
+    </div>
+</nav>

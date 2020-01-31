@@ -1,0 +1,38 @@
+{
+    "focus": {
+        "values": [
+            "single",
+            "multiple"
+        ],
+        "type": "checkbox"
+    },
+    "roles": {
+        "values": [
+            "tank",
+            "dps",
+            "support",
+            "control",
+            "healer",
+            "buffer",
+            "debuffer",
+            "cleanser"
+        ],
+        "type": "checkbox"
+    },
+    "type": {
+        "values": [
+            "physical",
+            "cosmo"
+        ],
+        "type": "radio"
+    },
+    "rank": {
+        "values": [
+            "SS",
+            "S",
+            "A",
+            "B"
+        ],
+        "type": "radio"
+    }
+}

@@ -1,0 +1,41 @@
+@card-title-padding-x: .75em;
+
+@import "templates/cards";
+
+.saint-card {
+    height: @card-height + (@card-spacing-y * 2);
+    border: 2px solid @gold;
+    border-radius: @radius-double;
+    transition: transform @transition-1 @time-transition-05;
+    position: relative;
+
+    .card-container {
+        height: @card-height;
+        background-size: cover;
+        margin: 0 (@card-spacing-x - @card-offset - 1) 0 (@card-spacing-x - @card-offset - 1);
+
+        img {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+    }
+
+    .card-title {
+        font-size: 15px;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        margin-bottom: 0;
+        width: 100%;
+
+        &.s-rank {
+            color: @gold;
+            text-shadow: 0 1px 5px @black;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-10px);
+    }
+}

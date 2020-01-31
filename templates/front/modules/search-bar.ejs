@@ -1,0 +1,47 @@
+<div class="search-bar-container">
+    <div class="search-bar-content">
+        <label for="search-bar-saints" class="d-none"></label>
+        <input id="search-bar-saints" type="text" minlength="3" maxlength="20" placeholder="Find a saint" />
+        <span class="search-icon">
+            <i class="material-icons">search</i>
+        </span>
+        <% if (tags) { %>
+            <span class="filters">
+                <i class="material-icons">tune</i>
+            </span>
+        <% } %>
+    </div>
+
+    <% if (tags) { %>
+        <div class="search-bar-filters">
+            <div class="row">
+                <% for (let tag in tags) { %>
+                    <div class="col-6">
+                        <div class="search-bar-filter">
+                            <div class="filter-title mt-3"><%= tag %></div>
+                            <div class="filter-container<%= tags[tag]["type"] === "radio" ? ' filter-container-radio' : ' filter-container-checkbox' %> mt-2">
+                                <% for (let i = 0, count = tags[tag]["values"].length; i < count; i++) { %>
+                                    <div class="filter-content<%= tags[tag]["type"] === "checkbox" ? ' filter-checkbox' : ' filter-radio' %>">
+                                        <input id="filter-by-<%= tags[tag]["values"][i] %>" type="<%= tags[tag]["type"] %>" name="filter-by-<%= tag %>" />
+                                        <label for="filter-by-<%= tags[tag]["values"][i] %>" class="text-center">
+                                            <span><%= tags[tag]["values"][i] %></span>
+                                        </label>
+                                        <% if (tags[tag]["type"] === "checkbox") { %>
+                                            <div class="filter-icons">
+                                                <i class="material-icons material-add">add</i>
+                                                <i class="material-icons material-close">close</i>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% } %>
+                                <% if (tags[tag]["type"] === "radio") { %>
+                                    <div class="filter-slider"></div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,262 @@
+<%
+    if (typeof cosmo === 'undefined') locals.cosmo = false;
+
+    let form;
+    if (locals.cosmo) {
+        form = "<form id='update-cosmo' method='POST' action='../../api/cosmo/update' data-update='true'>";
+    } else {
+        form = "<form id='update-cosmo' method='POST' action='../api/cosmo/create'>";
+   }
+
+    let cosmoData = {
+        name: {
+            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_name'] : "",
+            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_name'] : ""
+        },
+        description: {
+            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_description'] : "",
+            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_description'] : ""
+        },
+        image: locals.cosmo ? cloudinary.url("cosmos/" + cosmo.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+        basic_attributes: {
+            values: {
+                SS: {
+                    level_10: locals.cosmo ? cosmo.basic_attributes.values.SS.level_10 : ""
+                },
+                S: {
+                    level_10: locals.cosmo ? cosmo.basic_attributes.values.S.level_10 : ""
+                }
+            },
+            types: [
+                () => {
+                    for (let i = 0, count = attributes.length; i < count; i++) {
+                        let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
+                            selected;
+
+                        if (locals.cosmo) {
+                            selected = cleanAttribute === cosmo.basic_attributes.types[0].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                        }
+                    %>
+                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" name="cosmo-attribute-1-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
+                    <%
+                    }
+                },
+                () => {
+                    for (let i = 0, count = attributes.length; i < count; i++) {
+                        let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
+                            selected;
+
+                        if (locals.cosmo) {
+                            selected = cleanAttribute === cosmo.basic_attributes.types[1].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                        }
+                    %>
+                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" name="cosmo-attribute-2-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
+                    <%
+                    }
+                }
+            ]
+        },
+        bonus_attributes: {
+            type: () => {
+                for (let i = 0, count = bonuses.length; i < count; i++) {
+                    let cleanBonus = bonuses[i].toLowerCase().replace(/[ ]/g, "-"),
+                        selected;
+
+                    if (locals.cosmo) {
+                        selected = cleanBonus === cosmo.bonus_attributes.type.toLowerCase().replace(/[ ]/g, "-") ? "selected" : "";
+                    }
+                %>
+                    <option id="type-<%= cleanBonus %>" name="type-<%= cleanBonus %>" <%= locals.cosmo ? selected : "" %>><%= bonuses[i] %></option>
+                <%
+                }
+            },
+            value: locals.cosmo ? cosmo.bonus_attributes.value : ""
+        },
+        type: () => {
+            for (let i = 0, count = types.length; i < count; i++) {
+                let cleanType = types[i].toLowerCase(),
+                    selected;
+
+                if (locals.cosmo) {
+                    selected = cleanType === cosmo.type.toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                }
+            %>
+                <option id="type-<%= cleanType %>" name="type-<%= cleanType %>" <%= locals.cosmo ? selected : "" %>><%= types[i] %></option>
+            <%
+            }
+        },
+        obtainment_system: () => {
+            for (let system in systems) {
+                let type = systems[system].data.constructor,
+                    name = systems[system].name,
+                    slug = name.toLowerCase();
+
+                switch(type) {
+                    case Array:
+                        let array = systems[system].data;
+                        %>
+                            <div class="col-6">
+                                <label for="obtainment-system-<%= slug %>">
+                                    <span><%= name %></span>
+                                    <a href="#" class="very-small">(RESET)</a>
+                                </label>
+                                <select id="obtainment-system-<%= slug %>" class="form-control custom-select" <%= systems[system].multiple ? "multiple" : "" %>>
+                                    <option <%= locals.cosmo ? "" : "selected" %> disabled>Choose an entry</option>
+                                    <%
+                                        for (let i = 0, count = array.length; i < count; i++) {
+                                            let cleanEntry = array[i].toLowerCase(),
+                                                selected;
+
+                                            if (locals.cosmo) {
+                                                selected = cosmo.obtainment_system[slug].map(v => v.toLowerCase()).indexOf(cleanEntry) > -1 ? "selected": "";
+                                            }
+                                            %>
+                                                <option id="entry-<%= cleanEntry %>" name="entry-<%= cleanEntry %>" <%= locals.cosmo ? selected : "" %>><%= array[i] %></option>
+                                            <%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                        <%
+                        break;
+                    case Boolean:
+                        %>
+                            <div class="col-6 mt-4">
+                                <input type="checkbox" id="obtainment-system-<%= slug %>" name="obtainment-system-<%= slug %>" <%= systems[system].data ? "checked='true'" : "" %> />
+                                <label for="obtainment-system-<%= slug %>"><%= name %></label>
+                            </div>
+                        <%
+                        break;
+                    default:
+                        console.log("System type is not defined!");
+                }
+            }
+        },
+        exclusive_cn: locals.cosmo ? cosmo.exclusive_cn : ""
+    };
+%>
+
+<%- form %>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-white h4">
+                <i class="material-icons"><%= data.icon %></i>
+                <span class="ml-2"><%= data.head.title %></span>
+            </h1>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <label for="fr-name">Name (FR)</label>
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Rosaire" class="form-control" minlength="5" value="<%= cosmoData.name.fr %>" />
+                </div>
+                <div class="col-6">
+                    <label for="en-name">Name (EN)</label>
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Rosary" class="form-control" minlength="5" value="<%= cosmoData.name.en %>" required />
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12 thumb-container">
+                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold">default.png</span></label>
+                    <input type="file" id="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+                    <img src="<%= cosmoData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-6">
+            <label for="fr-description">Description (FR)</label>
+            <textarea id="fr-description" name="fr-description" class="form-control" minlength="10"><%= cosmoData.description.fr %></textarea>
+        </div>
+        <div class="col-6">
+            <label for="en-description">Description (EN)</label>
+            <textarea id="en-description" name="en-description" class="form-control" minlength="10"><%= cosmoData.description.en %></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-4 form-group">
+            <label for="cosmos-attributes-1">Basic attribute n°1</label>
+            <select id="cosmos-attributes-1" class="custom-select form-control">
+                <option selected disabled>Choose an attribute</option>
+                <%= cosmoData.basic_attributes.types[0]() %>
+            </select>
+        </div>
+        <div class="col-4">
+            <label for="ss-cosmos-attributes-value-1">SS value (level 10)</label>
+            <input type="text" id="ss-cosmos-attributes-value-1" name="ss-cosmos-attributes-value-1"
+                   placeholder="Ex: 17" class="form-control" value="<%= cosmoData.basic_attributes.values.SS.level_10[0] %>" />
+        </div>
+        <div class="col-4">
+            <label for="s-cosmos-attributes-value-1">S value (level 10)</label>
+            <input type="text" id="s-cosmos-attributes-value-1" name="s-cosmos-attributes-value-1"
+                   placeholder="Ex: 10%" class="form-control" value="<%= cosmoData.basic_attributes.values.S.level_10[0] %>" />
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-4 form-group">
+            <label for="cosmos-attributes-2">Basic attribute n°2</label>
+            <select id="cosmos-attributes-2" class="custom-select form-control">
+                <option selected disabled>Choose an attribute</option>
+                <%= cosmoData.basic_attributes.types[1]() %>
+            </select>
+        </div>
+        <div class="col-4">
+            <label for="ss-cosmos-attributes-value-2">SS value (level 10)</label>
+            <input type="text" id="ss-cosmos-attributes-value-2" name="ss-cosmos-attributes-value-2"
+                   placeholder="Ex: 15" class="form-control" value="<%= cosmoData.basic_attributes.values.SS.level_10[1] %>" />
+        </div>
+        <div class="col-4">
+            <label for="s-cosmos-attributes-value-2">S value (level 10)</label>
+            <input type="text" id="s-cosmos-attributes-value-2" name="s-cosmos-attributes-value-2"
+                   placeholder="Ex: 30.2" class="form-control" value="<%= cosmoData.basic_attributes.values.S.level_10[1] %>" />
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <div class="col-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <label for="bonus-attributes">Bonus attribute</label>
+                    <select id="bonus-attributes" class="form-control custom-select">
+                        <option selected disabled>Choose a bonus attribute</option>
+                        <%= cosmoData.bonus_attributes.type() %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="bonus-attribute-value">Bonus value</label>
+            <input type="text" id="bonus-attribute-value" name="bonus-attribute-value" placeholder="5%" class="form-control" value="<%= cosmoData.bonus_attributes.value %>" />
+        </div>
+        <div class="col-4">
+            <label for="cosmos-types">Cosmo type</label>
+            <select id="cosmos-types" class="form-control custom-select">
+                <option selected disabled>Choose a type</option>
+                <%= cosmoData.type() %>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <%= cosmoData.obtainment_system() %>
+        <div class="col-6 mt-4">
+            <input type="checkbox" id="exclusive-cn" name="exclusive-cn" <%= cosmoData.exclusive_cn ? "checked='true'" : "" %> />
+            <label for="exclusive-cn">Only on chinese version (exclusive)</label>
+        </div>
+    </div>
+
+    <div class="form-group row mt-5 mb-4">
+        <div class="col-12 mx-auto text-center">
+            <button id="submit" type="submit" class="btn btn-lg custom-theme theme-2">Sauvegarder les modifications</button>
+        </div>
+    </div>
+</form>

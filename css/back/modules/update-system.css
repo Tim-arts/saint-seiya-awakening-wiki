@@ -1,0 +1,32 @@
+form .upload-file {
+  position: relative;
+}
+form .upload-file label {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  cursor: pointer;
+}
+form .upload-file img {
+  height: 128px;
+  opacity: 1;
+  position: absolute;
+  top: -40px;
+  right: 15px;
+  will-change: opacity;
+  transition: opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+form .upload-file img:hover {
+  opacity: 0.5;
+}
+form select {
+  cursor: pointer;
+  overflow-y: hidden;
+}
+form select.form-control[multiple] {
+  height: 160px;
+}
+form select:focus option:checked {
+  background: #262635;
+}
+/*# sourceMappingURL=update-system.css.map */

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="<%= global.utils.locales.language %>">
+    <%
+        let data = (() => {
+                let object = {};
+
+                object.head = {
+                    title: "Add saint",
+                    viewStyleUrls: [
+                        "<link defer='defer' rel='stylesheet' href='../../css/back/views/index.css' type='text/css'>"
+                    ],
+                    viewScriptUrls: [
+                        "<script defer='defer' src='../../public/dist/back/js/index.js' type='text/javascript'></script>"
+                    ]
+                };
+                object.activeIndex = "2.1";
+                object.icon = "sports_volleyball";
+
+                return object;
+            })(),
+            modalData = {
+                title: "Warning!",
+                id: "response-modal",
+                titleId: "success-modal-id"
+            };
+    %>
+    <%- include("./../layout/head", {head: data.head}) %>
+
+    <body>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
+
+            <div id="content">
+                <div class="container-fluid">
+                    <%- include("./../modules/update-saint", {data: data}) %>
+                </div>
+            </div>
+        </section>
+        <%- include("./../modules/modal/response", {data: modalData}) %>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+@import (reference) 'modules/base/_colors';
+
+body {
+    font-family: "Muli", sans-serif;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: @letter-spacing-double;
+    color: #959595;
+    background-color: @grey-dark-1;
+    overflow-x: hidden;
+}
+
+section {
+    position: relative;
+}
+
+a {
+    will-change: color;
+    transition: color @transition-1 @time-transition-05;
+
+    .text-white();
+
+    &:hover {
+        text-decoration: none;
+        .text-green();
+    }
+
+    &.link-disabled {
+        &:active {
+            pointer-events: none;
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.flex-flow-inherit {
+    flex-flow: inherit;
+}
+
+.user-select-none {
+    user-select: none;
+}
+
+.px-sm-0 {
+    @media (max-width: 640px) {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+.hidden-xs {
+    @media (max-width: @breakpoint-sm) {
+        display: none;
+    }
+}
+
+.text-xs-center {
+    @media (max-width: @breakpoint-sm) {
+        text-align: center !important;
+    }
+}
+
+.flex-grow-sm-0 {
+    @media (max-width: @breakpoint-sm) {
+        flex-grow: 0 !important;
+    }
+}
+
+.my-6 {
+    margin-top: 6rem !important;
+    margin-bottom: 6rem !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.not-visible {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.very-small {
+    font-size: 60%;
+    letter-spacing: 1px;
+}

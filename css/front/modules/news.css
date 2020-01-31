@@ -1,0 +1,19 @@
+.news-container {
+  width: 100vw;
+  padding: 10em 15em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.news-container .news {
+  position: relative;
+  z-index: 3000;
+}
+.news-container .news .new {
+  position: relative;
+}
+.news-container .news .new img {
+  border: 2px solid #f6e5a1;
+  border-radius: 8px;
+}
+/*# sourceMappingURL=news.css.map */

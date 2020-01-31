@@ -1,0 +1,79 @@
+/* Menu */
+@menu-height: 60px;
+
+/* Spacings */
+@spacing-1: .25rem;
+@spacing-2: @spacing-1 * 2;
+@spacing-3: @spacing-2 * 2;
+@spacing-4: @spacing-3 * 2;
+@spacing-5: @spacing-4 * 2;
+
+/* Typography */
+@base-size: .8em;
+@type-scale: 1.2;
+@icon-size: 32px;
+
+@h5: @base-size * @type-scale;
+@h4: @h5 * @type-scale;
+@h3: @h4 * @type-scale;
+@h2: @h3 * @type-scale;
+@h1: @h2 * @type-scale;
+
+/* Transitions */
+@transition-1: cubic-bezier(0.215, 0.61, 0.355, 1);
+@transition-2: cubic-bezier(.21,.27,.13,1);
+
+@time-transition-010:  .1s;
+@time-transition-025:  .25s;
+@time-transition-03:   .3s;
+@time-transition-05:   .5s;
+@time-transition-075:  .75s;
+@time-transition-1:    1s;
+
+/* Gradients */
+@gradient-theme-1: linear-gradient(-90deg, rgba(189,17,250,1) 0%, rgba(70,194,255,1) 100%);
+
+/* Buttons */
+@button-padding-x: .8em;
+@button-padding-y: .4em;
+@button-letter-spacing-base: .5px;
+
+/* Templates */
+/* Cards */
+@card-width: 200px;
+@card-height: 280px;
+@card-offset: 2px;
+@card-spacing-x: 5px;
+@card-spacing-y: ((@card-spacing-x - @card-offset) / 3 * 2);
+
+/* Breakpoints */
+@breakpoint-xxl: 1600px;
+@breakpoint-xl: 1200px;
+@breakpoint-lg: 992px;
+@breakpoint-md: 768px;
+@breakpoint-sm: 576px;
+
+/* Radius */
+@radius-default: 4px;
+@radius-double: @radius-default * 2;
+@radius-circled: 50px;
+
+/* Letter spacing */
+@letter-spacing-default: .5px;
+@letter-spacing-double: @letter-spacing-default * 2;
+
+/* Box-shadows */
+@box-shadow-offset-x: 0;
+@box-shadow-offset-y: 0;
+@box-shadow-blur-radius: 20px;
+@box-shadow-spread-radius: 0;
+
+@box-shadow-value-simple: @box-shadow-offset-x @box-shadow-offset-y (@box-shadow-blur-radius / 2) @box-shadow-spread-radius;
+@box-shadow-value-default: @box-shadow-offset-x @box-shadow-offset-y @box-shadow-blur-radius @box-shadow-spread-radius;
+@box-shadow-value-double: @box-shadow-offset-x @box-shadow-offset-y (@box-shadow-blur-radius * 2) @box-shadow-spread-radius;
+
+/* Images */
+@img-min-height: 128px;
+
+/* Sidebar */
+@sidebar-width: 250px;

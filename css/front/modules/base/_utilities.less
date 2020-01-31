@@ -1,0 +1,53 @@
+@import (reference) '_colors';
+@import (reference) '_mixins';
+
+/* Creating colors */
+.CreateNewTextColor(e('white'), @white);
+.CreateNewTextColor(e('black'), @black);
+.CreateNewTextColor(e("grey-light-1"), @grey-light-1);
+.CreateNewTextColor(e("grey-dark-1"), @grey-dark-1);
+.CreateNewTextColor(e("green"), @success);
+.CreateNewTextColor(e("gold"), @gold);
+
+/* Extend grid */
+//@media (min-width: @breakpoint-xxl) {
+//    @xxl-grid-iterations: 12;
+//    .loop (@i) when (@i > 0) {
+//        .CreateColumn(e('xxl'), @i);
+//    }
+//    .loop (@xxl-grid-iterations);
+//}
+
+///* Creating background-color */
+//.CreateNewBGColor(e('transparent'), transparent);
+//.CreateNewBGColor(e('white'), @white);
+//.CreateNewBGColor(e('grey-dark'), @grey-dark);
+//.CreateNewBGColor(e('grey-darker'), @grey-darker);
+//.CreateNewBGColor(e('grey-light'), @grey-light);
+//.CreateNewBGColor(e('grey-lighter'), @grey-lighter);
+//.CreateNewBGColor(e('purple-light'), @purple-light);
+//.CreateNewBGColor(e('purple-dark'), @purple-dark);
+//.CreateNewBGColor(e('purple-darker'), @purple-darker);
+//.CreateNewBGColor(e('purple-black'), @purple-black);
+
+///* Creating background-image gradients */
+.CreateNewBGGradient(e('theme-1'), @gradient-theme-1);
+
+///* Creating background-image hover gradients */
+//.CreateNewBGGradientHover(e('purple-dark-to-light'), @gradient-purple-dark-to-light);
+//.CreateNewBGGradientHover(e('purple-dark-to-light-270'), @gradient-purple-dark-to-light-270);
+//.CreateNewBGGradientHover(e('purple-dark-to-light-left'), @gradient-purple-dark-to-light-left);
+//.CreateNewBGGradientHover(e('purple-dark-to-light-right'), @gradient-purple-dark-to-light-right);
+//.CreateNewBGGradientHover(e('purple-dark-to-darker'), @gradient-purple-dark-to-darker);
+
+///* Borders */
+//.CreateNewBorderColor(e('transparent'), transparent);
+//.CreateNewBorderColor(e('white'), @white);
+//.CreateNewBorderColor(e('grey-dark'), @grey-dark);
+//.CreateNewBorderColor(e('grey-darker'), @grey-darker);
+//.CreateNewBorderColor(e('grey-light'), @grey-light);
+//.CreateNewBorderColor(e('grey-lighter'), @grey-lighter);
+//.CreateNewBorderColor(e('purple-dark'), @purple-dark);
+//.CreateNewBorderColor(e('purple-darker'), @purple-darker);
+//.CreateNewBorderColor(e('success'), @success);
+//.CreateNewBorderColor(e('error'), @error);

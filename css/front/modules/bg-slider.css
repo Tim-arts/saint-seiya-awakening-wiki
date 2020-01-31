@@ -1,0 +1,50 @@
+.bg-slides {
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.bg-slides .bg-slides-container .bg-slide {
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+  opacity: 0;
+}
+.bg-slides .bg-slides-container .bg-slide.active {
+  display: block;
+  opacity: 1;
+}
+.bg-slides .bg-progress-bar-container {
+  position: relative;
+  top: -2px;
+}
+.bg-slides .bg-progress-bar-container .bg-progress-bar {
+  width: 100vw;
+  height: 2px;
+  background-color: red;
+}
+.bg-slides .bg-arrows-container .bg-arrow {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  display: block;
+  z-index: 1000;
+  opacity: 1;
+}
+.bg-slides .bg-arrows-container .bg-arrow.bg-arrow-left {
+  top: 50%;
+  left: 0;
+  transform: matrix(1, 0, 0, 1, 20, -20);
+}
+.bg-slides .bg-arrows-container .bg-arrow.bg-arrow-right {
+  top: 50%;
+  right: 0;
+  transform: matrix(1, 0, 0, 1, -40, -20);
+}
+.bg-slides .bg-arrows-container .bg-arrow:hover {
+  background: #000;
+}
+/*# sourceMappingURL=bg-slider.css.map */

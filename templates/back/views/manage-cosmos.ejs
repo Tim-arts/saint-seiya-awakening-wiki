@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="<%= global.utils.locales.language %>">
+    <%
+        let data = (() => {
+            let object = {};
+
+            object.head = {
+                title: "Gérer les cosmos",
+                viewStyleUrls: [
+                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/manage-cosmos.css' type='text/css'>"
+                ],
+                viewScriptUrls: [
+                    "<script defer='defer' src='../../public/dist/back/js/manage-cosmos.js' type='text/javascript'></script>"
+                ]
+            };
+            object.activeIndex = "3.1";
+            object.icon = "create";
+
+            return object;
+        })(),
+        modalData = {
+            title: "Warning!",
+            id: "response-modal",
+            titleId: "success-modal-id"
+        };
+    %>
+    <%- include("./../layout/head", {head: data.head}) %>
+
+    <body>
+    <section class="wrapper">
+        <%- include("./../layout/menu", {data: data}) %>
+
+        <div id="content">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h1 class="text-white h4">
+                            <i class="material-icons">developer_board</i>
+                            <span class="ml-2"><%= data.head.title %></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2 cosmo-placeholder system-placeholder h-100 text-center">
+                        <a href="/back/add-cosmo" class="d-block">
+                            <div class="cosmo-container system-container">
+                                <img src="<%= cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default cosmo" />
+                                <h2 class="h6 mt-4">
+                                    <i class="material-icons">add</i>
+                                    <span>Create a cosmo</span>
+                                </h2>
+                            </div>
+                        </a>
+                    </div>
+                    <% for (let i = 0, count = cosmos.length; i < count; i++) { %>
+                        <% let cosmo = cosmos[i] %>
+                        <%- include("./../modules/show-cosmo", {cosmo: cosmo}) %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include("./../modules/modal/response", {data: modalData}) %>
+    </body>
+</html>

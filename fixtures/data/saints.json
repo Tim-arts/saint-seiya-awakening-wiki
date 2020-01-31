@@ -1,0 +1,217 @@
+[
+    {
+        "name": "Guilty",
+        "slug": "guilty",
+        "rank": "A",
+        "damage_type": "cosmo",
+        "focus": "single",
+        "roles": [
+            "dps"
+        ],
+        "cosmos_suggestion": [
+            {
+                "legendary": "Mandala",
+                "lunar": ["Tenacity", "Bloom", "SpiritPrint"],
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "",
+                "comment": "GuiltyCosmosSuggestion1"
+            },
+            {
+                "legendary": "Mandala",
+                "lunar": "Knowing",
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "PVP",
+                "comment": "GuiltyCosmosSuggestion2"
+            }
+        ],
+        "main_skills": [
+            "GuiltyHatefulStrike",
+            "GuiltyFireOfRevenge",
+            "GuiltyEndlessHatred"
+        ],
+        "additional_skills": [],
+        "skill_suggestions": [
+            {
+                "priority": ["111", "115", "515", "555"],
+                "comment": "GuiltySkillSuggestion1Comment"
+            }
+        ],
+        "characteristics": {
+            "80": {
+                "hp": "",
+                "patk": "",
+                "catk": "",
+                "pdef": "",
+                "cdef": "",
+                "speed": ""
+            }
+        }
+    },
+    {
+        "name": "Arayashiki Shaka",
+        "slug": "arayashiki-shaka",
+        "rank": "S",
+        "damage_type": "cosmo",
+        "focus": "multiple",
+        "roles": [
+            "dps",
+            "cleanser"
+        ],
+        "cosmos_suggestion": [
+            {
+                "legendary": "Mandala",
+                "lunar": ["Tenacity", "Bloom", "SpiritPrint"],
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "",
+                "comment": "ArayashikiShakaCosmosSuggestion1"
+            },
+            {
+                "legendary": "Mandala",
+                "lunar": "Knowing",
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "PVP",
+                "comment": "ArayashikiShakaCosmosSuggestion2"
+            }
+        ],
+        "main_skills": [
+            "nameSkill1",
+            "nameSkill2",
+            "nameSkill3",
+            "nameSkill4"
+        ],
+        "additional_skills": [
+            "additionalNameSkill1",
+            "additionalNameSkill2"
+        ],
+        "skill_suggestions": [
+            {
+                "priority": ["111", "115", "515", "555"],
+                "comment": "ArayashikiShakaSkillSuggestion1Comment"
+            }
+        ],
+        "characteristics": {
+            "80": {
+                "hp": "",
+                "patk": "",
+                "catk": "",
+                "pdef": "",
+                "cdef": "",
+                "speed": ""
+            }
+        }
+    },
+    {
+        "name": "Divine Shaka",
+        "slug": "divine-shaka",
+        "rank": "S",
+        "damage_type": "cosmo",
+        "focus": "multiple",
+        "roles": [
+            "dps",
+            "cleanser"
+        ],
+        "cosmos_suggestion": [
+            {
+                "legendary": "Mandala",
+                "lunar": ["Tenacity", "Bloom", "SpiritPrint"],
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "",
+                "comment": "ArayashikiShakaCosmosSuggestion1"
+            },
+            {
+                "legendary": "Mandala",
+                "lunar": "Knowing",
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "PVP",
+                "comment": "ArayashikiShakaCosmosSuggestion2"
+            }
+        ],
+        "main_skills": [
+            "nameSkill1",
+            "nameSkill2",
+            "nameSkill3",
+            "nameSkill4"
+        ],
+        "additional_skills": [
+            "additionalNameSkill1",
+            "additionalNameSkill2"
+        ],
+        "skill_suggestions": [
+            {
+                "priority": ["111", "115", "515", "555"],
+                "comment": "ArayashikiShakaSkillSuggestion1Comment"
+            }
+        ],
+        "characteristics": {
+            "80": {
+                "hp": "",
+                "patk": "",
+                "catk": "",
+                "pdef": "",
+                "cdef": "",
+                "speed": ""
+            }
+        }
+    },
+    {
+        "name": "Shaka Ponk",
+        "slug": "shaka-ponk",
+        "rank": "S",
+        "damage_type": "cosmo",
+        "focus": "multiple",
+        "roles": [
+            "dps",
+            "cleanser"
+        ],
+        "cosmos_suggestion": [
+            {
+                "legendary": "Mandala",
+                "lunar": ["Tenacity", "Bloom", "SpiritPrint"],
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "",
+                "comment": "ArayashikiShakaCosmosSuggestion1"
+            },
+            {
+                "legendary": "Mandala",
+                "lunar": "Knowing",
+                "solar": "C.Stone",
+                "star": "Butterfly",
+                "template": "PVP",
+                "comment": "ArayashikiShakaCosmosSuggestion2"
+            }
+        ],
+        "main_skills": [
+            "nameSkill1",
+            "nameSkill2",
+            "nameSkill3",
+            "nameSkill4"
+        ],
+        "additional_skills": [
+            "additionalNameSkill1",
+            "additionalNameSkill2"
+        ],
+        "skill_suggestions": [
+            {
+                "priority": ["111", "115", "515", "555"],
+                "comment": "ArayashikiShakaSkillSuggestion1Comment"
+            }
+        ],
+        "characteristics": {
+            "80": {
+                "hp": "",
+                "patk": "",
+                "catk": "",
+                "pdef": "",
+                "cdef": "",
+                "speed": ""
+            }
+        }
+    }
+]

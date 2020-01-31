@@ -1,0 +1,12 @@
+<div class="card-flex xl-5 lg-3 xs-6 sm-6 md-4">
+    <a href="#">
+        <div class="saint-card w-100">
+            <div class="card-container" style="background-image: url(<%- cloudinary.url("saints/" + data.slug + "/full.png", {quality: "auto", secure: true}) %>)">
+                <%- cloudinary.image("saints/" + data.slug + "/full.png", {fetch_format: "auto", quality: "auto", secure: true}) %>
+            </div>
+            <p class="card-title text-center <%= data.rank.toLowerCase() + "-rank" %>">
+                <%= data.name %>
+            </p>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,128 @@
+@import (reference) 'base/_colors';
+@import (reference) 'base/_variables';
+@import (reference) '../views/base/_animations';
+
+/* Additional variables are available into _animations */
+@width: 100vw;
+@height: 100vh;
+
+.bg-slider {
+    position: absolute;
+    top: calc(@menu-height * -1); left: 0;
+    height: @height;
+    z-index: 100;
+
+    .bg-overlay {
+        position: absolute;
+        left: 0; right: 0;
+        width: @width;
+        height: 200px;
+        pointer-events: none;
+        z-index: 2000;
+
+        &.bg-overlay-top {
+            top: 0;
+            background: linear-gradient(180deg, @grey-dark-1 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        &.bg-overlay-bottom {
+            bottom: 0;
+            background: linear-gradient(0deg, @grey-dark-1 0%, rgba(0, 0, 0, 0) 100%);
+        }
+    }
+
+    .bg-slides-container {
+        width: @width;
+        height: @height;
+        position: absolute;
+
+        .bg-slide {
+            width: @width;
+            height: @height;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: none;
+            opacity: 0;
+            position: absolute;
+            top: 0; left: 0;
+            // filter: saturate(0);
+
+            &.active {
+                display: block;
+                opacity: @bg-slider-slide-opacity;
+            }
+
+            &.fadeOut {
+                animation: fadeOut;
+            }
+        }
+    }
+
+    .bg-progress-bar-container {
+        position: absolute;
+        bottom: 0;
+        display: none;
+
+        .bg-progress-bar {
+            height: 2px;
+            background-color: @purple-regular;
+            opacity: 0;
+        }
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .bg-arrows-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+
+        .bg-arrow {
+            cursor: pointer;
+            background-color: @grey-dark-2;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            display: block;
+            z-index: 1000;
+            opacity: .3;
+            padding: 8px;
+            will-change: transition;
+            transition: opacity @time-transition-05 @transition-1;
+
+            i {
+                will-change: color;
+                transition: color @time-transition-05 @transition-1;
+
+                .text-white();
+            }
+
+            &.bg-arrow-left {
+                top: 50%;
+                left: 0;
+                transform: matrix(1, 0, 0, 1, 40, -20);
+            }
+
+            &.bg-arrow-right {
+                top: 50%;
+                right: 0;
+                transform: matrix(1, 0, 0, 1, -40, -20);
+            }
+
+            &:hover {
+                opacity: .6;
+
+                i {
+                    .text-green();
+                }
+            }
+        }
+
+        &.active {
+            display: block;
+        }
+    }
+}

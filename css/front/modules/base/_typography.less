@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons&display=swap");
+@import (reference) url("_variables");
+
+h1 { font-size: @h1; }
+h2 {
+    font-size: @h2;
+
+    &.small {
+        font-size: (@h2 * @base-size) / @type-scale;
+    }
+}
+h3 { font-size: @h3; }
+h4 { font-size: @h4; }
+h5 { font-size: @h5; }
+small, .text_small { font-size: @base-size / @type-scale; }
+
+.icon {
+    display: inline-block;
+
+    &.small {
+        img {
+            width: @icon-size;
+            height: @icon-size;
+        }
+    }
+
+    &.medium {
+        img {
+            width: @icon-size + (@icon-size / 2);
+            height: @icon-size + (@icon-size / 2);
+        }
+    }
+
+    &.large {
+        img {
+            width: @icon-size * 2;
+            height: @icon-size * 2;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+[
+    {
+        "name": "skillName",
+        "saint_link": "skillNameSaintName",
+        "cost": 0,
+        "description": {
+            "main": "",
+            "levels": [
+                "skillNameSaintNameLv1",
+                "skillNameSaintNameLv2",
+                "skillNameSaintNameLv3",
+                "skillNameSaintNameLv4",
+                "skillNameSaintNameLv5"
+            ]
+        },
+        "awakened_skill": {
+            "index": -1,
+            "id": -1
+        }
+    }
+]

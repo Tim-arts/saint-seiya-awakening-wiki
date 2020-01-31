@@ -1,0 +1,108 @@
+@bg-slider-slide-opacity: .1;
+@bg-slider-fade-time: 1s;
+@bg-slider-load-time: 8s;
+
+.anim-fade-in {
+    animation-duration: @bg-slider-fade-time;
+    animation-name: fade-in;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.anim-fade-out {
+    animation-duration: @bg-slider-fade-time;
+    animation-name: fade-out;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.anim-fade-in-short {
+    animation-duration: 500ms;
+    animation-name: fade-in-short;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.anim-fade-out-short {
+    animation-duration: 500ms;
+    animation-name: fade-out-short;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.anim-load-in {
+    animation-duration: @bg-slider-load-time;
+    animation-name: load-in;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.anim-appear-in {
+    animation-duration: @time-transition-03;
+    animation-name: appear-in;
+    animation-timing-function: @transition-2;
+    animation-fill-mode: forwards;
+}
+
+.anim-appear-out {
+    animation-duration: @time-transition-03;
+    animation-name: appear-out;
+    animation-timing-function: @transition-2;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in-short {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fade-out-short {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fade-in {
+     0% { opacity: 0; }
+     100% { opacity: @bg-slider-slide-opacity; }
+ }
+
+@keyframes fade-out {
+    0% { opacity: @bg-slider-slide-opacity; }
+    100% { opacity: 0; }
+}
+
+@keyframes load-in {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% { opacity: 1;}
+
+    100% {
+        width: 100vw;
+        opacity: 0;
+    }
+}
+
+@keyframes appear-in {
+    0% { transform: scale(0); }
+    99% { display: none; }
+    100% {
+        transform: scale(1);
+        display: none;
+    }
+}
+
+@keyframes appear-out {
+    0% { transform: scale(1); }
+    99% { display: block; }
+    100% {
+        transform: scale(0);
+        display: block;
+    }
+}

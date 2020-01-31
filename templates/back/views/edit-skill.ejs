@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="<%= global.utils.locales.language %>">
+    <%
+        let data = (() => {
+            let object = {};
+
+            object.head = {
+                title: "Modifier une skill",
+                viewStyleUrls: [
+                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/update-skill.css' type='text/css'>"
+                ],
+                viewScriptUrls: [
+                    "<script defer='defer' src='../../public/dist/back/js/update-skill.js' type='text/javascript'></script>"
+                ]
+            };
+            object.dropdown = [
+                {
+                    url: "/back/update-skill/:" + skill._id,
+                    icon: "create",
+                    title: "Modifier une skill",
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                }
+            ];
+            object.activeIndex = "4.2";
+            object.icon = "create";
+
+            return object;
+        })(),
+        modalData = {
+            title: "Warning!",
+            id: "response-modal",
+            titleId: "success-modal-id"
+        };
+    %>
+    <%- include("./../layout/head", {head: data.head}) %>
+
+    <body>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
+
+            <div id="content">
+                <div class="container-fluid">
+                    <%- include("./../modules/update-skill", {data: data}) %>
+                </div>
+            </div>
+        </section>
+        <%- include("./../modules/modal/response", {data: modalData}) %>
+    </body>
+</html>

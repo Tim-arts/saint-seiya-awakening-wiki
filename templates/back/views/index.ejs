@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="<%= global.utils.locales.language %>">
+    <%
+        let data = (() => {
+            let object = {};
+
+            object.head = {
+                title: "SSAW - Back",
+                viewStyleUrls: [
+                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/index.css' type='text/css'>"
+                ],
+                viewScriptUrls: [
+                    "<script defer='defer' src='../../public/dist/back/js/index.js' type='text/javascript'></script>"
+                ]
+            };
+            object.activeIndex = "0";
+
+            return object;
+        })();
+    %>
+    <%- include("./../layout/head", {head: data.head}) %>
+
+    <body>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
+
+            <div id="content"></div>
+        </section>
+    </body>
+</html>

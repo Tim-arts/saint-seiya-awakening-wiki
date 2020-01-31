@@ -1,0 +1,96 @@
+{
+	"name": "rosaryName",
+	"basic_attributes": {
+		"values": [
+			"CATK",
+			"CATK"
+		],
+		"SS": {
+			"level_1": [
+				"2.71%",
+				"+59"
+			],
+			"level_2": [
+				"X%",
+				"+X"
+			],
+			"level_3": [
+				"X%",
+				"+X"
+			],
+			"level_4": [
+				"X%",
+				"+X"
+			],
+			"level_5": [
+				"X%",
+				"+X"
+			],
+			"level_6": [
+				"X%",
+				"+X"
+			],
+			"level_7": [
+				"X%",
+				"+X"
+			],
+			"level_8": [
+				"X%",
+				"+X"
+			],
+			"level_9": [
+				"X%",
+				"+X"
+			],
+			"level_10": [
+				"X%",
+				"+X"
+			]
+		},
+		"S": {
+			"level_1": [
+				"X%",
+				"+X"
+			],
+			"level_2": [
+				"X%",
+				"+X"
+			],
+			"level_3": [
+				"X%",
+				"+X"
+			],
+			"level_4": [
+				"X%",
+				"+X"
+			],
+			"level_5": [
+				"X%",
+				"+X"
+			],
+			"level_6": [
+				"X%",
+				"+X"
+			],
+			"level_7": [
+				"X%",
+				"+X"
+			],
+			"level_8": [
+				"X%",
+				"+X"
+			],
+			"level_9": [
+				"X%",
+				"+X"
+			],
+			"level_10": [
+				"X%",
+				"+X"
+			]
+		}
+	},
+	"bonus_attribute": "rosaryBonusAttribute",
+	"description": "rosaryDescription",
+	"category": "solar"
+}
