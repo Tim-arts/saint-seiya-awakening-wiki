@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     Autocomplete({
         input: sortCosmos,
         minLength: 3,
-        emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
         className: "cosmos",
         fetch: (text, update) => {
@@ -56,11 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
             update(suggestions);
         },
         render: (cosmo) => {
-            let cosmoElement = cosmosElements.filter(cosmoElement => cosmoElement.getAttribute("data-slug") === cosmo.slug);
+            let results = cosmosElements.filter(cosmoElement => cosmoElement.getAttribute("data-slug") === cosmo.slug);
             
             cosmosElements.forEach((element) => { element.classList.remove("hide"); });
-            cosmosElements.forEach((element) => { element.classList.add("hide"); });
-            cosmoElement.classList.remove("hide");
+            
+            if (results.length > 0) {
+                cosmosElements.forEach((element) => { element.classList.add("hide"); });
+                results.forEach((result) => { result.classList.remove("hide"); });
+            }
         }
     });
 });

@@ -26,7 +26,11 @@ var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/Moda
 
 var _autocompleter = _interopRequireDefault(require("autocompleter"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
 
 require("./base");
 
@@ -70,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
   (0, _autocompleter["default"])({
     input: sortCosmos,
     minLength: 3,
-    emptyMsg: "There are no results that match this request",
     debounceWaitMs: 100,
     className: "cosmos",
     fetch: function fetch(text, update) {
@@ -81,16 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
       update(suggestions);
     },
     render: function render(cosmo) {
-      var cosmoElement = cosmosElements.filter(function (cosmoElement) {
+      var results = cosmosElements.filter(function (cosmoElement) {
         return cosmoElement.getAttribute("data-slug") === cosmo.slug;
       });
       cosmosElements.forEach(function (element) {
         element.classList.remove("hide");
       });
-      cosmosElements.forEach(function (element) {
-        element.classList.add("hide");
-      });
-      cosmoElement.classList.remove("hide");
+
+      if (results.length > 0) {
+        cosmosElements.forEach(function (element) {
+          element.classList.add("hide");
+        });
+        results.forEach(function (result) {
+          result.classList.remove("hide");
+        });
+      }
     }
   });
 });
@@ -131,11 +139,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var Modal =
 /*#__PURE__*/
