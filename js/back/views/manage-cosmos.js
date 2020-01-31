@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             update(suggestions);
         },
         render: (cosmo) => {
+            console.log(1);
             let results = cosmosElements.filter(cosmoElement => cosmoElement.getAttribute("data-slug") === cosmo.slug);
             
             cosmosElements.forEach((element) => { element.classList.remove("hide"); });
