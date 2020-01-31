@@ -11,5 +11,7 @@
     "Healing",
     "P.ATK",
     "C.ATK",
-    "Life Steal"
+    "Life Steal",
+    "C.DEF Pierce",
+    "P.DEF Pierce"
 ]
