@@ -1,5 +1,3 @@
-import helpers from "../../shared/helpers";
-
 require("./base");
 import Modal from "./../../shared/modules/ModalResponse";
 import Autocomplete from "autocompleter";

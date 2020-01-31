@@ -20,13 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
 },{}],2:[function(require,module,exports){
 "use strict";
 
-var _helpers = _interopRequireDefault(require("../../shared/helpers"));
-
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
 var _autocompleter = _interopRequireDefault(require("autocompleter"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
 
 require("./base");
 
@@ -93,15 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
       }();
 
       resetDisplay();
-
-      if (results.length > 0) {
-        cosmosElements.forEach(function (element) {
-          element.classList.add("hide");
-        });
-        results.forEach(function (result) {
-          result.classList.remove("hide");
-        });
-      }
+      cosmosElements.forEach(function (element) {
+        element.classList.add("hide");
+      });
+      results.forEach(function (result) {
+        result.classList.remove("hide");
+      });
     },
     onSelect: null,
     preventSubmit: true
@@ -119,35 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-},{"../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./base":1,"autocompleter":5}],3:[function(require,module,exports){
-"use strict";
-
-module.exports = {
-  generateUuidv4: function generateUuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0,
-          v = c == 'x' ? r : r & 0x3 | 0x8;
-      return v.toString(16);
-    });
-  },
-  updateThumbnail: function updateThumbnail(image, source) {
-    image.classList.add("anim-fade-out-short"); // Preload image
-
-    var tempImage = document.createElement("img");
-    tempImage.src = source;
-    setTimeout(function () {
-      image.src = source;
-      image.classList.remove("anim-fade-out-short");
-      image.classList.add("anim-fade-in-short");
-      tempImage = null;
-      setTimeout(function () {
-        image.classList.remove("anim-fade-in-short");
-      }, 500);
-    }, 500);
-  }
-};
-
-},{}],4:[function(require,module,exports){
+},{"./../../shared/modules/ModalResponse":3,"./base":1,"autocompleter":4}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -155,11 +126,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var Modal =
 /*#__PURE__*/
@@ -250,7 +237,7 @@ function () {
 
 exports["default"] = Modal;
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
