@@ -66,11 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })();
     
             resetDisplay();
-            
-            if (results.length > 0) {
-                cosmosElements.forEach((element) => { element.classList.add("hide"); });
-                results.forEach((result) => { result.classList.remove("hide"); });
-            }
+    
+            cosmosElements.forEach((element) => { element.classList.add("hide"); });
+            results.forEach((result) => { result.classList.remove("hide"); });
         },
         onSelect: null,
         preventSubmit: true
