@@ -116,11 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "obtainment_system": {
                 "shrine": (() => {
                     let select = document.getElementById("obtainment-system-shrine");
-                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value), ...["Sunday"]] : null;
+                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
                 })(),
                 "titans": (() => {
                     let select = document.getElementById("obtainment-system-titans");
-                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value), ...["Saturday"]] : null;
+                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
                 })(),
                 "shop": !!document.getElementById("obtainment-system-shop").checked
             },

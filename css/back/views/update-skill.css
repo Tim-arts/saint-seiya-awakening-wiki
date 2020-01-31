@@ -711,7 +711,7 @@ form select {
   overflow-y: hidden;
 }
 form select.form-control[multiple] {
-  height: 160px;
+  min-height: 185px;
 }
 form select:focus option:checked {
   background: #262635;

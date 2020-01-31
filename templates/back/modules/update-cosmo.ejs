@@ -37,7 +37,7 @@
                             selected = cleanAttribute === cosmo.basic_attributes.types[0].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" name="cosmo-attribute-1-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" name="cosmo-attribute-1-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 },
@@ -50,7 +50,7 @@
                             selected = cleanAttribute === cosmo.basic_attributes.types[1].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" name="cosmo-attribute-2-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" name="cosmo-attribute-2-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 }
@@ -66,7 +66,7 @@
                         selected = cleanAttribute === cosmo.bonus_attributes.type.toLowerCase().replace(/[ ]/g, "-") ? "selected" : "";
                     }
                 %>
-                    <option id="type-<%= cleanAttribute %>" name="type-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
+                    <option id="type-<%= cleanAttribute %>" name="type-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                 <%
                 }
             },
@@ -81,7 +81,7 @@
                     selected = cleanType === cosmo.type.toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
                 }
             %>
-                <option id="type-<%= cleanType %>" name="type-<%= cleanType %>" <%= locals.cosmo ? selected : "" %>><%= types[i] %></option>
+                <option id="type-<%= cleanType %>" name="type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
             <%
             }
         },
@@ -111,7 +111,7 @@
                                                 selected = cosmo.obtainment_system[slug].map(v => v.toLowerCase()).indexOf(cleanEntry) > -1 ? "selected": "";
                                             }
                                             %>
-                                                <option id="entry-<%= cleanEntry %>" name="entry-<%= cleanEntry %>" <%= locals.cosmo ? selected : "" %>><%= array[i] %></option>
+                                                <option id="entry-<%= cleanEntry %>" name="entry-<%= cleanEntry %>" <%= selected %>><%= array[i] %></option>
                                             <%
                                         }
                                     %>

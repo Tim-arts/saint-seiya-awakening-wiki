@@ -306,15 +306,15 @@ document.addEventListener("DOMContentLoaded", function () {
       "obtainment_system": {
         "shrine": function () {
           var select = document.getElementById("obtainment-system-shrine");
-          return select.selectedIndex !== 0 ? [].concat(_toConsumableArray(Array.from(select.querySelectorAll("option:checked"), function (e) {
+          return select.selectedIndex !== 0 ? _toConsumableArray(Array.from(select.querySelectorAll("option:checked"), function (e) {
             return e.value;
-          })), ["Sunday"]) : null;
+          })) : null;
         }(),
         "titans": function () {
           var select = document.getElementById("obtainment-system-titans");
-          return select.selectedIndex !== 0 ? [].concat(_toConsumableArray(Array.from(select.querySelectorAll("option:checked"), function (e) {
+          return select.selectedIndex !== 0 ? _toConsumableArray(Array.from(select.querySelectorAll("option:checked"), function (e) {
             return e.value;
-          })), ["Saturday"]) : null;
+          })) : null;
         }(),
         "shop": !!document.getElementById("obtainment-system-shop").checked
       },
