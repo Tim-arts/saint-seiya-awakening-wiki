@@ -59,8 +59,7 @@
                         </a>
                     </div>
                     <% for (let i = 0, count = cosmos.length; i < count; i++) { %>
-                        <% let cosmo = cosmos[i] %>
-                        <%- include("./../modules/show-cosmo", {cosmo: cosmo}) %>
+                        <%- include("./../modules/show-cosmo", {cosmo: cosmos[i]}) %>
                     <% } %>
                 </div>
             </div>

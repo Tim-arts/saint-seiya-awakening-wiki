@@ -51,6 +51,9 @@
 .text-gold {
   color: #f6e5a1;
 }
+.text-error {
+  color: #f7765f;
+}
 /* Extend grid */
 .bg-gradient-theme-1 {
   background: linear-gradient(-90deg, #bd11fa 0%, #46c2ff 100%);

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let form = document.getElementById("update-cosmo"),
         inputFile = document.getElementById("custom-file"),
         defaultImageSrc = inputFile.nextElementSibling.src,
-        multipleSelect = document.querySelectorAll("select[multiple]"),
+        selects = document.querySelectorAll("select"),
         inputFileConstructor = new InputFile(inputFile, {
             img: document.getElementById("avatar"),
             size: 256
@@ -62,10 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("submit", (e) => {
         e.preventDefault();
         
-        let selectVerificationConstructor = new SelectVerification([
-            document.getElementById("cosmos-attributes-1"),
-            document.getElementById("cosmos-types")
-        ]);
+        let selectVerificationConstructor = new SelectVerification(document.querySelectorAll("select[required]"));
         
         data = {
             "_id": _data._id,
@@ -166,11 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+    
     form.addEventListener("input", () => {
         hasChanged = true;
     });
     
-    multipleSelect.forEach(function (select, i) {
+    selects.forEach((select) => {
+        console.log(select);
         let link = select.previousElementSibling.querySelector("a");
         link.addEventListener("click", function (e) {
             select.selectedIndex = 0;
