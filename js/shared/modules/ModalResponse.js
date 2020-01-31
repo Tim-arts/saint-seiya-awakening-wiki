@@ -17,7 +17,7 @@ export default class Modal {
             noChanges: "You haven't changed any data!",
             successfullyAdded: "The item has been successfully added!",
             successfullyUpdated: "The item has been successfully updated!",
-            deleteConfirmation: "Are you sure you want to delete this item?"
+            deleteConfirmation: "Do you really want to delete this item?"
         };
         this.options = {};
         
