@@ -1,6 +1,6 @@
 const basicAuth = require('express-basic-auth');
 const staticUserAuth = basicAuth({
-    users: JSON.parse(process.env.users),
+    users: JSON.parse(process.env.USERS),
     challenge: true
 });
 
