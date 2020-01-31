@@ -77,3 +77,20 @@ h1 {
         }
     }
 }
+
+.sort-results {
+    &:focus {
+        & + label {
+            i {
+                color: @success;
+            }
+        }
+    }
+
+    & + label {
+        i {
+            color: @green-faded-3;
+            transition: color @time-transition-05 @transition-1;
+        }
+    }
+}

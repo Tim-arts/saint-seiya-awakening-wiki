@@ -758,4 +758,11 @@ h1 i {
 .system:hover .system-tools {
   border-color: #00EC98;
 }
+.sort-results:focus + label i {
+  color: #00EC98;
+}
+.sort-results + label i {
+  color: rgba(0, 236, 152, 0.3);
+  transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
 /*# sourceMappingURL=manage-skills.css.map */

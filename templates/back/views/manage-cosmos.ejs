@@ -39,12 +39,13 @@
                             <span class="ml-2"><%= data.head.title %></span>
                         </h1>
                     </div>
-                    <div class="col-6 text-right position-relative">
-                        <label for="sort-cosmos">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <input id="sort-cosmos" type="text" class="form-control" placeholder="Rechercher une cosmo" />
-                    </div>
+                    <%
+                        let sortData = {
+                            id: "sort-cosmos",
+                            placeholder: "Rechercher une cosmo"
+                        };
+                    %>
+                    <%- include("./../modules/sort-results", {data: sortData}) %>
                 </div>
                 <div id="cosmos-container" class="row">
                     <div class="col-2 cosmo-placeholder system-placeholder h-100 text-center">

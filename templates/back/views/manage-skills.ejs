@@ -33,12 +33,19 @@
         <div id="content">
             <div class="container-fluid">
                 <div class="row mb-5">
-                    <div class="col-12">
+                    <div class="col-6">
                         <h1 class="text-white h4">
                             <i class="material-icons">developer_board</i>
                             <span class="ml-2"><%= data.head.title %></span>
                         </h1>
                     </div>
+                    <%
+                        let sortData = {
+                            id: "sort-skills",
+                            placeholder: "Rechercher un skill"
+                        };
+                    %>
+                    <%- include("./../modules/sort-results", {data: sortData}) %>
                 </div>
                 <div id="display-skills" class="row">
                     <div class="col-2 skill-placeholder system-placeholder h-100 text-center">
