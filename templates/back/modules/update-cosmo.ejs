@@ -58,15 +58,15 @@
         },
         bonus_attributes: {
             type: () => {
-                for (let i = 0, count = bonuses.length; i < count; i++) {
-                    let cleanBonus = bonuses[i].toLowerCase().replace(/[ ]/g, "-"),
+                for (let i = 0, count = attributes.length; i < count; i++) {
+                    let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
                         selected;
 
                     if (locals.cosmo) {
-                        selected = cleanBonus === cosmo.bonus_attributes.type.toLowerCase().replace(/[ ]/g, "-") ? "selected" : "";
+                        selected = cleanAttribute === cosmo.bonus_attributes.type.toLowerCase().replace(/[ ]/g, "-") ? "selected" : "";
                     }
                 %>
-                    <option id="type-<%= cleanBonus %>" name="type-<%= cleanBonus %>" <%= locals.cosmo ? selected : "" %>><%= bonuses[i] %></option>
+                    <option id="type-<%= cleanAttribute %>" name="type-<%= cleanAttribute %>" <%= locals.cosmo ? selected : "" %>><%= attributes[i] %></option>
                 <%
                 }
             },

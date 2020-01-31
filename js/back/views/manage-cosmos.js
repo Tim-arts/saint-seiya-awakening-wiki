@@ -1,10 +1,15 @@
+import helpers from "../../shared/helpers";
+
 require("./base");
 import Modal from "./../../shared/modules/ModalResponse";
+import Autocomplete from "autocompleter";
 
 document.addEventListener("DOMContentLoaded", () => {
     let deleteButtons = document.querySelectorAll(".cosmo-delete a"),
         modalElement = document.getElementById("response-modal"),
-        modal = new Modal(modalElement);
+        modal = new Modal(modalElement),
+        cosmosElements = Array.from(document.getElementById("cosmos-container").querySelectorAll(".cosmo")),
+        sortCosmos = document.getElementById("sort-cosmos");
     
     deleteButtons.forEach(function (button) {
         button.addEventListener("click", function (e) {
@@ -36,5 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         });
+    });
+    
+    Autocomplete({
+        input: sortCosmos,
+        minLength: 3,
+        emptyMsg: "There are no results that match this request",
+        debounceWaitMs: 100,
+        className: "cosmos",
+        fetch: (text, update) => {
+            text = text.toLowerCase();
+            let suggestions = cosmos.filter(n => n.slug.toLowerCase().startsWith(text));
+            
+            update(suggestions);
+        },
+        render: (cosmo) => {
+            let cosmoElement = cosmosElements.filter(cosmoElement => cosmoElement.getAttribute("data-slug") === cosmo.slug);
+            
+            cosmosElements.forEach((element) => { element.classList.remove("hide"); });
+            cosmosElements.forEach((element) => { element.classList.add("hide"); });
+            cosmoElement.classList.remove("hide");
+        }
     });
 });

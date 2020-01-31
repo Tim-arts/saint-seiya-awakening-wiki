@@ -11,7 +11,6 @@ module.exports = function () {
     router.get('/update-cosmo/:id', function (req, res) {
         const attributes = require("./../../../fixtures/data/modules/cosmos-attributes");
         const types = require("./../../../fixtures/data/modules/cosmos-types");
-        const bonuses = require("./../../../fixtures/data/modules/cosmos-bonuses");
         const systems = require("./../../../fixtures/data/modules/cosmos-systems");
         
         if (req.params.id && req.params.id.length === 37) {
@@ -34,7 +33,6 @@ module.exports = function () {
                             res.render("back/views/edit-cosmo", {
                                 attributes: attributes,
                                 types: types,
-                                bonuses: bonuses,
                                 cosmo: cosmo,
                                 systems: systems,
                                 locales: null
@@ -46,7 +44,6 @@ module.exports = function () {
                                 res.render("back/views/edit-cosmo", {
                                     attributes: attributes,
                                     types: types,
-                                    bonuses: bonuses,
                                     cosmo: cosmo,
                                     systems: systems,
                                     locales: await Promise.all([

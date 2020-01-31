@@ -39,11 +39,14 @@
                             <span class="ml-2"><%= data.head.title %></span>
                         </h1>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-6 text-right position-relative">
+                        <label for="sort-cosmos">
+                            <i class="material-icons">search</i>
+                        </label>
                         <input id="sort-cosmos" type="text" class="form-control" placeholder="Rechercher une cosmo" />
                     </div>
                 </div>
-                <div class="row">
+                <div id="cosmos-container" class="row">
                     <div class="col-2 cosmo-placeholder system-placeholder h-100 text-center">
                         <a href="/back/add-cosmo" class="d-block">
                             <div class="cosmo-container system-container">
@@ -64,5 +67,8 @@
         </div>
     </section>
     <%- include("./../modules/modal/response", {data: modalData}) %>
+    <script>
+        let cosmos = <%- JSON.stringify(cosmos) %>;
+    </script>
     </body>
 </html>

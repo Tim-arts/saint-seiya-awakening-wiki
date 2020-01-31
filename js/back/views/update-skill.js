@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
         className: "saint",
-        onSelect: function (saint) {
+        onSelect: (saint) => {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/" + saint.slug + "/thumbnail.png";
             
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         },
-        render: function(saint, currentValue) {
+        render: (saint) => {
             let div = document.createElement("div");
             div.innerHTML = saint.name;
             
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
         className: "skill",
-        onSelect: function (skill) {
+        onSelect: (skill) => {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/" + skill.slug + ".png";
     
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         },
-        render: function(skill, currentValue) {
+        render: (skill) => {
             let div = document.createElement("div");
             div.innerHTML = skill.name;
             

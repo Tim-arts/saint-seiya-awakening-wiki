@@ -663,7 +663,7 @@ body {
 .wrapper #content form textarea {
   min-height: 100px;
 }
-.wrapper #content form .form-control {
+.wrapper #content .form-control {
   color: #fff;
   background: #20202C;
   border: 2px solid rgba(246, 229, 161, 0.2);

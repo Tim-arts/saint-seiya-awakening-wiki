@@ -35,5 +35,16 @@
 	"heal_book_cosmo_name": "Heal Book",
 	"heal_book_cosmo_description": "Main attributes are cosmic attack and healing effects.",
 	"shaka_name": "Virgo Shaka",
-	"dohko_name": "Libra Dohko"
+	"dohko_name": "Libra Dohko",
+	"skillName": "skillName",
+	"letter_cosmo_name": "letter_cosmo_name",
+	"butterfly_cosmo_name": "butterfly_cosmo_name",
+	"crystal_fire_cosmo_name": "crystal_fire_cosmo_name",
+	"purple_nether_cosmo_name": "purple_nether_cosmo_name",
+	"tenacity_cosmo_name": "tenacity_cosmo_name",
+	"knowing_cosmo_name": "knowing_cosmo_name",
+	"body_care_cosmo_name": "body_care_cosmo_name",
+	"peace_fruit_cosmo_name": "peace_fruit_cosmo_name",
+	"spirit_print_cosmo_name": "spirit_print_cosmo_name",
+	"jadelight_cosmo_name": "jadelight_cosmo_name"
 }
