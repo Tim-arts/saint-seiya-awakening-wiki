@@ -714,6 +714,7 @@ h1 i {
 .system-placeholder .system-container {
   padding: 43px 20px;
   border-radius: 8px;
+  border-color: rgba(130, 46, 255, 0.3);
   will-change: border-color;
   transition: border-color cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
@@ -721,13 +722,13 @@ h1 i {
   color: white;
 }
 .system-placeholder .system-container h2 i {
-  font-size: 18px;
+  font-size: 21px;
   position: relative;
-  top: 4px;
+  top: 5px;
   left: -3px;
 }
 .system-placeholder .system-container:hover {
-  border-color: #00EC98;
+  border-color: #822EFF;
 }
 .system h2 {
   color: #fff;
