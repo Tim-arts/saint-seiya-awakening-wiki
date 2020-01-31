@@ -48,22 +48,43 @@ document.addEventListener("DOMContentLoaded", () => {
         minLength: 3,
         debounceWaitMs: 100,
         className: "cosmos",
-        fetch: (text, update) => {
+        fetch: (text) => {
             text = text.toLowerCase();
-            let suggestions = cosmos.filter(n => n.slug.toLowerCase().startsWith(text));
-            
-            update(suggestions);
-        },
-        render: (cosmo) => {
-            console.log(1);
-            let results = cosmosElements.filter(cosmoElement => cosmoElement.getAttribute("data-slug") === cosmo.slug);
-            
-            cosmosElements.forEach((element) => { element.classList.remove("hide"); });
+            let suggestions = cosmos.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
+                results = (() => {
+                    let results = [];
+                    
+                    for (let i = 0, iCount = suggestions.length; i < iCount; i++) {
+                        for (let j = 0, jCount = cosmosElements.length; j < jCount; j++) {
+                            if (cosmosElements[j].getAttribute("data-slug") === suggestions[i].slug) {
+                                results.push(cosmosElements[j]);
+                            }
+                        }
+                    }
+                    
+                    return results;
+                })();
+    
+            resetDisplay();
             
             if (results.length > 0) {
                 cosmosElements.forEach((element) => { element.classList.add("hide"); });
                 results.forEach((result) => { result.classList.remove("hide"); });
             }
+        },
+        onSelect: null,
+        preventSubmit: true
+    });
+    
+    sortCosmos.addEventListener("keyup", function () {
+        if (this.value.length <= 2) {
+            resetDisplay();
         }
     });
+    
+    function resetDisplay () {
+        cosmosElements.forEach((cosmoElement) => {
+            cosmoElement.classList.remove("hide");
+        });
+    }
 });
