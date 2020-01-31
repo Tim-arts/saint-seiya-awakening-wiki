@@ -124,6 +124,9 @@ h4 {
 h5 {
   font-size: 0.96em;
 }
+h5 {
+  font-size: 0.96em;
+}
 small,
 .text_small {
   font-size: 0.66666667em;
@@ -712,7 +715,7 @@ h1 i {
   height: 128px;
 }
 .system-placeholder .system-container {
-  padding: 43px 20px;
+  padding: 52px 20px;
   border-radius: 8px;
   border-color: rgba(130, 46, 255, 0.3);
   will-change: border-color;
@@ -741,6 +744,7 @@ h1 i {
 .system .system-container {
   padding: 20px;
   border-radius: 8px 8px 0 0;
+  height: 250px;
 }
 .system .system-tools {
   background-color: rgba(0, 0, 0, 0.1);
@@ -763,6 +767,7 @@ h1 i {
 }
 .sort-results + label i {
   color: rgba(0, 236, 152, 0.3);
+  will-change: color;
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 label {

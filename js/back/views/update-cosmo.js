@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })(),
                 "titans": (() => {
                     let select = document.getElementById("obtainment-system-titans");
-                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value), ...["Sunday"]] : null;
+                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value), ...["Saturday"]] : null;
                 })(),
                 "shop": !!document.getElementById("obtainment-system-shop").checked
             },
