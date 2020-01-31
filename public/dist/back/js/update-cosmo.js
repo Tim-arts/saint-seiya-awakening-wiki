@@ -311,7 +311,6 @@ document.addEventListener("DOMContentLoaded", function () {
     hasChanged = true;
   });
   selects.forEach(function (select) {
-    console.log(select);
     var link = select.previousElementSibling.querySelector("a");
     link.addEventListener("click", function (e) {
       select.selectedIndex = 0;

@@ -169,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     selects.forEach((select) => {
-        console.log(select);
         let link = select.previousElementSibling.querySelector("a");
         link.addEventListener("click", function (e) {
             select.selectedIndex = 0;

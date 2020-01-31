@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         debounceWaitMs: 100,
         className: "cosmos",
         fetch: (text) => {
-            text = text.toLowerCase();
+            text = text.toLowerCase().replace(/["._' ]/g, "-");
             let suggestions = cosmos.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
                 results = (() => {
                     let results = [];
