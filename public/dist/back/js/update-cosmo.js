@@ -386,6 +386,11 @@ module.exports = {
         image.classList.remove("anim-fade-in-short");
       }, 500);
     }, 500);
+  },
+  resetDisplay: function resetDisplay(elements, className) {
+    elements.forEach(function (element) {
+      element.classList.remove(className);
+    });
   }
 };
 

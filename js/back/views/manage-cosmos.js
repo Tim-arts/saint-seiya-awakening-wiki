@@ -1,6 +1,7 @@
 require("./base");
 import Modal from "./../../shared/modules/ModalResponse";
 import Autocomplete from "autocompleter";
+import { resetDisplay } from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     let deleteButtons = document.querySelectorAll(".cosmo-delete a"),
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return results;
                 })();
     
-            resetDisplay();
+            resetDisplay(cosmosElements, "hide");
     
             cosmosElements.forEach((element) => { element.classList.add("hide"); });
             results.forEach((result) => { result.classList.remove("hide"); });
@@ -74,13 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     sortCosmos.addEventListener("keyup", function () {
         if (this.value.length <= 2) {
-            resetDisplay();
+            resetDisplay(cosmosElements, "hide");
         }
     });
-    
-    function resetDisplay () {
-        cosmosElements.forEach((cosmoElement) => {
-            cosmoElement.classList.remove("hide");
-        });
-    }
 });

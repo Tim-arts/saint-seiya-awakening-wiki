@@ -22,5 +22,10 @@ module.exports = {
                 image.classList.remove("anim-fade-in-short");
             }, 500)
         }, 500);
+    },
+    resetDisplay (elements, className) {
+        elements.forEach((element) => {
+            element.classList.remove(className);
+        });
     }
 };

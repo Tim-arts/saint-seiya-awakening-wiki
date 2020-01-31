@@ -24,6 +24,8 @@ var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/Moda
 
 var _autocompleter = _interopRequireDefault(require("autocompleter"));
 
+var _helpers = require("./../../shared/helpers");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require("./base");
@@ -90,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return results;
       }();
 
-      resetDisplay();
+      (0, _helpers.resetDisplay)(cosmosElements, "hide");
       cosmosElements.forEach(function (element) {
         element.classList.add("hide");
       });
@@ -103,18 +105,45 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   sortCosmos.addEventListener("keyup", function () {
     if (this.value.length <= 2) {
-      resetDisplay();
+      (0, _helpers.resetDisplay)(cosmosElements, "hide");
     }
   });
-
-  function resetDisplay() {
-    cosmosElements.forEach(function (cosmoElement) {
-      cosmoElement.classList.remove("hide");
-    });
-  }
 });
 
-},{"./../../shared/modules/ModalResponse":3,"./base":1,"autocompleter":4}],3:[function(require,module,exports){
+},{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./base":1,"autocompleter":5}],3:[function(require,module,exports){
+"use strict";
+
+module.exports = {
+  generateUuidv4: function generateUuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : r & 0x3 | 0x8;
+      return v.toString(16);
+    });
+  },
+  updateThumbnail: function updateThumbnail(image, source) {
+    image.classList.add("anim-fade-out-short"); // Preload image
+
+    var tempImage = document.createElement("img");
+    tempImage.src = source;
+    setTimeout(function () {
+      image.src = source;
+      image.classList.remove("anim-fade-out-short");
+      image.classList.add("anim-fade-in-short");
+      tempImage = null;
+      setTimeout(function () {
+        image.classList.remove("anim-fade-in-short");
+      }, 500);
+    }, 500);
+  },
+  resetDisplay: function resetDisplay(elements, className) {
+    elements.forEach(function (element) {
+      element.classList.remove(className);
+    });
+  }
+};
+
+},{}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -217,7 +246,7 @@ function () {
 
 exports["default"] = Modal;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
