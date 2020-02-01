@@ -120,5 +120,12 @@
 	"vulcain_chain_cosmo_description": "Increases damage by 40% against units above 70% HP",
 	"water_curtain_cosmo_description": "When crowd controlled while at below 50% HP, skip to the next round and get an extra move.",
 	"wind_elf_cosmo_description": "Increases Cosmo Damage Multiplier by 10% during combat. When dealing damage to non-summoned units, this effect is increased by 4% (Lasts 3 rounds).",
-	"windflower_cosmo_description": "When attaking, decreases the target's Status HIT by 20% for 2 rounds"
+	"windflower_cosmo_description": "When attaking, decreases the target's Status HIT by 20% for 2 rounds",
+	"athena_exclamation_skill_name": "Athena Exclamation",
+	"athena_exclamation_skill_description_main": "Athena exclamation description",
+	"athena_exclamation_skill_description_level_1": "Skill description level 1",
+	"athena_exclamation_skill_description_level_2": "Skill description level 2",
+	"athena_exclamation_skill_description_level_3": "Skill description level 3",
+	"athena_exclamation_skill_description_level_4": "Skill description level 4",
+	"athena_exclamation_skill_description_level_5": "Skill description level 5"
 }

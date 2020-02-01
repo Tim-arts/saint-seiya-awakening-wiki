@@ -168,13 +168,15 @@ document.addEventListener("DOMContentLoaded", function () {
 },{}],3:[function(require,module,exports){
 "use strict";
 
+var _helpers = _interopRequireDefault(require("../../shared/helpers"));
+
 var _InputFile = _interopRequireDefault(require("./../modules/InputFile"));
 
 var _SelectVerification = _interopRequireDefault(require("./../../front/modules/SelectVerification"));
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
-var _helpers = require("./../../shared/helpers");
+var _helpers2 = require("./../../shared/helpers");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -240,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       };
     } else {
-      data._id = (0, _helpers.generateUuidv4)();
+      data._id = (0, _helpers2.generateUuidv4)();
 
       data.messageAction = function () {
         modal.show({
@@ -269,8 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value
       },
-      "slug": document.getElementById("en-name").value.toLowerCase().replace(/["._' ]/g, "-"),
-      "slug_underscore": document.getElementById("en-name").value.toLowerCase().replace(/["-.' ]/g, "_"),
+      "slug": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+      "slug_underscore": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
       "description": {
         "en": document.getElementById("en-description").value,
         "fr": document.getElementById("fr-description").value
@@ -367,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"./../../front/modules/SelectVerification":4,"./../../shared/helpers":5,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2}],4:[function(require,module,exports){
+},{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/helpers":5,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -443,6 +445,9 @@ module.exports = {
     elements.forEach(function (element) {
       element.classList.remove(className);
     });
+  },
+  convertToSlug: function convertToSlug(str, expression, replacer) {
+    return str.toLowerCase().replace(expression, replacer);
   }
 };
 

@@ -144,6 +144,9 @@ module.exports = {
     elements.forEach(function (element) {
       element.classList.remove(className);
     });
+  },
+  convertToSlug: function convertToSlug(str, expression, replacer) {
+    return str.toLowerCase().replace(expression, replacer);
   }
 };
 

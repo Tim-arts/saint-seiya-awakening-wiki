@@ -21,34 +21,17 @@ module.exports = {
             });
         }
     },
-    uploadTranslations (cloudinary, fs, http, path, data, folder) {
-        let cosmoName = data.slug_underscore + "_cosmo_name";
-        let cosmoDescription = data.slug_underscore + "_cosmo_description";
-        let enTranslation = {
-            [cosmoName]: data.name.en,
-            [cosmoDescription]: data.description.en
-        };
-        let frTranslation = {
-            [cosmoName]: data.name.fr,
-            [cosmoDescription]: data.description.fr
-        };
-        
-        folder = folder + data.slug;
-    
-        /* Update the translations from the i18n files (local system) */
-        const enFileName = global.utils.dirPath + "locales/data/cosmos/" + data.slug + "/en.json";
-        const frFileName = global.utils.dirPath + "locales/data/cosmos/" + data.slug + "/fr.json";
-        
-        fs.promises.mkdir(path.dirname(enFileName), {recursive: true}).then(x => fs.promises.writeFile(enFileName, JSON.stringify(enTranslation, null, 4)));
-        fs.promises.mkdir(path.dirname(frFileName), {recursive: true}).then(x => fs.promises.writeFile(frFileName, JSON.stringify(frTranslation, null, 4)));
-        
-        /* Update translations on CDN */
+    deleteTranslations (fs, data, folder) {
+        const localFolder = global.utils.dirPath + "locales/data/" + folder + "/" + data.slug;
+        fs.rmdirSync(localFolder, { recursive: true });
+    },
+    uploadTranslations (cloudinary, enTranslation, frTranslation, folder) {
         let enData = Buffer.from(JSON.stringify(enTranslation)).toString("Base64");
         enData = "data:image/png;base64," + enData;
         let frData = Buffer.from(JSON.stringify(frTranslation)).toString("Base64");
         frData = "data:image/png;base64," + frData;
-        
-        /* Upload translations from the CDN (remote) */
+    
+        /* Upload translations into CDN (remote) */
         this.uploadFileIntoCDN(cloudinary, {
             file: enData,
             public_id: "en.json",
@@ -62,18 +45,95 @@ module.exports = {
             resource_type: "raw"
         });
     },
-    deleteTranslations (fs, data, folder) {
-        const localFolder = global.utils.dirPath + "locales/data/" + folder + "/" + data.slug;
-        fs.rmdirSync(localFolder, { recursive: true });
+    process (cloudinary, fs, http, path, data, folder, singularType, pluralType) {
+        // Shared entry
+        let name = data.slug_underscore + "_" + singularType + "_name";
+        let enTranslation, frTranslation;
+        
+        switch (pluralType) {
+            case "cosmos":
+                let description = data.slug_underscore + "_" + singularType + "_description";
+                
+                enTranslation = {
+                    [name]: data.name.en,
+                    [description]: data.description.en
+                };
+                frTranslation = {
+                    [name]: data.name.fr,
+                    [description]: data.description.fr
+                };
+                
+                break;
+            case "skills":
+                let mainDescription = data.slug_underscore + "_" + singularType + "_description_main",
+                    level_1 = data.slug_underscore + "_" + singularType + "_description_level_1",
+                    level_2 = data.slug_underscore + "_" + singularType + "_description_level_2",
+                    level_3 = data.slug_underscore + "_" + singularType + "_description_level_3",
+                    level_4 = data.slug_underscore + "_" + singularType + "_description_level_4",
+                    level_5 = data.slug_underscore + "_" + singularType + "_description_level_5";
+                
+                enTranslation = {
+                    [name]: data.name.en,
+                    [mainDescription]: data.description.main.en,
+                    [level_1]: data.description.levels[0].en,
+                    [level_2]: data.description.levels[1].en,
+                    [level_3]: data.description.levels[2].en,
+                    [level_4]: data.description.levels[3].en,
+                    [level_5]: data.description.levels[4].en
+                };
+                frTranslation = {
+                    [name]: data.name.fr,
+                    [mainDescription]: data.description.main.fr,
+                    [level_1]: data.description.levels[0].fr,
+                    [level_2]: data.description.levels[1].fr,
+                    [level_3]: data.description.levels[2].fr,
+                    [level_4]: data.description.levels[3].fr,
+                    [level_5]: data.description.levels[4].fr
+                };
+                
+                break;
+            case "saints":
+                break;
+            default:
+                console.log("Type isn't recognized!");
+        }
+        
+        folder += data.slug;
+        
+        /* Update the translations to the i18n files (local system) */
+        const enFileName = global.utils.dirPath + "locales/data/" + pluralType + "/" + data.slug + "/en.json";
+        const frFileName = global.utils.dirPath + "locales/data/" + pluralType + "/" + data.slug + "/fr.json";
+        
+        fs.promises.mkdir(path.dirname(enFileName), {recursive: true}).then(x => fs.promises.writeFile(enFileName, JSON.stringify(enTranslation, null, 4)));
+        fs.promises.mkdir(path.dirname(frFileName), {recursive: true}).then(x => fs.promises.writeFile(frFileName, JSON.stringify(frTranslation, null, 4)));
+        
+        this.uploadTranslations(cloudinary, enTranslation, frTranslation, folder);
     },
-    formatData (data) {
-        let cosmoName = data.slug_underscore + "_cosmo_name";
-        let cosmoDescription = data.slug_underscore + "_cosmo_description";
+    formatData (data, singularType, pluralType) {
+        // Shared entry
+        data.name = data.slug_underscore + "_" + singularType + "_name";
         
-        data.name = cosmoName;
-        data.description = cosmoDescription;
-        delete data["image"];
+        switch (pluralType) {
+            case "cosmos":
+                data.description = data.slug_underscore + "_" + singularType +"_description";
+                
+                break;
+            case "skills":
+                data.description.main = data.slug_underscore + "_" + singularType + "_description_main";
+                
+                for (let i = 0; i <= 4; i++) {
+                    data.description.levels[i] = data.slug_underscore + "_" + singularType + "_description_level_" + (i + 1);
+                }
+                
+                break;
+            case "saints":
+                
+                break;
+            default:
+                console.log("Type isn't recognized!");
+        }
         
+        delete data.image;
         return data;
     }
 };

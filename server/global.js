@@ -24,8 +24,16 @@ module.exports = function (i18n) {
         retrieveLocales: false,
         translations: {
             cosmos: {
-                default: "cosmos/",
+                singular: "cosmo",
+                plural: "cosmos",
+                path: "cosmos/",
                 cdn: "translations/cosmos/"
+            },
+            skills: {
+                singular: "skill",
+                plural: "skills",
+                path: "skills/",
+                cdn: "translations/skills/"
             }
         }
     };

@@ -10,12 +10,12 @@
 
     let cosmoData = {
         name: {
-            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_name'] : "",
-            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_name'] : ""
+            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_name'] : "",
+            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_name'] : ""
         },
         description: {
-            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_description'] : "",
-            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_description'] : ""
+            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_description'] : "",
+            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_description'] : ""
         },
         image: locals.cosmo ? cloudinary.url("cosmos/" + cosmo.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
         basic_attributes: {

@@ -27,5 +27,8 @@ module.exports = {
         elements.forEach((element) => {
             element.classList.remove(className);
         });
+    },
+    convertToSlug (str, expression, replacer) {
+        return str.toLowerCase().replace(expression, replacer);
     }
 };

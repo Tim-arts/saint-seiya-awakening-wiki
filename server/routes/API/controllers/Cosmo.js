@@ -3,15 +3,9 @@ const http = require('http');
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 
-// Import helpers
+// Import dependencies
 const helpers = require("./_helpers");
-
-// Import model
 const CosmoModel = require("./../../../../fixtures/models/cosmos");
-
-// Define string to locate folders, names, ...
-const STATIC_COSMOS = global.utils.translations.cosmos.default;
-const STATIC_TRANSLATIONS = global.utils.translations.cosmos.cdn;
 
 exports.cosmo_create = function (req, res) {
     let data = req.body.data;
@@ -20,15 +14,15 @@ exports.cosmo_create = function (req, res) {
     helpers.uploadFileIntoCDN(cloudinary, {
         file: data.image,
         public_id: data.slug,
-        folder: STATIC_COSMOS,
+        folder: global.utils.translations.cosmos.path,
         allowed_formats: "jpeg,jpg,png",
     });
 
     /* Upload translation files on CDN */
-    helpers.uploadTranslations(cloudinary, fs, http, path, data, STATIC_TRANSLATIONS);
+    helpers.process(cloudinary, fs, http, path, data, global.utils.translations.cosmos.cdn, global.utils.translations.cosmos.singular, global.utils.translations.cosmos.plural);
     
     /* Create the new document into database */
-    CosmoModel.create(helpers.formatData(data), (error, document) => {
+    CosmoModel.create(helpers.formatData(data, global.utils.translations.cosmos.singular, global.utils.translations.cosmos.plural), (error, document) => {
         if (error) {
             console.log(error);
             res.json({
@@ -38,7 +32,6 @@ exports.cosmo_create = function (req, res) {
         }
 
         if (document) {
-            // console.log(document);
             res.json({
                 success: true,
                 data: JSON.stringify(document)
@@ -54,19 +47,19 @@ exports.cosmo_update = function (req, res) {
     helpers.uploadFileIntoCDN(cloudinary, {
         file: data.image,
         public_id: data.slug,
-        folder: STATIC_COSMOS,
+        folder: global.utils.translations.cosmos.path,
         allowed_formats: "jpeg,jpg,png",
     });
 
     /* Upload translation files on CDN */
-    helpers.uploadTranslations(cloudinary, fs, http, path, data, STATIC_TRANSLATIONS);
+    helpers.process(cloudinary, fs, http, path, data, global.utils.translations.cosmos.cdn, global.utils.translations.cosmos.singular, global.utils.translations.cosmos.plural);
     
     /* Update the document into database */
     CosmoModel.updateOne(
         {
             _id: data._id
         },
-            helpers.formatData(data),
+            helpers.formatData(data, global.utils.translations.cosmos.singular, global.utils.translations.cosmos.plural),
         {
             upsert: true
         },
@@ -94,17 +87,17 @@ exports.cosmo_delete = function (req, res) {
     
     /* Delete cosmo image from CDN */
     helpers.deleteFileFromCDN(cloudinary, {
-        file: STATIC_COSMOS + data.slug,
+        file: global.utils.translations.cosmos.path + data.slug,
         resource_type: "image"
     });
     
     // Delete translations from CDN
     helpers.deleteFileFromCDN(cloudinary, {
-        file: STATIC_TRANSLATIONS + data.slug + "/en.json",
+        file: global.utils.translations.cosmos.cdn + data.slug + "/en.json",
         resource_type: "raw"
     });
     helpers.deleteFileFromCDN(cloudinary, {
-        file: STATIC_TRANSLATIONS + data.slug + "/fr.json",
+        file: global.utils.translations.cosmos.cdn + data.slug + "/fr.json",
         resource_type: "raw"
     });
     
@@ -124,7 +117,6 @@ exports.cosmo_delete = function (req, res) {
         }
         
         if (document) {
-            // console.log(document);
             res.json({
                 success: true,
                 data: JSON.stringify(document)

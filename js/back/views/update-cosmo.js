@@ -1,3 +1,5 @@
+import helpers from "../../shared/helpers";
+
 require("./base");
 
 import InputFile from "./../modules/InputFile";
@@ -70,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
-            "slug": document.getElementById("en-name").value.toLowerCase().replace(/["._' ]/g, "-"),
-            "slug_underscore": document.getElementById("en-name").value.toLowerCase().replace(/["-.' ]/g, "_"),
+            "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+            "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "description": {
                 "en": document.getElementById("en-description").value,
                 "fr": document.getElementById("fr-description").value

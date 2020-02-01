@@ -684,6 +684,10 @@ body {
 .wrapper #content form label.pointer:hover {
   color: #fff;
 }
+.wrapper #content form label ~ .small {
+  font-size: 10px;
+  color: #f6e5a1;
+}
 .wrapper #content form textarea {
   min-height: 100px;
 }
@@ -703,6 +707,20 @@ body {
 h1 i {
   position: relative;
   top: 4px;
+}
+.sort-module label {
+  top: 0;
+  right: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.sort-module label i {
+  top: 7px;
+  right: 25px;
+  position: relative;
+}
+.sort-module label + input[type="text"] {
+  padding: 0.375rem 2.75rem 0.375rem 0.75rem;
 }
 .system .system-container,
 .system-placeholder .system-container {
@@ -769,19 +787,5 @@ h1 i {
   color: rgba(0, 236, 152, 0.3);
   will-change: color;
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-label {
-  top: 0;
-  right: 0;
-  position: absolute;
-  pointer-events: none;
-}
-label i {
-  top: 7px;
-  right: 25px;
-  position: relative;
-}
-label + input[type="text"] {
-  padding: 0.375rem 2.75rem 0.375rem 0.75rem;
 }
 /*# sourceMappingURL=manage-cosmos.css.map */

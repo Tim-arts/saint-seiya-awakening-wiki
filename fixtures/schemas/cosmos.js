@@ -6,10 +6,7 @@ const cosmos = {
             type: String,
             unique: true
         },
-        description: {
-            type: String,
-            unique: true
-        },
+        description: String,
         slug: {
             type: String,
             unique: true

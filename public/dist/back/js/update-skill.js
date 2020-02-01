@@ -6,19 +6,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    return arr2;
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -116,7 +146,7 @@ function () {
 
 exports["default"] = InputFile;
 
-},{"./../../shared/helpers":5}],2:[function(require,module,exports){
+},{"./../../shared/helpers":4}],2:[function(require,module,exports){
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -142,13 +172,15 @@ var _helpers = _interopRequireDefault(require("./../../shared/helpers"));
 
 var _InputFile = _interopRequireDefault(require("./../modules/InputFile"));
 
-var _SelectVerification = _interopRequireDefault(require("./../../front/modules/SelectVerification"));
-
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
 var _autocompleter = _interopRequireDefault(require("autocompleter"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
 
 require("./base");
 
@@ -207,8 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var selectVerificationConstructor = new _SelectVerification["default"]([]);
-    data = {};
 
     if (!hasChanged) {
       modal.show({
@@ -218,28 +248,55 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (selectVerificationConstructor.indexOf(false) === -1) {
-      $.post(form.getAttribute("action"), {
-        data: data
-      }, function (response) {
-        if (response.error) {
-          modal.show({
-            message: "errorValidation",
-            hideCloseButton: true
-          });
-          return;
-        }
+    data = {
+      "_id": _data._id,
+      "name": {
+        "en": document.getElementById("en-name").value,
+        "fr": document.getElementById("fr-name").value
+      },
+      "slug": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+      "slug_underscore": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
+      "description": {
+        main: {
+          "en": document.getElementById("en-description").value,
+          "fr": document.getElementById("fr-description").value
+        },
+        levels: function () {
+          var array = [];
 
-        if (response.success) {
-          _data.messageAction();
-        }
-      });
-    } else {
-      modal.show({
-        message: "selectMissing",
-        hideCloseButton: true
-      });
-    }
+          for (var i = 1; i <= 5; i++) {
+            var object = {
+              en: document.getElementById("level-" + i + "-description-en").value,
+              fr: document.getElementById("level-" + i + "-description-fr").value
+            };
+            array.push(object);
+          }
+
+          return array;
+        }()
+      },
+      "image": function () {
+        return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+      }(),
+      cost: document.getElementById("cost").value,
+      linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
+      awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize")
+    };
+    $.post(form.getAttribute("action"), {
+      data: data
+    }, function (response) {
+      if (response.error) {
+        modal.show({
+          message: "errorValidation",
+          hideCloseButton: true
+        });
+        return;
+      }
+
+      if (response.success) {
+        _data.messageAction();
+      }
+    });
   });
   form.addEventListener("input", function () {
     hasChanged = true;
@@ -328,49 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"./../../front/modules/SelectVerification":4,"./../../shared/helpers":5,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2,"autocompleter":7}],4:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var SelectVerification =
-/**
- * Construct SelectVerification instance
- * @constructor
- * @return {Array}
- * @param elements
- */
-function SelectVerification(elements) {
-  _classCallCheck(this, SelectVerification);
-
-  this.result = function () {
-    var check = [];
-
-    for (var i = 0, count = elements.length; i < count; i++) {
-      var select = elements[i],
-          selectedOption = select.options[select.selectedIndex];
-
-      if (selectedOption.hasAttribute("disabled")) {
-        check.push(false);
-      } else {
-        check.push(true);
-      }
-    }
-
-    return check;
-  }();
-
-  return this.result;
-};
-
-exports["default"] = SelectVerification;
-
-},{}],5:[function(require,module,exports){
+},{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../modules/InputFile":1,"./base":2,"autocompleter":6}],4:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -400,10 +415,13 @@ module.exports = {
     elements.forEach(function (element) {
       element.classList.remove(className);
     });
+  },
+  convertToSlug: function convertToSlug(str, expression, replacer) {
+    return str.toLowerCase().replace(expression, replacer);
   }
 };
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -411,11 +429,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var Modal =
 /*#__PURE__*/
@@ -506,7 +540,7 @@ function () {
 
 exports["default"] = Modal;
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :

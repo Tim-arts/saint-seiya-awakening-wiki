@@ -10,18 +10,18 @@
 
     let skillData = {
         name: {
-            fr: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
-            en: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
+            en: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
+            fr: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
         },
         description: {
             main: {
-                fr: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
-                en: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
+                en: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
+                fr: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
             },
             levels: () => {
                 for (let i = 1, count = 5; i <= count; i++) {
-                    let frDescription = locals.skill ? locales[0][cosmo.slug_underscore + '_skill_description_' + i] : "",
-                        enDescription = locals.skill ? locales[1][cosmo.slug_underscore + '_skill_description_' + i] : "";
+                    let enDescription = locals.skill ? locales[0][cosmo.slug_underscore + '_skill_description_' + i] : "",
+                        frDescription = locals.skill ? locales[1][cosmo.slug_underscore + '_skill_description_' + i] : "";
                     %>
                         <div class="col-6 mb-4">
                             <label for="level-<%= i %>-description-fr">Description compétence niveau <%= i %> (FR)</label>
@@ -92,27 +92,24 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-6 offset-6">
+        <div class="col-6">
             <div class="row">
                 <div class="col-8 position-relative">
                     <label for="awakening-skill-id">Compétence éveillée correspondante</label>
                     <input type="text" id="awakening-skill-id" name="awakening-skill-id" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakening_skill_id %>" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> champ de recherche : la saisie commence à partir de 3 caractères <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
                     <img class="not-input-file" src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Awakening skill image" />
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="e-s-5"></div>
-
-    <div class="row mb-4">
-        <div class="col-6 offset-6">
+        <div class="col-6">
             <div class="row">
                 <div class="col-8 position-relative">
                     <label for="linked-saint-id">Saint correspondant</label>
                     <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id %>" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> champ de recherche : la saisie commence à partir de 3 caractères <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
                     <img class="not-input-file" src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Saint image" />
@@ -121,7 +118,12 @@
         </div>
     </div>
 
-    <div class="e-s-3"></div>
+    <div class="row mb-4">
+        <div class="col-2">
+            <label for="cost">Coût en cristaux</label>
+            <input type="number" id="cost" name="cost" placeholder="Ex: 2" class="form-control" min="0" max="8" value="<%= skillData.cost %>" />
+        </div>
+    </div>
 
     <div class="form-group row mt-5 mb-4">
         <div class="col-12 mx-auto text-center">

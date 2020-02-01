@@ -2,7 +2,6 @@ require("./base");
 
 import helpers from "./../../shared/helpers";
 import InputFile from "./../modules/InputFile";
-import SelectVerification from "./../../front/modules/SelectVerification";
 import Modal from "./../../shared/modules/ModalResponse";
 import Autocomplete from "autocompleter";
 
@@ -62,14 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("submit", (e) => {
         e.preventDefault();
         
-        let selectVerificationConstructor = new SelectVerification([
-        
-        ]);
-        
-        data = {
-        
-        };
-        
         if (!hasChanged) {
             modal.show({
                 message: "noChanges",
@@ -79,30 +70,60 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        if (selectVerificationConstructor.indexOf(false) === -1) {
-            $.post(form.getAttribute("action"), {
-                data: data
-            }, (response) => {
-                if (response.error) {
-                    modal.show({
-                        message: "errorValidation",
-                        hideCloseButton: true
-                    });
+        data = {
+            "_id": _data._id,
+            "name": {
+                "en": document.getElementById("en-name").value,
+                "fr": document.getElementById("fr-name").value
+            },
+            "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+            "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
+            "description": {
+                main: {
+                    "en": document.getElementById("en-description").value,
+                    "fr": document.getElementById("fr-description").value
+                },
+                levels: (() => {
+                    let array = [];
                     
-                    return;
-                }
+                    for (let i = 1; i <= 5; i++) {
+                        let object = {
+                            en: document.getElementById("level-" + i + "-description-en").value,
+                            fr: document.getElementById("level-" + i + "-description-fr").value
+                        };
+                        
+                        array.push(object);
+                    }
+                    
+                    return array;
+                })()
+            },
+            "image": (() => {
+                return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+            })(),
+            cost: document.getElementById("cost").value,
+            linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
+            awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize")
+        };
+        
+        $.post(form.getAttribute("action"), {
+            data: data
+        }, (response) => {
+            if (response.error) {
+                modal.show({
+                    message: "errorValidation",
+                    hideCloseButton: true
+                });
 
-                if (response.success) {
-                    _data.messageAction();
-                }
-            });
-        } else {
-            modal.show({
-                message: "selectMissing",
-                hideCloseButton: true
-            });
-        }
+                return;
+            }
+
+            if (response.success) {
+                _data.messageAction();
+            }
+        });
     });
+    
     form.addEventListener("input", () => {
         hasChanged = true;
     });
