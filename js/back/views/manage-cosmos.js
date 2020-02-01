@@ -1,6 +1,7 @@
+import Autocomplete from "autocompleter";
+
 require("./base");
 import Modal from "./../../shared/modules/ModalResponse";
-import Autocomplete from "autocompleter";
 import { resetDisplay } from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {

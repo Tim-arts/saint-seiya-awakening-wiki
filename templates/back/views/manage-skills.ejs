@@ -47,7 +47,7 @@
                     %>
                     <%- include("./../modules/sort-results", {data: sortData}) %>
                 </div>
-                <div id="display-skills" class="row">
+                <div id="skills-container" class="row">
                     <div class="col-2 skill-placeholder system-placeholder h-100 text-center">
                         <a href="/back/add-skill" class="d-block">
                             <div class="skill-container system-container">
@@ -60,13 +60,15 @@
                         </a>
                     </div>
                     <% for (let i = 0, count = skills.length; i < count; i++) { %>
-                        <% let skill = skills[i] %>
-                        <%- include("./../modules/show-skill", {skill: skill}) %>
+                        <%- include("./../modules/show-skill", {skill: skill[i]}) %>
                     <% } %>
                 </div>
             </div>
         </div>
     </section>
     <%- include("./../modules/modal/response", {data: modalData}) %>
+    <script>
+        let skills = <%- JSON.stringify(skills) %>;
+    </script>
     </body>
 </html>
