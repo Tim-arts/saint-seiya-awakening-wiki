@@ -1,8 +1,8 @@
 require("./base");
 
-import helpers from "./../../shared/helpers";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
+import helpers from "./../../shared/helpers";
 import Autocomplete from "autocompleter";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -213,4 +213,10 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         preventSubmit: true
     });
+    
+    window.onbeforeunload = () => {
+        if (hasChanged) {
+            return true;
+        }
+    };
 });

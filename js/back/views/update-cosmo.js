@@ -1,11 +1,9 @@
-import helpers from "../../shared/helpers";
-
 require("./base");
 
 import InputFile from "./../modules/InputFile";
 import SelectVerification from "./../../front/modules/SelectVerification";
 import Modal from "./../../shared/modules/ModalResponse";
-import { generateUuidv4 } from "./../../shared/helpers";
+import helpers from "../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     let form = document.getElementById("update-cosmo"),
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             } else {
-                data._id = generateUuidv4();
+                data._id = helpers.generateUuidv4();
                 data.messageAction = () => {
                     modal.show({
                         message: "successfullyAdded",
@@ -177,4 +175,10 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
         });
     });
+    
+    window.onbeforeunload = () => {
+        if (hasChanged) {
+            return true;
+        }
+    };
 });

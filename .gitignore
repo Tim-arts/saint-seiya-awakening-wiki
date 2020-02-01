@@ -70,5 +70,5 @@ node_modules/
 node_modules
 *.css.map
 *.bdd
-public/dist
 database-saves
+/public/dist/
