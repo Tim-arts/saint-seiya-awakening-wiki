@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "elements",
         fetch: (text) => {
             text = text.toLowerCase().replace(/["._' ]/g, "-");
-            let suggestions = elements.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
+            let suggestions = elementsFromDB.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
                 results = (() => {
                     let results = [];
                     
