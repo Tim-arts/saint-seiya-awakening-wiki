@@ -141,7 +141,7 @@
             ];
         %>
         <%
-            if (locals.cosmo) {
+            if (locals.cosmo || locals.skill || locals.saint) {
                 let currentObject = entries[Number(data.activeIndex.split(".")[0])];
                 currentObject["dropdown"] = [...currentObject["dropdown"], ...data.dropdown];
             }

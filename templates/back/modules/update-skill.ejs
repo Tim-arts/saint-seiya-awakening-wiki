@@ -20,8 +20,8 @@
             },
             levels: () => {
                 for (let i = 1, count = 5; i <= count; i++) {
-                    let enDescription = locals.skill ? locales[0][cosmo.slug_underscore + '_skill_description_' + i] : "",
-                        frDescription = locals.skill ? locales[1][cosmo.slug_underscore + '_skill_description_' + i] : "";
+                    let enDescription = locals.skill ? locales[0][skill.slug_underscore + '_skill_description_' + i] : "",
+                        frDescription = locals.skill ? locales[1][skill.slug_underscore + '_skill_description_' + i] : "";
                     %>
                         <div class="col-6 mb-4">
                             <label for="level-<%= i %>-description-fr">Description compétence niveau <%= i %> (FR)</label>
@@ -68,7 +68,7 @@
         <div class="col-6">
             <div class="row">
                 <div class="col-12 thumb-container">
-                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold">default.png</span></label>
+                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.skill ? "default.png" : "" %></span></label>
                     <input type="file" id="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= skillData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>

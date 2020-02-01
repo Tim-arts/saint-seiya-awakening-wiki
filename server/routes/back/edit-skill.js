@@ -26,14 +26,16 @@ module.exports = function () {
                         if (error) {
                             console.log(error);
                 
-                            res.render("back/views/edit-cosmo", {
+                            res.render("back/views/edit-skill", {
+                                skill: skill,
                                 locales: null
                             });
                         }
             
                         if (result) {
                             (async function render () {
-                                res.render("back/views/edit-cosmo", {
+                                res.render("back/views/edit-skill", {
+                                    skill: skill,
                                     locales: await Promise.all([
                                         (() => {
                                             let object = result.resources.find(o => o.public_id.indexOf("en") > -1);

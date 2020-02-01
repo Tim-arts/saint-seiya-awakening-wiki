@@ -119,12 +119,5 @@
 	"wind_elf_cosmo_name": "Elfe de vent",
 	"wind_elf_cosmo_description": "En combat augmente votre attaque cosmique de 10%. Pour chaque ennemi touché (hors invocations) vous gagnez 4% d'attaque cosmique pendant 3 tours.",
 	"windflower_cosmo_name": "Anémone",
-	"windflower_cosmo_description": "Lors de l'attaque, réduit la chance statut de la cible de 20 % pendant 2 manches.",
-	"athena_exclamation_skill_name": "Athéna Exclamation",
-	"athena_exclamation_skill_description_main": "Description pour l'athéna exclamation",
-	"athena_exclamation_skill_description_level_1": "Description compétence niveau 1",
-	"athena_exclamation_skill_description_level_2": "Description compétence niveau 2",
-	"athena_exclamation_skill_description_level_3": "Description compétence niveau 3",
-	"athena_exclamation_skill_description_level_4": "Description compétence niveau 4",
-	"athena_exclamation_skill_description_level_5": "Description compétence niveau 5"
+	"windflower_cosmo_description": "Lors de l'attaque, réduit la chance statut de la cible de 20 % pendant 2 manches."
 }

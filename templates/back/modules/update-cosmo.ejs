@@ -162,7 +162,7 @@
         <div class="col-6">
             <div class="row">
                 <div class="col-12 thumb-container">
-                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold">default.png</span></label>
+                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.cosmo ? "default.png" : "" %></span></label>
                     <input type="file" id="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= cosmoData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>
