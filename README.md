@@ -57,4 +57,4 @@ To handle fixtures:
 - Mix of the both above, will remove and load the new fixtures
 > npm run fixtures
 
-**Warning**: Please **save** the database (using the **mongodump** command) before performing any operation. You also might prefer to empty the database before loading the new fixtures (to avoid duplicates).
+**Warning**: Please **save** the database (using the **mongodump** command) before performing any operation.
