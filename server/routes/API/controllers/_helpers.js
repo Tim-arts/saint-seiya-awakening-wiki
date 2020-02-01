@@ -21,6 +21,11 @@ module.exports = {
             });
         }
     },
+    deleteFolderFromCDN (cloudinary, folder) {
+        cloudinary.api.delete_folder(folder, function (error) {
+            if (error) console.log(error);
+        });
+    },
     deleteTranslations (fs, data, folder) {
         const localFolder = global.utils.dirPath + "locales/data/" + folder + "/" + data.slug;
         fs.rmdirSync(localFolder, { recursive: true });

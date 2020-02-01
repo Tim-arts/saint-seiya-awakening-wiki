@@ -27,57 +27,57 @@
     <%- include("./../layout/head", {head: data.head}) %>
 
     <body>
-    <section class="wrapper">
-        <%- include("./../layout/menu", {data: data}) %>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
 
-        <div id="content">
-            <div class="container-fluid">
-                <div class="row mb-5">
-                    <div class="col-6">
-                        <h1 class="text-white h4">
-                            <i class="material-icons">developer_board</i>
-                            <span class="ml-2"><%= data.head.title %></span>
-                        </h1>
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <h1 class="text-white h4">
+                                <i class="material-icons">developer_board</i>
+                                <span class="ml-2"><%= data.head.title %></span>
+                            </h1>
+                        </div>
+                        <%
+                            let sortData = {
+                                placeholder: "Rechercher une cosmo"
+                            };
+                        %>
+                        <%- include("./../modules/sort-results", {data: sortData}) %>
                     </div>
-                    <%
-                        let sortData = {
-                            placeholder: "Rechercher une cosmo"
-                        };
-                    %>
-                    <%- include("./../modules/sort-results", {data: sortData}) %>
-                </div>
-                <div id="elements-container" class="row">
-                    <div class="col-2 element-placeholder h-100 text-center">
-                        <a href="/back/add-cosmo" class="d-block">
-                            <div class="element-container">
-                                <img src="<%= cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default cosmo" />
-                                <h2 class="h6 mt-4">
-                                    <i class="material-icons">add_circle_outline</i>
-                                    <span>Create a cosmo</span>
-                                </h2>
-                            </div>
-                        </a>
-                    </div>
-                    <%
-                        let urls = {
-                            element: "../back/update-cosmo/:",
-                            delete: "../api/cosmo/delete",
-                            path: "cosmos/"
-                        };
+                    <div id="elements-container" class="row">
+                        <div class="col-2 element-placeholder h-100 text-center">
+                            <a href="/back/add-cosmo" class="d-block">
+                                <div class="element-container">
+                                    <img src="<%= cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default cosmo" />
+                                    <h2 class="h6 mt-4">
+                                        <i class="material-icons">add_circle_outline</i>
+                                        <span>Create a cosmo</span>
+                                    </h2>
+                                </div>
+                            </a>
+                        </div>
+                        <%
+                            let urls = {
+                                element: "../back/update-cosmo/:",
+                                delete: "../api/cosmo/delete",
+                                path: "cosmos/"
+                            };
 
-                        for (let i = 0, count = cosmos.length; i < count; i++) {
-                            %>
-                                <%- include("./../modules/show-element", {data: urls, element: cosmos[i]}); %>
-                            <%
-                        }
-                    %>
+                            for (let i = 0, count = cosmos.length; i < count; i++) {
+                                %>
+                                    <%- include("./../modules/show-element", {data: urls, element: cosmos[i]}); %>
+                                <%
+                            }
+                        %>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <%- include("./../modules/modal/response", {data: modalData}) %>
-    <script>
-        let elementsFromDB = <%- JSON.stringify(cosmos) %>;
-    </script>
+        </section>
+        <%- include("./../modules/modal/response", {data: modalData}) %>
+        <script>
+            let elementsFromDB = <%- JSON.stringify(cosmos) %>;
+        </script>
     </body>
 </html>
