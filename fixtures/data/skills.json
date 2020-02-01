@@ -13,9 +13,7 @@
                 "skillNameSaintNameLv5"
             ]
         },
-        "awakened_skill": {
-            "index": -1,
-            "id": -1
-        }
+        "linked_saint_id": "link_id",
+        "awakening_skill_id": "skill_id"
     }
 ]

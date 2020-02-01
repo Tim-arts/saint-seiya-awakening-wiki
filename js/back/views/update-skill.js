@@ -108,53 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
-        input: document.getElementById("saint-link"),
-        minLength: 3,
-        emptyMsg: "There are no results that match this request",
-        debounceWaitMs: 100,
-        className: "saint",
-        onSelect: (saint) => {
-            let imageElement = this.input.parentElement.parentElement.querySelector("img"),
-                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/" + saint.slug + "/thumbnail.png";
-            
-            this.input.value = saint.name;
-            helpers.updateThumbnail(imageElement, imageSrc);
-        },
-        fetch: (data, update) => {
-            $.ajax({
-                url: "../api/saints",
-                data: {
-                    data: data
-                },
-                method: "POST",
-                dataType: 'json',
-                success: function(response) {
-                    update(response.data);
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
-        },
-        render: (saint) => {
-            let div = document.createElement("div");
-            div.innerHTML = saint.name;
-            
-            return div;
-        }
-    });
-    
-    Autocomplete({
-        input: document.getElementById("awakening-skill-link"),
+        input: document.getElementById("awakening-skill-id"),
         minLength: 3,
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
         className: "skill",
-        onSelect: (skill) => {
+        onSelect: function (skill) {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/" + skill.slug + ".png";
     
             this.input.value = skill.name;
+            this.input.setAttribute("data-serialize", skill._id);
             helpers.updateThumbnail(imageElement, imageSrc);
         },
         fetch: (data, update) => {
@@ -176,8 +140,56 @@ document.addEventListener("DOMContentLoaded", () => {
         render: (skill) => {
             let div = document.createElement("div");
             div.innerHTML = skill.name;
+            div.classList.add("suggestion");
             
             return div;
-        }
+        },
+        customize: (input, inputRect, container) => {
+            input.parentElement.appendChild(container);
+        },
+        preventSubmit: true
+    });
+    
+    Autocomplete({
+        input: document.getElementById("linked-saint-id"),
+        minLength: 3,
+        emptyMsg: "There are no results that match this request",
+        debounceWaitMs: 100,
+        className: "saint",
+        onSelect: function (saint) {
+            let imageElement = this.input.parentElement.parentElement.querySelector("img"),
+                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/" + saint.slug + "/thumbnail.png";
+            
+            this.input.value = saint.name;
+            this.input.setAttribute("data-serialize", saint._id);
+            helpers.updateThumbnail(imageElement, imageSrc);
+        },
+        fetch: (data, update) => {
+            $.ajax({
+                url: "../api/saints",
+                data: {
+                    data: data
+                },
+                method: "POST",
+                dataType: 'json',
+                success: function(response) {
+                    update(response.data);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        },
+        render: (saint) => {
+            let div = document.createElement("div");
+            div.innerHTML = saint.name;
+            div.classList.add("suggestion");
+            
+            return div;
+        },
+        customize: (input, inputRect, container) => {
+            input.parentElement.appendChild(container);
+        },
+        preventSubmit: true
     });
 });

@@ -1,7 +1,6 @@
-const Schema = require("mongoose").Schema;
-const data = {
-    skills: require("./../schemas/skills")(Schema)
+const schema = {
+    skills: require("./../schemas/skills")
 };
-const Models = require("./../setSchemasToModels")(data);
+const Models = require("./../setSchemasToModels")(schema);
 
 module.exports = Models.models.skills;

@@ -1,0 +1,24 @@
+.autocomplete {
+    width: calc(100% - 30px)!important;
+    top: 70px !important;
+    left: 15px !important;
+    background-color: @grey-dark-1;
+    border: 2px solid fade(@gold, 20%);
+    z-index: 1;
+    .box-shadow(0 10px 20px 0, @black-alpha-2);
+
+    .suggestion {
+        padding: 5px 10px;
+        cursor: pointer;
+        will-change: background-color;
+        transition: background-color @time-transition-05 @transition-1;
+
+        &:hover, &.selected {
+            background-color: lighten(@grey-dark-1, 5%);
+        }
+
+        &.selected:hover {
+            background-color: lighten(@grey-dark-1, 10%);
+        }
+    }
+}

@@ -10,8 +10,14 @@ const cosmos = {
             type: String,
             unique: true
         },
-        slug: String,
-        slug_underscore: String,
+        slug: {
+            type: String,
+            unique: true
+        },
+        slug_underscore: {
+            type: String,
+            unique: true
+        },
         basic_attributes: {
             types: {
                 type: Array,

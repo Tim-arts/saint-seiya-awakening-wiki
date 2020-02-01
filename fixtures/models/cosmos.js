@@ -1,6 +1,6 @@
-const data = {
+const schema = {
     cosmos: require("./../schemas/cosmos")
 };
-const Models = require("./../setSchemasToModels")(data);
+const Models = require("./../setSchemasToModels")(schema);
 
 module.exports = Models.models.cosmos;

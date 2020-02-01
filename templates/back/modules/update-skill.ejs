@@ -36,12 +36,9 @@
             }
         },
         image: locals.skill ? cloudinary.url("skills/" + skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("skills/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
-        saint_link: locals.skill ? skill.saint_link : "",
         cost: locals.skill ? skill.cost : "",
-        awakened_skill: {
-            index: locals.skill ? skill.awakened_skill.index : "",
-            skill_link: locals.skill ? skill.awakened_skill.skill_link : ""
-        }
+        linked_saint_id: locals.skill ? skill.linked_saint_id : "",
+        awakening_skill_id: locals.skill ? skill.awakening_skill_id: ""
     };
 %>
 
@@ -95,18 +92,14 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-6">
-            <label for="skill-cost">Coût de la compétence</label>
-            <input type="number" id="skill-cost" name="skill-cost" placeholder="Ex: 2" class="form-control" value="<%= skillData.cost %>" />
-        </div>
-        <div class="col-6">
+        <div class="col-6 offset-6">
             <div class="row">
-                <div class="col-8">
-                    <label for="saint-link">Saint correspondant</label>
-                    <input type="text" id="saint-link" name="saint-link" placeholder="Ex: Arayshiki Shaka" class="form-control" />
+                <div class="col-8 position-relative">
+                    <label for="awakening-skill-id">Compétence éveillée correspondante</label>
+                    <input type="text" id="awakening-skill-id" name="awakening-skill-id" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakening_skill_id %>" />
                 </div>
                 <div class="col-4 thumb-container">
-                    <img class="not-input-file" src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Saint image" />
+                    <img class="not-input-file" src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Awakening skill image" />
                 </div>
             </div>
         </div>
@@ -115,22 +108,20 @@
     <div class="e-s-5"></div>
 
     <div class="row mb-4">
-        <div class="col-6">
-            <label for="awakening-skill-index">Index de la compétence éveillée</label>
-            <input type="number" id="awakening-skill-index" name="awakening-skill-index" placeholder="Ex: 4" min="1" max="4" class="form-control" value="<%= skillData.saint_link %>" />
-        </div>
-        <div class="col-6">
+        <div class="col-6 offset-6">
             <div class="row">
-                <div class="col-8">
-                    <label for="awakening-skill-link">Compétence éveillée correspondante</label>
-                    <input type="text" id="awakening-skill-link" name="awakening-skill-link" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakened_skill.skill_link %>" />
+                <div class="col-8 position-relative">
+                    <label for="linked-saint-id">Saint correspondant</label>
+                    <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id %>" />
                 </div>
                 <div class="col-4 thumb-container">
-                    <img class="not-input-file" src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Awakening skill image" />
+                    <img class="not-input-file" src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Saint image" />
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="e-s-3"></div>
 
     <div class="form-group row mt-5 mb-4">
         <div class="col-12 mx-auto text-center">
