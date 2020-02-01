@@ -23,17 +23,12 @@ browserify(["js/back/views/update-cosmo.js"])
     .bundle()
     .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/update-cosmo.js"));
 
-browserify(["js/back/views/manage-cosmos.js"])
-    .transform("babelify")
-    .bundle()
-    .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/manage-cosmos.js"));
-
 browserify(["js/back/views/update-skill.js"])
     .transform("babelify")
     .bundle()
     .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/update-skill.js"));
 
-browserify(["js/back/views/manage-skills.js"])
+browserify(["js/back/views/manage-elements.js"])
     .transform("babelify")
     .bundle()
     .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/manage-skills.js"));

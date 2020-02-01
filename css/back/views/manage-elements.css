@@ -722,49 +722,49 @@ h1 i {
 .sort-module label + input[type="text"] {
   padding: 0.375rem 2.75rem 0.375rem 0.75rem;
 }
-.system .system-container,
-.system-placeholder .system-container {
+.element .element-container,
+.element-placeholder .element-container {
   background-color: rgba(0, 0, 0, 0.1);
   border: 2px solid rgba(0, 236, 152, 0.3);
   position: relative;
 }
-.system .system-container img,
-.system-placeholder .system-container img {
+.element .element-container img,
+.element-placeholder .element-container img {
   height: 128px;
 }
-.system-placeholder .system-container {
+.element-placeholder .element-container {
   padding: 52px 20px;
   border-radius: 8px;
   border-color: rgba(130, 46, 255, 0.3);
   will-change: border-color;
   transition: border-color cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
-.system-placeholder .system-container h2 {
+.element-placeholder .element-container h2 {
   color: white;
 }
-.system-placeholder .system-container h2 i {
+.element-placeholder .element-container h2 i {
   font-size: 21px;
   position: relative;
   top: 5px;
   left: -3px;
 }
-.system-placeholder .system-container:hover {
+.element-placeholder .element-container:hover {
   border-color: #822EFF;
 }
-.system h2 {
+.element h2 {
   color: #fff;
 }
-.system .system-container,
-.system .system-tools {
+.element .element-container,
+.element .element-tools {
   will-change: border-color;
   transition: border-color cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
-.system .system-container {
+.element .element-container {
   padding: 20px;
   border-radius: 8px 8px 0 0;
   height: 250px;
 }
-.system .system-tools {
+.element .element-tools {
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
   padding-bottom: 12px;
@@ -772,12 +772,12 @@ h1 i {
   border: 2px solid rgba(0, 236, 152, 0.3);
   border-top: 0;
 }
-.system .system-tools a {
+.element .element-tools a {
   font-size: 12px;
   display: block;
 }
-.system:hover .system-container,
-.system:hover .system-tools {
+.element:hover .element-container,
+.element:hover .element-tools {
   border-color: #00EC98;
 }
 .sort-results:focus + label i {
@@ -788,4 +788,4 @@ h1 i {
   will-change: color;
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/*# sourceMappingURL=manage-cosmos.css.map */
+/*# sourceMappingURL=manage-elements.css.map */

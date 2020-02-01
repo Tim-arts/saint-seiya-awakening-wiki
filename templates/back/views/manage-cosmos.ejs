@@ -7,10 +7,10 @@
             object.head = {
                 title: "Gérer les cosmos",
                 viewStyleUrls: [
-                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/manage-cosmos.css' type='text/css'>"
+                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/manage-elements.css' type='text/css'>"
                 ],
                 viewScriptUrls: [
-                    "<script defer='defer' src='../../public/dist/back/js/manage-cosmos.js' type='text/javascript'></script>"
+                    "<script defer='defer' src='../../public/dist/back/js/manage-elements.js' type='text/javascript'></script>"
                 ]
             };
             object.activeIndex = "3.1";
@@ -41,16 +41,15 @@
                     </div>
                     <%
                         let sortData = {
-                            id: "sort-cosmos",
                             placeholder: "Rechercher une cosmo"
                         };
                     %>
                     <%- include("./../modules/sort-results", {data: sortData}) %>
                 </div>
-                <div id="cosmos-container" class="row">
-                    <div class="col-2 cosmo-placeholder system-placeholder h-100 text-center">
+                <div id="elements-container" class="row">
+                    <div class="col-2 element-placeholder h-100 text-center">
                         <a href="/back/add-cosmo" class="d-block">
-                            <div class="cosmo-container system-container">
+                            <div class="element-container">
                                 <img src="<%= cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default cosmo" />
                                 <h2 class="h6 mt-4">
                                     <i class="material-icons">add_circle_outline</i>
@@ -59,16 +58,26 @@
                             </div>
                         </a>
                     </div>
-                    <% for (let i = 0, count = cosmos.length; i < count; i++) { %>
-                        <%- include("./../modules/show-cosmo", {cosmo: cosmos[i]}) %>
-                    <% } %>
+                    <%
+                        let urls = {
+                            element: "../back/update-cosmo/:",
+                            delete: "../api/cosmo/delete",
+                            path: "cosmos/"
+                        };
+
+                        for (let i = 0, count = cosmos.length; i < count; i++) {
+                            %>
+                                <%- include("./../modules/show-element", {data: urls, element: cosmos[i]}); %>
+                            <%
+                        }
+                    %>
                 </div>
             </div>
         </div>
     </section>
     <%- include("./../modules/modal/response", {data: modalData}) %>
     <script>
-        let cosmos = <%- JSON.stringify(cosmos) %>;
+        let elements = <%- JSON.stringify(cosmos) %>;
     </script>
     </body>
 </html>

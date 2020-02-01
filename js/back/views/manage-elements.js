@@ -5,11 +5,11 @@ import Modal from "./../../shared/modules/ModalResponse";
 import { resetDisplay } from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
-    let deleteButtons = document.querySelectorAll(".skill-delete a"),
+    let deleteButtons = document.querySelectorAll(".element-delete a"),
         modalElement = document.getElementById("response-modal"),
         modal = new Modal(modalElement),
-        skillsElements = Array.from(document.getElementById("skills-container").querySelectorAll(".skill")),
-        sortSkills = document.getElementById("sort-skills");
+        elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element")),
+        sortElements = document.getElementById("sort-elements");
     
     deleteButtons.forEach(function (button) {
         button.addEventListener("click", function (e) {
@@ -24,18 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 submitContent: "Yes",
                 closeContent: "No",
                 submit: () => {
-                    let skillsElementsParent = _this.closest(".skill"),
+                    let elementParent = _this.closest(".element"),
                         href = _this.href,
                         data = {
-                            _id: skillsElementsParent.getAttribute("data-id"),
-                            slug: skillsElementsParent.getAttribute("data-slug")
+                            _id: elementParent.getAttribute("data-id"),
+                            slug: elementParent.getAttribute("data-slug")
                         };
     
                     $.post(href, {
                         data: data
                     }, (response) => {
                         if (response.success) {
-                            skillsElementsParent.remove();
+                            elementParent.remove();
                         }
                     });
                 }
@@ -44,20 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
-        input: sortSkills,
+        input: sortElements,
         minLength: 3,
         debounceWaitMs: 100,
-        className: "skills",
+        className: "elements",
         fetch: (text) => {
             text = text.toLowerCase().replace(/["._' ]/g, "-");
-            let suggestions = skills.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
+            let suggestions = elements.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
                 results = (() => {
                     let results = [];
                     
                     for (let i = 0, iCount = suggestions.length; i < iCount; i++) {
-                        for (let j = 0, jCount = skillsElements.length; j < jCount; j++) {
-                            if (skillsElements[j].getAttribute("data-slug") === suggestions[i].slug) {
-                                results.push(skillsElements[j]);
+                        for (let j = 0, jCount = elements.length; j < jCount; j++) {
+                            if (elements[j].getAttribute("data-slug") === suggestions[i].slug) {
+                                results.push(elements[j]);
                             }
                         }
                     }
@@ -65,18 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     return results;
                 })();
             
-            resetDisplay(skillsElements, "hide");
+            resetDisplay(elements, "hide");
     
-            skillsElements.forEach((element) => { element.classList.add("hide"); });
+            elements.forEach((element) => { element.classList.add("hide"); });
             results.forEach((result) => { result.classList.remove("hide"); });
         },
         onSelect: null,
         preventSubmit: true
     });
     
-    sortSkills.addEventListener("keyup", function () {
+    sortElements.addEventListener("keyup", function () {
         if (this.value.length <= 2) {
-            resetDisplay(skillsElements, "hide");
+            resetDisplay(elements, "hide");
         }
     });
 });

@@ -23,8 +23,8 @@ h1 {
     }
 }
 
-.system, .system-placeholder {
-    .system-container {
+.element, .element-placeholder {
+    .element-container {
         background-color: @black-alpha-1;
         border: 2px solid @green-faded-3;
         position: relative;
@@ -35,8 +35,8 @@ h1 {
     }
 }
 
-.system-placeholder {
-    .system-container {
+.element-placeholder {
+    .element-container {
         padding: 52px 20px;
         border-radius: @radius-double;
         border-color: @purple-faded-3;
@@ -60,23 +60,23 @@ h1 {
     }
 }
 
-.system {
+.element {
     h2 {
         color: @white;
     }
 
-    .system-container, .system-tools {
+    .element-container, .element-tools {
         will-change: border-color;
         transition: border-color @transition-1 @time-transition-05;
     }
 
-    .system-container {
+    .element-container {
         padding: 20px;
         border-radius: @radius-double @radius-double 0 0;
         height: 250px;
     }
 
-    .system-tools {
+    .element-tools {
         background-color: @black-alpha-1;
         padding: 10px;
         padding-bottom: 12px;
@@ -91,7 +91,7 @@ h1 {
     }
 
     &:hover {
-        .system-container, .system-tools {
+        .element-container, .element-tools {
             border-color: @success;
         }
     }

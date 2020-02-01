@@ -26,16 +26,20 @@ var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/Moda
 
 var _helpers = require("./../../shared/helpers");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
 
 require("./base");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var deleteButtons = document.querySelectorAll(".skill-delete a"),
+  var deleteButtons = document.querySelectorAll(".element-delete a"),
       modalElement = document.getElementById("response-modal"),
       modal = new _ModalResponse["default"](modalElement),
-      skillsElements = Array.from(document.getElementById("skills-container").querySelectorAll(".skill")),
-      sortSkills = document.getElementById("sort-skills");
+      elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element")),
+      sortElements = document.getElementById("sort-elements");
   deleteButtons.forEach(function (button) {
     button.addEventListener("click", function (e) {
       e.preventDefault();
@@ -49,18 +53,18 @@ document.addEventListener("DOMContentLoaded", function () {
         submitContent: "Yes",
         closeContent: "No",
         submit: function submit() {
-          var skillsElementsParent = _this.closest(".skill"),
+          var elementParent = _this.closest(".element"),
               href = _this.href,
               data = {
-            _id: skillsElementsParent.getAttribute("data-id"),
-            slug: skillsElementsParent.getAttribute("data-slug")
+            _id: elementParent.getAttribute("data-id"),
+            slug: elementParent.getAttribute("data-slug")
           };
 
           $.post(href, {
             data: data
           }, function (response) {
             if (response.success) {
-              skillsElementsParent.remove();
+              elementParent.remove();
             }
           });
         }
@@ -68,23 +72,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   (0, _autocompleter["default"])({
-    input: sortSkills,
+    input: sortElements,
     minLength: 3,
     debounceWaitMs: 100,
-    className: "skills",
+    className: "elements",
     fetch: function fetch(text) {
       text = text.toLowerCase().replace(/["._' ]/g, "-");
 
-      var suggestions = skills.filter(function (n) {
+      var suggestions = elements.filter(function (n) {
         return n.slug.toLowerCase().indexOf(text) > -1;
       }),
           results = function () {
         var results = [];
 
         for (var i = 0, iCount = suggestions.length; i < iCount; i++) {
-          for (var j = 0, jCount = skillsElements.length; j < jCount; j++) {
-            if (skillsElements[j].getAttribute("data-slug") === suggestions[i].slug) {
-              results.push(skillsElements[j]);
+          for (var j = 0, jCount = elements.length; j < jCount; j++) {
+            if (elements[j].getAttribute("data-slug") === suggestions[i].slug) {
+              results.push(elements[j]);
             }
           }
         }
@@ -92,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return results;
       }();
 
-      (0, _helpers.resetDisplay)(skillsElements, "hide");
-      skillsElements.forEach(function (element) {
+      (0, _helpers.resetDisplay)(elements, "hide");
+      elements.forEach(function (element) {
         element.classList.add("hide");
       });
       results.forEach(function (result) {
@@ -103,9 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
     onSelect: null,
     preventSubmit: true
   });
-  sortSkills.addEventListener("keyup", function () {
+  sortElements.addEventListener("keyup", function () {
     if (this.value.length <= 2) {
-      (0, _helpers.resetDisplay)(skillsElements, "hide");
+      (0, _helpers.resetDisplay)(elements, "hide");
     }
   });
 });
@@ -154,11 +158,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var Modal =
 /*#__PURE__*/

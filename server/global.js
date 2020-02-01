@@ -20,7 +20,7 @@ module.exports = function (i18n) {
                 }
             ]
         },
-        version: "1.0.0",
+        version: require("./../package").version,
         retrieveLocales: false,
         translations: {
             cosmos: {
