@@ -168,15 +168,13 @@ document.addEventListener("DOMContentLoaded", function () {
 },{}],3:[function(require,module,exports){
 "use strict";
 
-var _helpers = _interopRequireDefault(require("../../shared/helpers"));
-
 var _InputFile = _interopRequireDefault(require("./../modules/InputFile"));
 
 var _SelectVerification = _interopRequireDefault(require("./../../front/modules/SelectVerification"));
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
-var _helpers2 = require("./../../shared/helpers");
+var _helpers = _interopRequireDefault(require("../../shared/helpers"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -242,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       };
     } else {
-      data._id = (0, _helpers2.generateUuidv4)();
+      data._id = _helpers["default"].generateUuidv4();
 
       data.messageAction = function () {
         modal.show({
@@ -367,9 +365,15 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
     });
   });
+
+  window.onbeforeunload = function () {
+    if (hasChanged) {
+      return true;
+    }
+  };
 });
 
-},{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/helpers":5,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2}],4:[function(require,module,exports){
+},{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

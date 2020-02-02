@@ -38,7 +38,8 @@
         image: locals.skill ? cloudinary.url("skills/" + skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("skills/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
         cost: locals.skill ? skill.cost : "",
         linked_saint_id: locals.skill ? skill.linked_saint_id : "",
-        awakening_skill_id: locals.skill ? skill.awakening_skill_id: ""
+        awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
+        isPassive: locals.skill ? skill.isPassive: ""
     };
 %>
 
@@ -119,9 +120,13 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-2">
+        <div class="col-3 mt-2">
             <label for="cost">Coût en cristaux</label>
             <input type="number" id="cost" name="cost" placeholder="Ex: 2" class="form-control" min="0" max="8" value="<%= skillData.cost %>" />
+        </div>
+        <div class="col-3 mt-5">
+            <input type="checkbox" id="is-passive" name="is-passive" <%= skillData.is_passive ? "checked='true'" : "" %> />
+            <label for="is-passive" class="ml-1">Passive</label>
         </div>
     </div>
 

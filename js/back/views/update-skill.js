@@ -103,7 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
             })(),
             cost: document.getElementById("cost").value,
             linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
-            awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize")
+            awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize"),
+            isPassive: !!document.getElementById("is-passive").checked
         };
         
         $.post(form.getAttribute("action"), {

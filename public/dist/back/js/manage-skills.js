@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch: function fetch(text) {
       text = text.toLowerCase().replace(/["._' ]/g, "-");
 
-      var suggestions = elements.filter(function (n) {
+      var suggestions = elementsFromDB.filter(function (n) {
         return n.slug.toLowerCase().indexOf(text) > -1;
       }),
           results = function () {
