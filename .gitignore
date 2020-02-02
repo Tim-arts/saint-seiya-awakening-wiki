@@ -64,11 +64,18 @@ node_modules/
 # dotenv environment variables file
 .env
 
-# Idea folder & .map files
+# IDE specific files
 .idea
 .idea/*
-node_modules
+
+# CSS map files
 *.css.map
-*.bdd
+
+# Folders that should not be on the git repository
+node_modules
 database-saves
-/public/dist/
+
+# Auto-generated folders and files
+/public/dist
+/locales/en.json
+/locales/fr.json
