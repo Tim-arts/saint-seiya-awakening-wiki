@@ -200,6 +200,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return data;
   }(),
+      cost = document.getElementById("cost"),
+      isPassiveElement = document.getElementById("is-passive"),
       hasChanged = false,
       data;
 
@@ -244,10 +246,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "image": function () {
         return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
       }(),
-      cost: document.getElementById("cost").value,
+      cost: cost.value,
       linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
       awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize"),
-      isPassive: !!document.getElementById("is-passive").checked
+      isPassive: !!isPassiveElement.checked
     };
     $.post(form.getAttribute("action"), {
       data: data
@@ -349,6 +351,14 @@ document.addEventListener("DOMContentLoaded", function () {
       input.parentElement.appendChild(container);
     },
     preventSubmit: true
+  });
+  isPassiveElement.addEventListener("change", function () {
+    if (this.checked) {
+      cost.value = null;
+      cost.setAttribute("disabled", "disabled");
+    } else {
+      cost.removeAttribute("disabled");
+    }
   });
 
   window.onbeforeunload = function () {

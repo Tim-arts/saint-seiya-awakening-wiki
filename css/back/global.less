@@ -171,6 +171,10 @@ body {
             color: @white;
             background: @grey-dark-1;
             border: 2px solid fade(@gold, 20%);
+
+            &[disabled] {
+                border-color: @white-alpha-3;
+            }
         }
     }
 }

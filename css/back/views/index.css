@@ -696,6 +696,9 @@ body {
   background: #20202C;
   border: 2px solid rgba(246, 229, 161, 0.2);
 }
+.wrapper #content .form-control[disabled] {
+  border-color: rgba(255, 255, 255, 0.3);
+}
 @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px;
