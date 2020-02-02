@@ -1,0 +1,24 @@
+{
+    "cosmos_subattributes_availabilities_name": "Disponibilités des attributs secondaires cosmiques",
+    
+    "cosmos_subattributes_availabilities_title_0": "Attributs secondaires (max 6 par cosmo)",
+    "cosmos_subattributes_availabilities_title_1": "Bonus max. atteignable (SS)",
+    "cosmos_subattributes_availabilities_title_2": "Bonus max. atteignable (S)",
+    "cosmos_subattributes_availabilities_title_3": "Attribut secondaire disponible sur une cosmo solaire",
+    "cosmos_subattributes_availabilities_title_4": "Attribut secondaire disponible sur une cosmo lunaire",
+    "cosmos_subattributes_availabilities_title_5": "Attribut secondaire disponible sur une cosmo stellaire",
+    
+    "cosmos_subattributes_availabilities_data_0": "ATK P / ATK C fixe",
+    "cosmos_subattributes_availabilities_data_1": "ATK P / ATK C %",
+    "cosmos_subattributes_availabilities_data_2": "DÉG C",
+    "cosmos_subattributes_availabilities_data_3": "Niveau crit. P",
+    "cosmos_subattributes_availabilities_data_4": "PVs fixes",
+    "cosmos_subattributes_availabilities_data_5": "PVs %",
+    "cosmos_subattributes_availabilities_data_6": "DÉF C / DÉF P fixe",
+    "cosmos_subattributes_availabilities_data_7": "DÉF C / DÉF P %",
+    "cosmos_subattributes_availabilities_data_8": "Chance statut",
+    "cosmos_subattributes_availabilities_data_9": "Rés. Statut",
+    "cosmos_subattributes_availabilities_data_10": "Vitesse",
+    "cosmos_subattributes_availabilities_data_11": "Vol de vie",
+    "cosmos_subattributes_availabilities_data_12": "Soin"
+}

@@ -1,0 +1,24 @@
+{
+    "cosmos_subattributes_availabilities_name": "Cosmos subattributes availabilities",
+    
+    "cosmos_subattributes_availabilities_title_0": "Substats (max 6 per cosmo)",
+    "cosmos_subattributes_availabilities_title_1": "Max bonus reachable (SS)",
+    "cosmos_subattributes_availabilities_title_2": "Max bonus reachable (S)",
+    "cosmos_subattributes_availabilities_title_3": "Substat available on solar cosmo",
+    "cosmos_subattributes_availabilities_title_4": "Substat available on lunar cosmo",
+    "cosmos_subattributes_availabilities_title_5": "Substat available on star cosmo",
+    
+    "cosmos_subattributes_availabilities_data_0": "P.ATK / C.ATK flat",
+    "cosmos_subattributes_availabilities_data_1": "P.ATK / C.ATK %",
+    "cosmos_subattributes_availabilities_data_2": "C.DMG",
+    "cosmos_subattributes_availabilities_data_3": "Crit level",
+    "cosmos_subattributes_availabilities_data_4": "HP flat",
+    "cosmos_subattributes_availabilities_data_5": "HP %",
+    "cosmos_subattributes_availabilities_data_6": "C.DEF / P.DEF flat",
+    "cosmos_subattributes_availabilities_data_7": "C.DEF / P.DEF %",
+    "cosmos_subattributes_availabilities_data_8": "Status Hit",
+    "cosmos_subattributes_availabilities_data_9": "Status Res",
+    "cosmos_subattributes_availabilities_data_10": "Speed",
+    "cosmos_subattributes_availabilities_data_11": "Life Steal",
+    "cosmos_subattributes_availabilities_data_12": "Heal"
+}

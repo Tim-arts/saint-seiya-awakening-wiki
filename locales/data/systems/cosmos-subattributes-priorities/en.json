@@ -1,0 +1,26 @@
+{
+    "cosmos_costs_name": "Cosmos subattributes priorities",
+    
+    "cosmos_subattributes_priorities_data_0_0": "DPS P.ATK",
+    "cosmos_subattributes_priorities_data_0_1": "P.ATK % > P.ATK flat",
+    "cosmos_subattributes_priorities_data_0_2": "Crit level as important for crit character",
+    
+    "cosmos_subattributes_priorities_data_1_0": "DPS C.ATK",
+    "cosmos_subattributes_priorities_data_1_1": "C.ATK % > C.DMG > C.ATK flat",
+    
+    "cosmos_subattributes_priorities_data_2_0": "Tank",
+    "cosmos_subattributes_priorities_data_2_1": "HP % > HP flat > P.DEF / C.DEF",
+    "cosmos_subattributes_priorities_data_2_2": "HP flat > HP % for C characters (< 11k base HP)",
+    
+    "cosmos_subattributes_priorities_data_3_0": "PVP",
+    "cosmos_subattributes_priorities_data_3_1": "Speed is the top PVP stat. Status Res is also quite important.",
+    
+    "cosmos_subattributes_priorities_data_4_0": "Heal",
+    "cosmos_subattributes_priorities_data_4_1": "Heal > C.ATK % > C.ATK flat",
+    
+    "cosmos_subattributes_priorities_data_5_0": "Status hit",
+    "cosmos_subattributes_priorities_data_5_1": "Very important for each character with control (freeze, stun, silence, etc.)",
+    
+    "cosmos_subattributes_priorities_data_6_0": "Life Steal",
+    "cosmos_subattributes_priorities_data_6_1": "Very import to sustain (only for DPS)"
+}

@@ -1,0 +1,26 @@
+{
+    "cosmos_costs_name": "Priorités des attributs secondaires cosmiques",
+    
+    "cosmos_subattributes_priorities_data_0_0": "DPS ATK P",
+    "cosmos_subattributes_priorities_data_0_1": "ATK P % > ATK P fixe",
+    "cosmos_subattributes_priorities_data_0_2": "Crit level as important for crit character",
+    
+    "cosmos_subattributes_priorities_data_1_0": "DPS ATK C",
+    "cosmos_subattributes_priorities_data_1_1": "ATK C % > DÉG C > ATK C fixe",
+    
+    "cosmos_subattributes_priorities_data_2_0": "Tank",
+    "cosmos_subattributes_priorities_data_2_1": "PVs % > PVs fixes > DÉF P / DÉF C",
+    "cosmos_subattributes_priorities_data_2_2": "PVs fixes > PVs % pour les personnages de rang C (< 11k PVs de base)",
+    
+    "cosmos_subattributes_priorities_data_3_0": "PVP",
+    "cosmos_subattributes_priorities_data_3_1": "La vitesse est la meilleure stat pour le PVP. La Rés. Statut est aussi relativement importante.",
+    
+    "cosmos_subattributes_priorities_data_4_0": "Soin",
+    "cosmos_subattributes_priorities_data_4_1": "Soin > DÉG C % > DÉG C fixe",
+    
+    "cosmos_subattributes_priorities_data_5_0": "Chance de statut",
+    "cosmos_subattributes_priorities_data_5_1": "Très importante pour tous les personnages qui possèdent du contrôle (gel, étourdissement, silence, etc.)",
+    
+    "cosmos_subattributes_priorities_data_6_0": "Vol de vie",
+    "cosmos_subattributes_priorities_data_6_1": "Very import to sustain (seulement pour DPS)"
+}
