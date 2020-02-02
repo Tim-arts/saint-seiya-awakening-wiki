@@ -1,0 +1,22 @@
+{
+    "cosmos_subattributes_title_0": "Attributs secondaires (max 6 par cosmo)",
+    "cosmos_subattributes_title_1": "Bonus max. atteignable (SS)",
+    "cosmos_subattributes_title_2": "Bonus max. atteignable (S)",
+    "cosmos_subattributes_title_3": "Attribut secondaire disponible sur une cosmo solaire",
+    "cosmos_subattributes_title_4": "Attribut secondaire disponible sur une cosmo lunaire",
+    "cosmos_subattributes_title_5": "Attribut secondaire disponible sur une cosmo étoile",
+    
+    "cosmos_subattributes_content_0": "ATK P / ATK C fixe",
+    "cosmos_subattributes_content_1": "ATK P / ATK C %",
+    "cosmos_subattributes_content_2": "DÉG C",
+    "cosmos_subattributes_content_3": "Niveau crit. P",
+    "cosmos_subattributes_content_4": "PVs fixe",
+    "cosmos_subattributes_content_5": "PVs %",
+    "cosmos_subattributes_content_6": "DÉF C / DÉF P fixe",
+    "cosmos_subattributes_content_7": "DÉF C / DÉF P %",
+    "cosmos_subattributes_content_8": "Chance statut",
+    "cosmos_subattributes_content_9": "Rés. Statut",
+    "cosmos_subattributes_content_10": "Vitesse",
+    "cosmos_subattributes_content_11": "Vol de vie",
+    "cosmos_subattributes_content_12": "Soin"
+}
