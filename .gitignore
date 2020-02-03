@@ -24,6 +24,5 @@ node_modules
 database-saves
 
 # Auto-generated folders and files
-/public/dist
 /locales/en.json
 /locales/fr.json

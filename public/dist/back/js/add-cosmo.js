@@ -1,0 +1,1 @@
+console.error("Error: Cannot find module 'D:\\Dev\\saint-seiya-awakening-wiki\\js\\back\\views\\add-cosmo.js' from 'D:\\Dev\\saint-seiya-awakening-wiki'");
