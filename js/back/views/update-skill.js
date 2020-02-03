@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             return data;
         })(),
-        cost = document.getElementById("cost"),
+        costElement = document.getElementById("cost"),
+        awakeningSkillElement = document.getElementById("awakening-skill-id"),
         isPassiveElement = document.getElementById("is-passive"),
         hasChanged = false,
         data;
@@ -103,9 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "image": (() => {
                 return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
             })(),
-            cost: cost.value,
+            cost: costElement.value,
+            awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
-            awakening_skill_id: document.getElementById("awakening-skill-id").getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked
         };
         
@@ -218,12 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     isPassiveElement.addEventListener("change", function () {
-        if (this.checked) {
-            cost.value = null;
-            cost.setAttribute("disabled", "disabled");
-        } else {
-            cost.removeAttribute("disabled");
-        }
+        helpers.applyPassive(this.checked, {
+            cost: costElement,
+            awakening: {
+                element: awakeningSkillElement,
+                img: awakeningSkillElement.parentElement.nextElementSibling.querySelector("img"),
+                imgSrc: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png"
+            },
+        });
     });
     
     window.onbeforeunload = () => {

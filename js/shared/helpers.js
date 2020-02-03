@@ -30,5 +30,22 @@ module.exports = {
     },
     convertToSlug (str, expression, replacer) {
         return str.toLowerCase().replace(expression, replacer);
+    },
+    applyPassive (bool, elements) {
+        if (bool) {
+            elements.cost.value = null;
+            elements.cost.setAttribute("disabled", "disabled");
+    
+            elements.awakening.element.value = null;
+            elements.awakening.element.removeAttribute("data-serialize");
+            elements.awakening.element.setAttribute("disabled", "disabled");
+            
+            if (elements.awakening.img.src !== elements.awakening.imgSrc) {
+                this.updateThumbnail(elements.awakening.img, elements.awakening.imgSrc);
+            }
+        } else {
+            elements.cost.removeAttribute("disabled");
+            elements.awakening.element.removeAttribute("disabled");
+        }
     }
 };
