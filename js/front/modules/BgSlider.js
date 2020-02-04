@@ -3,6 +3,7 @@ export default class BgSlider {
      * Construct BgSlide instance
      * @return {BgSlider}
      * @param {Element} el
+     * @param {number} imagesAvailable
      * @param {Object} count
      * @param {number} index, active slide
      * @param {number} transitionBetween, transition time between each slide
@@ -16,7 +17,8 @@ export default class BgSlider {
      */
     constructor (
         el,
-        count = { mobile: 5, desktop: 5 },
+        imagesAvailable = {mobile: 5, desktop: 5},
+        count = {mobile: 5, desktop: 5},
         index = 0,
         transitionBetween = 1000,
         transitionTime = 8000,
@@ -37,6 +39,15 @@ export default class BgSlider {
         })();
         
         this.el = el;
+        this.imagesAvailable = (() => {
+            let value = JSON.parse(el.getAttribute('data-slide-images-available'));
+            
+            if (!value) {
+                return this.isOnMobile ? imagesAvailable.mobile : imagesAvailable.desktop;
+            }
+    
+            return this.isOnMobile ? value.mobile : value.desktop;
+        })();
         this.count = (() => {
             let value = JSON.parse(el.getAttribute('data-slide-count'));
             
@@ -61,8 +72,12 @@ export default class BgSlider {
         this.slides = ((self) => {
             let slides = [],
                 randomNumbers = (() => {
-                    const numbers = [...Array(self.count).keys()].map(num => num + 1);
-                    return numbers.sort(() => Math.random() - 0.5);
+                    const nums = new Set();
+                    while(nums.size !== self.count) {
+                        nums.add(Math.floor(Math.random() * self.imagesAvailable) + 1);
+                    }
+                    
+                    return Array.from(nums);
                 })();
             
             for (let i = 0, count = self.count; i < count; i++) {

@@ -29,49 +29,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var BgSlider =
 /*#__PURE__*/
@@ -80,6 +42,7 @@ function () {
    * Construct BgSlide instance
    * @return {BgSlider}
    * @param {Element} el
+   * @param {number} imagesAvailable
    * @param {Object} count
    * @param {number} index, active slide
    * @param {number} transitionBetween, transition time between each slide
@@ -94,22 +57,26 @@ function () {
   function BgSlider(el) {
     var _this = this;
 
-    var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    var imagesAvailable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
       mobile: 5,
       desktop: 5
     };
-    var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var transitionBetween = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1000;
-    var transitionTime = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 8000;
-    var random = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-    var loop = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
-    var arrows = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : {
+    var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+      mobile: 5,
+      desktop: 5
+    };
+    var index = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var transitionBetween = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1000;
+    var transitionTime = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 8000;
+    var random = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : true;
+    var loop = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
+    var arrows = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {
       rounded: true,
       state: false,
       value: 2
     };
-    var progressBar = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
-    var infiniteLoop = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : true;
+    var progressBar = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
+    var infiniteLoop = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : true;
 
     _classCallCheck(this, BgSlider);
 
@@ -124,6 +91,16 @@ function () {
     }();
 
     this.el = el;
+
+    this.imagesAvailable = function () {
+      var value = JSON.parse(el.getAttribute('data-slide-images-available'));
+
+      if (!value) {
+        return _this.isOnMobile ? imagesAvailable.mobile : imagesAvailable.desktop;
+      }
+
+      return _this.isOnMobile ? value.mobile : value.desktop;
+    }();
 
     this.count = function () {
       var value = JSON.parse(el.getAttribute('data-slide-count'));
@@ -154,13 +131,13 @@ function () {
     this.slides = function (self) {
       var slides = [],
           randomNumbers = function () {
-        var numbers = _toConsumableArray(Array(self.count).keys()).map(function (num) {
-          return num + 1;
-        });
+        var nums = new Set();
 
-        return numbers.sort(function () {
-          return Math.random() - 0.5;
-        });
+        while (nums.size !== self.count) {
+          nums.add(Math.floor(Math.random() * self.imagesAvailable) + 1);
+        }
+
+        return Array.from(nums);
       }();
 
       for (var i = 0, _count = self.count; i < _count; i++) {
@@ -436,11 +413,7 @@ require("../base");
 
 var _BgSlider = _interopRequireDefault(require("./../modules/BgSlider"));
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
   var slideElements = document.querySelectorAll(".bg-slider");
