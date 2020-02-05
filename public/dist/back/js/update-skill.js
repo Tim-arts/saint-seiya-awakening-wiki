@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
       awakeningSkillElement = document.getElementById("awakening-skill-id"),
       linkedSaintIdElement = document.getElementById("linked-saint-id"),
       isPassiveElement = document.getElementById("is-passive"),
+      skillsSortable = document.getElementById("skills-sortable"),
       hasChanged = false,
       data;
 
@@ -322,6 +323,57 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
   (0, _autocompleter["default"])({
+    input: document.getElementById("skills-evolved-ids"),
+    minLength: 3,
+    emptyMsg: "There are no results that match this request",
+    debounceWaitMs: 100,
+    className: "skill-evolved",
+    onSelect: function onSelect(skill) {
+      console.log(skill);
+    },
+    fetch: function fetch(data, update) {
+      $.ajax({
+        url: "../api/skills",
+        data: {
+          data: data
+        },
+        method: "POST",
+        dataType: 'json',
+        success: function success(response) {
+          update(response.data);
+        },
+        error: function error(response) {
+          console.log(response);
+        }
+      });
+    },
+    render: function render(skill) {
+      var div = document.createElement("div");
+      div.innerHTML = "<div class='skill-evolved'><span>" + skill.name + "</span></div>";
+      div.classList.add("col-4", "suggestion");
+      var span = document.createElement("span");
+      span.innerHTML = "×";
+      span.classList.add("close");
+      span.addEventListener("click", function () {
+        var _this = this;
+
+        modal.show({
+          message: "deleteConfirmation",
+          submitContent: "Confirm",
+          submit: function submit() {
+            _this.parentElement.parentElement.remove();
+          }
+        });
+      });
+      div.appendChild(span);
+      return div;
+    },
+    customize: function customize(input, inputRect, container) {
+      skillsSortable.appendChild(container);
+    },
+    preventSubmit: true
+  });
+  (0, _autocompleter["default"])({
     input: linkedSaintIdElement,
     minLength: 3,
     emptyMsg: "There are no results that match this request",
@@ -363,7 +415,7 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
 
-  _sortablejs["default"].create(document.getElementById("skills-sortable"));
+  _sortablejs["default"].create(skillsSortable);
 
   isPassiveElement.addEventListener("change", function () {
     _helpers["default"].applyPassive(this.checked, {

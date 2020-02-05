@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         awakeningSkillElement = document.getElementById("awakening-skill-id"),
         linkedSaintIdElement = document.getElementById("linked-saint-id"),
         isPassiveElement = document.getElementById("is-passive"),
+        skillsSortable = document.getElementById("skills-sortable"),
         hasChanged = false,
         data;
     
@@ -186,6 +187,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
+        input: document.getElementById("skills-evolved-ids"),
+        minLength: 3,
+        emptyMsg: "There are no results that match this request",
+        debounceWaitMs: 100,
+        className: "skill-evolved",
+        onSelect: function (skill) {
+            console.log(skill);
+        },
+        fetch: (data, update) => {
+            $.ajax({
+                url: "../api/skills",
+                data: {
+                    data: data
+                },
+                method: "POST",
+                dataType: 'json',
+                success: function(response) {
+                    update(response.data);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        },
+        render: (skill) => {
+            let div = document.createElement("div");
+            div.innerHTML = "<div class='skill-evolved'><span>" + skill.name + "</span></div>";
+            div.classList.add("col-4", "suggestion");
+            
+            let span = document.createElement("span");
+            span.innerHTML = "×";
+            span.classList.add("close");
+            span.addEventListener("click", function () {
+                let _this = this;
+    
+                modal.show({
+                    message: "deleteConfirmation",
+                    submitContent: "Confirm",
+                    submit: () => {
+                        _this.parentElement.parentElement.remove();
+                    }
+                });
+            });
+            
+            div.appendChild(span);
+            
+            return div;
+        },
+        customize: (input, inputRect, container) => {
+            skillsSortable.appendChild(container);
+        },
+        preventSubmit: true
+    });
+    
+    Autocomplete({
         input: linkedSaintIdElement,
         minLength: 3,
         emptyMsg: "There are no results that match this request",
@@ -228,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preventSubmit: true
     });
     
-    Sortable.create(document.getElementById("skills-sortable"));
+    Sortable.create(skillsSortable);
     
     isPassiveElement.addEventListener("change", function () {
         helpers.applyPassive(this.checked, {
