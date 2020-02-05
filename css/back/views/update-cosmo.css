@@ -66,7 +66,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/muli/v19/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Material Icons';
@@ -710,6 +710,32 @@ body {
 }
 .autocomplete .suggestion.selected:hover {
   background-color: #35354a;
+}
+form .autocomplete-container label i {
+  color: rgba(0, 236, 152, 0.3);
+  right: 25px;
+  top: 41px;
+  position: absolute;
+  pointer-events: none;
+}
+form .autocomplete-container label + input[type="text"] {
+  padding: 0.375rem 2.75rem 0.375rem 0.75rem;
+}
+form .autocomplete-container .skills-evolved .skill-evolved {
+  color: #fff;
+  background-color: #20202C;
+  padding: 5px 10px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  will-change: border-color;
+  transition: border-color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  cursor: grab;
+}
+form .autocomplete-container .skills-evolved .skill-evolved:hover {
+  border-color: #00EC98;
+}
+form .autocomplete-container .skills-evolved .skill-evolved:active {
+  cursor: grabbing;
 }
 form .thumb-container {
   position: relative;

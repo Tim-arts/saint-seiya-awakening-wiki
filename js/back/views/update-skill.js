@@ -4,8 +4,14 @@ import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
 import helpers from "./../../shared/helpers";
 import Autocomplete from "autocompleter";
+import Sortable from "sortablejs";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const DEFAULT = {
+        skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
+        saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+    };
+    
     let form = document.getElementById("update-skill"),
         inputFile = document.getElementById("custom-file"),
         defaultImageSrc = inputFile.nextElementSibling.src,
@@ -56,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })(),
         costElement = document.getElementById("cost"),
         awakeningSkillElement = document.getElementById("awakening-skill-id"),
+        linkedSaintIdElement = document.getElementById("linked-saint-id"),
         isPassiveElement = document.getElementById("is-passive"),
         hasChanged = false,
         data;
@@ -106,8 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
             })(),
             cost: costElement.value,
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
-            linked_saint_id: document.getElementById("linked-saint-id").getAttribute("data-serialize"),
-            isPassive: !!isPassiveElement.checked
+            linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
+            isPassive: !!isPassiveElement.checked,
+            linked_skills_evolved: (() => {
+    
+            })()
         };
         
         $.post(form.getAttribute("action"), {
@@ -140,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "skill",
         onSelect: function (skill) {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
-                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/" + skill.slug + ".png";
+                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png";
     
             this.input.value = skill.name;
             this.input.setAttribute("data-serialize", skill._id);
@@ -176,14 +186,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
-        input: document.getElementById("linked-saint-id"),
+        input: linkedSaintIdElement,
         minLength: 3,
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
         className: "saint",
         onSelect: function (saint) {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
-                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/" + saint.slug + "/thumbnail.png";
+                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/thumbnail.png";
             
             this.input.value = saint.name;
             this.input.setAttribute("data-serialize", saint._id);
@@ -218,15 +228,32 @@ document.addEventListener("DOMContentLoaded", () => {
         preventSubmit: true
     });
     
+    Sortable.create(document.getElementById("skills-sortable"));
+    
     isPassiveElement.addEventListener("change", function () {
         helpers.applyPassive(this.checked, {
-            cost: costElement,
-            awakening: {
-                element: awakeningSkillElement,
-                img: awakeningSkillElement.parentElement.nextElementSibling.querySelector("img"),
-                imgSrc: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png"
-            },
+            cost: costElement
         });
+    });
+    
+    awakeningSkillElement.addEventListener("change", function () {
+        if (this.value === "") {
+            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+                imageSrc = DEFAULT.skill;
+            
+            this.removeAttribute("data-serialize");
+            helpers.updateThumbnail(imageElement, imageSrc);
+        }
+    });
+    
+    linkedSaintIdElement.addEventListener("change", function () {
+        if (this.value === "") {
+            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+                imageSrc = DEFAULT.saint;
+            
+            this.removeAttribute("data-serialize");
+            helpers.updateThumbnail(imageElement, imageSrc);
+        }
     });
     
     window.onbeforeunload = () => {

@@ -25,7 +25,8 @@ const skills = {
         cost: Number,
         linked_saint_id: String,
         awakening_skill_id: String,
-        isPassive: Boolean
+        isPassive: Boolean,
+        linked_skills_evolved: Array
     }
 };
 

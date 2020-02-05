@@ -40,7 +40,18 @@
         linked_saint_id: locals.skill ? skill.linked_saint_id : "",
         awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
         isPassive: locals.skill ? skill.isPassive: "",
-        skillIndex: locals.skill ? skill.skillIndex : ""
+        skillIndex: locals.skill ? skill.skillIndex : "",
+        linked_skills_evolved: () => {
+            if (locals.skill) {
+                for (let i = 0; i < 5; i++) {
+                    %>
+                        <div class="col-4">
+                            <div class="skill-evolved">Skill <%= i %></div>
+                        </div>
+                    <%
+                }
+            }
+        }
     };
 %>
 
@@ -59,11 +70,11 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Athéna Exclamation" class="form-control" minlength="3" value="<%= skillData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" value="<%= skillData.name.fr %>" />
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Athena Exclamation" class="form-control" minlength="3" value="<%= skillData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" value="<%= skillData.name.en %>" required />
                 </div>
             </div>
         </div>
@@ -71,7 +82,7 @@
             <div class="row">
                 <div class="col-12 thumb-container">
                     <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.skill ? "default.png" : "" %></span></label>
-                    <input type="file" id="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+                    <input type="file" id="custom-file" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= skillData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>
             </div>
@@ -100,9 +111,9 @@
             <div class="small mt-1"><span class="font-weight-bold">·</span> Minimum : 0, maximum 8 <span class="font-weight-bold">·</span></div>
         </div>
         <div class="col-3 mt-2">
-            <label for="skill-index">Index de la compétence</label>
+            <label for="skill-index">Index de la compétence basique</label>
             <input type="number" id="skill-index" name="skill-index" placeholder="Ex: 2" class="form-control" min="0" max="0" value="<%= skillData.skillIndex %>" />
-            <div class="small mt-1"><span class="font-weight-bold">·</span> Un index commence à 1 et se termine à 4 <span class="font-weight-bold">·</span></div>
+            <div class="small mt-1"><span class="font-weight-bold">·</span> Commence à 1 et se termine à 4 <span class="font-weight-bold">·</span></div>
         </div>
         <div class="col-1 mt-5 text-center">
             <input type="checkbox" id="is-passive" name="is-passive" <%= skillData.is_passive ? "checked='true'" : "" %> />
@@ -110,10 +121,13 @@
         </div>
         <div class="col-6">
             <div class="row">
-                <div class="col-8 position-relative">
-                    <label for="awakening-skill-id">Compétence éveillée correspondante (RC)</label>
+                <div class="col-8 autocomplete-container position-relative">
+                    <label for="awakening-skill-id">
+                        <span>Compétence éveillée correspondante (RC)</span>
+                        <i class="material-icons">search</i>
+                    </label>
                     <input type="text" id="awakening-skill-id" name="awakening-skill-id" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakening_skill_id %>" />
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> champ de recherche : la saisie commence à partir de 3 caractères <span class="font-weight-bold">·</span></div>
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
                     <img class="not-input-file" src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Awakening skill image" />
@@ -125,12 +139,26 @@
     <div class="e-s-4"></div>
 
     <div class="row mb-5">
-        <div class="col-6 offset-6">
+        <div class="col-6 autocomplete-container position-relative">
+            <label for="skill-evolved-id">
+                <span>Skill(s) évolué(s) correspondant(s)</span>
+                <i class="material-icons">search</i>
+            </label>
+            <input type="text" id="skill-evolved-id" name="skill-evolved-id" placeholder="Ex: Great Eclipse II" class="form-control" />
+            <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
+            <div id="skills-sortable" class="row skills-evolved mt-3">
+                <%= skillData.linked_skills_evolved() %>
+            </div>
+        </div>
+        <div class="col-6">
             <div class="row">
-                <div class="col-8 position-relative">
-                    <label for="linked-saint-id">Saint correspondant</label>
+                <div class="col-8 autocomplete-container position-relative">
+                    <label for="linked-saint-id">
+                        <span>Saint correspondant</span>
+                        <i class="material-icons">search</i>
+                    </label>
                     <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id %>" />
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> champ de recherche : la saisie commence à partir de 3 caractères <span class="font-weight-bold">·</span></div>
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
                     <img class="not-input-file" src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Saint image" />
