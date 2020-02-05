@@ -1,24 +1,28 @@
-import Autocomplete from "autocompleter";
-
 require("./base");
+
+import Autocomplete from "autocompleter";
 import Modal from "./../../shared/modules/ModalResponse";
-import { resetDisplay } from "./../../shared/helpers";
+import { constants, resetDisplay } from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
-    let deleteButtons = document.querySelectorAll(".element-delete a"),
-        modalElement = document.getElementById("response-modal"),
-        modal = new Modal(modalElement),
-        elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element")),
-        sortElements = document.getElementById("sort-elements");
+    /* Elements */
+    let deleteButtonElements = document.querySelectorAll(".element-delete a");
+    let modalElement = document.getElementById("response-modal");
+    let elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element"));
+    let sortElements = document.getElementById("sort-elements");
     
-    deleteButtons.forEach(function (button) {
+    /* Constructors */
+    let ModalConstructor = new Modal(modalElement);
+    
+    /* Events */
+    deleteButtonElements.forEach(function (button) {
         button.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
             
             let _this = this;
     
-            modal.show({
+            ModalConstructor.show({
                 message: "deleteConfirmation",
                 backdrop: "static",
                 submitContent: "Yes",
@@ -43,6 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
+    sortElements.addEventListener("keyup", function () {
+        if (this.value.length <= 2) {
+            resetDisplay(elements, "hide");
+        }
+    });
+    
+    elements.forEach((element) => {
+        element.querySelector("img").addEventListener("error", function () {
+            this.onerror = null;
+            this.src = constants.urls.skill;
+        });
+    });
+    
+    /* Dependencies usages */
     Autocomplete({
         input: sortElements,
         minLength: 3,
@@ -66,17 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 })();
             
             resetDisplay(elements, "hide");
-    
+            
             elements.forEach((element) => { element.classList.add("hide"); });
             results.forEach((result) => { result.classList.remove("hide"); });
         },
         onSelect: null,
         preventSubmit: true
-    });
-    
-    sortElements.addEventListener("keyup", function () {
-        if (this.value.length <= 2) {
-            resetDisplay(elements, "hide");
-        }
     });
 });

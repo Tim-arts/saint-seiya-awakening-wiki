@@ -2,7 +2,7 @@
     <div class="element-container">
         <a href="<%= data.element + element._id %>">
             <div class="element-content">
-                <img class="d-block mx-auto" src="<%= cloudinary.url(data.path + element.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="<%= element.name %>" width="128" />
+                <img class="d-block mx-auto" src="<%= cloudinary.url(data.path + element.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="<%= __(element.name) %>" width="128" />
                 <h2 class="font-weight-bold h5 mt-4"><%= __(element.name) %></h2>
             </div>
         </a>

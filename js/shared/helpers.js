@@ -1,4 +1,10 @@
 module.exports = {
+    constants: {
+        urls: {
+            skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
+            saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+        }
+    },
     generateUuidv4 () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);

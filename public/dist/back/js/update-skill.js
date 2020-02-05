@@ -138,37 +138,34 @@ document.addEventListener("DOMContentLoaded", function () {
 },{}],3:[function(require,module,exports){
 "use strict";
 
+var _autocompleter = _interopRequireDefault(require("autocompleter"));
+
+var _sortablejs = _interopRequireDefault(require("sortablejs"));
+
 var _InputFile = _interopRequireDefault(require("./../modules/InputFile"));
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
 var _helpers = _interopRequireDefault(require("./../../shared/helpers"));
 
-var _autocompleter = _interopRequireDefault(require("autocompleter"));
-
-var _sortablejs = _interopRequireDefault(require("sortablejs"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require("./base");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var DEFAULT = {
-    skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
-    saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
-  };
+  /* Elements */
+  var formElement = document.getElementById("update-skill");
+  var inputFileElement = document.getElementById("custom-file");
+  var avatarElement = document.getElementById("avatar");
+  var modalElement = document.getElementById("response-modal");
+  var costElement = document.getElementById("cost");
+  var awakeningSkillElement = document.getElementById("awakening-skill-id");
+  var linkedSaintIdElement = document.getElementById("linked-saint-id");
+  var isPassiveElement = document.getElementById("is-passive");
+  var skillsSortable = document.getElementById("skills-sortable");
 
-  var form = document.getElementById("update-skill"),
-      inputFile = document.getElementById("custom-file"),
-      defaultImageSrc = inputFile.nextElementSibling.src,
-      inputFileConstructor = new _InputFile["default"](inputFile, {
-    img: document.getElementById("avatar"),
-    size: 256
-  }),
-      modalElement = document.getElementById("response-modal"),
-      modal = new _ModalResponse["default"](modalElement),
-      _data = function () {
-    var isUpdate = form.hasAttribute("data-update"),
+  var _data = function () {
+    var isUpdate = formElement.hasAttribute("data-update"),
         data = {};
 
     if (isUpdate) {
@@ -179,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }();
 
       data.messageAction = function () {
-        modal.show({
+        ModalConstructor.show({
           message: "successfullyUpdated",
           title: "Success!",
           backdrop: "static",
@@ -193,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
       data._id = _helpers["default"].generateUuidv4();
 
       data.messageAction = function () {
-        modal.show({
+        ModalConstructor.show({
           message: "successfullyAdded",
           title: "Success!",
           backdrop: "static",
@@ -206,20 +203,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     return data;
-  }(),
-      costElement = document.getElementById("cost"),
-      awakeningSkillElement = document.getElementById("awakening-skill-id"),
-      linkedSaintIdElement = document.getElementById("linked-saint-id"),
-      isPassiveElement = document.getElementById("is-passive"),
-      skillsSortable = document.getElementById("skills-sortable"),
-      hasChanged = false,
-      data;
+  }();
 
-  form.addEventListener("submit", function (e) {
+  var hasChanged = false;
+  var data;
+  /* Constructors */
+
+  var InputFileConstructor = new _InputFile["default"](inputFileElement, {
+    img: avatarElement,
+    size: 256
+  });
+  var ModalConstructor = new _ModalResponse["default"](modalElement);
+  /* Events */
+
+  formElement.addEventListener("submit", function (e) {
     e.preventDefault();
 
     if (!hasChanged) {
-      modal.show({
+      ModalConstructor.show({
         message: "noChanges",
         hideCloseButton: true
       });
@@ -254,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }()
       },
       "image": function () {
-        return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+        return InputFileConstructor.options.img.src === inputFileElement.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
       }(),
       cost: costElement.value,
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
@@ -262,11 +263,11 @@ document.addEventListener("DOMContentLoaded", function () {
       isPassive: !!isPassiveElement.checked,
       linked_skills_evolved: function () {}()
     };
-    $.post(form.getAttribute("action"), {
+    $.post(formElement.getAttribute("action"), {
       data: data
     }, function (response) {
       if (response.error) {
-        modal.show({
+        ModalConstructor.show({
           message: "errorValidation",
           hideCloseButton: true
         });
@@ -278,9 +279,41 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  form.addEventListener("input", function () {
+  formElement.addEventListener("input", function () {
     hasChanged = true;
   });
+
+  window.onbeforeunload = function () {
+    if (hasChanged) {
+      return true;
+    }
+  };
+
+  isPassiveElement.addEventListener("change", function () {
+    _helpers["default"].applyPassive(this.checked, {
+      cost: costElement
+    });
+  });
+  awakeningSkillElement.addEventListener("change", function () {
+    if (this.value === "") {
+      var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+          imageSrc = _helpers["default"]["default"].urls.skill;
+      this.removeAttribute("data-serialize");
+
+      _helpers["default"].updateThumbnail(imageElement, imageSrc);
+    }
+  });
+  linkedSaintIdElement.addEventListener("change", function () {
+    if (this.value === "") {
+      var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+          imageSrc = _helpers["default"]["default"].urls.saint;
+      this.removeAttribute("data-serialize");
+
+      _helpers["default"].updateThumbnail(imageElement, imageSrc);
+    }
+  });
+  /* Dependencies usages */
+
   (0, _autocompleter["default"])({
     input: document.getElementById("awakening-skill-id"),
     minLength: 3,
@@ -357,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
       span.addEventListener("click", function () {
         var _this = this;
 
-        modal.show({
+        ModalConstructor.show({
           message: "deleteConfirmation",
           submitContent: "Confirm",
           submit: function submit() {
@@ -415,43 +448,21 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
 
-  _sortablejs["default"].create(skillsSortable);
-
-  isPassiveElement.addEventListener("change", function () {
-    _helpers["default"].applyPassive(this.checked, {
-      cost: costElement
-    });
-  });
-  awakeningSkillElement.addEventListener("change", function () {
-    if (this.value === "") {
-      var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-          imageSrc = DEFAULT.skill;
-      this.removeAttribute("data-serialize");
-
-      _helpers["default"].updateThumbnail(imageElement, imageSrc);
-    }
-  });
-  linkedSaintIdElement.addEventListener("change", function () {
-    if (this.value === "") {
-      var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-          imageSrc = DEFAULT.saint;
-      this.removeAttribute("data-serialize");
-
-      _helpers["default"].updateThumbnail(imageElement, imageSrc);
-    }
-  });
-
-  window.onbeforeunload = function () {
-    if (hasChanged) {
-      return true;
-    }
-  };
+  if (skillsSortable.querySelector("div")) {
+    _sortablejs["default"].create(skillsSortable);
+  }
 });
 
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../modules/InputFile":1,"./base":2,"autocompleter":6,"sortablejs":7}],4:[function(require,module,exports){
 "use strict";
 
 module.exports = {
+  constants: {
+    urls: {
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+    }
+  },
   generateUuidv4: function generateUuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0,

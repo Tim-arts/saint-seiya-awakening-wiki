@@ -144,7 +144,7 @@ var _SelectVerification = _interopRequireDefault(require("./../../front/modules/
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
-var _helpers = _interopRequireDefault(require("../../shared/helpers"));
+var _helpers = require("../../shared/helpers");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -159,18 +159,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 require("./base");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var form = document.getElementById("update-cosmo"),
-      inputFile = document.getElementById("custom-file"),
-      defaultImageSrc = inputFile.nextElementSibling.src,
-      selects = document.querySelectorAll("select"),
-      inputFileConstructor = new _InputFile["default"](inputFile, {
-    img: document.getElementById("avatar"),
-    size: 256
-  }),
-      modalElement = document.getElementById("response-modal"),
-      modal = new _ModalResponse["default"](modalElement),
-      _data = function () {
-    var isUpdate = form.hasAttribute("data-update"),
+  /* Elements */
+  var formElement = document.getElementById("update-cosmo");
+  var inputFile = document.getElementById("custom-file");
+  var selects = document.querySelectorAll("select");
+  var modalElement = document.getElementById("response-modal");
+
+  var _data = function () {
+    var isUpdate = formElement.hasAttribute("data-update"),
         data = {};
 
     if (isUpdate) {
@@ -181,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }();
 
       data.messageAction = function () {
-        modal.show({
+        ModalConstructor.show({
           message: "successfullyUpdated",
           title: "Success!",
           backdrop: "static",
@@ -192,10 +188,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       };
     } else {
-      data._id = _helpers["default"].generateUuidv4();
+      data._id = (0, _helpers.generateUuidv4)();
 
       data.messageAction = function () {
-        modal.show({
+        ModalConstructor.show({
           message: "successfullyAdded",
           title: "Success!",
           backdrop: "static",
@@ -208,11 +204,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     return data;
-  }(),
-      hasChanged = false,
-      data;
+  }();
 
-  form.addEventListener("submit", function (e) {
+  var hasChanged = false;
+  var data;
+  /* Constructors */
+
+  var InputFileConstructor = new _InputFile["default"](inputFile, {
+    img: document.getElementById("avatar"),
+    size: 256
+  });
+  var ModalConstructor = new _ModalResponse["default"](modalElement);
+  /* Events */
+
+  formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     var selectVerificationConstructor = new _SelectVerification["default"](document.querySelectorAll("select[required]"));
     data = {
@@ -221,8 +226,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value
       },
-      "slug": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
-      "slug_underscore": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
+      "slug": (0, _helpers.convertToSlug)(document.getElementById("en-name").value, /["._' ]/g, "-"),
+      "slug_underscore": (0, _helpers.convertToSlug)(document.getElementById("en-name").value, /["-.' ]/g, "_"),
       "description": {
         "en": document.getElementById("en-description").value,
         "fr": document.getElementById("fr-description").value
@@ -271,13 +276,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "shop": !!document.getElementById("obtainment-system-shop").checked
       },
       "image": function () {
-        return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+        return InputFileConstructor.options.img.src === inputFile.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
       }(),
       "exclusive_cn": !!document.getElementById("exclusive-cn").checked
     };
 
     if (!hasChanged) {
-      modal.show({
+      ModalConstructor.show({
         message: "noChanges",
         hideCloseButton: true
       });
@@ -285,11 +290,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (selectVerificationConstructor.indexOf(false) === -1) {
-      $.post(form.getAttribute("action"), {
+      $.post(formElement.getAttribute("action"), {
         data: data
       }, function (response) {
         if (response.error) {
-          modal.show({
+          ModalConstructor.show({
             message: "errorValidation",
             hideCloseButton: true
           });
@@ -301,21 +306,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     } else {
-      modal.show({
+      ModalConstructor.show({
         message: "selectMissing",
         hideCloseButton: true
       });
     }
   });
-  form.addEventListener("input", function () {
+  formElement.addEventListener("input", function () {
     hasChanged = true;
-  });
-  selects.forEach(function (select) {
-    var link = select.previousElementSibling.querySelector("a");
-    link.addEventListener("click", function (e) {
-      select.selectedIndex = 0;
-      e.preventDefault();
-    });
   });
 
   window.onbeforeunload = function () {
@@ -323,6 +321,14 @@ document.addEventListener("DOMContentLoaded", function () {
       return true;
     }
   };
+
+  selects.forEach(function (select) {
+    var link = select.previousElementSibling.querySelector("a");
+    link.addEventListener("click", function (e) {
+      select.selectedIndex = 0;
+      e.preventDefault();
+    });
+  });
 });
 
 },{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/modules/ModalResponse":6,"./../modules/InputFile":1,"./base":2}],4:[function(require,module,exports){
@@ -371,6 +377,12 @@ exports["default"] = SelectVerification;
 "use strict";
 
 module.exports = {
+  constants: {
+    urls: {
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+    }
+  },
   generateUuidv4: function generateUuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0,

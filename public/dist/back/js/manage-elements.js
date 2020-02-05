@@ -31,19 +31,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 require("./base");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var deleteButtons = document.querySelectorAll(".element-delete a"),
-      modalElement = document.getElementById("response-modal"),
-      modal = new _ModalResponse["default"](modalElement),
-      elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element")),
-      sortElements = document.getElementById("sort-elements");
-  deleteButtons.forEach(function (button) {
+  /* Elements */
+  var deleteButtonElements = document.querySelectorAll(".element-delete a");
+  var modalElement = document.getElementById("response-modal");
+  var elements = Array.from(document.getElementById("elements-container").querySelectorAll(".element"));
+  var sortElements = document.getElementById("sort-elements");
+  /* Constructors */
+
+  var ModalConstructor = new _ModalResponse["default"](modalElement);
+  /* Events */
+
+  deleteButtonElements.forEach(function (button) {
     button.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
 
       var _this = this;
 
-      modal.show({
+      ModalConstructor.show({
         message: "deleteConfirmation",
         backdrop: "static",
         submitContent: "Yes",
@@ -67,6 +72,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+  sortElements.addEventListener("keyup", function () {
+    if (this.value.length <= 2) {
+      (0, _helpers.resetDisplay)(elements, "hide");
+    }
+  });
+  elements.forEach(function (element) {
+    element.querySelector("img").addEventListener("error", function () {
+      this.onerror = null;
+      this.src = _helpers.constants.urls.skill;
+    });
+  });
+  /* Dependencies usages */
+
   (0, _autocompleter["default"])({
     input: sortElements,
     minLength: 3,
@@ -103,17 +121,18 @@ document.addEventListener("DOMContentLoaded", function () {
     onSelect: null,
     preventSubmit: true
   });
-  sortElements.addEventListener("keyup", function () {
-    if (this.value.length <= 2) {
-      (0, _helpers.resetDisplay)(elements, "hide");
-    }
-  });
 });
 
 },{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./base":1,"autocompleter":5}],3:[function(require,module,exports){
 "use strict";
 
 module.exports = {
+  constants: {
+    urls: {
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+    }
+  },
   generateUuidv4: function generateUuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0,

@@ -3,21 +3,17 @@ require("./base");
 import InputFile from "./../modules/InputFile";
 import SelectVerification from "./../../front/modules/SelectVerification";
 import Modal from "./../../shared/modules/ModalResponse";
-import helpers from "../../shared/helpers";
+import { generateUuidv4, convertToSlug } from "../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
-    let form = document.getElementById("update-cosmo"),
-        inputFile = document.getElementById("custom-file"),
-        defaultImageSrc = inputFile.nextElementSibling.src,
-        selects = document.querySelectorAll("select"),
-        inputFileConstructor = new InputFile(inputFile, {
-            img: document.getElementById("avatar"),
-            size: 256
-        }),
-        modalElement = document.getElementById("response-modal"),
-        modal = new Modal(modalElement),
-        _data = (() => {
-            let isUpdate = form.hasAttribute("data-update"),
+    /* Elements */
+    let formElement = document.getElementById("update-cosmo");
+    let inputFile = document.getElementById("custom-file");
+    let selects = document.querySelectorAll("select");
+    let modalElement = document.getElementById("response-modal");
+    
+    let _data = (() => {
+            let isUpdate = formElement.hasAttribute("data-update"),
                 data = {};
             
             if (isUpdate) {
@@ -28,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return array[array.length - 1].substring(1);
                 })();
                 data.messageAction = () => {
-                    modal.show({
+                    ModalConstructor.show({
                         message: "successfullyUpdated",
                         title: "Success!",
                         backdrop: "static",
@@ -39,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             } else {
-                data._id = helpers.generateUuidv4();
+                data._id = generateUuidv4();
                 data.messageAction = () => {
-                    modal.show({
+                    ModalConstructor.show({
                         message: "successfullyAdded",
                         title: "Success!",
                         backdrop: "static",
@@ -54,12 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             return data;
-        })(),
-        hasChanged = false,
-        data;
+        })();
+    let hasChanged = false;
+    let data;
     
-    form
-        .addEventListener("submit", (e) => {
+    /* Constructors */
+    let InputFileConstructor = new InputFile(inputFile, {
+        img: document.getElementById("avatar"),
+        size: 256
+    });
+    let ModalConstructor = new Modal(modalElement);
+    
+    /* Events */
+    formElement.addEventListener("submit", (e) => {
         e.preventDefault();
         
         let selectVerificationConstructor = new SelectVerification(document.querySelectorAll("select[required]"));
@@ -70,8 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
-            "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
-            "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
+            "slug": convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+            "slug_underscore": convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "description": {
                 "en": document.getElementById("en-description").value,
                 "fr": document.getElementById("fr-description").value
@@ -125,13 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 "shop": !!document.getElementById("obtainment-system-shop").checked
             },
             "image": (() => {
-                return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+                return InputFileConstructor.options.img.src === inputFile.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
             })(),
             "exclusive_cn": !!document.getElementById("exclusive-cn").checked
         };
         
         if (!hasChanged) {
-            modal.show({
+            ModalConstructor.show({
                 message: "noChanges",
                 hideCloseButton: true
             });
@@ -140,33 +143,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         if (selectVerificationConstructor.indexOf(false) === -1) {
-            $.post(form.getAttribute("action"), {
+            $.post(formElement.getAttribute("action"), {
                 data: data
             }, (response) => {
                 if (response.error) {
-                    modal.show({
+                    ModalConstructor.show({
                         message: "errorValidation",
                         hideCloseButton: true
                     });
                     
                     return;
                 }
-
+                
                 if (response.success) {
                     _data.messageAction();
                 }
             });
         } else {
-            modal.show({
+            ModalConstructor.show({
                 message: "selectMissing",
                 hideCloseButton: true
             });
         }
     });
     
-    form.addEventListener("input", () => {
+    formElement.addEventListener("input", () => {
         hasChanged = true;
     });
+    window.onbeforeunload = () => {
+        if (hasChanged) {
+            return true;
+        }
+    };
     
     selects.forEach((select) => {
         let link = select.previousElementSibling.querySelector("a");
@@ -175,10 +183,4 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
         });
     });
-    
-    window.onbeforeunload = () => {
-        if (hasChanged) {
-            return true;
-        }
-    };
 });

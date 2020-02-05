@@ -108,18 +108,18 @@
         <div class="col-2 mt-2">
             <label for="cost">Coût en cristaux</label>
             <input type="number" id="cost" name="cost" placeholder="Ex: 2" class="form-control" min="0" max="8" value="<%= skillData.cost %>" />
-            <div class="small mt-1"><span class="font-weight-bold">·</span> Minimum : 0, maximum 8 <span class="font-weight-bold">·</span></div>
+            <div class="small mt-1"><span class="font-weight-bold">·</span> min 0 - max 8 <span class="font-weight-bold">·</span></div>
         </div>
         <div class="col-3 mt-2">
             <label for="skill-index">Index de la compétence basique</label>
             <input type="number" id="skill-index" name="skill-index" placeholder="Ex: 2" class="form-control" min="0" max="0" value="<%= skillData.skillIndex %>" />
-            <div class="small mt-1"><span class="font-weight-bold">·</span> Commence à 1 et se termine à 4 <span class="font-weight-bold">·</span></div>
+            <div class="small mt-1"><span class="font-weight-bold">·</span> min 1 - max 4 <span class="font-weight-bold">·</span></div>
         </div>
         <div class="col-1 mt-5 text-center">
             <input type="checkbox" id="is-passive" name="is-passive" <%= skillData.is_passive ? "checked='true'" : "" %> />
             <label for="is-passive" class="ml-1">Passive</label>
         </div>
-        <div class="col-6">
+        <div class="col-6 mt-2">
             <div class="row">
                 <div class="col-8 autocomplete-container position-relative">
                     <label for="awakening-skill-id">

@@ -1,79 +1,78 @@
 require("./base");
 
+import Autocomplete from "autocompleter";
+import Sortable from "sortablejs";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
 import helpers from "./../../shared/helpers";
-import Autocomplete from "autocompleter";
-import Sortable from "sortablejs";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const DEFAULT = {
-        skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
-        saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
-    };
+    /* Elements */
+    let formElement = document.getElementById("update-skill");
+    let inputFileElement = document.getElementById("custom-file");
+    let avatarElement = document.getElementById("avatar");
+    let modalElement = document.getElementById("response-modal");
+    let costElement = document.getElementById("cost");
+    let awakeningSkillElement = document.getElementById("awakening-skill-id");
+    let linkedSaintIdElement = document.getElementById("linked-saint-id");
+    let isPassiveElement = document.getElementById("is-passive");
+    let skillsSortable = document.getElementById("skills-sortable");
     
-    let form = document.getElementById("update-skill"),
-        inputFile = document.getElementById("custom-file"),
-        defaultImageSrc = inputFile.nextElementSibling.src,
-        inputFileConstructor = new InputFile(inputFile, {
-            img: document.getElementById("avatar"),
-            size: 256
-        }),
-        modalElement = document.getElementById("response-modal"),
-        modal = new Modal(modalElement),
-        _data = (() => {
-            let isUpdate = form.hasAttribute("data-update"),
-                data = {};
-            
-            if (isUpdate) {
-                data._id = (() => {
-                    let url = document.URL,
-                        array = url.split("/");
-                    
-                    return array[array.length - 1].substring(1);
-                })();
-                data.messageAction = () => {
-                    modal.show({
-                        message: "successfullyUpdated",
-                        title: "Success!",
-                        backdrop: "static",
-                        submit: () => {
-                            window.location.reload(true);
-                        },
-                        hideCloseButton: true
-                    });
-                }
-            } else {
-                data._id = helpers.generateUuidv4();
-                data.messageAction = () => {
-                    modal.show({
-                        message: "successfullyAdded",
-                        title: "Success!",
-                        backdrop: "static",
-                        submit: () => {
-                            window.location.reload(true);
-                        },
-                        hideCloseButton: true
-                    });
-                };
+    let  _data = (() => {
+        let isUpdate = formElement.hasAttribute("data-update"),
+            data = {};
+        
+        if (isUpdate) {
+            data._id = (() => {
+                let url = document.URL,
+                    array = url.split("/");
+                
+                return array[array.length - 1].substring(1);
+            })();
+            data.messageAction = () => {
+                ModalConstructor.show({
+                    message: "successfullyUpdated",
+                    title: "Success!",
+                    backdrop: "static",
+                    submit: () => {
+                        window.location.reload(true);
+                    },
+                    hideCloseButton: true
+                });
             }
-            
-            return data;
-        })(),
-        costElement = document.getElementById("cost"),
-        awakeningSkillElement = document.getElementById("awakening-skill-id"),
-        linkedSaintIdElement = document.getElementById("linked-saint-id"),
-        isPassiveElement = document.getElementById("is-passive"),
-        skillsSortable = document.getElementById("skills-sortable"),
-        hasChanged = false,
-        data;
+        } else {
+            data._id = helpers.generateUuidv4();
+            data.messageAction = () => {
+                ModalConstructor.show({
+                    message: "successfullyAdded",
+                    title: "Success!",
+                    backdrop: "static",
+                    submit: () => {
+                        window.location.reload(true);
+                    },
+                    hideCloseButton: true
+                });
+            };
+        }
+        
+        return data;
+    })();
+    let hasChanged = false;
+    let data;
     
-    form
-        .addEventListener("submit", (e) => {
+    /* Constructors */
+    let InputFileConstructor = new InputFile(inputFileElement, {
+        img: avatarElement,
+        size: 256
+    });
+    let ModalConstructor = new Modal(modalElement);
+    
+    /* Events */
+    formElement.addEventListener("submit", (e) => {
         e.preventDefault();
         
         if (!hasChanged) {
-            modal.show({
+            ModalConstructor.show({
                 message: "noChanges",
                 hideCloseButton: true
             });
@@ -110,39 +109,71 @@ document.addEventListener("DOMContentLoaded", () => {
                 })()
             },
             "image": (() => {
-                return inputFileConstructor.options.img.src === defaultImageSrc ? null : inputFileConstructor.options.img.src;
+                return InputFileConstructor.options.img.src === inputFileElement.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
             })(),
             cost: costElement.value,
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
             linked_skills_evolved: (() => {
-    
+            
             })()
         };
         
-        $.post(form.getAttribute("action"), {
+        $.post(formElement.getAttribute("action"), {
             data: data
         }, (response) => {
             if (response.error) {
-                modal.show({
+                ModalConstructor.show({
                     message: "errorValidation",
                     hideCloseButton: true
                 });
-
+                
                 return;
             }
-
+            
             if (response.success) {
                 _data.messageAction();
             }
         });
     });
     
-    form.addEventListener("input", () => {
+    formElement.addEventListener("input", () => {
         hasChanged = true;
     });
+    window.onbeforeunload = () => {
+        if (hasChanged) {
+            return true;
+        }
+    };
     
+    isPassiveElement.addEventListener("change", function () {
+        helpers.applyPassive(this.checked, {
+            cost: costElement
+        });
+    });
+    
+    awakeningSkillElement.addEventListener("change", function () {
+        if (this.value === "") {
+            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+                imageSrc = helpers.default.urls.skill;
+            
+            this.removeAttribute("data-serialize");
+            helpers.updateThumbnail(imageElement, imageSrc);
+        }
+    });
+    
+    linkedSaintIdElement.addEventListener("change", function () {
+        if (this.value === "") {
+            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
+                imageSrc = helpers.default.urls.saint;
+            
+            this.removeAttribute("data-serialize");
+            helpers.updateThumbnail(imageElement, imageSrc);
+        }
+    });
+    
+    /* Dependencies usages */
     Autocomplete({
         input: document.getElementById("awakening-skill-id"),
         minLength: 3,
@@ -152,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         onSelect: function (skill) {
             let imageElement = this.input.parentElement.parentElement.querySelector("img"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png";
-    
+            
             this.input.value = skill.name;
             this.input.setAttribute("data-serialize", skill._id);
             helpers.updateThumbnail(imageElement, imageSrc);
@@ -221,8 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
             span.classList.add("close");
             span.addEventListener("click", function () {
                 let _this = this;
-    
-                modal.show({
+                
+                ModalConstructor.show({
                     message: "deleteConfirmation",
                     submitContent: "Confirm",
                     submit: () => {
@@ -284,37 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
         preventSubmit: true
     });
     
-    Sortable.create(skillsSortable);
-    
-    isPassiveElement.addEventListener("change", function () {
-        helpers.applyPassive(this.checked, {
-            cost: costElement
-        });
-    });
-    
-    awakeningSkillElement.addEventListener("change", function () {
-        if (this.value === "") {
-            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-                imageSrc = DEFAULT.skill;
-            
-            this.removeAttribute("data-serialize");
-            helpers.updateThumbnail(imageElement, imageSrc);
-        }
-    });
-    
-    linkedSaintIdElement.addEventListener("change", function () {
-        if (this.value === "") {
-            let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-                imageSrc = DEFAULT.saint;
-            
-            this.removeAttribute("data-serialize");
-            helpers.updateThumbnail(imageElement, imageSrc);
-        }
-    });
-    
-    window.onbeforeunload = () => {
-        if (hasChanged) {
-            return true;
-        }
-    };
+    if (skillsSortable.querySelector("div")) {
+        Sortable.create(skillsSortable);
+    }
 });
