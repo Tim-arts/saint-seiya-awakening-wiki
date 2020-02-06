@@ -171,6 +171,17 @@ module.exports = {
     } else {
       elements.cost.removeAttribute("disabled");
     }
+  },
+  displayElementsFromType: function displayElementsFromType(markers, value, type) {
+    if (value === type) {
+      markers.forEach(function (marker) {
+        marker.classList.add("hide");
+      });
+    } else {
+      markers.forEach(function (marker) {
+        marker.classList.remove("hide");
+      });
+    }
   }
 };
 

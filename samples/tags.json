@@ -1,8 +1,0 @@
-{
-    "tags": {
-        "focus": ["single target", "multiple target"],
-        "roles": ["tank", "dps", "support", "control", "healer", "buffer", "debuffer"],
-        "type": ["physical damage", "cosmo damage"],
-        "rank": ["SS", "S", "A", "B"]
-    }
-}

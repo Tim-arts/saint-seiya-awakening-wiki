@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return avatarElement.src === helpers.constants.urls.skill ? null : InputFileConstructor.options.img.src;
             })(),
             skill_index: Number(skillIndexElement.value),
-            cost: costElement.value,
+            cost: Number(costElement.value),
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
@@ -177,13 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     typesSkill.addEventListener("change", function () {
-        let markers = Array.from(document.querySelectorAll(".marker-type-standard"));
-        
-        if (this.value === "modified") {
-            markers.forEach((marker) => { marker.classList.add("hide"); });
-        } else {
-            markers.forEach((marker) => { marker.classList.remove("hide"); });
-        }
+        helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), this.value, "modified");
     });
     
     /* Dependencies usages */
@@ -348,4 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     let sortable = Sortable.create(skillsSortable);
+    
+    /* On load */
+    helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
 });

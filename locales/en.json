@@ -167,5 +167,6 @@
 	"great_eclipse_i_skill_description_level_2": "I. HP is reduced by 20%. II. 560% damage multiplier, 80% life steal.",
 	"great_eclipse_i_skill_description_level_3": "I. HP is reduced by 25%. II. 600% damage multiplier, 90% life steal.",
 	"great_eclipse_i_skill_description_level_4": "I. HP is reduced by 30%. II. 660% damage multiplier, 100% life steal.",
-	"great_eclipse_i_skill_description_level_5": "I. HP is reduced by 30%. II. 720% damage multiplier, 100% life steal."
+	"great_eclipse_i_skill_description_level_5": "I. HP is reduced by 30%. II. 720% damage multiplier, 100% life steal.",
+	"great_eclipse_ii_skill_name": "great_eclipse_ii_skill_name"
 }

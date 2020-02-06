@@ -9,6 +9,30 @@
    }
 
     let skillData = {
+        typesSkill: () => {
+            let types = [
+                {
+                    name: "Standard",
+                    value: "standard"
+                },
+                {
+                    name: "Modifié",
+                    value: "modified"
+                }
+            ];
+
+            for (let i = 0, count = types.length; i < count; i++) {
+                let type = types[i],
+                    selected;
+
+                if (locals.skill) {
+                    selected = type.value === skill.type ? "selected": "";
+                }
+                %>
+                    <option id="type-skill-modified" value="<%= type.value %>" <%= selected %>><%= type.name %></option>
+                <%
+            }
+        },
         name: {
             en: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
             fr: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
@@ -74,8 +98,7 @@
         <div class="col-2">
             <label for="types-skill">Type du skill</label>
             <select id="types-skill" class="not-full-width form-control">
-                <option id="type-skill-standard" value="standard">Standard</option>
-                <option id="type-skill-modified" value="modified">Modifié</option>
+                <%= skillData.typesSkill() %>
             </select>
         </div>
     </div>

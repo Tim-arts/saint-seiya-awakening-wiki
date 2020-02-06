@@ -45,5 +45,12 @@ module.exports = {
         } else {
             elements.cost.removeAttribute("disabled");
         }
+    },
+    displayElementsFromType (markers, value, type) {
+        if (value === type) {
+            markers.forEach((marker) => { marker.classList.add("hide"); });
+        } else {
+            markers.forEach((marker) => { marker.classList.remove("hide"); });
+        }
     }
 };
