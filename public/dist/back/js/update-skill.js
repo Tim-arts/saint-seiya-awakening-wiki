@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }()
       },
       "image": function () {
-        return InputFileConstructor.options.img.src === inputFileElement.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
+        return avatarElement.src === _helpers["default"].constants.urls.skill ? null : InputFileConstructor.options.img.src;
       }(),
       cost: costElement.value,
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
@@ -279,6 +279,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (response.success) {
+        hasChanged = false;
+
         _data.messageAction();
       }
     });
@@ -494,8 +496,9 @@ document.addEventListener("DOMContentLoaded", function () {
 module.exports = {
   constants: {
     urls: {
-      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
-      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png",
+      cosmo: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/default.png"
     }
   },
   generateUuidv4: function generateUuidv4() {

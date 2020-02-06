@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* Elements */
   var formElement = document.getElementById("update-cosmo");
   var inputFile = document.getElementById("custom-file");
+  var avatarElement = document.getElementById("avatar");
   var selects = document.querySelectorAll("select");
   var modalElement = document.getElementById("response-modal");
 
@@ -276,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "shop": !!document.getElementById("obtainment-system-shop").checked
       },
       "image": function () {
-        return InputFileConstructor.options.img.src === inputFile.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
+        return avatarElement.src === _helpers.constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
       }(),
       "exclusive_cn": !!document.getElementById("exclusive-cn").checked
     };
@@ -379,8 +380,9 @@ exports["default"] = SelectVerification;
 module.exports = {
   constants: {
     urls: {
-      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
-      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png",
+      cosmo: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/default.png"
     }
   },
   generateUuidv4: function generateUuidv4() {

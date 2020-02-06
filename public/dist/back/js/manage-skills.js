@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   elements.forEach(function (element) {
     element.querySelector("img").addEventListener("error", function () {
-      this.onerror = null;
       this.src = _helpers.constants.urls.skill;
+      this.onerror = null;
     });
   });
   /* Dependencies usages */

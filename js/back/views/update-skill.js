@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })()
             },
             "image": (() => {
-                return InputFileConstructor.options.img.src === inputFileElement.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
+                return avatarElement.src === helpers.constants.urls.skill ? null : InputFileConstructor.options.img.src;
             })(),
             cost: costElement.value,
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             if (response.success) {
+                hasChanged = false;
                 _data.messageAction();
             }
         });

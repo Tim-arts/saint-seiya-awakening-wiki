@@ -3,12 +3,13 @@ require("./base");
 import InputFile from "./../modules/InputFile";
 import SelectVerification from "./../../front/modules/SelectVerification";
 import Modal from "./../../shared/modules/ModalResponse";
-import { generateUuidv4, convertToSlug } from "../../shared/helpers";
+import { constants, generateUuidv4, convertToSlug } from "../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
     let formElement = document.getElementById("update-cosmo");
     let inputFile = document.getElementById("custom-file");
+    let avatarElement = document.getElementById("avatar");
     let selects = document.querySelectorAll("select");
     let modalElement = document.getElementById("response-modal");
     
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "shop": !!document.getElementById("obtainment-system-shop").checked
             },
             "image": (() => {
-                return InputFileConstructor.options.img.src === inputFile.nextElementSibling.src ? null : InputFileConstructor.options.img.src;
+                return avatarElement.src === constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
             })(),
             "exclusive_cn": !!document.getElementById("exclusive-cn").checked
         };

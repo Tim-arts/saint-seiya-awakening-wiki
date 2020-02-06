@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     elements.forEach((element) => {
         element.querySelector("img").addEventListener("error", function () {
-            this.onerror = null;
             this.src = constants.urls.skill;
+            this.onerror = null;
         });
     });
     
