@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var inputFileElement = document.getElementById("custom-file");
   var avatarElement = document.getElementById("avatar");
   var modalElement = document.getElementById("response-modal");
+  var skillIndexElement = document.getElementById("skill-index");
   var costElement = document.getElementById("cost");
   var awakeningSkillElement = document.getElementById("awakening-skill-id");
   var linkedSaintIdElement = document.getElementById("linked-saint-id");
@@ -293,6 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "image": function () {
         return avatarElement.src === _helpers["default"].constants.urls.skill ? null : InputFileConstructor.options.img.src;
       }(),
+      skill_index: Number(skillIndexElement.value),
       cost: costElement.value,
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
       linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
