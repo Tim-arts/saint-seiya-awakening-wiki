@@ -84,7 +84,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/muli/v19/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Material Icons';
@@ -557,6 +557,9 @@ a.link-disabled:active {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+}
+.not-full-width {
+  width: initial;
 }
 .very-small {
   font-size: 60%;

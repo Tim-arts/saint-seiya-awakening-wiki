@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let linkedSaintIdElement = document.getElementById("linked-saint-id");
     let isPassiveElement = document.getElementById("is-passive");
     let skillsSortable = document.getElementById("skills-sortable");
+    let typesSkill = document.getElementById("types-skill");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -82,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         data = {
             "_id": _data._id,
-            "type": document.getElementById("types-skill").value,
+            "type": typesSkill.value,
             "name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
@@ -171,6 +172,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
             this.removeAttribute("data-serialize");
             helpers.updateThumbnail(imageElement, imageSrc);
+        }
+    });
+    
+    typesSkill.addEventListener("change", function () {
+        let markers = Array.from(document.querySelectorAll(".marker-type-modified"));
+        
+        if (this.value === "modified") {
+            markers.forEach((marker) => { marker.classList.add("hide"); });
+        } else {
+            markers.forEach((marker) => { marker.classList.remove("hide"); });
         }
     });
     

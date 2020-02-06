@@ -540,6 +540,9 @@ a.link-disabled:active {
   opacity: 0;
   pointer-events: none;
 }
+.not-full-width {
+  width: initial;
+}
 .very-small {
   font-size: 60%;
   letter-spacing: 1px;

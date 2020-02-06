@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var linkedSaintIdElement = document.getElementById("linked-saint-id");
   var isPassiveElement = document.getElementById("is-passive");
   var skillsSortable = document.getElementById("skills-sortable");
+  var typesSkill = document.getElementById("types-skill");
 
   var _data = function () {
     var isUpdate = formElement.hasAttribute("data-update"),
@@ -229,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     data = {
       "_id": _data._id,
-      "type": document.getElementById("types-skill").value,
+      "type": typesSkill.value,
       "name": {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value
@@ -311,6 +312,19 @@ document.addEventListener("DOMContentLoaded", function () {
       this.removeAttribute("data-serialize");
 
       _helpers["default"].updateThumbnail(imageElement, imageSrc);
+    }
+  });
+  typesSkill.addEventListener("change", function () {
+    var markers = Array.from(document.querySelectorAll(".marker-type-modified"));
+
+    if (this.value === "modified") {
+      markers.forEach(function (marker) {
+        marker.classList.add("hide");
+      });
+    } else {
+      markers.forEach(function (marker) {
+        marker.classList.remove("hide");
+      });
     }
   });
   /* Dependencies usages */
