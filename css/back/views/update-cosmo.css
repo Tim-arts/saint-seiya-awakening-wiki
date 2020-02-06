@@ -721,20 +721,31 @@ form .autocomplete-container label i {
 form .autocomplete-container label + input[type="text"] {
   padding: 0.375rem 2.75rem 0.375rem 0.75rem;
 }
-form .autocomplete-container .skills-evolved .skill-evolved {
+form .autocomplete-container .skills-modified .skill-modified {
   color: #fff;
-  background-color: #20202C;
-  padding: 5px 10px;
+  background-color: #15151d;
+  padding: 10px;
   border: 2px solid transparent;
   border-radius: 4px;
   will-change: border-color;
   transition: border-color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   cursor: grab;
 }
-form .autocomplete-container .skills-evolved .skill-evolved:hover {
+form .autocomplete-container .skills-modified .skill-modified img {
+  width: 32px;
+}
+form .autocomplete-container .skills-modified .skill-modified .close {
+  color: #fff;
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  text-shadow: none;
+  cursor: pointer;
+}
+form .autocomplete-container .skills-modified .skill-modified:hover {
   border-color: #00EC98;
 }
-form .autocomplete-container .skills-evolved .skill-evolved:active {
+form .autocomplete-container .skills-modified .skill-modified:active {
   cursor: grabbing;
 }
 form .thumb-container {

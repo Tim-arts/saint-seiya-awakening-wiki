@@ -18,16 +18,29 @@ form {
             }
         }
 
-        .skills-evolved {
-            .skill-evolved {
+        .skills-modified {
+            .skill-modified {
                 color: @white;
-                background-color: @grey-dark-1;
-                padding: 5px 10px;
+                background-color: @grey-dark-2;
+                padding: 10px;
                 border: 2px solid transparent;
                 border-radius: 4px;
                 will-change: border-color;
                 transition: border-color @time-transition-05 @transition-1;
                 cursor: grab;
+
+                img {
+                    width: 32px;
+                }
+
+                .close {
+                    color: @white;
+                    position: absolute;
+                    right: 25px;
+                    top: 5px;
+                    text-shadow: none;
+                    cursor: pointer;
+                }
 
                 &:hover {
                     border-color: @success;

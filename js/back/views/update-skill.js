@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         data = {
             "_id": _data._id,
+            "type": document.getElementById("types-skill").value,
             "name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
-            linked_skills_evolved: (() => {
+            linked_skills_modified: (() => {
             
             })()
         };
@@ -218,13 +219,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
-        input: document.getElementById("skills-evolved-ids"),
+        input: document.getElementById("skills-modified-ids"),
         minLength: 3,
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
-        className: "skill-evolved",
+        className: "skill",
         onSelect: function (skill) {
-            console.log(skill);
+            this.input.value = null;
+            
+            // If the skill already exists in the pool, don't add it again
+            if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize") === skill._id).indexOf(true) > -1) {
+                return;
+            }
+            
+            let parent = document.createElement("div");
+            parent.classList.add("col-4", "position-relative", "mb-2");
+            parent.setAttribute("data-serialize", skill._id);
+            
+            let div = document.createElement("div");
+            div.innerHTML = "<img src='" + helpers.constants.urls.skill + "' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
+            div.classList.add("skill-modified");
+    
+            let span = document.createElement("span");
+            span.innerHTML = "×";
+            span.classList.add("close");
+            span.addEventListener("click", function () {
+                ModalConstructor.show({
+                    message: "deleteConfirmation",
+                    submitContent: "Confirm",
+                    submit: () => {
+                        this.parentElement.parentElement.remove();
+                    }
+                });
+            });
+            
+            div.appendChild(span);
+            parent.appendChild(div);
+            skillsSortable.appendChild(parent);
+    
+            sortable.destroy();
+            sortable = Sortable.create(skillsSortable);
         },
         fetch: (data, update) => {
             $.ajax({
@@ -244,26 +278,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         render: (skill) => {
             let div = document.createElement("div");
-            div.innerHTML = "<div class='skill-evolved'><span>" + skill.name + "</span></div>";
-            div.classList.add("col-4", "suggestion");
-            
-            let span = document.createElement("span");
-            span.innerHTML = "×";
-            span.classList.add("close");
-            span.addEventListener("click", function () {
-                let _this = this;
-                
-                ModalConstructor.show({
-                    message: "deleteConfirmation",
-                    submitContent: "Confirm",
-                    submit: () => {
-                        _this.parentElement.parentElement.remove();
-                    }
-                });
-            });
-            
-            div.appendChild(span);
-            
+            div.innerHTML = skill.name;
+            div.classList.add("suggestion");
+    
             return div;
         },
         customize: (input, inputRect, container) => {
@@ -315,7 +332,5 @@ document.addEventListener("DOMContentLoaded", () => {
         preventSubmit: true
     });
     
-    if (skillsSortable.querySelector("div")) {
-        Sortable.create(skillsSortable);
-    }
+    let sortable = Sortable.create(skillsSortable);
 });

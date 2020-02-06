@@ -229,6 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     data = {
       "_id": _data._id,
+      "type": document.getElementById("types-skill").value,
       "name": {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value
@@ -261,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
       linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
       isPassive: !!isPassiveElement.checked,
-      linked_skills_evolved: function () {}()
+      linked_skills_modified: function () {}()
     };
     $.post(formElement.getAttribute("action"), {
       data: data
@@ -356,13 +357,45 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
   (0, _autocompleter["default"])({
-    input: document.getElementById("skills-evolved-ids"),
+    input: document.getElementById("skills-modified-ids"),
     minLength: 3,
     emptyMsg: "There are no results that match this request",
     debounceWaitMs: 100,
-    className: "skill-evolved",
+    className: "skill",
     onSelect: function onSelect(skill) {
-      console.log(skill);
+      this.input.value = null; // If the skill already exists in the pool, don't add it again
+
+      if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(function (x) {
+        return x.getAttribute("data-serialize") === skill._id;
+      }).indexOf(true) > -1) {
+        return;
+      }
+
+      var parent = document.createElement("div");
+      parent.classList.add("col-4", "position-relative", "mb-2");
+      parent.setAttribute("data-serialize", skill._id);
+      var div = document.createElement("div");
+      div.innerHTML = "<img src='" + _helpers["default"].constants.urls.skill + "' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
+      div.classList.add("skill-modified");
+      var span = document.createElement("span");
+      span.innerHTML = "×";
+      span.classList.add("close");
+      span.addEventListener("click", function () {
+        var _this = this;
+
+        ModalConstructor.show({
+          message: "deleteConfirmation",
+          submitContent: "Confirm",
+          submit: function submit() {
+            _this.parentElement.parentElement.remove();
+          }
+        });
+      });
+      div.appendChild(span);
+      parent.appendChild(div);
+      skillsSortable.appendChild(parent);
+      sortable.destroy();
+      sortable = _sortablejs["default"].create(skillsSortable);
     },
     fetch: function fetch(data, update) {
       $.ajax({
@@ -382,23 +415,8 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     render: function render(skill) {
       var div = document.createElement("div");
-      div.innerHTML = "<div class='skill-evolved'><span>" + skill.name + "</span></div>";
-      div.classList.add("col-4", "suggestion");
-      var span = document.createElement("span");
-      span.innerHTML = "×";
-      span.classList.add("close");
-      span.addEventListener("click", function () {
-        var _this = this;
-
-        ModalConstructor.show({
-          message: "deleteConfirmation",
-          submitContent: "Confirm",
-          submit: function submit() {
-            _this.parentElement.parentElement.remove();
-          }
-        });
-      });
-      div.appendChild(span);
+      div.innerHTML = skill.name;
+      div.classList.add("suggestion");
       return div;
     },
     customize: function customize(input, inputRect, container) {
@@ -448,9 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
 
-  if (skillsSortable.querySelector("div")) {
-    _sortablejs["default"].create(skillsSortable);
-  }
+  var sortable = _sortablejs["default"].create(skillsSortable);
 });
 
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../modules/InputFile":1,"./base":2,"autocompleter":6,"sortablejs":7}],4:[function(require,module,exports){

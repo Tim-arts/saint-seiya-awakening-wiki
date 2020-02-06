@@ -41,12 +41,17 @@
         awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
         isPassive: locals.skill ? skill.isPassive: "",
         skillIndex: locals.skill ? skill.skillIndex : "",
-        linked_skills_evolved: () => {
+        linked_skills_modified: () => {
             if (locals.skill) {
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0, count = skill.linked_skills_modified.length; i < count; i++) {
+                    let skillModified = skill.linked_skills_modified[i];
                     %>
-                        <div class="col-4">
-                            <div class="skill-evolved">Skill <%= i %></div>
+                        <div class="col-4 position-relative mb-2" data-serialize="<%= skillModified._id %>">
+                            <div class="skill-modified">
+                                <img src="<%= cloudinary.url("skills/" + skillModified.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-3" alt="Skill icon" />
+                                <span><%= skillModified.slug %>></span>
+                                <span class="close">×</span>
+                            </div>
                         </div>
                     <%
                 }
@@ -62,6 +67,16 @@
                 <i class="material-icons"><%= data.icon %></i>
                 <span class="ml-2"><%= data.head.title %></span>
             </h1>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-2">
+            <label for="types-skill">Type du skill</label>
+            <select id="types-skill" class="form-control">
+                <option id="type-skill-standard" value="standard">Standard</option>
+                <option id="type-skill-modified" value="modified">Modified</option>
+            </select>
         </div>
     </div>
 
@@ -105,15 +120,15 @@
     </div>
 
     <div class="row mb-5">
+        <div class="col-3 mt-2">
+            <label for="skill-index">Position de la compétence</label>
+            <input type="number" id="skill-index" name="skill-index" placeholder="Ex: 2" class="form-control" min="0" max="0" value="<%= skillData.skillIndex %>" />
+            <div class="small mt-1"><span class="font-weight-bold">·</span> min 1 - max 4 <span class="font-weight-bold">·</span></div>
+        </div>
         <div class="col-2 mt-2">
             <label for="cost">Coût en cristaux</label>
             <input type="number" id="cost" name="cost" placeholder="Ex: 2" class="form-control" min="0" max="8" value="<%= skillData.cost %>" />
             <div class="small mt-1"><span class="font-weight-bold">·</span> min 0 - max 8 <span class="font-weight-bold">·</span></div>
-        </div>
-        <div class="col-3 mt-2">
-            <label for="skill-index">Index de la compétence basique</label>
-            <input type="number" id="skill-index" name="skill-index" placeholder="Ex: 2" class="form-control" min="0" max="0" value="<%= skillData.skillIndex %>" />
-            <div class="small mt-1"><span class="font-weight-bold">·</span> min 1 - max 4 <span class="font-weight-bold">·</span></div>
         </div>
         <div class="col-1 mt-5 text-center">
             <input type="checkbox" id="is-passive" name="is-passive" <%= skillData.is_passive ? "checked='true'" : "" %> />
@@ -140,15 +155,13 @@
 
     <div class="row mb-5">
         <div class="col-6 autocomplete-container position-relative">
-            <label for="skills-evolved-ids">
+            <label for="skills-modified-ids">
                 <span>Skill(s) évolué(s) correspondant(s)</span>
                 <i class="material-icons">search</i>
             </label>
-            <input type="text" id="skills-evolved-ids" name="skills-evolved-ids" placeholder="Ex: Great Eclipse II" class="form-control" />
+            <input type="text" id="skills-modified-ids" name="skills-modified-ids" placeholder="Ex: Great Eclipse II" class="form-control" />
             <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-            <div id="skills-sortable" class="row skills-evolved mt-3">
-                <%= skillData.linked_skills_evolved() %>
-            </div>
+            <div id="skills-sortable" class="row skills-modified mt-3"><%= skillData.linked_skills_modified() %></div>
         </div>
         <div class="col-6">
             <div class="row">

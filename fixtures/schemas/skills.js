@@ -2,6 +2,7 @@ const skills = {
     name: "skills",
     template: {
         _id: String,
+        type: {type: String},
         name: {
             type: String,
             unique: true
@@ -26,7 +27,7 @@ const skills = {
         linked_saint_id: String,
         awakening_skill_id: String,
         isPassive: Boolean,
-        linked_skills_evolved: Array
+        linked_skills_modified: Array
     }
 };
 
