@@ -786,7 +786,7 @@ form select:focus option:checked {
   background: #262635;
 }
 .main-description {
-  min-height: 150px !important;
+  min-height: 180px !important;
   border-color: rgba(246, 229, 161, 0.5) !important;
 }
 /*# sourceMappingURL=update-skill.css.map */

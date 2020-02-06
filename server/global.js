@@ -34,6 +34,12 @@ module.exports = function (i18n) {
                 plural: "skills",
                 path: "skills/",
                 cdn: "translations/skills/"
+            },
+            saints: {
+                singular: "saint",
+                plural: "saints",
+                path: "saints/",
+                cdn: "translations/saints/"
             }
         }
     };

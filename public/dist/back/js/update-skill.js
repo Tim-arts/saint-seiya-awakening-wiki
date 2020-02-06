@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   typesSkill.addEventListener("change", function () {
-    var markers = Array.from(document.querySelectorAll(".marker-type-modified"));
+    var markers = Array.from(document.querySelectorAll(".marker-type-standard"));
 
     if (this.value === "modified") {
       markers.forEach(function (marker) {

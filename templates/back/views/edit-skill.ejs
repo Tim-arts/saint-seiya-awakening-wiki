@@ -5,7 +5,7 @@
             let object = {};
 
             object.head = {
-                title: "Modifier une skill",
+                title: "Modifier une compétence",
                 viewStyleUrls: [
                     "<link defer='defer' rel='stylesheet' href='../../css/back/views/update-skill.css' type='text/css'>"
                 ],
@@ -17,7 +17,7 @@
                 {
                     url: "/back/update-skill/:" + skill._id,
                     icon: "create",
-                    title: "Modifier un skill",
+                    title: object.head.title,
                     visibility: [
                         "production",
                         "development"

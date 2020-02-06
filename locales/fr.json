@@ -159,5 +159,12 @@
 	"cosmos_subattributes_priorities_data_5_0": "Chance de statut",
 	"cosmos_subattributes_priorities_data_5_1": "Très importante pour tous les personnages qui possèdent du contrôle (gel, étourdissement, silence, etc.)",
 	"cosmos_subattributes_priorities_data_6_0": "Vol de vie",
-	"cosmos_subattributes_priorities_data_6_1": "Très important pour résister (seulement pour DPS)"
+	"cosmos_subattributes_priorities_data_6_1": "Très important pour résister (seulement pour DPS)",
+	"great_eclipse_i_skill_name": "Grande Eclipse I",
+	"great_eclipse_i_skill_description_main": "Après avoir lancé \"Grande Eclipse I\", les neuf planètes s'alignent en 2 tours avant que Hades agisse et tous les ennemies auront leur vie réduite de 15% (inclue la vie max; les ennemies d'un certain niveau ne sont pas affectés mais subiront à la place 200% de dégâts bruts), et la compétance sera remplacé par \"Grande Ecplise II\", faisant 520% de dégâts cosmique à 1 ennemie. Cette attaque vole de la vie égale à 70% des dégâts faits et la vie excédentaire sera convertie en vie max (la vie max convertie ne peut excéder 80% de sa vie max originale).",
+	"great_eclipse_i_skill_description_level_1": "I. Vie réduite de 15%. II. Multiplicateur de dégâts de 520%, 70% de vol de vie.",
+	"great_eclipse_i_skill_description_level_2": "I. Vie réduite de 20%. II. Multiplicateur de dégâts de 560%, 80% de vol de vie.",
+	"great_eclipse_i_skill_description_level_3": "I. Vie réduite de 25%. II. Multiplicateur de dégâts de 600%, 90% de vol de vie.",
+	"great_eclipse_i_skill_description_level_4": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 660%, 100% de vol de vie.",
+	"great_eclipse_i_skill_description_level_5": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 720%, 100% de vol de vie."
 }

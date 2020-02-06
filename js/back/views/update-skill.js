@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     typesSkill.addEventListener("change", function () {
-        let markers = Array.from(document.querySelectorAll(".marker-type-modified"));
+        let markers = Array.from(document.querySelectorAll(".marker-type-standard"));
         
         if (this.value === "modified") {
             markers.forEach((marker) => { marker.classList.add("hide"); });
