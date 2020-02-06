@@ -23,6 +23,7 @@ const skills = {
                 maxItems: 5
             }
         },
+        skill_index: Number,
         cost: Number,
         linked_saint_id: String,
         awakening_skill_id: String,
