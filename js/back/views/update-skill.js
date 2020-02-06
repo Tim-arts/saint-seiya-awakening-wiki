@@ -117,22 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
-            linked_skills_modified: (() => {
-                let array = Array.from(skillsSortable.querySelectorAll(":scope > div")),
-                    data = [];
-                
-                array.forEach((entry) => {
-                    let parseResult = JSON.parse(entry.getAttribute("data-serialize")),
-                        object = {
-                        _id: parseResult._id,
-                        slug: parseResult.slug
-                    };
-                    
-                    data.push(object);
-                });
-                
-                return data;
-            })()
+            linked_skills_modified: Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize"))
         };
         
         $.post(formElement.getAttribute("action"), {
@@ -258,14 +243,14 @@ document.addEventListener("DOMContentLoaded", () => {
             
             let parent = document.createElement("div");
             parent.classList.add("col-4", "position-relative", "mb-2");
-            parent.setAttribute("data-serialize", JSON.stringify({
-                _id: skill._id,
-                slug: skill.slug
-            }));
+            parent.setAttribute("data-serialize", skill._id);
             
             let div = document.createElement("div");
-            div.innerHTML = "<img src='" + helpers.constants.urls.skill + "' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
+            div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
             div.classList.add("skill-modified");
+            div.querySelector("img").addEventListener("error", function () {
+                this.src = helpers.constants.urls.skill;
+            });
     
             let span = document.createElement("span");
             span.innerHTML = "×";
