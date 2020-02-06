@@ -22,7 +22,3 @@ node_modules/
 # Folders that should not be on the git repository
 node_modules
 database-saves
-
-# Auto-generated folders and files
-/locales/en.json
-/locales/fr.json
