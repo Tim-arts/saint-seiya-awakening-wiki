@@ -263,7 +263,19 @@ document.addEventListener("DOMContentLoaded", function () {
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
       linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
       isPassive: !!isPassiveElement.checked,
-      linked_skills_modified: function () {}()
+      linked_skills_modified: function () {
+        var array = Array.from(skillsSortable.querySelectorAll(":scope > div")),
+            data = [];
+        array.forEach(function (entry) {
+          var parseResult = JSON.parse(entry.getAttribute("data-serialize")),
+              object = {
+            _id: parseResult._id,
+            slug: parseResult.slug
+          };
+          data.push(object);
+        });
+        return data;
+      }()
     };
     $.post(formElement.getAttribute("action"), {
       data: data
@@ -387,7 +399,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var parent = document.createElement("div");
       parent.classList.add("col-4", "position-relative", "mb-2");
-      parent.setAttribute("data-serialize", skill._id);
+      parent.setAttribute("data-serialize", JSON.stringify({
+        _id: skill._id,
+        slug: skill.slug
+      }));
       var div = document.createElement("div");
       div.innerHTML = "<img src='" + _helpers["default"].constants.urls.skill + "' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
       div.classList.add("skill-modified");

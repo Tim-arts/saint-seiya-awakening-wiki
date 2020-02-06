@@ -118,7 +118,20 @@ document.addEventListener("DOMContentLoaded", () => {
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
             linked_skills_modified: (() => {
-            
+                let array = Array.from(skillsSortable.querySelectorAll(":scope > div")),
+                    data = [];
+                
+                array.forEach((entry) => {
+                    let parseResult = JSON.parse(entry.getAttribute("data-serialize")),
+                        object = {
+                        _id: parseResult._id,
+                        slug: parseResult.slug
+                    };
+                    
+                    data.push(object);
+                });
+                
+                return data;
             })()
         };
         
@@ -245,7 +258,10 @@ document.addEventListener("DOMContentLoaded", () => {
             
             let parent = document.createElement("div");
             parent.classList.add("col-4", "position-relative", "mb-2");
-            parent.setAttribute("data-serialize", skill._id);
+            parent.setAttribute("data-serialize", JSON.stringify({
+                _id: skill._id,
+                slug: skill.slug
+            }));
             
             let div = document.createElement("div");
             div.innerHTML = "<img src='" + helpers.constants.urls.skill + "' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
