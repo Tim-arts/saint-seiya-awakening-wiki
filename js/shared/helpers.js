@@ -36,7 +36,7 @@ module.exports = {
         });
     },
     convertToSlug (str, expression, replacer) {
-        return str.toLowerCase().replace(expression, replacer);
+        return str.trim().toLowerCase().replace(expression, replacer);
     },
     applyPassive (bool, elements) {
         if (bool) {

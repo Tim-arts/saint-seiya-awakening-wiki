@@ -166,7 +166,7 @@ module.exports = {
     });
   },
   convertToSlug: function convertToSlug(str, expression, replacer) {
-    return str.toLowerCase().replace(expression, replacer);
+    return str.trim().toLowerCase().replace(expression, replacer);
   },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {
