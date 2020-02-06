@@ -133,8 +133,9 @@ document.addEventListener("DOMContentLoaded", function () {
 module.exports = {
   constants: {
     urls: {
-      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/default.png",
-      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/default.png"
+      skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png",
+      cosmo: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/default.png",
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/default.png"
     }
   },
   generateUuidv4: function generateUuidv4() {
