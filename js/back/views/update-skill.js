@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!hasChanged) {
             ModalConstructor.show({
                 message: "noChanges",
+                changeSubmitButton: "Close",
                 hideCloseButton: true
             });
             
@@ -119,7 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
-            linked_skills_modified: Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize"))
+            linked_skills_modified: (() => {
+                if (skillsSortable.querySelectorAll(":scope > div").length > 0) {
+                    return Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize"));
+                } else {
+                    return null;
+                }
+            })()
         };
         
         $.post(formElement.getAttribute("action"), {
@@ -350,6 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 message: "deleteConfirmation",
                 submitContent: "Confirm",
                 submit: () => {
+                    hasChanged = true;
                     this.parentElement.parentElement.remove();
                 }
             });

@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!hasChanged) {
             ModalConstructor.show({
                 message: "noChanges",
+                changeSubmitButton: "Close",
                 hideCloseButton: true
             });
             

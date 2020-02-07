@@ -54,7 +54,7 @@ module.exports = (Model, type) => {
         
             /* Upload translation files on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
-        
+            
             /* Update the document into database */
             Model.updateOne(
                 {

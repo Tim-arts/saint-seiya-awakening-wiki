@@ -53,24 +53,28 @@ module.exports = {
     process (cloudinary, fs, http, path, data, folder, singularType, pluralType) {
         // Shared entry
         let name = data.slug_underscore + "_" + singularType + "_name";
-        let enTranslation, frTranslation;
+        let enTranslation = {},
+            frTranslation = {};
         
         switch (pluralType) {
             case "cosmos":
                 let description = data.slug_underscore + "_" + singularType + "_description";
-                
-                enTranslation = {
-                    [name]: data.name.en,
-                    [description]: data.description.en
-                };
-                frTranslation = {
-                    [name]: data.name.fr,
-                    [description]: data.description.fr
-                };
+    
+                enTranslation[[name]] = data.name.en;
+                enTranslation[[description]] = data.description.en;
+    
+                frTranslation[[name]] = data.name.fr;
+                frTranslation[[description]] = data.description.fr;
                 
                 break;
             case "skills":
                 let mainDescription = data.slug_underscore + "_" + singularType + "_description_main";
+    
+                enTranslation[[name]] = data.name.en;
+                enTranslation[[mainDescription]] = data.description.main.en;
+    
+                frTranslation[[name]] = data.name.fr;
+                frTranslation[[mainDescription]] = data.description.main.fr;
                 
                 if (data.type === "standard") {
                     let level_1 = data.slug_underscore + "_" + singularType + "_description_level_1",
@@ -79,27 +83,18 @@ module.exports = {
                         level_4 = data.slug_underscore + "_" + singularType + "_description_level_4",
                         level_5 = data.slug_underscore + "_" + singularType + "_description_level_5";
     
-                    enTranslation[level_1] = data.description.levels[0].en;
-                    enTranslation[level_2] = data.description.levels[1].en;
-                    enTranslation[level_3] = data.description.levels[2].en;
-                    enTranslation[level_4] = data.description.levels[3].en;
-                    enTranslation[level_5] = data.description.levels[4].en;
+                    enTranslation[[level_1]] = data.description.levels[0].en;
+                    enTranslation[[level_2]] = data.description.levels[1].en;
+                    enTranslation[[level_3]] = data.description.levels[2].en;
+                    enTranslation[[level_4]] = data.description.levels[3].en;
+                    enTranslation[[level_5]] = data.description.levels[4].en;
     
-                    frTranslation[level_1]= data.description.levels[0].fr;
-                    frTranslation[level_2]= data.description.levels[1].fr;
-                    frTranslation[level_3]= data.description.levels[2].fr;
-                    frTranslation[level_4]= data.description.levels[3].fr;
-                    frTranslation[level_5]= data.description.levels[4].fr;
+                    frTranslation[[level_1]] = data.description.levels[0].fr;
+                    frTranslation[[level_2]] = data.description.levels[1].fr;
+                    frTranslation[[level_3]] = data.description.levels[2].fr;
+                    frTranslation[[level_4]] = data.description.levels[3].fr;
+                    frTranslation[[level_5]] = data.description.levels[4].fr;
                 }
-                
-                enTranslation = {
-                    [name]: data.name.en,
-                    [mainDescription]: data.description.main.en
-                };
-                frTranslation = {
-                    [name]: data.name.fr,
-                    [mainDescription]: data.description.main.fr
-                };
                 
                 break;
             case "saints":
@@ -131,8 +126,10 @@ module.exports = {
             case "skills":
                 data.description.main = data.slug_underscore + "_" + singularType + "_description_main";
                 
-                for (let i = 0; i <= 4; i++) {
-                    data.description.levels[i] = data.slug_underscore + "_" + singularType + "_description_level_" + (i + 1);
+                if (data.type === "standard") {
+                    for (let i = 0; i <= 4; i++) {
+                        data.description.levels[i] = data.slug_underscore + "_" + singularType + "_description_level_" + (i + 1);
+                    }
                 }
                 
                 break;

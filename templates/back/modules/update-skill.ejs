@@ -9,6 +9,7 @@
    }
 
     let skillData = {
+        title: locals.skill ? "Modification de : <span class='text-green'>" + __(skill.name) + "</span>" : data.head.title,
         typesSkill: () => {
             let types = [
                 {
@@ -67,6 +68,10 @@
         is_passive: locals.skill ? skill.is_passive: "",
         linked_skills_modified: () => {
             if (locals.skill) {
+                if (!skill.linked_skills_modified[0]) {
+                    return;
+                }
+
                 for (let i = 0, count = skill.linked_skills_modified.length; i < count; i++) {
                     let s = skill.linked_skills_modified[i];
                     %>
@@ -89,7 +94,7 @@
         <div class="col-12">
             <h1 class="text-white h4">
                 <i class="material-icons"><%= data.icon %></i>
-                <span class="ml-2"><%= data.head.title %></span>
+                <span class="ml-2"><%- skillData.title %></span></span>
             </h1>
         </div>
     </div>

@@ -88,7 +88,7 @@ module.exports = {
         return new Promise(resolve => {
             let count = skill.linked_skills_modified.length;
             
-            if (count === 0) {
+            if (count === 0 || !skill.linked_skills_modified[0]) {
                 return resolve(skill);
             }
             
