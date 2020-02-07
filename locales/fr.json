@@ -166,5 +166,7 @@
 	"great_eclipse_i_skill_description_level_2": "I. Vie réduite de 20%. II. Multiplicateur de dégâts de 560%, 80% de vol de vie.",
 	"great_eclipse_i_skill_description_level_3": "I. Vie réduite de 25%. II. Multiplicateur de dégâts de 600%, 90% de vol de vie.",
 	"great_eclipse_i_skill_description_level_4": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 660%, 100% de vol de vie.",
-	"great_eclipse_i_skill_description_level_5": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 720%, 100% de vol de vie."
+	"great_eclipse_i_skill_description_level_5": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 720%, 100% de vol de vie.",
+	"great_eclipse_ii_skill_name": "Grande Eclipse II",
+	"great_eclipse_ii_skill_description_main": "Inflige 520% de dégâts cosmique à 1 ennemi. Cette attaque vole de la vie égale à 70% des dégâts faits et la vie excédentaire sera convertie en vie max (la vie max convertie ne peut excéder 80% de sa vie max originale)."
 }

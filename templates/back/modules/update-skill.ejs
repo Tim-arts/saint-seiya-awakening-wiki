@@ -73,7 +73,7 @@
                         <div class="col-4 position-relative mb-2" data-serialize="<%= s._id %>">
                             <div class="skill-modified">
                                 <img src="<%= cloudinary.url("skills/" + s.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-2" alt="Skill icon" />
-                                <span><%= convertToName(s.slug) %></span>
+                                <span><%= __(s.name) %></span>
                                 <span class="close">×</span>
                             </div>
                         </div>

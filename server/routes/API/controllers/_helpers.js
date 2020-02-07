@@ -70,30 +70,35 @@ module.exports = {
                 
                 break;
             case "skills":
-                let mainDescription = data.slug_underscore + "_" + singularType + "_description_main",
-                    level_1 = data.slug_underscore + "_" + singularType + "_description_level_1",
-                    level_2 = data.slug_underscore + "_" + singularType + "_description_level_2",
-                    level_3 = data.slug_underscore + "_" + singularType + "_description_level_3",
-                    level_4 = data.slug_underscore + "_" + singularType + "_description_level_4",
-                    level_5 = data.slug_underscore + "_" + singularType + "_description_level_5";
+                let mainDescription = data.slug_underscore + "_" + singularType + "_description_main";
+                
+                if (data.type === "standard") {
+                    let level_1 = data.slug_underscore + "_" + singularType + "_description_level_1",
+                        level_2 = data.slug_underscore + "_" + singularType + "_description_level_2",
+                        level_3 = data.slug_underscore + "_" + singularType + "_description_level_3",
+                        level_4 = data.slug_underscore + "_" + singularType + "_description_level_4",
+                        level_5 = data.slug_underscore + "_" + singularType + "_description_level_5";
+    
+                    enTranslation[level_1] = data.description.levels[0].en;
+                    enTranslation[level_2] = data.description.levels[1].en;
+                    enTranslation[level_3] = data.description.levels[2].en;
+                    enTranslation[level_4] = data.description.levels[3].en;
+                    enTranslation[level_5] = data.description.levels[4].en;
+    
+                    frTranslation[level_1]= data.description.levels[0].fr;
+                    frTranslation[level_2]= data.description.levels[1].fr;
+                    frTranslation[level_3]= data.description.levels[2].fr;
+                    frTranslation[level_4]= data.description.levels[3].fr;
+                    frTranslation[level_5]= data.description.levels[4].fr;
+                }
                 
                 enTranslation = {
                     [name]: data.name.en,
-                    [mainDescription]: data.description.main.en,
-                    [level_1]: data.description.levels[0].en,
-                    [level_2]: data.description.levels[1].en,
-                    [level_3]: data.description.levels[2].en,
-                    [level_4]: data.description.levels[3].en,
-                    [level_5]: data.description.levels[4].en
+                    [mainDescription]: data.description.main.en
                 };
                 frTranslation = {
                     [name]: data.name.fr,
-                    [mainDescription]: data.description.main.fr,
-                    [level_1]: data.description.levels[0].fr,
-                    [level_2]: data.description.levels[1].fr,
-                    [level_3]: data.description.levels[2].fr,
-                    [level_4]: data.description.levels[3].fr,
-                    [level_5]: data.description.levels[4].fr
+                    [mainDescription]: data.description.main.fr
                 };
                 
                 break;
