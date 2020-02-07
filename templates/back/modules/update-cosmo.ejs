@@ -9,6 +9,7 @@
    }
 
     let cosmoData = {
+        title: locals.cosmo ? "Modification de : <span class='text-green'>" + __(cosmo.name) + "</span>" : data.head.title,
         name: {
             en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_name'] : "",
             fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_name'] : ""
@@ -16,6 +17,30 @@
         description: {
             en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_description'] : "",
             fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_description'] : ""
+        },
+        comment: {
+            en: (() => {
+                let result = "";
+
+                if(locals.cosmo) {
+                    if (cosmo.comment) {
+                        result = locales[0][cosmo.slug_underscore + '_cosmo_comment'];
+                    }
+                }
+
+                return result;
+            })(),
+            fr: (() => {
+                let result = "";
+
+                if(locals.cosmo) {
+                    if (cosmo.comment) {
+                        result = locales[1][cosmo.slug_underscore + '_cosmo_comment'];
+                    }
+                }
+
+                return result;
+            })()
         },
         image: locals.cosmo ? cloudinary.url("cosmos/" + cosmo.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
         basic_attributes: {
@@ -141,7 +166,7 @@
         <div class="col-12">
             <h1 class="text-white h4">
                 <i class="material-icons"><%= data.icon %></i>
-                <span class="ml-2"><%= data.head.title %></span>
+                <span class="ml-2"><%- cosmoData.title %></span>
             </h1>
         </div>
     </div>
@@ -178,6 +203,17 @@
         <div class="col-6">
             <label for="en-description">Description (EN)</label>
             <textarea id="en-description" name="en-description" class="form-control" minlength="10"><%= cosmoData.description.en %></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-6">
+            <label for="fr-comment">Partie commentaire (FR)</label>
+            <textarea id="fr-comment" name="fr-comment" class="form-control"><%= cosmoData.comment.fr %></textarea>
+        </div>
+        <div class="col-6">
+            <label for="en-comment">Partie commentaire (FR)</label>
+            <textarea id="en-comment" name="en-comment" class="form-control"><%= cosmoData.comment.en %></textarea>
         </div>
     </div>
 

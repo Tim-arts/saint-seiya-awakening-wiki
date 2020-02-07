@@ -80,6 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-description").value,
                 "fr": document.getElementById("fr-description").value
             },
+            "comment": {
+                "en": document.getElementById("en-comment").value,
+                "fr": document.getElementById("fr-comment").value
+            },
             "basic_attributes": {
                 "types": [
                     (() => {
@@ -158,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 
                 if (response.success) {
+                    hasChanged = false;
                     _data.messageAction();
                 }
             });

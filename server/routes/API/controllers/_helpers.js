@@ -58,13 +58,16 @@ module.exports = {
         
         switch (pluralType) {
             case "cosmos":
-                let description = data.slug_underscore + "_" + singularType + "_description";
+                let description = data.slug_underscore + "_" + singularType + "_description",
+                    comment = data.slug_underscore + "_" + singularType + "_comment";
     
                 enTranslation[[name]] = data.name.en;
                 enTranslation[[description]] = data.description.en;
+                enTranslation[[comment]] = data.comment.en;
     
                 frTranslation[[name]] = data.name.fr;
                 frTranslation[[description]] = data.description.fr;
+                frTranslation[[comment]] = data.comment.fr;
                 
                 break;
             case "skills":
@@ -121,6 +124,7 @@ module.exports = {
         switch (pluralType) {
             case "cosmos":
                 data.description = data.slug_underscore + "_" + singularType +"_description";
+                data.comment = data.slug_underscore + "_" + singularType +"_comment";
                 
                 break;
             case "skills":

@@ -7,6 +7,7 @@ const cosmos = {
             unique: true
         },
         description: String,
+        comment: String,
         slug: {
             type: String,
             unique: true

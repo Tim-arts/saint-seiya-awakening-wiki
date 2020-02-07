@@ -169,5 +169,8 @@
 	"great_eclipse_i_skill_description_level_4": "I. HP is reduced by 30%. II. 660% damage multiplier, 100% life steal.",
 	"great_eclipse_i_skill_description_level_5": "I. HP is reduced by 30%. II. 720% damage multiplier, 100% life steal.",
 	"great_eclipse_ii_skill_name": "Great Eclipse II",
-	"great_eclipse_ii_skill_description_main": "Deals 520% C.DMG to 1 enemy. This attack steals HP equals to 70% of damage dealt and excess HP will be converted into Max HP (the converted Max HP cannot exceed 80% of your original Max HP)."
+	"great_eclipse_ii_skill_description_main": "Deals 520% C.DMG to 1 enemy. This attack steals HP equals to 70% of damage dealt and excess HP will be converted into Max HP (the converted Max HP cannot exceed 80% of your original Max HP).",
+	"scarab_cosmo_name": "Scarab",
+	"scarab_cosmo_description": "Increases life by 15% in combat and for every 10% of life lost, increases damage reflection by an additional 3%",
+	"scarab_cosmo_comment": ""
 }

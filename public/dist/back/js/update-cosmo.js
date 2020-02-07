@@ -294,6 +294,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "en": document.getElementById("en-description").value,
         "fr": document.getElementById("fr-description").value
       },
+      "comment": {
+        "en": document.getElementById("en-comment").value,
+        "fr": document.getElementById("fr-comment").value
+      },
       "basic_attributes": {
         "types": [function () {
           var select = document.getElementById("cosmos-attributes-1");
@@ -365,6 +369,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (response.success) {
+          hasChanged = false;
+
           _data.messageAction();
         }
       });
