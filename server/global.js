@@ -21,7 +21,7 @@ module.exports = function (i18n) {
             ]
         },
         version: require("./../package").version,
-        retrieveLocales: false,
+        getLocales: false,
         translations: {
             cosmos: {
                 singular: "cosmo",

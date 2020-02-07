@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     fetch: function fetch(data, update) {
       $.ajax({
-        url: "../api/skills",
+        url: "../../api/skills",
         data: {
           data: data
         },
@@ -373,7 +373,10 @@ document.addEventListener("DOMContentLoaded", function () {
     debounceWaitMs: 100,
     className: "skill",
     onSelect: function onSelect(skill) {
-      this.input.value = null; // If the skill already exists in the pool, don't add it again
+      this.input.value = null;
+
+      var slug = _helpers["default"].convertToName(skill.slug); // If the skill already exists in the pool, don't add it again
+
 
       if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(function (x) {
         return x.getAttribute("data-serialize") === skill._id;
@@ -385,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
       parent.classList.add("col-4", "position-relative", "mb-2");
       parent.setAttribute("data-serialize", skill._id);
       var div = document.createElement("div");
-      div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
+      div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-2' alt='Skill icon' /><span>" + slug + "</span>";
       div.classList.add("skill-modified");
       div.querySelector("img").addEventListener("error", function () {
         this.src = _helpers["default"].constants.urls.skill;
@@ -412,9 +415,10 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     fetch: function fetch(data, update) {
       $.ajax({
-        url: "../api/skills",
+        url: "../../api/skills",
         data: {
-          data: data
+          data: data,
+          $ne: _data._id
         },
         method: "POST",
         dataType: 'json',
@@ -428,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     render: function render(skill) {
       var div = document.createElement("div");
-      div.innerHTML = skill.name;
+      div.innerHTML = _helpers["default"].convertToName(skill.slug);
       div.classList.add("suggestion");
       return div;
     },
@@ -453,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     fetch: function fetch(data, update) {
       $.ajax({
-        url: "../api/saints",
+        url: "../../api/saints",
         data: {
           data: data
         },
@@ -519,13 +523,37 @@ module.exports = {
       }, 500);
     }, 500);
   },
+  capitalize: function capitalize(string) {
+    var result;
+
+    if (string.length === 2 && string[0] === string[1]) {
+      result = string.toUpperCase();
+    } else {
+      result = string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    return result;
+  },
   resetDisplay: function resetDisplay(elements, className) {
     elements.forEach(function (element) {
       element.classList.remove(className);
     });
   },
-  convertToSlug: function convertToSlug(str, expression, replacer) {
-    return str.trim().toLowerCase().replace(expression, replacer);
+  convertToSlug: function convertToSlug(string, expression, replacer) {
+    return string.trim().toLowerCase().replace(expression, replacer);
+  },
+  convertToName: function convertToName(slug) {
+    var name = [];
+    slug = slug.split("-");
+
+    for (var i = 0, count = slug.length; i < count; i++) {
+      if (slug[i] !== "") {
+        name.push(this.capitalize(slug[i]));
+      }
+    }
+
+    name = name.join(" ");
+    return name;
   },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {

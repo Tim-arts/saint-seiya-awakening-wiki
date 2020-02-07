@@ -160,13 +160,37 @@ module.exports = {
       }, 500);
     }, 500);
   },
+  capitalize: function capitalize(string) {
+    var result;
+
+    if (string.length === 2 && string[0] === string[1]) {
+      result = string.toUpperCase();
+    } else {
+      result = string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    return result;
+  },
   resetDisplay: function resetDisplay(elements, className) {
     elements.forEach(function (element) {
       element.classList.remove(className);
     });
   },
-  convertToSlug: function convertToSlug(str, expression, replacer) {
-    return str.trim().toLowerCase().replace(expression, replacer);
+  convertToSlug: function convertToSlug(string, expression, replacer) {
+    return string.trim().toLowerCase().replace(expression, replacer);
+  },
+  convertToName: function convertToName(slug) {
+    var name = [];
+    slug = slug.split("-");
+
+    for (var i = 0, count = slug.length; i < count; i++) {
+      if (slug[i] !== "") {
+        name.push(this.capitalize(slug[i]));
+      }
+    }
+
+    name = name.join(" ");
+    return name;
   },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {
@@ -174,6 +198,17 @@ module.exports = {
       elements.cost.setAttribute("disabled", "disabled");
     } else {
       elements.cost.removeAttribute("disabled");
+    }
+  },
+  displayElementsFromType: function displayElementsFromType(markers, value, type) {
+    if (value === type) {
+      markers.forEach(function (marker) {
+        marker.classList.add("hide");
+      });
+    } else {
+      markers.forEach(function (marker) {
+        marker.classList.remove("hide");
+      });
     }
   }
 };

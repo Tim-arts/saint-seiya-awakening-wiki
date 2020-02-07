@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         fetch: (data, update) => {
             $.ajax({
-                url: "../api/skills",
+                url: "../../api/skills",
                 data: {
                     data: data
                 },
@@ -232,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "skill",
         onSelect: function (skill) {
             this.input.value = null;
+            let slug = helpers.convertToName(skill.slug);
             
             // If the skill already exists in the pool, don't add it again
             if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize") === skill._id).indexOf(true) > -1) {
@@ -243,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
             parent.setAttribute("data-serialize", skill._id);
             
             let div = document.createElement("div");
-            div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-3' alt='Skill icon' /><span>" + skill.name + "</span>";
+            div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-2' alt='Skill icon' /><span>" + slug + "</span>";
             div.classList.add("skill-modified");
             div.querySelector("img").addEventListener("error", function () {
                 this.src = helpers.constants.urls.skill;
@@ -271,9 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         fetch: (data, update) => {
             $.ajax({
-                url: "../api/skills",
+                url: "../../api/skills",
                 data: {
-                    data: data
+                    data: data,
+                    $ne: _data._id
                 },
                 method: "POST",
                 dataType: 'json',
@@ -287,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         render: (skill) => {
             let div = document.createElement("div");
-            div.innerHTML = skill.name;
+            div.innerHTML = helpers.convertToName(skill.slug);
             div.classList.add("suggestion");
     
             return div;
@@ -314,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         fetch: (data, update) => {
             $.ajax({
-                url: "../api/saints",
+                url: "../../api/saints",
                 data: {
                     data: data
                 },

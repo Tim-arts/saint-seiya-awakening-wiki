@@ -30,13 +30,38 @@ module.exports = {
             }, 500)
         }, 500);
     },
+    capitalize (string) {
+        let result;
+        
+        if ((string.length === 2) && (string[0] === string[1])) {
+            result = string.toUpperCase();
+        } else {
+            result = string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        
+        return result;
+    },
     resetDisplay (elements, className) {
         elements.forEach((element) => {
             element.classList.remove(className);
         });
     },
-    convertToSlug (str, expression, replacer) {
-        return str.trim().toLowerCase().replace(expression, replacer);
+    convertToSlug (string, expression, replacer) {
+        return string.trim().toLowerCase().replace(expression, replacer);
+    },
+    convertToName (slug) {
+        let name = [];
+        slug = slug.split("-");
+        
+        for (let i = 0, count = slug.length; i < count; i++) {
+            if (slug[i] !== "") {
+                name.push(this.capitalize(slug[i]));
+            }
+        }
+        
+        name = name.join(" ");
+        
+        return name;
     },
     applyPassive (bool, elements) {
         if (bool) {

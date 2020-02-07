@@ -3,6 +3,9 @@ const router = express.Router();
 const cloudinary = require("cloudinary").v2;
 const getJSON = require("get-json");
 
+// Import dependencies
+const helpers = require("./_helpers");
+
 // Import model
 const Skills = require("./../../../fixtures/models/skills");
 
@@ -33,27 +36,10 @@ module.exports = function () {
                         }
             
                         if (result) {
-                            (async function render () {
+                            (async function () {
                                 res.render("back/views/edit-skill", {
-                                    skill: skill,
-                                    locales: await Promise.all([
-                                        (() => {
-                                            let object = result.resources.find(o => o.public_id.indexOf("en") > -1);
-                                            return getJSON(object.url, function(error, response) {
-                                                if (response) {
-                                                    return JSON.stringify(response);
-                                                }
-                                            });
-                                        })(),
-                                        (() => {
-                                            let object = result.resources.find(o => o.public_id.indexOf("fr") > -1);
-                                            return getJSON(object.url, function(error, response) {
-                                                if (response) {
-                                                    return JSON.stringify(response);
-                                                }
-                                            });
-                                        })(),
-                                    ])
+                                    skill: await helpers.getSkillsModified(Skills, skill),
+                                    locales: await helpers.getLocales(getJSON, result)
                                 });
                             })();
                         }

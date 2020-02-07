@@ -3,8 +3,8 @@ const app = require("./server/config");
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-if (global.utils.retrieveLocales && process.env.NODE_ENV === "development") {
-    require("./server/retrieveLocales")(cloudinary);
+if (global.utils.getLocales && process.env.NODE_ENV === "development") {
+    require("./server/getLocales")(cloudinary);
 }
 
 if (process.env.NODE_ENV === "development") {

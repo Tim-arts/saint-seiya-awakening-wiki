@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require('fs');
 const getJSON = require("get-json");
 
-const updateLocalesTranslationsFromCDN = require("./helpers").updateLocalesTranslationsFromCDN;
+const updateLocalesTranslationsFromCDN = require("./routes/back/_helpers").updateLocalesTranslationsFromCDN;
 
 module.exports = (cloudinary) => {
     let types = [

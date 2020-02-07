@@ -68,12 +68,12 @@
         linked_skills_modified: () => {
             if (locals.skill) {
                 for (let i = 0, count = skill.linked_skills_modified.length; i < count; i++) {
-                    let skillModified = skill.linked_skills_modified[i];
+                    let s = skill.linked_skills_modified[i];
                     %>
-                        <div class="col-4 position-relative mb-2" data-serialize="<%= skillModified._id %>">
+                        <div class="col-4 position-relative mb-2" data-serialize="<%= s._id %>">
                             <div class="skill-modified">
-                                <img src="<%= cloudinary.url("skills/" + skillModified.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-3" alt="Skill icon" />
-                                <span><%= skillModified.slug %>></span>
+                                <img src="<%= cloudinary.url("skills/" + s.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-2" alt="Skill icon" />
+                                <span><%= convertToName(s.slug) %></span>
                                 <span class="close">×</span>
                             </div>
                         </div>
