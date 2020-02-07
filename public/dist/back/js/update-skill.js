@@ -38,19 +38,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    return arr2;
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -161,7 +191,11 @@ var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/Moda
 
 var _helpers = _interopRequireDefault(require("./../../shared/helpers"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
 
 require("./../base");
 
@@ -176,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var awakeningSkillElement = document.getElementById("awakening-skill-id");
   var linkedSaintIdElement = document.getElementById("linked-saint-id");
   var isPassiveElement = document.getElementById("is-passive");
-  var skillsSortable = document.getElementById("skills-sortable");
+  var skillsSortable = document.getElementById("sortable-skills");
   var typesSkill = document.getElementById("types-skill");
 
   var _data = function () {
@@ -279,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
       awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
       linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
       isPassive: !!isPassiveElement.checked,
-      linked_skills_modified: function () {
+      linked_modified_skills: function () {
         if (skillsSortable.querySelectorAll(":scope > div").length > 0) {
           return Array.from(skillsSortable.querySelectorAll(":scope > div")).map(function (x) {
             return x.getAttribute("data-serialize");
@@ -341,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   typesSkill.addEventListener("change", function () {
-    _helpers["default"].displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), this.value, "modified");
+    _helpers["default"].displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), this.value, "modified");
   });
   /* Dependencies usages */
 
@@ -387,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
     preventSubmit: true
   });
   (0, _autocompleter["default"])({
-    input: document.getElementById("skills-modified-ids"),
+    input: document.getElementById("modified-skills-ids"),
     minLength: 3,
     emptyMsg: "There are no results that match this request",
     debounceWaitMs: 100,
@@ -409,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function () {
       parent.setAttribute("data-serialize", skill._id);
       var div = document.createElement("div");
       div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-2' alt='Skill icon' /><span>" + slug + "</span>";
-      div.classList.add("skill-modified");
+      div.classList.add("modified-skill");
       div.querySelector("img").addEventListener("error", function () {
         this.src = _helpers["default"].constants.urls.skill;
       });
@@ -522,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   /* On load */
 
-  _helpers["default"].displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
+  _helpers["default"].displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
 });
 
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../base":1,"./../modules/InputFile":2,"autocompleter":6,"sortablejs":8}],4:[function(require,module,exports){
@@ -619,11 +653,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 var Modal =
 /*#__PURE__*/

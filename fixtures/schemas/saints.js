@@ -6,6 +6,7 @@ const saints = {
             type: String,
             unique: true
         },
+        comment: String,
         slug: {
             type: String,
             unique: true
@@ -67,14 +68,14 @@ const saints = {
                 "comment": String
             }
         ],
-        "characteristics": {
+        characteristics: {
             80: {
-                hp: String,
-                patk: String,
-                catk: String,
-                pdef: String,
-                cdef: String,
-                speed: String
+                "hp": String,
+                "p.atk": String,
+                "c.atk": String,
+                "p.def": String,
+                "c.def": String,
+                "speed": String
             }
         }
     }

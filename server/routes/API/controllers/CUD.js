@@ -101,9 +101,7 @@ module.exports = (Model, type) => {
                 file: global.utils.translations[type].cdn + data.slug + "/fr.json",
                 resource_type: "raw"
             });
-            if (!!data.slug) {
-                helpers.deleteFolderFromCDN(cloudinary, (global.utils.translations[type].cdn + data.slug));
-            }
+            helpers.deleteFolderFromCDN(cloudinary, (global.utils.translations[type].cdn + data.slug));
         
             /* Delete translations from i18n files (local system) */
             helpers.deleteTranslations(fs, data, global.utils.translations[type].plural);

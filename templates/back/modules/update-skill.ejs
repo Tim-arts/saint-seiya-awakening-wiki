@@ -13,8 +13,8 @@
         typesSkill: () => {
             let types = [
                 {
-                    name: "Standard",
-                    value: "standard"
+                    name: "Principal",
+                    value: "main"
                 },
                 {
                     name: "Modifié",
@@ -30,7 +30,7 @@
                     selected = type.value === skill.type ? "selected": "";
                 }
                 %>
-                    <option id="type-skill-modified" value="<%= type.value %>" <%= selected %>><%= type.name %></option>
+                    <option id="type-modified-skill" value="<%= type.value %>" <%= selected %>><%= type.name %></option>
                 <%
             }
         },
@@ -66,17 +66,17 @@
         linked_saint_id: locals.skill ? skill.linked_saint_id : "",
         awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
         is_passive: locals.skill ? skill.is_passive: "",
-        linked_skills_modified: () => {
+        linked_modified_skills: () => {
             if (locals.skill) {
-                if (!skill.linked_skills_modified[0]) {
+                if (!skill.linked_modified_skills[0]) {
                     return;
                 }
 
-                for (let i = 0, count = skill.linked_skills_modified.length; i < count; i++) {
-                    let s = skill.linked_skills_modified[i];
+                for (let i = 0, count = skill.linked_modified_skills.length; i < count; i++) {
+                    let s = skill.linked_modified_skills[i];
                     %>
                         <div class="col-4 position-relative mb-2" data-serialize="<%= s._id %>">
-                            <div class="skill-modified">
+                            <div class="modified-skill">
                                 <img src="<%= cloudinary.url("skills/" + s.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-2" alt="Skill icon" />
                                 <span><%= __(s.name) %></span>
                                 <span class="close">×</span>
@@ -143,12 +143,12 @@
         </div>
     </div>
 
-    <div class="row mb-4 marker-type-standard">
+    <div class="row mb-4 marker-type-main">
         <%= skillData.description.levels() %>
     </div>
 
     <div class="row mb-5">
-        <div class="col-3 mt-2 marker-type-standard">
+        <div class="col-3 mt-2 marker-type-main">
             <label for="skill-index">Position de la compétence</label>
             <input type="number" id="skill-index" name="skill-index" placeholder="Ex: 2" class="form-control" min="0" max="4" value="<%= skillData.skill_index %>" />
             <div class="small mt-1"><span class="font-weight-bold">·</span> min 1 - max 4 <span class="font-weight-bold">·</span></div>
@@ -162,7 +162,7 @@
             <input type="checkbox" id="is-passive" name="is-passive" <%= skillData.is_passive ? "checked='true'" : "" %> />
             <label for="is-passive" class="ml-1">Passive</label>
         </div>
-        <div class="col-6 mt-2 marker-type-standard">
+        <div class="col-6 mt-2 marker-type-main">
             <div class="row">
                 <div class="col-8 autocomplete-container position-relative">
                     <label for="awakening-skill-id">
@@ -182,14 +182,14 @@
     <div class="e-s-4"></div>
 
     <div class="row mb-5">
-        <div class="col-6 autocomplete-container position-relative marker-type-standard">
-            <label for="skills-modified-ids">
+        <div class="col-6 autocomplete-container position-relative marker-type-main">
+            <label for="modified-skills-ids">
                 <span>Skill(s) modifié(s) correspondant(s)</span>
                 <i class="material-icons">search</i>
             </label>
-            <input type="text" id="skills-modified-ids" name="skills-modified-ids" placeholder="Ex: Great Eclipse II" class="form-control" />
+            <input type="text" id="modified-skills-ids" name="modified-skills-ids" placeholder="Ex: Great Eclipse II" class="form-control" />
             <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-            <div id="skills-sortable" class="row skills-modified mt-3"><%= skillData.linked_skills_modified() %></div>
+            <div id="sortable-skills" class="row modified-skills mt-3"><%= skillData.linked_modified_skills() %></div>
         </div>
         <div class="col-6">
             <div class="row">

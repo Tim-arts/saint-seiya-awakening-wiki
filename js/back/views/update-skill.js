@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let awakeningSkillElement = document.getElementById("awakening-skill-id");
     let linkedSaintIdElement = document.getElementById("linked-saint-id");
     let isPassiveElement = document.getElementById("is-passive");
-    let skillsSortable = document.getElementById("skills-sortable");
+    let skillsSortable = document.getElementById("sortable-skills");
     let typesSkill = document.getElementById("types-skill");
     
     let  _data = (() => {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             awakening_skill_id: awakeningSkillElement.getAttribute("data-serialize"),
             linked_saint_id: linkedSaintIdElement.getAttribute("data-serialize"),
             isPassive: !!isPassiveElement.checked,
-            linked_skills_modified: (() => {
+            linked_modified_skills: (() => {
                 if (skillsSortable.querySelectorAll(":scope > div").length > 0) {
                     return Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize"));
                 } else {
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     typesSkill.addEventListener("change", function () {
-        helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), this.value, "modified");
+        helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), this.value, "modified");
     });
     
     /* Dependencies usages */
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     Autocomplete({
-        input: document.getElementById("skills-modified-ids"),
+        input: document.getElementById("modified-skills-ids"),
         minLength: 3,
         emptyMsg: "There are no results that match this request",
         debounceWaitMs: 100,
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             let div = document.createElement("div");
             div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-2' alt='Skill icon' /><span>" + slug + "</span>";
-            div.classList.add("skill-modified");
+            div.classList.add("modified-skill");
             div.querySelector("img").addEventListener("error", function () {
                 this.src = helpers.constants.urls.skill;
             });
@@ -365,5 +365,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     /* On load */
-    helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
+    helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
 });

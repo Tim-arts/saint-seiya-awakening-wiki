@@ -79,7 +79,7 @@ module.exports = {
                 frTranslation[[name]] = data.name.fr;
                 frTranslation[[mainDescription]] = data.description.main.fr;
                 
-                if (data.type === "standard") {
+                if (data.type === "main") {
                     let level_1 = data.slug_underscore + "_" + singularType + "_description_level_1",
                         level_2 = data.slug_underscore + "_" + singularType + "_description_level_2",
                         level_3 = data.slug_underscore + "_" + singularType + "_description_level_3",
@@ -130,7 +130,7 @@ module.exports = {
             case "skills":
                 data.description.main = data.slug_underscore + "_" + singularType + "_description_main";
                 
-                if (data.type === "standard") {
+                if (data.type === "main") {
                     for (let i = 0; i <= 4; i++) {
                         data.description.levels[i] = data.slug_underscore + "_" + singularType + "_description_level_" + (i + 1);
                     }

@@ -88,18 +88,18 @@ module.exports = {
     },
     getSkillsModified (Skills, skill) {
         return new Promise(resolve => {
-            let count = skill.linked_skills_modified.length;
+            let count = skill.linked_modified_skills.length;
             
-            if (count === 0 || !skill.linked_skills_modified[0]) {
+            if (count === 0 || !skill.linked_modified_skills[0]) {
                 return resolve(skill);
             }
             
             for (let i = 0; i < count; i++) {
                 Skills.findOne({
-                    _id: skill.linked_skills_modified[i]
-                }, (err, skillModified) => {
-                    if (skillModified) {
-                        skill.linked_skills_modified[i] = skillModified;
+                    _id: skill.linked_modified_skills[i]
+                }, (err, modifiedSkill) => {
+                    if (modifiedSkill) {
+                        skill.linked_modified_skills[i] = modifiedSkill;
                 
                         if ((i + 1) === count) {
                             resolve(skill);
