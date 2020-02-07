@@ -344,6 +344,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     let sortable = Sortable.create(skillsSortable);
+    Array.from(skillsSortable.querySelectorAll("span.close")).forEach(span => {
+        span.addEventListener("click", function () {
+            ModalConstructor.show({
+                message: "deleteConfirmation",
+                submitContent: "Confirm",
+                submit: () => {
+                    this.parentElement.parentElement.remove();
+                }
+            });
+        });
+    });
     
     /* On load */
     helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), typesSkill.options[typesSkill.selectedIndex].value, "modified");

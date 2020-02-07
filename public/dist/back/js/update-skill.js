@@ -484,8 +484,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   var sortable = _sortablejs["default"].create(skillsSortable);
-  /* On load */
 
+  Array.from(skillsSortable.querySelectorAll("span.close")).forEach(function (span) {
+    span.addEventListener("click", function () {
+      var _this2 = this;
+
+      ModalConstructor.show({
+        message: "deleteConfirmation",
+        submitContent: "Confirm",
+        submit: function submit() {
+          _this2.parentElement.parentElement.remove();
+        }
+      });
+    });
+  });
+  /* On load */
 
   _helpers["default"].displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-standard")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
 });
