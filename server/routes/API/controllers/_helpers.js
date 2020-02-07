@@ -16,7 +16,7 @@ module.exports = {
             cloudinary.uploader.destroy(options.file, {
                 resource_type: options.resource_type,
                 invalidate: true
-            }, function (error, result) {
+            }, function (error) {
                 if (error) console.log(error);
             });
         }
