@@ -1,4 +1,4 @@
-require("./base");
+require("./../base");
 
 import InputFile from "./../modules/InputFile";
 import SelectVerification from "./../../front/modules/SelectVerification";

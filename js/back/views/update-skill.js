@@ -1,4 +1,4 @@
-require("./base");
+require("./../base");
 
 import Autocomplete from "autocompleter";
 import Sortable from "sortablejs";

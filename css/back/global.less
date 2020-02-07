@@ -61,7 +61,6 @@ body {
 
         .sidebar-menu {
             width: @sidebar-width;
-            border-bottom: 1px solid @grey-dark-1;
 
             p {
                 color: #fff;
@@ -110,14 +109,21 @@ body {
             margin-left: -250px;
         }
 
-        .version {
+        .stick-to-bottom {
             width: 100%;
             bottom: 0;
             left: 0;
             position: absolute;
+            border-top: 1px solid @grey-dark-1;
 
-            p {
-                font-size: 12px;
+            a {
+                img {
+                    width: 24px;
+                }
+            }
+
+            p, a div {
+                font-size: @base-size;
             }
         }
     }
@@ -174,6 +180,11 @@ body {
 
             &[disabled] {
                 border-color: @white-alpha-3;
+            }
+
+            &:focus {
+                border-color: @success;
+                box-shadow: none;
             }
         }
     }

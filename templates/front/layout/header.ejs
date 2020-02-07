@@ -33,9 +33,10 @@
                                     <% let currentLanguage = utils.locales.languages[language] %>
                                     <a class="dropdown-item<%= utils.locales.language === currentLanguage.id ? " active": "" %>" href="#" data-language="<%= currentLanguage.id %>">
                                         <div class="dropdown-item-wrapper">
-                                        <span class="country-flag">
-                                            <img alt="<%= currentLanguage.id + "-language" %>" src="<%= currentLanguage.base64 %>"/>
-                                        </span><span><%= __(currentLanguage.id + "_language") %></span>
+                                            <span class="country-flag">
+                                                <img alt="<%= currentLanguage.id + "-language" %>" src="<%= currentLanguage.base64 %>"/>
+                                            </span>
+                                            <span><%= __(currentLanguage.id + "_language") %></span>
                                         </div>
                                     </a>
                                 <% } %>

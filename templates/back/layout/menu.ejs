@@ -20,7 +20,7 @@
                     ]
                 },
                 {
-                    name: "News",
+                    name: "Actualités",
                     url: "news",
                     dropdown: [
                         {
@@ -104,7 +104,7 @@
                     ]
                 },
                 {
-                    name: "Skills",
+                    name: "Compétences",
                     url: "skills-menu",
                     dropdown: [
                         {
@@ -170,7 +170,18 @@
             <% } %>
         <% } %>
     </ul>
-    <div class="version text-center">
-        <p class="text-white">Version <%= global.utils.version %></p>
+    <div class="stick-to-bottom text-center">
+        <div class="row mx-0 my-4">
+            <% for (let language in utils.locales.languages) { %>
+                <% let currentLanguage = utils.locales.languages[language] %>
+                <div class="col-<%= (12 / utils.locales.languages.length) %> px-0">
+                    <a class="language d-block<%= utils.locales.language === currentLanguage.id ? " active": "" %>" href="#" data-language="<%= currentLanguage.id %>">
+                        <img class="mr-2" src="<%= currentLanguage.base64 %>" alt="<%= currentLanguage.id + "-language" %>" />
+                        <div class="mt-2"><%= __(currentLanguage.id + "_language") %></div>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+        <p class="text-white my-4">Version <%= global.utils.version %></p>
     </div>
 </nav>
