@@ -626,7 +626,7 @@ body {
 .wrapper #sidebar .sidebar-menu li.active a,
 .wrapper #sidebar .sidebar-menu li a.active {
   color: #00EC98;
-  background: #303049;
+  background: #303049 !important;
 }
 .wrapper #sidebar.active {
   margin-left: -250px;
