@@ -33,6 +33,8 @@ module.exports = {
                     
                     module.exports.processLocales(fs, getJSON, path, translations[translation].urls.en, enFileName);
                     module.exports.processLocales(fs, getJSON, path, translations[translation].urls.fr, frFileName);
+                    
+                    console.log("Updating " + type.plural);
                 }
             }
         });
