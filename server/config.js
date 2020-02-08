@@ -59,6 +59,8 @@ app.use('/back', routes.back.editSkill());
 app.use('/back', routes.back.manageSkills());
 
 app.use('/back', routes.back.addSaint());
+app.use('/back', routes.back.editSaint());
+app.use('/back', routes.back.manageSaints());
 
 /* 404 */
 app.use(function (req, res) {

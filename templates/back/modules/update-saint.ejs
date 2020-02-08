@@ -1,0 +1,64 @@
+<%
+    if (typeof saint === 'undefined') locals.saint = false;
+
+    let form;
+    if (locals.saint) {
+        form = "<form id='update-saint' method='POST' action='../../api/saint/update' data-update='true'>";
+    } else {
+        form = "<form id='update-saint' method='POST' action='../api/saint/create'>";
+   }
+
+    let saintData = {
+        title: locals.saint ? "Modification de : <span class='text-green'>" + __(saint.name) + "</span>" : data.head.title,
+        name: {
+            en: locals.saint ? locales[0][saint.slug_underscore + '_saint_name'] : "",
+            fr: locals.saint ? locales[1][saint.slug_underscore + '_saint_name'] : ""
+        },
+        image: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true })
+    };
+%>
+
+<%- form %>
+    <div class="row mb-5">
+        <div class="col-12">
+            <h1 class="text-white h4">
+                <i class="material-icons"><%= data.icon %></i>
+                <span class="ml-2"><%- saintData.title %></span>
+            </h1>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <label for="fr-name">Name (FR)</label>
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" value="<%= saintData.name.fr %>" />
+                </div>
+                <div class="col-6">
+                    <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" value="<%= saintData.name.en %>" required />
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12 thumb-container">
+                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+                    <input type="file" id="custom-file" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+                    <img src="<%= saintData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="e-s-5"></div>
+
+    <div class="row mb-4">
+        <div class="col-12 mx-auto text-center">
+            <button id="submit" type="submit" class="btn btn-lg custom-theme theme-2">Sauvegarder les modifications</button>
+        </div>
+    </div>
+</form>

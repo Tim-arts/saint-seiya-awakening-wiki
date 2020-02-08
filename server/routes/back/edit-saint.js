@@ -7,25 +7,21 @@ const getJSON = require("get-json");
 const helpers = require("./_helpers");
 
 // Import model
-const Cosmos = require("./../../../fixtures/models/cosmos");
+const Saints = require("./../../../fixtures/models/saints");
 
 module.exports = function () {
-    // Route: /back/update-cosmo/:id
-    router.get('/update-cosmo/:id', function (req, res) {
-        const attributes = require("./../../../fixtures/data/modules/cosmos-attributes");
-        const types = require("./../../../fixtures/data/modules/cosmos-types");
-        const systems = require("./../../../fixtures/data/modules/cosmos-systems");
-        
+    // Route: /back/update-saint/:id
+    router.get('/update-saint/:id', function (req, res) {
         if (req.params.id && req.params.id.length === 37) {
             const _id = req.params.id.substring(1);
     
-            Cosmos.findOne({
+            Saints.findOne({
                 _id: _id
-            }, (err, cosmo) => {
-                if (cosmo) {
+            }, (err, saint) => {
+                if (saint) {
                     cloudinary.api.resources({
                         public_ids: ".json",
-                        prefix: "translations/cosmos/" + cosmo.slug + "/",
+                        prefix: "translations/saints/" + saint.slug + "/",
                         resource_type: "raw",
                         type: "upload",
                         max_results: 2
@@ -33,29 +29,23 @@ module.exports = function () {
                         if (error) {
                             console.log(error);
     
-                            res.render("back/views/edit-cosmo", {
-                                attributes: attributes,
-                                types: types,
-                                cosmo: cosmo,
-                                systems: systems,
+                            res.render("back/views/edit-saint", {
+                                saint: saint,
                                 locales: null
                             });
                         }
                         
                         if (result) {
                             (async function render () {
-                                res.render("back/views/edit-cosmo", {
-                                    attributes: attributes,
-                                    types: types,
-                                    cosmo: cosmo,
-                                    systems: systems,
+                                res.render("back/views/edit-saint", {
+                                    saint: saint,
                                     locales: await helpers.getLocales(getJSON, result)
                                 });
                             })();
                         }
                     });
                 } else {
-                    res.render("No cosmo to edit!");
+                    res.render("No saint to edit!");
                 }
             });
         } else {

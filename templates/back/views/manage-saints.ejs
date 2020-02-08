@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="<%= global.utils.locales.language %>">
+    <%
+        let data = (() => {
+            let object = {};
+
+            object.head = {
+                title: "Gérer les saints",
+                viewStyleUrls: [
+                    "<link defer='defer' rel='stylesheet' href='../../css/back/views/manage-elements.css' type='text/css'>"
+                ],
+                viewScriptUrls: [
+                    "<script defer='defer' src='../../public/dist/back/js/manage-elements.js' type='text/javascript'></script>"
+                ]
+            };
+            object.activeIndex = "2.1";
+            object.icon = "create";
+
+            return object;
+        })(),
+        modalData = {
+            title: "Warning!",
+            id: "response-modal",
+            titleId: "success-modal-id"
+        };
+    %>
+    <%- include("./../layout/head", {head: data.head}) %>
+
+    <body>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
+
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <h1 class="text-white h4">
+                                <i class="material-icons">developer_board</i>
+                                <span class="ml-2"><%= data.head.title %></span>
+                            </h1>
+                        </div>
+                        <%
+                            let sortData = {
+                                placeholder: "Rechercher un saint"
+                            };
+                        %>
+                        <%- include("./../modules/sort-results", {data: sortData}) %>
+                    </div>
+                    <div id="elements-container" class="row">
+                        <div class="col-2 element-placeholder h-100 text-center">
+                            <a href="/back/add-saint" class="d-block">
+                                <div class="element-container">
+                                    <img src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default saint" />
+                                    <h2 class="h6 mt-4">
+                                        <i class="material-icons">add_circle_outline</i>
+                                        <span>Create a saint</span>
+                                    </h2>
+                                </div>
+                            </a>
+                        </div>
+                        <%
+                            let urls = {
+                                element: "../back/update-saint/:",
+                                delete: "../api/saint/delete",
+                                path: "saints/"
+                            };
+
+                            for (let i = 0, count = saints.length; i < count; i++) {
+                                %>
+                                    <%- include("./../modules/show-element", {data: urls, element: saints[i]}); %>
+                                <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include("./../modules/modal/response", {data: modalData}) %>
+        <script>
+            let elementsFromDB = <%- JSON.stringify(saints) %>;
+        </script>
+    </body>
+</html>

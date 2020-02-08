@@ -33,7 +33,7 @@
   "scripts": {
     "deploy": "npm version patch && git push heroku master",
     "start": "node build.js",
-    "watch-js": "start /MIN watchify js/front/views/index.js -o public/dist/front/js/index.js && start /MIN watchify js/back/views/index.js -o public/dist/back/js/index.js && start /MIN watchify js/back/views/update-cosmo.js -o public/dist/back/js/update-cosmo.js && start /MIN watchify js/back/views/update-skill.js -o public/dist/back/js/update-skill.js && start /MIN watchify js/back/views/manage-elements.js -o public/dist/back/js/manage-elements.js",
+    "watch-js": "start /MIN watchify js/front/views/index.js -o public/dist/front/js/index.js && start /MIN watchify js/back/views/index.js -o public/dist/back/js/index.js && start /MIN watchify js/back/views/update-cosmo.js -o public/dist/back/js/update-cosmo.js && start /MIN watchify js/back/views/update-skill.js -o public/dist/back/js/update-skill.js && start /MIN watchify js/back/views/update-saint.js -o public/dist/back/js/update-saint.js && start /MIN watchify js/back/views/manage-elements.js -o public/dist/back/js/manage-elements.js",
     "local": "concurrently -p \"{name}\" -n \"server,watcher\" -c \"gray.bgMagenta,yellow.bgBlue\" \"npm start\" \"npm run watch-js\"",
     "list": "heroku builds -a saint-seiya-awakening-wiki",
     "cancel": "heroku builds:cancel",

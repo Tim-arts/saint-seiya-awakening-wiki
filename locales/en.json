@@ -172,5 +172,9 @@
 	"great_eclipse_ii_skill_description_main": "Deals 520% C.DMG to 1 enemy. This attack steals HP equals to 70% of damage dealt and excess HP will be converted into Max HP (the converted Max HP cannot exceed 80% of your original Max HP).",
 	"scarab_cosmo_name": "Scarab",
 	"scarab_cosmo_description": "Increases life by 15% in combat and for every 10% of life lost, increases damage reflection by an additional 3%",
-	"scarab_cosmo_comment": ""
+	"scarab_cosmo_comment": "",
+	"Guilty": "Guilty",
+	"Arayashiki Shaka": "Arayashiki Shaka",
+	"Divine Shaka": "Divine Shaka",
+	"Shaka Ponk": "Shaka Ponk"
 }

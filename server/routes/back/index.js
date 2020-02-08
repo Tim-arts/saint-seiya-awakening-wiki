@@ -1,25 +1,29 @@
 const home = require("./home");
 
 const addCosmo = require("./add-cosmo");
-const manageCosmos = require("./manage-cosmos");
 const editCosmo = require("./edit-cosmo");
+const manageCosmos = require("./manage-cosmos");
 
 const addSkill = require("./add-skill");
-const manageSkills = require("./manage-skills");
 const editSkill = require("./edit-skill");
+const manageSkills = require("./manage-skills");
 
 const addSaint = require("./add-saint");
+const editSaint = require("./edit-saint");
+const manageSaints = require("./manage-saints");
 
 module.exports = {
     home,
     
     addCosmo,
-    manageCosmos,
     editCosmo,
+    manageCosmos,
     
     addSkill,
-    manageSkills,
     editSkill,
+    manageSkills,
     
-    addSaint
+    addSaint,
+    editSaint,
+    manageSaints
 };
