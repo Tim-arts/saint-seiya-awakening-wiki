@@ -11,55 +11,28 @@ const saints = {
             type: String,
             unique: true
         },
-        rank: {
-            type: String,
-            uppercase: true,
-            required: true
-        },
-        damage_type: {
-            type: String,
-            lowercase: true,
-            required: true
-        },
-        focus: {
-            type: String,
-            lowercase: true,
-            required: true
-        },
+        rank: String,
+        damage_type: String,
+        focus: String,
         roles: {
             type: String,
             minItems: 1,
-            maxItems: 7,
-            lowercase: true,
-            required: true
+            maxItems: 7
         },
         cosmos_suggestion: [
             {
-                "legendary": {
-                    type: String,
-                    required: true
-                },
-                "lunar": {
-                    type: String,
-                    required: true
-                },
-                "solar": {
-                    type: String,
-                    required: true
-                },
-                "star": {
-                    type: String,
-                    required: true
-                },
-                "template": String,
+                "legendary": String,
+                "lunar": String,
+                "solar": String,
+                "star": String,
+                "template_name": String,
                 "comment": String
             }
         ],
         main_skills: {
             type: Array,
             minItems: 3,
-            maxItems: 4,
-            required: true
+            maxItems: 4
         },
         additional_skills: Array,
         skill_suggestions: [
