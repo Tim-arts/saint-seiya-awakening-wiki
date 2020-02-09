@@ -203,25 +203,21 @@ document.addEventListener("DOMContentLoaded", () => {
             helpers.updateThumbnail(imageElement, imageSrc);
         },
         fetch: (data, update) => {
-            $.ajax({
-                url: "../../api/skills",
+            let options = {
+                ajaxUrl: "../../api/skills",
+                partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
                     data: data
                 },
-                method: "POST",
-                dataType: 'json',
-                success: function(response) {
-                    update(response.data);
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+                update: update
+            };
+            
+            helpers.postRequest(options);
         },
         render: (skill) => {
-            let div = document.createElement("div");
-            div.innerHTML = skill.name;
-            div.classList.add("suggestion");
+            console.log(skill);
+            let div = helpers.convertStringToDOMElement(skill.div);
+            skill.name = div.innerHTML;
             
             return div;
         },
@@ -239,47 +235,38 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "skill",
         onSelect: function (skill) {
             this.input.value = null;
-            let name = helpers.convertToName(skill.slug);
             
             // If the skill already exists in the pool, don't add it again
             if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize") === skill._id).indexOf(true) > -1) {
                 return;
             }
-    
+            
             $.post("../../api/partials/linked-modified-skill", {
                 _id: skill._id,
                 slug: skill.slug,
-                name: name
-            }, (response) => {
-                skillsSortable.insertAdjacentHTML("beforeend", response);
-    
+                name: skill.name
+            }, (html) => {
+                skillsSortable.insertAdjacentHTML("beforeend", html);
+                
                 sortable.destroy();
                 sortable = Sortable.create(skillsSortable);
             });
         },
         fetch: (data, update) => {
-            $.ajax({
-                url: "../../api/skills",
+            let options = {
+                ajaxUrl: "../../api/skills",
+                partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
                     data: data,
                     $ne: _data._id
                 },
-                method: "POST",
-                dataType: 'json',
-                success: function(response) {
-                    update(response.data);
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+                update: update
+            };
+    
+            helpers.postRequest(options);
         },
         render: (skill) => {
-            let div = document.createElement("div");
-            div.innerHTML = helpers.convertToName(skill.slug);
-            div.classList.add("suggestion");
-    
-            return div;
+            return helpers.convertStringToDOMElement(skill.div);
         },
         customize: (input, inputRect, container) => {
             skillsSortable.appendChild(container);
@@ -302,26 +289,21 @@ document.addEventListener("DOMContentLoaded", () => {
             helpers.updateThumbnail(imageElement, imageSrc);
         },
         fetch: (data, update) => {
-            $.ajax({
-                url: "../../api/saints",
+            let options = {
+                ajaxUrl: "../../api/saints",
+                partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
                     data: data
                 },
-                method: "POST",
-                dataType: 'json',
-                success: function(response) {
-                    update(response.data);
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+                update: update
+            };
+    
+            helpers.postRequest(options);
         },
         render: (saint) => {
-            let div = document.createElement("div");
-            div.innerHTML = saint.name;
-            div.classList.add("suggestion");
-            
+            let div = helpers.convertStringToDOMElement(saint.div);
+            saint.name = div.innerHTML;
+    
             return div;
         },
         customize: (input, inputRect, container) => {

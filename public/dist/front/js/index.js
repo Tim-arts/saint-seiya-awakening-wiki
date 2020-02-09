@@ -21,35 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"cookies-js":4}],2:[function(require,module,exports){
+},{"cookies-js":7}],2:[function(require,module,exports){
 "use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
 
 var BgSlider =
 /*#__PURE__*/
@@ -93,8 +77,7 @@ function () {
     };
     var progressBar = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
     var infiniteLoop = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : true;
-
-    _classCallCheck(this, BgSlider);
+    (0, _classCallCheck2["default"])(this, BgSlider);
 
     this.isOnMobile = function () {
       var check = false;
@@ -214,7 +197,7 @@ function () {
    */
 
 
-  _createClass(BgSlider, [{
+  (0, _createClass2["default"])(BgSlider, [{
     key: "createElementSlide",
     value: function createElementSlide(self, i, randomNumbers) {
       var element = document.createElement("div"),
@@ -416,24 +399,19 @@ function () {
       clearInterval(this.intervalLoop);
     }
   }]);
-
   return BgSlider;
 }();
 
 exports["default"] = BgSlider;
 
-},{}],3:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":4,"@babel/runtime/helpers/createClass":5,"@babel/runtime/helpers/interopRequireDefault":6}],3:[function(require,module,exports){
 "use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 require("../base");
 
 var _BgSlider = _interopRequireDefault(require("./../modules/BgSlider"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   var slideElements = document.querySelectorAll(".bg-slider");
@@ -462,7 +440,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-},{"../base":1,"./../modules/BgSlider":2}],4:[function(require,module,exports){
+},{"../base":1,"./../modules/BgSlider":2,"@babel/runtime/helpers/interopRequireDefault":6}],4:[function(require,module,exports){
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+},{}],5:[function(require,module,exports){
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+},{}],6:[function(require,module,exports){
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+},{}],7:[function(require,module,exports){
 /*
  * Cookies.js - 1.2.3
  * https://github.com/ScottHamper/Cookies

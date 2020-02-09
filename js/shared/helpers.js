@@ -49,20 +49,6 @@ module.exports = {
     convertToSlug (string, expression, replacer) {
         return string.trim().toLowerCase().replace(expression, replacer);
     },
-    convertToName (slug) {
-        let name = [];
-        slug = slug.split("-");
-        
-        for (let i = 0, count = slug.length; i < count; i++) {
-            if (slug[i] !== "") {
-                name.push(this.capitalize(slug[i]));
-            }
-        }
-        
-        name = name.join(" ");
-        
-        return name;
-    },
     applyPassive (bool, elements) {
         if (bool) {
             elements.cost.value = null;
@@ -77,5 +63,48 @@ module.exports = {
         } else {
             markers.forEach((marker) => { marker.classList.remove("hide"); });
         }
+    },
+    convertStringToDOMElement (string) {
+        let wrapper = document.createElement('div');
+        wrapper.innerHTML= string;
+    
+        return wrapper.firstChild;
+    },
+    postRequest (options) {
+        $.ajax({
+            url: options.ajaxUrl,
+            data: options.data,
+            method: "POST",
+            dataType: 'json',
+            success: async function (response) {
+                function request () {
+                    let data = response.data,
+                        count = data.length;
+                
+                    if (count === 0) {
+                        return null;
+                    }
+                
+                    return new Promise (resolve => {
+                        for (let i = 0; i < count; i++) {
+                            $.post(options.partialUrl, {
+                                name: data[i].name
+                            }, (response) => {
+                                data[i].div = response;
+        
+                                if ((i + 1) === count) {
+                                    return resolve(data);
+                                }
+                            });
+                        }
+                    });
+                }
+            
+                options.update(await request());
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
     }
 };

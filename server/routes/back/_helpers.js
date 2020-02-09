@@ -87,7 +87,7 @@ module.exports = {
         ]);
     },
     getSkillsModified (Skills, skill) {
-        return new Promise(resolve => {
+        return new Promise (resolve => {
             let count = skill.linked_modified_skills.length;
             
             if (count === 0 || !skill.linked_modified_skills[0]) {

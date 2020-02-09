@@ -49,6 +49,7 @@ app.use('/api', routes.API.controllers());
 /* API Partials */
 app.use('/api', routes.API.partials.addSkillSuggestion());
 app.use('/api', routes.API.partials.linkedModifiedSkill());
+app.use('/api', routes.API.partials.autocompleteSuggestion());
 
 /* Back */
 app.use('/back', routes.back.home(router));

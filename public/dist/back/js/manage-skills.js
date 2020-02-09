@@ -30,20 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"cookies-js":6}],2:[function(require,module,exports){
+},{"cookies-js":9}],2:[function(require,module,exports){
 "use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _autocompleter = _interopRequireDefault(require("autocompleter"));
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
 var _helpers = require("./../../shared/helpers");
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
 
 require("./../base");
 
@@ -140,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./../base":1,"autocompleter":5}],3:[function(require,module,exports){
+},{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./../base":1,"@babel/runtime/helpers/interopRequireDefault":7,"autocompleter":8}],3:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -192,19 +188,6 @@ module.exports = {
   convertToSlug: function convertToSlug(string, expression, replacer) {
     return string.trim().toLowerCase().replace(expression, replacer);
   },
-  convertToName: function convertToName(slug) {
-    var name = [];
-    slug = slug.split("-");
-
-    for (var i = 0, count = slug.length; i < count; i++) {
-      if (slug[i] !== "") {
-        name.push(this.capitalize(slug[i]));
-      }
-    }
-
-    name = name.join(" ");
-    return name;
-  },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {
       elements.cost.value = null;
@@ -229,32 +212,16 @@ module.exports = {
 },{}],4:[function(require,module,exports){
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
 
 var Modal =
 /*#__PURE__*/
@@ -268,8 +235,7 @@ function () {
   function Modal(el) {
     var _this = this;
 
-    _classCallCheck(this, Modal);
-
+    (0, _classCallCheck2["default"])(this, Modal);
     this.el = el;
     this.title = this.el.querySelector(".modal-title");
     this.content = this.el.querySelector(".modal-content-to-replace");
@@ -292,7 +258,7 @@ function () {
     return this;
   }
 
-  _createClass(Modal, [{
+  (0, _createClass2["default"])(Modal, [{
     key: "show",
     value: function show(options) {
       if (options.title) this.changeTitle(options.title);
@@ -339,13 +305,46 @@ function () {
       }
     }
   }]);
-
   return Modal;
 }();
 
 exports["default"] = Modal;
 
-},{}],5:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":5,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/interopRequireDefault":7}],5:[function(require,module,exports){
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+},{}],6:[function(require,module,exports){
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+},{}],7:[function(require,module,exports){
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+},{}],8:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -734,7 +733,7 @@ exports["default"] = Modal;
 }));
 
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*
  * Cookies.js - 1.2.3
  * https://github.com/ScottHamper/Cookies
