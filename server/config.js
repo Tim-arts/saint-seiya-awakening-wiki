@@ -46,7 +46,9 @@ app.use('/api', routes.API.tags());
 app.use('/api', routes.API.skills());
 app.use('/api', routes.API.cosmos());
 app.use('/api', routes.API.controllers());
+/* API Partials */
 app.use('/api', routes.API.partials.addSkillSuggestion());
+app.use('/api', routes.API.partials.linkedModifiedSkill());
 
 /* Back */
 app.use('/back', routes.back.home(router));

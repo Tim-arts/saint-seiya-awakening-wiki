@@ -360,9 +360,8 @@
                         </div>
                     </div>
                     <div id="skills-suggestions-container" class="row">
-                        <div class="skills-suggestion col-6 mt-2">
-                            <input type="number" id="skill-suggestion-0" class="form-control" />
-                        </div>
+                        <% let index = 0 %>
+                        <%- include("partials/add-skill-suggestion", {index: index}) %>
                     </div>
                 </div>
                 <div class="col-4">

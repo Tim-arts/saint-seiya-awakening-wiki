@@ -239,43 +239,23 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "skill",
         onSelect: function (skill) {
             this.input.value = null;
-            let slug = helpers.convertToName(skill.slug);
+            let name = helpers.convertToName(skill.slug);
             
             // If the skill already exists in the pool, don't add it again
             if (Array.from(skillsSortable.querySelectorAll(":scope > div")).map(x => x.getAttribute("data-serialize") === skill._id).indexOf(true) > -1) {
                 return;
             }
-            
-            let parent = document.createElement("div");
-            parent.classList.add("col-4", "position-relative", "mb-2");
-            parent.setAttribute("data-serialize", skill._id);
-            
-            let div = document.createElement("div");
-            div.innerHTML = "<img src='https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png' class='mr-2' alt='Skill icon' /><span>" + slug + "</span>";
-            div.classList.add("modified-skill");
-            div.querySelector("img").addEventListener("error", function () {
-                this.src = helpers.constants.urls.skill;
-            });
     
-            let span = document.createElement("span");
-            span.innerHTML = "×";
-            span.classList.add("close");
-            span.addEventListener("click", function () {
-                ModalConstructor.show({
-                    message: "deleteConfirmation",
-                    submitContent: "Confirm",
-                    submit: () => {
-                        this.parentElement.parentElement.remove();
-                    }
-                });
-            });
-            
-            div.appendChild(span);
-            parent.appendChild(div);
-            skillsSortable.appendChild(parent);
+            $.post("../../api/partials/linked-modified-skill", {
+                _id: skill._id,
+                slug: skill.slug,
+                name: name
+            }, (response) => {
+                skillsSortable.insertAdjacentHTML("beforeend", response);
     
-            sortable.destroy();
-            sortable = Sortable.create(skillsSortable);
+                sortable.destroy();
+                sortable = Sortable.create(skillsSortable);
+            });
         },
         fetch: (data, update) => {
             $.ajax({
@@ -351,16 +331,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     let sortable = Sortable.create(skillsSortable);
-    Array.from(skillsSortable.querySelectorAll("span.close")).forEach(span => {
-        span.addEventListener("click", function () {
-            ModalConstructor.show({
-                message: "deleteConfirmation",
-                submitContent: "Confirm",
-                submit: () => {
-                    hasChanged = true;
-                    this.parentElement.parentElement.remove();
-                }
-            });
+    $(document).on("click", "#sortable-skills span.close", function () {
+        ModalConstructor.show({
+            message: "deleteConfirmation",
+            submitContent: "Confirm",
+            submit: () => {
+                this.parentElement.parentElement.remove();
+            }
         });
     });
     

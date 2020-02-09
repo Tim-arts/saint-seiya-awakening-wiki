@@ -75,13 +75,11 @@
                 for (let i = 0, count = skill.linked_modified_skills.length; i < count; i++) {
                     let s = skill.linked_modified_skills[i];
                     %>
-                        <div class="col-4 position-relative mb-2" data-serialize="<%= s._id %>">
-                            <div class="modified-skill">
-                                <img src="<%= cloudinary.url("skills/" + s.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" class="mr-2" alt="Skill icon" />
-                                <span><%= __(s.name) %></span>
-                                <span class="close">×</span>
-                            </div>
-                        </div>
+                        <%- include("partials/linked-modified-skill", {
+                            _id: s._id,
+                            slug: s.slug,
+                            name: __(s.name)
+                        }) %>
                     <%
                 }
             }
