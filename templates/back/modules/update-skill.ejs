@@ -10,7 +10,7 @@
 
     let skillData = {
         title: locals.skill ? "Modification de : <span class='text-green'>" + __(skill.name) + "</span>" : data.head.title,
-        typesSkill: () => {
+        types_skill: () => {
             let types = [
                 {
                     name: "Principal",
@@ -103,7 +103,7 @@
         <div class="col-2">
             <label for="types-skill">Type du skill</label>
             <select id="types-skill" class="not-full-width form-control">
-                <%= skillData.typesSkill() %>
+                <%= skillData.types_skill() %>
             </select>
         </div>
     </div>
@@ -124,7 +124,7 @@
         <div class="col-6">
             <div class="row">
                 <div class="col-12 thumb-container">
-                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.skill ? "default.png" : "" %></span></label>
+                    <label for="custom-file" class="pointer">Upload image <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.skill ? "default.png" : "" %></span></label>
                     <input type="file" id="custom-file" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= skillData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>

@@ -20,6 +20,10 @@
         .no-border-y();
     }
 
+    .no-padding {
+        padding: 0;
+    }
+
     .borders-transparent-x (@border-width) {
         border-left: 2px solid transparent;
         border-right: 2px solid transparent;
@@ -64,6 +68,11 @@
         padding: (@button-padding-y / 2) (@button-padding-x * 2) !important;
     }
 
+    &.fit {
+        width: 100%;
+        padding: @button-padding-x 0 !important;
+    }
+
     .rounded (@radius: @radius-default) {
         border-radius: @radius;
     }
@@ -106,7 +115,7 @@
 
     &.theme-3 {
         font-weight: bold;
-        background-color: @green-faded-1;
+        background-color: @green-faded-2;
         color: @success;
         will-change: border-color;
         transition: border-color @transition-1 @time-transition-05;
@@ -118,5 +127,14 @@
         &:hover {
             border-color: @success;
         }
+    }
+
+    &.theme-4 {
+        background: @grey-dark-1;
+        border: 2px solid fade(@gold, 20%);
+        padding: (@button-padding-x / 8) (@button-padding-x / 4);
+
+        .text-white();
+        .rounded();
     }
 }

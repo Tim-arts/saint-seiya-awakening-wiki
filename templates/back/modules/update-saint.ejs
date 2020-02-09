@@ -14,7 +14,147 @@
             en: locals.saint ? locales[0][saint.slug_underscore + '_saint_name'] : "",
             fr: locals.saint ? locales[1][saint.slug_underscore + '_saint_name'] : ""
         },
-        image: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true })
+        comment: {
+            en: (() => {
+                let result = "";
+
+                if(locals.saint) {
+                    if (saint.comment) {
+                        result = locales[0][saint.slug_underscore + '_saint_comment'];
+                    }
+                }
+
+                return result;
+            })(),
+            fr: (() => {
+                let result = "";
+
+                if(locals.saint) {
+                    if (saint.comment) {
+                        result = locales[1][saint.slug_underscore + '_saint_comment'];
+                    }
+                }
+
+                return result;
+            })()
+        },
+        image: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        ranks: () => {
+            for (let i = 0, count = ranks.length; i < count; i++) {
+                let cleanType = convertToSlug(ranks[i], /[ ]/g),
+                    selected;
+
+                if (locals.saint) {
+                    selected = cleanType === convertToSlug(saint.rank, /[ ]/g) ? "selected": "";
+                }
+            %>
+                <option id="rank-<%= cleanType %>" name="type-<%= cleanType %>" <%= selected %>><%= ranks[i] %></option>
+            <%
+            }
+        },
+        damage_types: () => {
+            for (let i = 0, count = types.length; i < count; i++) {
+                let cleanType = convertToSlug(types[i], /[ ]/g),
+                    selected;
+
+                if (locals.saint) {
+                    selected = cleanType === convertToSlug(saint.damage_type, /[ ]/g) ? "selected": "";
+                }
+            %>
+                <option id="damage-type-<%= cleanType %>" name="damage-type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
+            <%
+            }
+        },
+        focus: () => {
+            for (let i = 0, count = focus.length; i < count; i++) {
+                let cleanType = convertToSlug(focus[i], /[ ]/g),
+                    selected;
+
+                if (locals.saint) {
+                    selected = cleanType === convertToSlug(saint.focus, /[ ]/g) ? "selected": "";
+                }
+            %>
+                <option id="focus-<%= cleanType %>" name="focus-<%= cleanType %>" <%= selected %>><%= focus[i] %></option>
+            <%
+            }
+        },
+        roles: () => {
+            for (let i = 0, count = roles.length; i < count; i++) {
+                let cleanType = convertToSlug(roles[i], /[ ]/g),
+                    selected;
+
+                if (locals.saint) {
+                    selected = cleanType === convertToSlug(saint.roles, /[ ]/g) ? "selected": "";
+                }
+            %>
+                <option id="role-<%= cleanType %>" name="focus-<%= cleanType %>" <%= selected %>><%= roles[i] %></option>
+            <%
+            }
+        },
+        handle_skills: (object) => {
+            if (locals.saint || (locals.saint && !!!object.length)) {
+                for (let i = 0, count = object.length; i < count; i++) {
+                    let skill = object[i];
+
+                    %>
+                        <div class="col-<%= (12 / count) %>">
+                            <div class="main-skill">
+                                <img src="<%= cloudinary.url("skills/" + skill[i].slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Skill icon" />
+                                <span><%= __(skill.name) %></span>
+                            </div>
+                        </div>
+                    <%
+                }
+            } else {
+                %>
+                    <div class="col-12">
+                        <div class="h6 text-white mb-0">Aucune compétence n'est actuellement liée !</div>
+                    </div>
+                <%
+            }
+        },
+        cosmos_suggestions: () => {
+            if (locals.saint || (locals.saint && !!!saint.cosmos_suggestions.length)) {
+
+            } else {
+                %>
+                    <div class="col-12">Il n'y a aucune suggestion de cosmos existante.</div>
+                <%
+            }
+        },
+        skills_suggestions: () => {
+            if (locals.saint || (locals.saint && !!!saint.skills_suggestions.length)) {
+
+            } else {
+                %>
+                    <div class="col-12">Il n'y a aucune suggestion de skills existante.</div>
+                <%
+            }
+        },
+        characteristics: {
+            levels: () => {
+                for (let i = 0, count = levels.length; i < count; i++) {
+                    let level = levels[i];
+
+                    %>
+                        <option id="level-<%= level %>" value="<%= level %>"><%= level %></option>
+                    <%
+                }
+            },
+            generate_fields: () => {
+                for (let i = 0, count = characteristics.length; i < count; i++) {
+                    let characteristic = characteristics[i],
+                        cleanCharacteristic = characteristic.toLowerCase();
+
+                    %>
+                        <div class="col-1">
+                            <label for="characteristic-<%= cleanCharacteristic %>"><%= characteristic %></label>
+                            <input type="number" id="characteristic-<%= cleanCharacteristic %>" class="form-control" />
+                        </div>
+                    <%
+                }
+            }
+        }
     };
 %>
 
@@ -33,18 +173,20 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" value="<%= saintData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Milo du Scorpion" class="form-control" minlength="3" value="<%= saintData.name.fr %>" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" value="<%= saintData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Scorpio Milo" class="form-control" minlength="3" value="<%= saintData.name.en %>" required />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="row">
                 <div class="col-12 thumb-container">
-                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+                    <label for="custom-file" class="pointer">Upload image <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
                     <input type="file" id="custom-file" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= saintData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>
@@ -52,7 +194,230 @@
         </div>
     </div>
 
+    <div class="row mb-4">
+        <div class="col-6">
+            <label for="fr-comment">Partie commentaire (FR)</label>
+            <textarea id="fr-comment" name="fr-comment" class="form-control"><%= saintData.comment.fr %></textarea>
+        </div>
+        <div class="col-6">
+            <label for="en-comment">Partie commentaire (EN)</label>
+            <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
+        </div>
+    </div>
 
+    <div class="row mb-4">
+        <div class="col-3 form-group">
+            <label for="ranks">Rank <a href="#" class="very-small">(RESET)</a></label>
+            <select id="ranks" class="custom-select form-control">
+                <option selected disabled>Choose an attribute</option>
+                <%= saintData.ranks() %>
+            </select>
+        </div>
+        <div class="col-3 form-group">
+            <label for="damage-types">Damage type <a href="#" class="very-small">(RESET)</a></label>
+            <select id="damage-types" class="custom-select form-control">
+                <option selected disabled>Choose an attribute</option>
+                <%= saintData.damage_types() %>
+            </select>
+        </div>
+        <div class="col-3 form-group">
+            <label for="focus">Focus <a href="#" class="very-small">(RESET)</a></label>
+            <select id="focus" class="custom-select form-control">
+                <option selected disabled>Choose an attribute</option>
+                <%= saintData.focus() %>
+            </select>
+        </div>
+        <div class="col-3 form-group">
+            <label for="roles">Roles <a href="#" class="very-small">(RESET)</a></label>
+            <select id="roles" class="custom-select form-control" multiple>
+                <option selected disabled>Choose an attribute</option>
+                <%= saintData.roles() %>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-6 form-group">
+            <label for="main-skills">Compétences principales</label>
+            <div class="row">
+                <%= saintData.handle_skills(saint.main_skills) %>
+            </div>
+            <div class="small mt-1"><span class="font-weight-bold">·</span> Le lien des compétences principales <a href="manage-skills" class="text-green">se configure</a> dans les pages de compétences <span class="font-weight-bold">·</span></div>
+        </div>
+        <div class="col-6 form-group">
+            <label for="main-skills">Compétences additionnelles</label>
+            <div class="row">
+                <%= saintData.handle_skills(saint.additionnal_skills) %>
+            </div>
+            <div class="small mt-1"><span class="font-weight-bold">·</span> Le lien des compétences additionnelles <a href="manage-skills" class="text-green">se configure</a> dans les pages de compétences <span class="font-weight-bold">·</span></div>
+        </div>
+    </div>
+
+    <div class="e-s-5"></div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Ajouter une suggestion de cosmos</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-4">
+            <div class="row">
+                <div class="col-4">
+                    <label for="cosmo-suggestion-template-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
+                    <input type="text" id="cosmo-suggestion-template-name" name="cosmo-suggestion-template-name" placeholder="Ex: Berserk" class="form-control" minlength="3" />
+                </div>
+                <div class="col-2 autocomplete-container position-relative">
+                    <label for="search-cosmo-lunar">
+                        <span>Lunar</span>
+                        <i class="material-icons">search</i>
+                    </label>
+                    <input type="text" id="search-cosmo-lunar" name="search-cosmo-lunar" placeholder="Ex: Eagle-Eye" class="form-control" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
+                </div>
+                <div class="col-2 autocomplete-container position-relative">
+                    <label for="search-cosmo-solar">
+                        <span>Solar</span>
+                        <i class="material-icons">search</i>
+                    </label>
+                    <input type="text" id="search-cosmo-solar" name="search-cosmo-solar" placeholder="Ex: Decelerator" class="form-control" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
+                </div>
+                <div class="col-2 autocomplete-container position-relative">
+                    <label for="search-cosmo-star">
+                        <span>Star</span>
+                        <i class="material-icons">search</i>
+                    </label>
+                    <input type="text" id="search-cosmo-star" name="search-cosmo-star" placeholder="Ex: Decelerator" class="form-control" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
+                </div>
+                <div class="col-2 autocomplete-container position-relative">
+                    <label for="search-cosmo-legendary">
+                        <span>Legendary</span>
+                        <i class="material-icons">search</i>
+                    </label>
+                    <input type="text" id="search-cosmo-legendary" name="search-cosmo-legendary" placeholder="Ex: Decelerator" class="form-control" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-5">
+                    <label for="fr-cosmo-suggestion-comment">Commentaire (FR)</label>
+                    <textarea id="fr-cosmo-suggestion-comment" name="fr-cosmo-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
+                </div>
+                <div class="col-5">
+                    <label for="en-cosmo-suggestion-comment">Commentaire (EN)</label>
+                    <textarea id="en-cosmo-suggestion-comment" name="en-cosmo-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-lg custom-theme theme-3 fit align-center">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Suggestions de cosmos</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <%= saintData.cosmos_suggestions() %>
+            </div>
+        </div>
+    </div>
+
+    <div class="e-s-5"></div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Ajouter une suggestion de compétences</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="skills-suggestions" class="w-100 position-relative">
+                                <span>Priorités</span>
+                                <span>
+                                    <button type="button" class="button form-control position-absolute"><i class="material-icons">add</i></button>
+                                </span>
+                            </label>
+                            <input type="number" id="skills-suggestions" name="skills-suggestions" placeholder="Ex: 1133" class="form-control" value="1111" readonly />
+                        </div>
+                    </div>
+                    <div id="skills-suggestions-container" class="row">
+                        <div class="col-6 my-2">
+                            <input type="number" id="skill-suggestion-0" name="skill-suggestion-0" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="fr-skill-suggestion-comment">Commentaire (FR)</label>
+                    <textarea id="fr-skill-suggestion-comment" name="fr-skill-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
+                </div>
+                <div class="col-4">
+                    <label for="en-skill-suggestion-comment">Commentaire (EN)</label>
+                    <textarea id="en-skill-suggestion-comment" name="en-skill-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-lg custom-theme theme-3 fit align-center">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Suggestions de compétences</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <%= saintData.skills_suggestions() %>
+            </div>
+        </div>
+    </div>
+
+    <div class="e-s-5"></div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Caractéristiques du saint</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <label for="saint-levels">Niveau</label>
+                    <select id="saint-levels" class="custom-select form-control">
+                        <option selected disabled>Choose a level</option>
+                        <%= saintData.characteristics.levels() %>
+                    </select>
+                </div>
+                <%= saintData.characteristics.generate_fields() %>
+            </div>
+        </div>
+    </div>
 
     <div class="e-s-5"></div>
 

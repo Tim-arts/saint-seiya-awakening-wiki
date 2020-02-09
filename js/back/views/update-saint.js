@@ -1,6 +1,5 @@
 require("./../base");
 
-import Autocomplete from "autocompleter";
 import Sortable from "sortablejs";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
@@ -8,7 +7,7 @@ import helpers from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
-    let formElement = document.getElementById("update-skill");
+    let formElement = document.getElementById("update-saint");
     let inputFileElement = document.getElementById("custom-file");
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
@@ -78,13 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         data = {
             "_id": _data._id,
-            "type": typesSkill.value,
             "name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
-            "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_")
+            "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
+            "image": (() => {
+                return avatarElement.src === helpers.constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
+            })()
         };
         
         $.post(formElement.getAttribute("action"), {

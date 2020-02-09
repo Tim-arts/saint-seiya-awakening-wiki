@@ -55,27 +55,27 @@
             types: [
                 () => {
                     for (let i = 0, count = attributes.length; i < count; i++) {
-                        let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
+                        let cleanAttribute = convertToSlug(attributes[i], /[ ]/g),
                             selected;
 
                         if (locals.cosmo) {
-                            selected = cleanAttribute === cosmo.basic_attributes.types[0].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                            selected = cleanAttribute === convertToSlug(cosmo.basic_attributes.types[0], /[ ]/g) ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" name="cosmo-attribute-1-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 },
                 () => {
                     for (let i = 0, count = attributes.length; i < count; i++) {
-                        let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
+                        let cleanAttribute = convertToSlug(attributes[i], /[ ]/g),
                             selected;
 
                         if (locals.cosmo) {
-                            selected = cleanAttribute === cosmo.basic_attributes.types[1].toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                            selected = cleanAttribute === convertToSlug(cosmo.basic_attributes.types[1], /[ ]/g) ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" name="cosmo-attribute-2-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 }
@@ -84,14 +84,14 @@
         bonus_attributes: {
             type: () => {
                 for (let i = 0, count = attributes.length; i < count; i++) {
-                    let cleanAttribute = attributes[i].toLowerCase().replace(/[ ]/g, "-"),
+                    let cleanAttribute = convertToSlug(attributes[i], /[ ]/g),
                         selected;
 
                     if (locals.cosmo) {
-                        selected = cleanAttribute === cosmo.bonus_attributes.type.toLowerCase().replace(/[ ]/g, "-") ? "selected" : "";
+                        selected = cleanAttribute === convertToSlug(cosmo.bonus_attributes.type, /[ ]/g) ? "selected" : "";
                     }
                 %>
-                    <option id="type-<%= cleanAttribute %>" name="type-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                    <option id="type-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                 <%
                 }
             },
@@ -99,14 +99,14 @@
         },
         type: () => {
             for (let i = 0, count = types.length; i < count; i++) {
-                let cleanType = types[i].toLowerCase(),
+                let cleanType = convertToSlug(types[i], /[ ]/g),
                     selected;
 
                 if (locals.cosmo) {
-                    selected = cleanType === cosmo.type.toLowerCase().replace(/[ ]/g, "-") ? "selected": "";
+                    selected = cleanType === convertToSlug(cosmo.type, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="type-<%= cleanType %>" name="type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
+                <option id="type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
             <%
             }
         },
@@ -114,7 +114,7 @@
             for (let system in systems) {
                 let type = systems[system].data.constructor,
                     name = systems[system].name,
-                    slug = name.toLowerCase();
+                    slug = convertToSlug(name, /[ ]/g);
 
                 switch(type) {
                     case Array:
@@ -129,14 +129,14 @@
                                     <option <%= locals.cosmo ? "" : "selected" %> disabled>Choose an entry</option>
                                     <%
                                         for (let i = 0, count = array.length; i < count; i++) {
-                                            let cleanEntry = array[i].toLowerCase(),
+                                            let cleanEntry = convertToSlug(array[i], /[ ]/g),
                                                 selected;
 
                                             if (locals.cosmo) {
                                                 selected = cosmo.obtainment_system[slug].map(v => v.toLowerCase()).indexOf(cleanEntry) > -1 ? "selected": "";
                                             }
                                             %>
-                                                <option id="entry-<%= cleanEntry %>" name="entry-<%= cleanEntry %>" <%= selected %>><%= array[i] %></option>
+                                                <option id="entry-<%= cleanEntry %>" <%= selected %>><%= array[i] %></option>
                                             <%
                                         }
                                     %>
@@ -177,17 +177,19 @@
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
                     <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Rosaire" class="form-control" minlength="3" value="<%= cosmoData.name.fr %>" />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
                     <input type="text" id="en-name" name="en-name" placeholder="Ex: Rosary" class="form-control" minlength="3" value="<%= cosmoData.name.en %>" required />
+                    <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="row">
                 <div class="col-12 thumb-container">
-                    <label for="custom-file" class="pointer">Upload image <span class="small">(max 256kb)</span>: <span class="text-gold"><%= !locals.cosmo ? "default.png" : "" %></span></label>
+                    <label for="custom-file" class="pointer">Upload image <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.cosmo ? "default.png" : "" %></span></label>
                     <input type="file" id="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
                     <img src="<%= cosmoData.image %>" id="avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
                 </div>
@@ -212,7 +214,7 @@
             <textarea id="fr-comment" name="fr-comment" class="form-control"><%= cosmoData.comment.fr %></textarea>
         </div>
         <div class="col-6">
-            <label for="en-comment">Partie commentaire (FR)</label>
+            <label for="en-comment">Partie commentaire (EN)</label>
             <textarea id="en-comment" name="en-comment" class="form-control"><%= cosmoData.comment.en %></textarea>
         </div>
     </div>

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Get dynamic data from DB
-const Saints = require("../../../fixtures/models/saints");
+const Saints = require("./../../../fixtures/models/saints");
 
 module.exports = function () {
     // Middleware
@@ -17,7 +17,7 @@ module.exports = function () {
     
     // Route: /saints/show
     router.get("/show", function(req, res) {
-        let tags = require("../../../fixtures/data/modules/search-tags");
+        let tags = require("./../../../fixtures/data/modules/search-tags")();
         
         Saints.find({}, (err, saints) => {
             res.render("front/views/saints/show", {

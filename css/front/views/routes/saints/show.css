@@ -279,6 +279,9 @@ small,
   border-top: none;
   border-bottom: none;
 }
+.custom-theme .no-padding {
+  padding: 0;
+}
 .custom-theme .borders-white {
   border: 2px solid #fff;
 }
@@ -287,6 +290,10 @@ small,
 }
 .custom-theme.small {
   padding: 0.2em 1.6em !important;
+}
+.custom-theme.fit {
+  width: 100%;
+  padding: 0.8em 0 !important;
 }
 .custom-theme.theme-1 {
   will-change: box-shadow;
@@ -326,7 +333,7 @@ small,
 }
 .custom-theme.theme-3 {
   font-weight: bold;
-  background-color: rgba(0, 236, 152, 0.1);
+  background-color: rgba(0, 236, 152, 0.2);
   color: #00EC98;
   will-change: border-color;
   transition: border-color cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
@@ -341,6 +348,13 @@ small,
 }
 .custom-theme.theme-3:hover {
   border-color: #00EC98;
+}
+.custom-theme.theme-4 {
+  background: #20202C;
+  border: 2px solid rgba(246, 229, 161, 0.2);
+  padding: 0.1em 0.2em;
+  color: #fff;
+  border-radius: 4px;
 }
 .modal {
   cursor: pointer;
