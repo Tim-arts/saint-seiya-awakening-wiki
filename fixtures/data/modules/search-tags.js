@@ -22,6 +22,7 @@ module.exports = () => {
         },
         "rank": {
             "values": [
+                "SSS",
                 "SS",
                 "S",
                 "A",

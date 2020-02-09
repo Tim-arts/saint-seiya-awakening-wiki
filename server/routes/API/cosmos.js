@@ -9,7 +9,7 @@ module.exports = function () {
         next();
     });
     
-    // Route: /api/tags
+    // Route: /api/cosmos
     router.get('/cosmos', function(req, res) {
         res.json(cosmos);
     });

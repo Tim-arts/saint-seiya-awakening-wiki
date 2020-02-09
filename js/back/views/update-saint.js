@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
     
+    let addSkillSuggestion = document.getElementById("btn-add-skills-suggestion");
+    
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
             data = {};
@@ -115,4 +117,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         }
     };
+    
+    addSkillSuggestion.addEventListener("click", function () {
+        let container = document.getElementById("skills-suggestions-container"),
+            index = container.querySelectorAll(".skills-suggestion").length;
+        
+        $.post("../../api/partials/add-skill-suggestion", {
+            index: index
+        }, (response) => {
+            container.insertAdjacentHTML("beforeend", response);
+        });
+    });
 });
