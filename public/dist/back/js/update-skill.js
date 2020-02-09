@@ -364,8 +364,6 @@ document.addEventListener("DOMContentLoaded", function () {
       _helpers["default"].postRequest(options);
     },
     render: function render(skill) {
-      console.log(skill);
-
       var div = _helpers["default"].convertStringToDOMElement(skill.div);
 
       skill.name = div.innerHTML;
