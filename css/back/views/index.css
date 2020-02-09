@@ -720,7 +720,7 @@ body {
   min-height: 100px;
 }
 .wrapper #content form button[type="button"].align-center {
-  transform: translateY(100%);
+  transform: translateY(110%);
   position: relative;
 }
 .wrapper #content .form-control {
