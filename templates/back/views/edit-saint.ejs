@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="<%= global.utils.locales.language %>">
     <%
-    let data = (() => {
+        let data = (() => {
             let object = {};
 
             object.head = {
-                title: "Ajouter un saint",
+                title: "Modifier un saint",
                 viewStyleUrls: [
                     "<link defer='defer' rel='stylesheet' href='../../css/back/views/update-saint.css' type='text/css'>",
                     "<link defer='defer' rel='stylesheet' href='../../../node_modules/choices.js/public/assets/styles/choices.min.css' type='text/css'>"
@@ -14,8 +14,19 @@
                     "<script defer='defer' src='../../public/dist/back/js/update-saint.js' type='text/javascript'></script>"
                 ]
             };
-            object.activeIndex = "2.0";
-            object.icon = "flash_on";
+            object.dropdown = [
+                {
+                    url: "/back/update-saint/:" + saint._id,
+                    icon: "create",
+                    title: object.head.title,
+                    visibility: [
+                        "production",
+                        "development"
+                    ]
+                }
+            ];
+            object.activeIndex = "2.2";
+            object.icon = "create";
 
             return object;
         })(),

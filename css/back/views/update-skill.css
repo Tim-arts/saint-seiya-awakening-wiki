@@ -748,9 +748,14 @@ body {
 .autocomplete .suggestion.selected:hover {
   background-color: #35354a;
 }
+form .autocomplete-container label {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
 form .autocomplete-container label i {
   color: rgba(0, 236, 152, 0.3);
-  right: 25px;
+  right: 10px;
   top: 41px;
   position: absolute;
   pointer-events: none;
@@ -784,6 +789,42 @@ form .autocomplete-container .modified-skills .modified-skill:hover {
 }
 form .autocomplete-container .modified-skills .modified-skill:active {
   cursor: grabbing;
+}
+form .autocomplete-container .choices {
+  margin-bottom: 0;
+}
+form .autocomplete-container .choices .choices__inner {
+  background: #20202C;
+  border: 2px solid rgba(246, 229, 161, 0.2);
+  min-height: 38px;
+  padding: 4px 0.75rem;
+}
+form .autocomplete-container .choices .choices__input {
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+}
+form .autocomplete-container .choices .choices__list--dropdown {
+  background-color: #20202C;
+  border: 2px solid rgba(246, 229, 161, 0.2);
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  z-index: 2;
+}
+form .autocomplete-container .choices .choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background-color: #262635;
+}
+form .autocomplete-container .choices .choices__list--multiple .choices__item {
+  font-weight: bold;
+  color: #00EC98;
+  background-color: #2a2a40;
+  border: none;
+  margin: -3px 5px 0 0;
+}
+form .autocomplete-container .choices .choices__list--multiple .choices__item .choices__button {
+  border-left-color: #3f476e;
 }
 form .thumb-container {
   position: relative;

@@ -5,9 +5,13 @@
 form {
     .autocomplete-container {
         label {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+
             i {
                 color: @green-faded-3;
-                right: 25px;
+                right: 10px;
                 top: 41px;
                 position: absolute;
                 pointer-events: none;
@@ -48,6 +52,51 @@ form {
 
                 &:active {
                     cursor: grabbing;
+                }
+            }
+        }
+
+        .choices {
+            margin-bottom: 0;
+
+            .choices__inner {
+                background: @grey-dark-1;
+                border: 2px solid fade(@gold, 20%);
+                min-height: 38px;
+                padding: 4px .75rem;
+            }
+
+            .choices__input {
+                font-size: 16px;
+                color: @white;
+                background-color: transparent;
+                padding: 0;
+                margin-bottom: 0;
+            }
+
+            .choices__list--dropdown {
+                background-color: @grey-dark-1;
+                border: 2px solid fade(@gold, 20%);
+                border-top-width: 1px;
+                border-bottom-width: 1px;
+                z-index: 2;
+
+                .choices__item--selectable.is-highlighted {
+                    background-color: @grey-medium-1;
+                }
+            }
+
+            .choices__list--multiple {
+                .choices__item {
+                    font-weight: bold;
+                    color: @success;
+                    background-color: @grey-medium-3;
+                    border: none;
+                    margin: -3px 5px 0 0;
+
+                    .choices__button {
+                        border-left-color: @grey-light-2;
+                    }
                 }
             }
         }

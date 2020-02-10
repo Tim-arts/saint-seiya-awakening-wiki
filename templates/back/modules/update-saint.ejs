@@ -131,6 +131,15 @@
                 <%
             }
         },
+        search_cosmos: (type) => {
+            let filteredCosmos = cosmos.filter(cosmo => cosmo.type === type);
+
+            for (let i = 0, count = filteredCosmos.length; i < count; i++) {
+            %>
+                <option id="cosmo-<%= filteredCosmos[i].slug %>"><%= __(filteredCosmos[i].name) %></option>
+            <%
+            }
+        },
         characteristics: {
             levels: () => {
                 for (let i = 0, count = levels.length; i < count; i++) {
@@ -206,6 +215,28 @@
     </div>
 
     <div class="row mb-4">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h5 mt-0">Caractéristiques du saint</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <label for="saint-levels">Niveau</label>
+                    <select id="saint-levels" class="custom-select form-control">
+                        <option selected disabled>Choose a level</option>
+                        <%= saintData.characteristics.levels() %>
+                    </select>
+                </div>
+                <%= saintData.characteristics.generate_fields() %>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
         <div class="col-3 form-group">
             <label for="ranks">Rank <a href="#" class="very-small">(RESET)</a></label>
             <select id="ranks" class="custom-select form-control">
@@ -265,40 +296,56 @@
         </div>
         <div class="col-12 mb-4">
             <div class="row">
-                <div class="col-4">
-                    <label for="cosmo-suggestion-template-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="cosmo-suggestion-template-name" name="cosmo-suggestion-template-name" placeholder="Ex: Berserk" class="form-control" minlength="3" />
+                <div class="col-6 mb-4">
+                    <label for="cosmo-suggestion-template-name-fr">Name (FR)</label>
+                    <input type="text" id="cosmo-suggestion-template-name-fr" placeholder="Ex: Berserk" class="form-control" minlength="3" />
                 </div>
-                <div class="col-2 autocomplete-container position-relative">
-                    <label for="search-cosmo-lunar">
+                <div class="col-6 mb-4">
+                    <label for="cosmo-suggestion-template-name-en">Name (EN)</label>
+                    <input type="text" id="cosmo-suggestion-template-name-en" placeholder="Ex: Berserk" class="form-control" minlength="3" />
+                </div>
+                <div class="col-6 autocomplete-container position-relative mb-4">
+                    <label for="search-cosmos-lunar">
                         <span>Lunar</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="search-cosmo-lunar" name="search-cosmo-lunar" placeholder="Ex: Eagle-Eye" class="form-control" />
+                    <select id="search-cosmos-lunar" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
+                        <option placeholder>Ex: <%= __(cosmos[25].name) %></option>
+                        <%= saintData.search_cosmos("lunar") %>
+                    </select>
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
-                <div class="col-2 autocomplete-container position-relative">
-                    <label for="search-cosmo-solar">
+                <div class="col-6 autocomplete-container position-relative mb-4">
+                    <label for="search-cosmos-solar">
                         <span>Solar</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="search-cosmo-solar" name="search-cosmo-solar" placeholder="Ex: Decelerator" class="form-control" />
+                    <select id="search-cosmos-solar" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
+                        <option placeholder>Ex: <%= __(cosmos[0].name) %></option>
+                        <%= saintData.search_cosmos("solar") %>
+                    </select>
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
-                <div class="col-2 autocomplete-container position-relative">
-                    <label for="search-cosmo-star">
+                <div class="col-6 autocomplete-container position-relative mb-4">
+                    <label for="search-cosmos-star">
                         <span>Star</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="search-cosmo-star" name="search-cosmo-star" placeholder="Ex: Decelerator" class="form-control" />
+                    <select id="search-cosmos-star" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
+                        <option placeholder>Ex: <%= __(cosmos[10].name) %></option>
+                        <%= saintData.search_cosmos("star") %>
+                    </select>
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
-                <div class="col-2 autocomplete-container position-relative">
-                    <label for="search-cosmo-legendary">
+                <div class="col-6 autocomplete-container position-relative mb-4">
+                    <label for="search-cosmos-legendary">
                         <span>Legendary</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="search-cosmo-legendary" name="search-cosmo-legendary" placeholder="Ex: Decelerator" class="form-control" />
+                    <select id="search-cosmos-legendary" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
+                        <option placeholder>Ex: <%= __(cosmos[40].name) %></option>
+                        <%= saintData.search_cosmos("legendary") %>
+                    </select>
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
             </div>
@@ -390,30 +437,6 @@
         <div class="col-12">
             <div class="row">
                 <%= saintData.skills_suggestions() %>
-            </div>
-        </div>
-    </div>
-
-    <div class="e-s-5"></div>
-
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h5 mt-0">Caractéristiques du saint</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-2">
-                    <label for="saint-levels">Niveau</label>
-                    <select id="saint-levels" class="custom-select form-control">
-                        <option selected disabled>Choose a level</option>
-                        <%= saintData.characteristics.levels() %>
-                    </select>
-                </div>
-                <%= saintData.characteristics.generate_fields() %>
             </div>
         </div>
     </div>

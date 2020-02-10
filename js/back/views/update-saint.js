@@ -1,6 +1,7 @@
 require("./../base");
 
 import Sortable from "sortablejs";
+import Choices from "choices.js";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
 import helpers from "./../../shared/helpers";
@@ -12,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
     
+    let searchCosmosLunarElement = document.getElementById("search-cosmos-lunar");
+    let searchCosmosSolarElement = document.getElementById("search-cosmos-solar");
+    let searchCosmosStarElement = document.getElementById("search-cosmos-star");
+    let searchCosmosLegendaryElement = document.getElementById("search-cosmos-legendary");
     let addSkillSuggestion = document.getElementById("btn-add-skills-suggestion");
     
     let  _data = (() => {
@@ -127,5 +132,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }, (response) => {
             container.insertAdjacentHTML("beforeend", response);
         });
+    });
+    
+    new Choices(searchCosmosLunarElement, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true
+    });
+    new Choices(searchCosmosSolarElement, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true
+    });
+    new Choices(searchCosmosStarElement, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true
+    });
+    new Choices(searchCosmosLegendaryElement, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true
     });
 });
