@@ -296,7 +296,7 @@ module.exports = {
     var span = document.createElement("span");
     var img = document.createElement("img");
     var slug = this.convertToSlug(attr.value, /["._' ]/g, '-');
-    img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/v1/cosmos/" + slug + ".png";
+    img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/" + slug + ".png";
     span.appendChild(img);
     el.insertAdjacentElement("afterbegin", span);
     return el;

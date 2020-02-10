@@ -115,7 +115,7 @@ module.exports = {
         const img = document.createElement("img");
         const slug = this.convertToSlug(attr.value, /["._' ]/g, '-');
     
-        img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/v1/cosmos/" + slug + ".png";
+        img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/" + slug + ".png";
     
         span.appendChild(img);
         el.insertAdjacentElement("afterbegin", span);
