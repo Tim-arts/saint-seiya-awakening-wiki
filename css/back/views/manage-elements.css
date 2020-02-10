@@ -688,6 +688,9 @@ body {
 .wrapper #content form {
   width: 100%;
 }
+.wrapper #content form h1 {
+  font-weight: bold;
+}
 .wrapper #content form h1 i {
   position: relative;
   top: 5px;

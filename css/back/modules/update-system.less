@@ -152,4 +152,79 @@ form {
             }
         }
     }
+
+    .cosmos-suggestions, .skills-suggestions {
+        .head {
+            font-weight: bold;
+            color: @white;
+        }
+
+        .suggestion {
+            background-color: @grey-dark-2-faded-5;
+            padding-top: 15px;
+
+            &.starter {
+                @alpha-index: 3;
+
+                .index, .fr-name, .en-name, .fr-description, .en-description {
+                    @str: "white-alpha-";
+                    @concat: ~"@{str}@{alpha-index}";
+
+                    color: @@concat;
+                }
+
+                img {
+                    @str: ".";
+                    @concat: ~"@{str}@{alpha-index}";
+
+                    filter: invert(1);
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+                    opacity: @concat;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &.active {
+                .index, .fr-name, .en-name, .fr-description, .en-description {
+                    color: @white;
+                }
+            }
+
+            /* Shared */
+            .index, .fr-name, .en-name {
+                top: 5px;
+                position: relative;
+            }
+
+            img {
+                width: 48px;
+                display: inline-block;
+                cursor: pointer;
+            }
+
+            .fr-description, .en-description {
+                padding: 10px 15px;
+                border-bottom: 1px solid @success;
+
+                div {
+                    padding: 5px 0;
+                }
+            }
+        }
+
+        .actions {
+            button[type="button"] {
+                height: 28px;
+                padding: 2px 5px;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
 }

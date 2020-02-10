@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
     
+    /* On load */
     selects.forEach((select) => {
         let link = select.previousElementSibling.querySelector("a");
         link.addEventListener("click", function (e) {

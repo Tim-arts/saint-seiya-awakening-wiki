@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
         helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), this.value, "modified");
     });
     
-    /* Dependencies usages */
+    /* On load */
     Autocomplete({
         input: document.getElementById("awakening-skill-id"),
         minLength: 3,
@@ -322,6 +322,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    /* On load */
     helpers.displayElementsFromType(Array.from(document.querySelectorAll(".marker-type-main")), typesSkill.options[typesSkill.selectedIndex].value, "modified");
 });

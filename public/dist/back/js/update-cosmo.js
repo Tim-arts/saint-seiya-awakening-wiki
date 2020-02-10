@@ -35,16 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -143,9 +143,11 @@ exports["default"] = InputFile;
 },{"./../../shared/helpers":5,"@babel/runtime/helpers/classCallCheck":9,"@babel/runtime/helpers/createClass":10,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":14}],3:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _InputFile = _interopRequireDefault(require("./../modules/InputFile"));
 
@@ -328,6 +330,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return true;
     }
   };
+  /* On load */
+
 
   selects.forEach(function (select) {
     var link = select.previousElementSibling.querySelector("a");
@@ -343,12 +347,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var SelectVerification =
 /**
@@ -385,9 +389,11 @@ exports["default"] = SelectVerification;
 },{"@babel/runtime/helpers/classCallCheck":9,"@babel/runtime/helpers/interopRequireDefault":11}],5:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
@@ -473,7 +479,7 @@ module.exports = {
       method: "POST",
       dataType: 'json',
       success: function () {
-        var _success = (0, _asyncToGenerator2["default"])(
+        var _ref = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/
         _regenerator["default"].mark(function _callee(response) {
           var request;
@@ -481,7 +487,7 @@ module.exports = {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  request = function _ref() {
+                  request = function _ref2() {
                     var data = response.data,
                         count = data.length;
 
@@ -525,11 +531,9 @@ module.exports = {
           }, _callee);
         }));
 
-        function success(_x) {
-          return _success.apply(this, arguments);
-        }
-
-        return success;
+        return function success(_x) {
+          return _ref.apply(this, arguments);
+        };
       }(),
       error: function error(response) {
         console.log(response);
@@ -554,14 +558,14 @@ module.exports = {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var Modal =
 /*#__PURE__*/

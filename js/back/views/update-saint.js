@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let searchCosmosSolarElement = document.getElementById("search-cosmos-solar");
     let searchCosmosStarElement = document.getElementById("search-cosmos-star");
     let searchCosmosLegendaryElement = document.getElementById("search-cosmos-legendary");
-    let addSkillSuggestion = document.getElementById("btn-add-skills-suggestion");
+    let addSkillSuggestionPriority = document.getElementById("add-skills-suggestion-priority");
+    let addCosmosSuggestion = document.getElementById("add-cosmos-suggestion");
+    let addSkillsSuggestion = document.getElementById("add-skills-suggestion");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -123,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
     
-    addSkillSuggestion.addEventListener("click", function () {
+    addSkillSuggestionPriority.addEventListener("click", function () {
         let container = document.getElementById("skills-suggestions-container"),
             index = container.querySelectorAll(".skills-suggestion").length;
         
@@ -134,7 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    new Choices(searchCosmosLunarElement, {
+    addCosmosSuggestion.addEventListener("click", () => {
+    
+    });
+    
+    addSkillsSuggestion.addEventListener("click", () => {
+    
+    });
+    
+    /* On load */
+    let searchCosmosLunarConstructor = new Choices(searchCosmosLunarElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
@@ -148,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-    new Choices(searchCosmosSolarElement, {
+    let searchCosmosSolarConstructor = new Choices(searchCosmosSolarElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
@@ -162,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-    new Choices(searchCosmosStarElement, {
+    let searchCosmosStarConstructor = new Choices(searchCosmosStarElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
@@ -176,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-    new Choices(searchCosmosLegendaryElement, {
+    let searchCosmosLegendaryConstructor = new Choices(searchCosmosLegendaryElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
