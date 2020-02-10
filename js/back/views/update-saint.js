@@ -139,27 +139,56 @@ document.addEventListener("DOMContentLoaded", () => {
         searchFloor: 3,
         searchResultLimit: 5,
         removeItems: true,
-        removeItemButton: true
+        removeItemButton: true,
+        callbackOnCreateTemplates: (template) => {
+            return {
+                choice(classes, attr) {
+                    return helpers.returnTemplateElement(classes, attr);
+                }
+            }
+        }
     });
     new Choices(searchCosmosSolarElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
         removeItems: true,
-        removeItemButton: true
+        removeItemButton: true,
+        callbackOnCreateTemplates: (template) => {
+            return {
+                choice(classes, attr) {
+                    return helpers.returnTemplateElement(classes, attr);
+                }
+            }
+        }
     });
     new Choices(searchCosmosStarElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
         removeItems: true,
-        removeItemButton: true
+        removeItemButton: true,
+        callbackOnCreateTemplates: (template) => {
+            return {
+                choice(classes, attr) {
+                    return helpers.returnTemplateElement(classes, attr);
+                }
+            }
+        }
     });
     new Choices(searchCosmosLegendaryElement, {
         duplicateItemsAllowed: false,
         searchFloor: 3,
         searchResultLimit: 5,
         removeItems: true,
-        removeItemButton: true
+        removeItemButton: true,
+        itemSelectText: null,
+        callbackOnCreateTemplates: (template) => {
+            return {
+                choice(classes, attr) {
+                    return helpers.returnTemplateElement(classes, attr);
+                }
+            }
+        }
     });
 });

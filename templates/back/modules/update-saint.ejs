@@ -204,17 +204,6 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-6">
-            <label for="fr-comment">Partie commentaire (FR)</label>
-            <textarea id="fr-comment" name="fr-comment" class="form-control"><%= saintData.comment.fr %></textarea>
-        </div>
-        <div class="col-6">
-            <label for="en-comment">Partie commentaire (EN)</label>
-            <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
-        </div>
-    </div>
-
-    <div class="row mb-4">
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
@@ -438,6 +427,19 @@
             <div class="row">
                 <%= saintData.skills_suggestions() %>
             </div>
+        </div>
+    </div>
+
+    <div class="e-s-4"></div>
+
+    <div class="row mb-4">
+        <div class="col-6">
+            <label for="fr-comment">Partie commentaire (FR)</label>
+            <textarea id="fr-comment" name="fr-comment" class="form-control"><%= saintData.comment.fr %></textarea>
+        </div>
+        <div class="col-6">
+            <label for="en-comment">Partie commentaire (EN)</label>
+            <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
         </div>
     </div>
 

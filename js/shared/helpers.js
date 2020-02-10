@@ -1,3 +1,5 @@
+import Choices from "choices.js";
+
 module.exports = {
     constants: {
         urls: {
@@ -106,5 +108,18 @@ module.exports = {
                 console.log(response);
             }
         });
+    },
+    returnTemplateElement (classes, attr) {
+        const el = Choices.defaults.templates.choice.call(this, classes, attr);
+        const span = document.createElement("span");
+        const img = document.createElement("img");
+        const slug = this.convertToSlug(attr.value, /["._' ]/g, '-');
+    
+        img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/v1/cosmos/" + slug + ".png";
+    
+        span.appendChild(img);
+        el.insertAdjacentElement("afterbegin", span);
+    
+        return el;
     }
 };

@@ -5,16 +5,13 @@
 form {
     .autocomplete-container {
         label {
-            width: 100%;
-            position: relative;
-            z-index: 1;
-
             i {
                 color: @green-faded-3;
-                right: 10px;
+                right: 25px;
                 top: 41px;
                 position: absolute;
                 pointer-events: none;
+                z-index: 1;
             }
 
             & + input[type="text"] {
@@ -74,6 +71,17 @@ form {
                 margin-bottom: 0;
             }
 
+            .choices__item {
+                span {
+                    display: inline-block;
+                    margin-right: 10px;
+
+                    img {
+                        width: 32px;
+                    }
+                }
+            }
+
             .choices__list--dropdown {
                 background-color: @grey-dark-1;
                 border: 2px solid fade(@gold, 20%);
@@ -83,6 +91,10 @@ form {
 
                 .choices__item--selectable.is-highlighted {
                     background-color: @grey-medium-1;
+                }
+
+                .choices__item--selectable:after {
+                    content: none;
                 }
             }
 
