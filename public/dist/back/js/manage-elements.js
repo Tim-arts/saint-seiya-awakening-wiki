@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.onerror = null;
     });
   });
-  /* Dependencies usages */
+  /* On load */
 
   (0, _autocompleter["default"])({
     input: sortElements,
@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
     debounceWaitMs: 100,
     className: "elements",
     fetch: function fetch(text) {
-      text = text.toLowerCase().replace(/["._' ]/g, "-");
+      text = (0, _helpers.convertToSlug)(text, /["._' ]/g, "-");
 
-      var suggestions = elementsFromDB.filter(function (n) {
+      var suggestions = elements.filter(function (n) {
         return n.slug.toLowerCase().indexOf(text) > -1;
       }),
           results = function () {
@@ -146,6 +146,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _choices = _interopRequireDefault(require("choices.js"));
+
+var _ModalResponse = _interopRequireDefault(require("./modules/ModalResponse"));
 
 module.exports = {
   constants: {
@@ -220,7 +222,7 @@ module.exports = {
     wrapper.innerHTML = string;
     return wrapper.firstChild;
   },
-  postRequest: function postRequest(options) {
+  updateSuggestions: function updateSuggestions(options) {
     $.ajax({
       url: options.ajaxUrl,
       data: options.data,
@@ -290,7 +292,13 @@ module.exports = {
       }
     });
   },
-  returnTemplateElement: function returnTemplateElement(classes, attr) {
+  returnCustomDropdownTemplateElement: function returnCustomDropdownTemplateElement(classes, attr) {
+    var el = _choices["default"].defaults.templates.dropdown.call(this, classes, attr);
+
+    el.classList.add("static-dropdown");
+    return el;
+  },
+  returnCustomChoiceTemplateElement: function returnCustomChoiceTemplateElement(classes, attr) {
     var el = _choices["default"].defaults.templates.choice.call(this, classes, attr);
 
     var span = document.createElement("span");
@@ -300,10 +308,126 @@ module.exports = {
     span.appendChild(img);
     el.insertAdjacentElement("afterbegin", span);
     return el;
+  },
+  prepareMakeDynamicModal: function prepareMakeDynamicModal(self, dynamicModal, Choices) {
+    var data = {};
+    data.index = self.getAttribute("data-index");
+    data.search = {
+      type: self.getAttribute("data-type")
+    };
+
+    data.selectedElements = function () {
+      return Array.from(self.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(function (x) {
+        return x.getAttribute("data-slug");
+      });
+    };
+
+    data.modal = {
+      id: "choice-" + data.search.type + "-cosmos-" + data.index,
+      title: "Add cosmo(s)"
+    };
+    data.modal.submitId = data.modal.id + "-submit";
+    var elementAtIndex = window["Modal_Choices"]["choices--search-elements-" + data.search.type + "-" + data.index];
+
+    if (elementAtIndex) {
+      $(elementAtIndex.modal).modal({
+        show: true,
+        backdrop: "static",
+        keyboard: false
+      });
+      return;
+    }
+
+    return (0, _asyncToGenerator2["default"])(
+    /*#__PURE__*/
+    _regenerator["default"].mark(function _callee2() {
+      var request;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              request = function _ref3() {
+                return new Promise(function (resolve) {
+                  module.exports.makeDynamicModal(data, Choices, self, resolve);
+                });
+              };
+
+              return _context2.abrupt("return", request());
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  makeDynamicModal: function makeDynamicModal(data, Choices, linkElement, resolve) {
+    var _this = this;
+
+    $.post("../../api/partials/generate-modal", data, function (response) {
+      var dynamicModal = _this.convertStringToDOMElement(response);
+
+      document.body.appendChild(dynamicModal);
+      var submit = document.getElementById(data.modal.submitId);
+      var select = document.getElementById("search-elements-" + data.search.type);
+      var Choice = new Choices(select, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true,
+        itemSelectText: null,
+        callbackOnCreateTemplates: function callbackOnCreateTemplates() {
+          return {
+            dropdown: function dropdown(classes, attr) {
+              return module.exports.returnCustomDropdownTemplateElement(classes, attr);
+            },
+            choice: function choice(classes, attr) {
+              return module.exports.returnCustomChoiceTemplateElement(classes, attr);
+            }
+          };
+        }
+      });
+      var elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
+
+      if (!elementAtIndex) {
+        window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
+          choice: Choice,
+          modal: dynamicModal
+        };
+      }
+
+      submit.addEventListener("click", function () {
+        var array = Choice.getValue(true);
+        var parent = linkElement.parentElement.parentElement;
+        Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(function (entry) {
+          entry.remove();
+        });
+        array.forEach(function (entry) {
+          $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+            slug: module.exports.convertToSlug(entry, /["._' ]/g, '-')
+          }, function (response) {
+            var thumbnail = module.exports.convertStringToDOMElement(response);
+            parent.appendChild(thumbnail);
+          });
+        });
+      });
+      $(dynamicModal).modal({
+        show: true,
+        backdrop: "static",
+        keyboard: false
+      });
+      return resolve({
+        el: dynamicModal,
+        choice: Choice,
+        link: linkElement
+      });
+    });
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":5,"@babel/runtime/helpers/interopRequireDefault":8,"@babel/runtime/regenerator":9,"choices.js":11}],4:[function(require,module,exports){
+},{"./modules/ModalResponse":4,"@babel/runtime/helpers/asyncToGenerator":5,"@babel/runtime/helpers/interopRequireDefault":8,"@babel/runtime/regenerator":9,"choices.js":11}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

@@ -35,16 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -361,7 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
         update: update
       };
 
-      _helpers["default"].postRequest(options);
+      _helpers["default"].updateSuggestions(options);
     },
     render: function render(skill) {
       var div = _helpers["default"].convertStringToDOMElement(skill.div);
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
         update: update
       };
 
-      _helpers["default"].postRequest(options);
+      _helpers["default"].updateSuggestions(options);
     },
     render: function render(skill) {
       return _helpers["default"].convertStringToDOMElement(skill.div);
@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", function () {
         update: update
       };
 
-      _helpers["default"].postRequest(options);
+      _helpers["default"].updateSuggestions(options);
     },
     render: function render(saint) {
       var div = _helpers["default"].convertStringToDOMElement(saint.div);
@@ -478,13 +478,17 @@ document.addEventListener("DOMContentLoaded", function () {
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../base":1,"./../modules/InputFile":2,"@babel/runtime/helpers/interopRequireDefault":10,"autocompleter":15,"sortablejs":19}],4:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _choices = _interopRequireDefault(require("choices.js"));
+
+var _ModalResponse = _interopRequireDefault(require("./modules/ModalResponse"));
 
 module.exports = {
   constants: {
@@ -559,14 +563,14 @@ module.exports = {
     wrapper.innerHTML = string;
     return wrapper.firstChild;
   },
-  postRequest: function postRequest(options) {
+  updateSuggestions: function updateSuggestions(options) {
     $.ajax({
       url: options.ajaxUrl,
       data: options.data,
       method: "POST",
       dataType: 'json',
       success: function () {
-        var _success = (0, _asyncToGenerator2["default"])(
+        var _ref = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/
         _regenerator["default"].mark(function _callee(response) {
           var request;
@@ -574,7 +578,7 @@ module.exports = {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  request = function _ref() {
+                  request = function _ref2() {
                     var data = response.data,
                         count = data.length;
 
@@ -618,18 +622,22 @@ module.exports = {
           }, _callee);
         }));
 
-        function success(_x) {
-          return _success.apply(this, arguments);
-        }
-
-        return success;
+        return function success(_x) {
+          return _ref.apply(this, arguments);
+        };
       }(),
       error: function error(response) {
         console.log(response);
       }
     });
   },
-  returnTemplateElement: function returnTemplateElement(classes, attr) {
+  returnCustomDropdownTemplateElement: function returnCustomDropdownTemplateElement(classes, attr) {
+    var el = _choices["default"].defaults.templates.dropdown.call(this, classes, attr);
+
+    el.classList.add("static-dropdown");
+    return el;
+  },
+  returnCustomChoiceTemplateElement: function returnCustomChoiceTemplateElement(classes, attr) {
     var el = _choices["default"].defaults.templates.choice.call(this, classes, attr);
 
     var span = document.createElement("span");
@@ -639,22 +647,138 @@ module.exports = {
     span.appendChild(img);
     el.insertAdjacentElement("afterbegin", span);
     return el;
+  },
+  prepareMakeDynamicModal: function prepareMakeDynamicModal(self, dynamicModal, Choices) {
+    var data = {};
+    data.index = self.getAttribute("data-index");
+    data.search = {
+      type: self.getAttribute("data-type")
+    };
+
+    data.selectedElements = function () {
+      return Array.from(self.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(function (x) {
+        return x.getAttribute("data-slug");
+      });
+    };
+
+    data.modal = {
+      id: "choice-" + data.search.type + "-cosmos-" + data.index,
+      title: "Add cosmo(s)"
+    };
+    data.modal.submitId = data.modal.id + "-submit";
+    var elementAtIndex = window["Modal_Choices"]["choices--search-elements-" + data.search.type + "-" + data.index];
+
+    if (elementAtIndex) {
+      $(elementAtIndex.modal).modal({
+        show: true,
+        backdrop: "static",
+        keyboard: false
+      });
+      return;
+    }
+
+    return (0, _asyncToGenerator2["default"])(
+    /*#__PURE__*/
+    _regenerator["default"].mark(function _callee2() {
+      var request;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              request = function _ref3() {
+                return new Promise(function (resolve) {
+                  module.exports.makeDynamicModal(data, Choices, self, resolve);
+                });
+              };
+
+              return _context2.abrupt("return", request());
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  makeDynamicModal: function makeDynamicModal(data, Choices, linkElement, resolve) {
+    var _this = this;
+
+    $.post("../../api/partials/generate-modal", data, function (response) {
+      var dynamicModal = _this.convertStringToDOMElement(response);
+
+      document.body.appendChild(dynamicModal);
+      var submit = document.getElementById(data.modal.submitId);
+      var select = document.getElementById("search-elements-" + data.search.type);
+      var Choice = new Choices(select, {
+        duplicateItemsAllowed: false,
+        searchFloor: 3,
+        searchResultLimit: 5,
+        removeItems: true,
+        removeItemButton: true,
+        itemSelectText: null,
+        callbackOnCreateTemplates: function callbackOnCreateTemplates() {
+          return {
+            dropdown: function dropdown(classes, attr) {
+              return module.exports.returnCustomDropdownTemplateElement(classes, attr);
+            },
+            choice: function choice(classes, attr) {
+              return module.exports.returnCustomChoiceTemplateElement(classes, attr);
+            }
+          };
+        }
+      });
+      var elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
+
+      if (!elementAtIndex) {
+        window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
+          choice: Choice,
+          modal: dynamicModal
+        };
+      }
+
+      submit.addEventListener("click", function () {
+        var array = Choice.getValue(true);
+        var parent = linkElement.parentElement.parentElement;
+        Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(function (entry) {
+          entry.remove();
+        });
+        array.forEach(function (entry) {
+          $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+            slug: module.exports.convertToSlug(entry, /["._' ]/g, '-')
+          }, function (response) {
+            var thumbnail = module.exports.convertStringToDOMElement(response);
+            parent.appendChild(thumbnail);
+          });
+        });
+      });
+      $(dynamicModal).modal({
+        show: true,
+        backdrop: "static",
+        keyboard: false
+      });
+      return resolve({
+        el: dynamicModal,
+        choice: Choice,
+        link: linkElement
+      });
+    });
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":7,"@babel/runtime/helpers/interopRequireDefault":10,"@babel/runtime/regenerator":14,"choices.js":16}],5:[function(require,module,exports){
+},{"./modules/ModalResponse":5,"@babel/runtime/helpers/asyncToGenerator":7,"@babel/runtime/helpers/interopRequireDefault":10,"@babel/runtime/regenerator":14,"choices.js":16}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var Modal =
 /*#__PURE__*/

@@ -13,13 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
     
-    let searchCosmosLunarElement = document.getElementById("search-cosmos-lunar");
-    let searchCosmosSolarElement = document.getElementById("search-cosmos-solar");
-    let searchCosmosStarElement = document.getElementById("search-cosmos-star");
-    let searchCosmosLegendaryElement = document.getElementById("search-cosmos-legendary");
     let addSkillSuggestionPriority = document.getElementById("add-skills-suggestion-priority");
-    let addCosmosSuggestion = document.getElementById("add-cosmos-suggestion");
-    let addSkillsSuggestion = document.getElementById("add-skills-suggestion");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -62,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
     let hasChanged = false;
     let data;
+    let dynamicModal;
+    window["Modal_Choices"] = {};
     
     /* Constructors */
     let InputFileConstructor = new InputFile(inputFileElement, {
@@ -136,70 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    addCosmosSuggestion.addEventListener("click", () => {
-    
-    });
-    
-    addSkillsSuggestion.addEventListener("click", () => {
-    
-    });
-    
-    /* On load */
-    let searchCosmosLunarConstructor = new Choices(searchCosmosLunarElement, {
-        duplicateItemsAllowed: false,
-        searchFloor: 3,
-        searchResultLimit: 5,
-        removeItems: true,
-        removeItemButton: true,
-        callbackOnCreateTemplates: (template) => {
-            return {
-                choice(classes, attr) {
-                    return helpers.returnTemplateElement(classes, attr);
-                }
-            }
-        }
-    });
-    let searchCosmosSolarConstructor = new Choices(searchCosmosSolarElement, {
-        duplicateItemsAllowed: false,
-        searchFloor: 3,
-        searchResultLimit: 5,
-        removeItems: true,
-        removeItemButton: true,
-        callbackOnCreateTemplates: (template) => {
-            return {
-                choice(classes, attr) {
-                    return helpers.returnTemplateElement(classes, attr);
-                }
-            }
-        }
-    });
-    let searchCosmosStarConstructor = new Choices(searchCosmosStarElement, {
-        duplicateItemsAllowed: false,
-        searchFloor: 3,
-        searchResultLimit: 5,
-        removeItems: true,
-        removeItemButton: true,
-        callbackOnCreateTemplates: (template) => {
-            return {
-                choice(classes, attr) {
-                    return helpers.returnTemplateElement(classes, attr);
-                }
-            }
-        }
-    });
-    let searchCosmosLegendaryConstructor = new Choices(searchCosmosLegendaryElement, {
-        duplicateItemsAllowed: false,
-        searchFloor: 3,
-        searchResultLimit: 5,
-        removeItems: true,
-        removeItemButton: true,
-        itemSelectText: null,
-        callbackOnCreateTemplates: (template) => {
-            return {
-                choice(classes, attr) {
-                    return helpers.returnTemplateElement(classes, attr);
-                }
-            }
-        }
+    $(document).on("click", ".suggestion .require-modal", function (e) {
+        dynamicModal = helpers.prepareMakeDynamicModal(this, dynamicModal, Choices);
+        
+        e.preventDefault();
     });
 });

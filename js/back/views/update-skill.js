@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 update: update
             };
             
-            helpers.postRequest(options);
+            helpers.updateSuggestions(options);
         },
         render: (skill) => {
             let div = helpers.convertStringToDOMElement(skill.div);
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 update: update
             };
     
-            helpers.postRequest(options);
+            helpers.updateSuggestions(options);
         },
         render: (skill) => {
             return helpers.convertStringToDOMElement(skill.div);
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 update: update
             };
     
-            helpers.postRequest(options);
+            helpers.updateSuggestions(options);
         },
         render: (saint) => {
             let div = helpers.convertStringToDOMElement(saint.div);

@@ -1,24 +1,10 @@
 @import (reference) "../../front/modules/base/_colors";
 @import (reference) "../../front/modules/base/_variables";
 @import "autocomplete";
+@import "choices";
 
 form {
     .autocomplete-container {
-        label {
-            i {
-                color: @green-faded-3;
-                right: 25px;
-                top: 41px;
-                position: absolute;
-                pointer-events: none;
-                z-index: 1;
-            }
-
-            & + input[type="text"] {
-                padding: .375rem 2.75rem 0.375rem .75rem;
-            }
-        }
-
         .modified-skills {
             .modified-skill {
                 color: @white;
@@ -49,66 +35,6 @@ form {
 
                 &:active {
                     cursor: grabbing;
-                }
-            }
-        }
-
-        .choices {
-            margin-bottom: 0;
-
-            .choices__inner {
-                background: @grey-dark-1;
-                border: 2px solid fade(@gold, 20%);
-                min-height: 38px;
-                padding: 4px .75rem;
-            }
-
-            .choices__input {
-                font-size: 16px;
-                color: @white;
-                background-color: transparent;
-                padding: 0;
-                margin-bottom: 0;
-            }
-
-            .choices__item {
-                span {
-                    display: inline-block;
-                    margin-right: 10px;
-
-                    img {
-                        width: 32px;
-                    }
-                }
-            }
-
-            .choices__list--dropdown {
-                background-color: @grey-dark-1;
-                border: 2px solid fade(@gold, 20%);
-                border-top-width: 1px;
-                border-bottom-width: 1px;
-                z-index: 2;
-
-                .choices__item--selectable.is-highlighted {
-                    background-color: @grey-medium-1;
-                }
-
-                .choices__item--selectable:after {
-                    content: none;
-                }
-            }
-
-            .choices__list--multiple {
-                .choices__item {
-                    font-weight: bold;
-                    color: @success;
-                    background-color: @grey-medium-3;
-                    border: none;
-                    margin: -3px 5px 0 0;
-
-                    .choices__button {
-                        border-left-color: @grey-light-2;
-                    }
                 }
             }
         }
@@ -180,13 +106,10 @@ form {
         }
 
         .suggestion {
-            &.active {
-                .index, .fr-name, .en-name, .fr-description, .en-description {
-                    color: @white;
-                }
+            .index, .fr-name, .en-name, .fr-description, .en-description {
+                color: @white;
             }
 
-            /* Shared */
             .index, .fr-name, .en-name {
                 top: 5px;
                 position: relative;
@@ -195,45 +118,17 @@ form {
             .image-container {
                 position: relative;
                 display: inline-block;
-                cursor: pointer;
 
                 img {
                     width: 48px;
-                    will-change: opacity;
-                    transition: opacity @time-transition-05 @transition-1;
-                }
-
-                .delete-image {
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    position: absolute;
-                    opacity: 0;
-                    will-change: opacity;
-                    transition: opacity @time-transition-05 @transition-1;
-
-                    i {
-                        color: white;
-                        transform: translate(50%, 50%);
-                        pointer-events: none;
-                    }
-                }
-
-                &:not(.placeholder) {
-                    &:hover {
-                        img {
-                            opacity: @opacity-concat;
-                        }
-
-                        .delete-image {
-                            opacity: 1;
-                        }
-                    }
                 }
 
                 &.placeholder {
+                    cursor: pointer;
+
                     img {
+                        will-change: opacity;
+                        transition: opacity @time-transition-05 @transition-1;
                         opacity: @opacity-concat;
                     }
 
@@ -246,7 +141,7 @@ form {
             }
 
             .fr-description, .en-description {
-                > div {
+                [contenteditable="true"] {
                     padding: 5px 0;
                 }
             }
@@ -271,11 +166,14 @@ form {
 
         .actions {
             button[type="button"] {
-                height: 28px;
-                padding: 2px 5px;
+                width: 32px;
+                height: 32px;
 
                 i {
                     font-size: 16px;
+                    position: relative;
+                    top: -2px;
+                    left: -6px;
                 }
             }
         }

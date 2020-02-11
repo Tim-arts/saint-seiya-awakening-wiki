@@ -19,10 +19,9 @@
 
             return object;
         })(),
-        modalData = {
+        responseModalData = {
             title: "Warning!",
-            id: "response-modal",
-            titleId: "success-modal-id"
+            id: "response-modal"
         };
     %>
     <%- include("./../layout/head", {head: data.head}) %>
@@ -37,6 +36,6 @@
                 </div>
             </div>
         </section>
-        <%- include("./../modules/modal/response", {data: modalData}) %>
+        <%- include("./../modules/modal/response", {data: responseModalData}) %>
     </body>
 </html>

@@ -118,7 +118,7 @@
 
             } else {
                 %>
-                    <div class="col-12">Il n'y a aucune suggestion de cosmos existante.</div>
+                    <div class="col-12 mt-2">Il n'y a aucune suggestion de cosmos existante.</div>
                 <%
             }
         },
@@ -129,15 +129,6 @@
                 %>
                     <div class="col-12">Il n'y a aucune suggestion de skills existante.</div>
                 <%
-            }
-        },
-        search_cosmos: (type) => {
-            let filteredCosmos = cosmos.filter(cosmo => cosmo.type === type);
-
-            for (let i = 0, count = filteredCosmos.length; i < count; i++) {
-            %>
-                <option id="cosmo-<%= filteredCosmos[i].slug %>"><%= __(filteredCosmos[i].name) %></option>
-            <%
             }
         },
         characteristics: {
@@ -275,87 +266,6 @@
 
     <div class="e-s-4"></div>
 
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h5 mt-0">Ajouter une suggestion de cosmos</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 mb-4">
-            <div class="row">
-                <div class="col-6 mb-4">
-                    <label for="cosmo-suggestion-template-name-fr">Name (FR)</label>
-                    <input type="text" id="cosmo-suggestion-template-name-fr" placeholder="Ex: Berserk" class="form-control" minlength="3" />
-                </div>
-                <div class="col-6 mb-4">
-                    <label for="cosmo-suggestion-template-name-en">Name (EN)</label>
-                    <input type="text" id="cosmo-suggestion-template-name-en" placeholder="Ex: Berserk" class="form-control" minlength="3" />
-                </div>
-                <div class="col-6 autocomplete-container position-relative mb-4">
-                    <label for="search-cosmos-lunar">
-                        <span>Lunar</span>
-                        <i class="material-icons">search</i>
-                    </label>
-                    <select id="search-cosmos-lunar" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
-                        <option placeholder>Ex: <%= __(cosmos[25].name) %></option>
-                        <%= saintData.search_cosmos("lunar") %>
-                    </select>
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-                </div>
-                <div class="col-6 autocomplete-container position-relative mb-4">
-                    <label for="search-cosmos-solar">
-                        <span>Solar</span>
-                        <i class="material-icons">search</i>
-                    </label>
-                    <select id="search-cosmos-solar" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
-                        <option placeholder>Ex: <%= __(cosmos[0].name) %></option>
-                        <%= saintData.search_cosmos("solar") %>
-                    </select>
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-                </div>
-                <div class="col-6 autocomplete-container position-relative">
-                    <label for="search-cosmos-star">
-                        <span>Star</span>
-                        <i class="material-icons">search</i>
-                    </label>
-                    <select id="search-cosmos-star" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
-                        <option placeholder>Ex: <%= __(cosmos[10].name) %></option>
-                        <%= saintData.search_cosmos("star") %>
-                    </select>
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-                </div>
-                <div class="col-6 autocomplete-container position-relative">
-                    <label for="search-cosmos-legendary">
-                        <span>Legendary</span>
-                        <i class="material-icons">search</i>
-                    </label>
-                    <select id="search-cosmos-legendary" class="custom-select form-control choices__input" data-type="select-multiple" multiple>
-                        <option placeholder>Ex: <%= __(cosmos[40].name) %></option>
-                        <%= saintData.search_cosmos("legendary") %>
-                    </select>
-                    <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-5">
-                    <label for="fr-cosmo-suggestion-comment">Commentaire (FR)</label>
-                    <textarea id="fr-cosmo-suggestion-comment" name="fr-cosmo-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
-                </div>
-                <div class="col-5">
-                    <label for="en-cosmo-suggestion-comment">Commentaire (EN)</label>
-                    <textarea id="en-cosmo-suggestion-comment" name="en-cosmo-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
-                </div>
-                <div class="col-2">
-                    <button id="add-cosmos-suggestion" type="button" class="btn btn-lg custom-theme theme-3 fit align-center">Ajouter</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row cosmos-suggestions mb-4">
         <div class="col-12">
             <div class="row">
@@ -378,13 +288,12 @@
                         <div class="col-1 actions">Actions</div>
                     </div>
                 </div>
-                <%=/* saintData.cosmos_suggestions() */%>
                 <div class="col-12 suggestions">
                     <div class="row suggestion starter">
                         <div class="col-12">
                             <div class="row content">
                                 <div class="col-1 index">
-                                    <div class="py-1">0</div>
+                                    <div class="py-1" contenteditable="true" data-text="0"></div>
                                 </div>
                                 <div class="col-1 fr-name">
                                     <div class="py-1" contenteditable="true" data-text="Berserk"></div>
@@ -392,141 +301,32 @@
                                 <div class="col-1 en-name">
                                     <div class="py-1" contenteditable="true" data-text="Berserk"></div>
                                 </div>
-                                <div class="col-2 lunar-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
-                                </div>
                                 <div class="col-2 solar-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
+                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "solar", index: "0"}) %>
+                                </div>
+                                <div class="col-2 lunar-cosmos">
+                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "lunar", index: "0"}) %>
                                 </div>
                                 <div class="col-2 star-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
+                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "star", index: "0"}) %>
                                 </div>
                                 <div class="col-2 legendary-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
+                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "legendary", index: "0"}) %>
                                 </div>
                                 <div class="col-1 actions">
-                                    <button type="button" class="delete form-control not-full-width"><i class="material-icons">add</i></button>
+                                    <button type="button" id="add-cosmos-suggestion" class="delete form-control not-full-width"><i class="material-icons">add</i></button>
                                 </div>
                                 <div class="col-6 fr-description mt-3">
                                     <div contenteditable="true" data-text="EN Description..."></div>
                                 </div>
                                 <div class="col-6 en-description mt-3">
                                     <div contenteditable="true" data-text="EN Description..."></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row suggestion active">
-                        <div class="col-12">
-                            <div class="row content">
-                                <div class="col-1 index">
-                                    <div class="py-1">1</div>
-                                </div>
-                                <div class="col-1 fr-name">
-                                    <div class="py-1" contenteditable="true" data-text="Berserk">Berserk</div>
-                                </div>
-                                <div class="col-1 en-name">
-                                    <div class="py-1" contenteditable="true" data-text="Berserk">Berserk</div>
-                                </div>
-                                <div class="col-2 lunar-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/bloom.png" alt="Lunar cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/body-care.png" alt="Lunar cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 solar-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Solar cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/eagle-eye.png" alt="Solar cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/rosary.png" alt="Solar cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 star-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/butterfly.png" alt="Star cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Star cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-2 legendary-cosmos">
-                                    <div class="image-container placeholder">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/blood-elf.png" alt="Legendary cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                    <div class="image-container">
-                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/chimera.png" alt="Legendary cosmo" />
-                                        <div class="delete-image">
-                                            <i class="material-icons">close</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-1 actions">
-                                    <button type="button" class="delete form-control not-full-width"><i class="material-icons">close</i></button>
-                                </div>
-                                <div class="col-6 fr-description mt-3">
-                                    <div contenteditable="true" data-text="EN Description...">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
-                                    </div>
-                                </div>
-                                <div class="col-6 en-description mt-3">
-                                    <div contenteditable="true" data-text="EN Description...">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%= saintData.cosmos_suggestions() %>
             </div>
         </div>
     </div>
@@ -611,3 +411,4 @@
         </div>
     </div>
 </form>
+

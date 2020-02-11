@@ -2,7 +2,7 @@ require("./../base");
 
 import Autocomplete from "autocompleter";
 import Modal from "./../../shared/modules/ModalResponse";
-import { constants, resetDisplay } from "./../../shared/helpers";
+import { constants, convertToSlug, resetDisplay } from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
@@ -60,15 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    /* Dependencies usages */
+    /* On load */
     Autocomplete({
         input: sortElements,
         minLength: 3,
         debounceWaitMs: 100,
         className: "elements",
         fetch: (text) => {
-            text = text.toLowerCase().replace(/["._' ]/g, "-");
-            let suggestions = elementsFromDB.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
+            text = convertToSlug(text, /["._' ]/g, "-");
+            let suggestions = elements.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
                 results = (() => {
                     let results = [];
                     

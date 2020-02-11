@@ -1,4 +1,5 @@
 import Choices from "choices.js";
+import Modal from "./modules/ModalResponse";
 
 module.exports = {
     constants: {
@@ -72,7 +73,7 @@ module.exports = {
     
         return wrapper.firstChild;
     },
-    postRequest (options) {
+    updateSuggestions (options) {
         $.ajax({
             url: options.ajaxUrl,
             data: options.data,
@@ -109,7 +110,12 @@ module.exports = {
             }
         });
     },
-    returnTemplateElement (classes, attr) {
+    returnCustomDropdownTemplateElement (classes, attr) {
+        const el = Choices.defaults.templates.dropdown.call(this, classes, attr);
+        el.classList.add("static-dropdown");
+        return el;
+    },
+    returnCustomChoiceTemplateElement (classes, attr) {
         const el = Choices.defaults.templates.choice.call(this, classes, attr);
         const span = document.createElement("span");
         const img = document.createElement("img");
@@ -121,5 +127,106 @@ module.exports = {
         el.insertAdjacentElement("afterbegin", span);
     
         return el;
+    },
+    prepareMakeDynamicModal (self, dynamicModal, Choices) {
+        let data = {};
+        data.index = self.getAttribute("data-index");
+        data.search = {
+            type: self.getAttribute("data-type")
+        };
+        data.selectedElements = (() => {
+            return Array.from(self.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(x => x.getAttribute("data-slug"));
+        });
+        data.modal = {
+            id: "choice-"+ data.search.type +"-cosmos-" + data.index,
+            title: "Add cosmo(s)",
+        };
+        data.modal.submitId = data.modal.id + "-submit";
+    
+        let elementAtIndex = window["Modal_Choices"]["choices--search-elements-" + data.search.type + "-" + data.index];
+        if (elementAtIndex) {
+            $(elementAtIndex.modal).modal({
+                show: true,
+                backdrop: "static",
+                keyboard: false
+            });
+        
+            return;
+        }
+    
+        return (async function () {
+            function request () {
+                return new Promise (resolve => {
+                    module.exports.makeDynamicModal(data, Choices, self, resolve);
+                });
+            }
+            
+            return request();
+        })();
+    },
+    makeDynamicModal (data, Choices, linkElement, resolve) {
+        $.post("../../api/partials/generate-modal", data, (response) => {
+            let dynamicModal = this.convertStringToDOMElement(response);
+            document.body.appendChild(dynamicModal);
+            
+            let submit = document.getElementById(data.modal.submitId);
+            let select = document.getElementById("search-elements-" + data.search.type);
+            let Choice = new Choices(select, {
+                duplicateItemsAllowed: false,
+                searchFloor: 3,
+                searchResultLimit: 5,
+                removeItems: true,
+                removeItemButton: true,
+                itemSelectText: null,
+                callbackOnCreateTemplates: () => {
+                    return {
+                        dropdown(classes, attr) {
+                            return module.exports.returnCustomDropdownTemplateElement(classes, attr);
+                        },
+                        choice(classes, attr) {
+                            return module.exports.returnCustomChoiceTemplateElement(classes, attr);
+                        }
+                    }
+                }
+            });
+            
+            let elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
+            if (!elementAtIndex) {
+                window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
+                    choice: Choice,
+                    modal: dynamicModal
+                };
+            }
+    
+            submit.addEventListener("click", function () {
+                let array = Choice.getValue(true);
+                let parent = linkElement.parentElement.parentElement;
+                
+                Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(entry => {
+                    entry.remove();
+                });
+                
+                array.forEach(entry => {
+                    $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+                        slug: module.exports.convertToSlug(entry, /["._' ]/g, '-')
+                    }, (response) => {
+                        let thumbnail = module.exports.convertStringToDOMElement(response);
+                        parent.appendChild(thumbnail);
+                    });
+                });
+            });
+    
+            $(dynamicModal).modal({
+                show: true,
+                backdrop: "static",
+                keyboard: false
+            });
+            
+            return resolve({
+                el: dynamicModal,
+                choice: Choice,
+                link: linkElement
+            });
+        });
     }
 };
