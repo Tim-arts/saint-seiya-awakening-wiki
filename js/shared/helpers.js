@@ -199,7 +199,7 @@ module.exports = {
                                 entry.remove();
                             });
                             
-                            (async function process () {
+                            (async function () {
                                 async function fetch (value) {
                                     return new Promise (resolve => {
                                         $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
@@ -210,7 +210,7 @@ module.exports = {
                                             let thumbnail = module.exports.convertStringToDOMElement(response);
                                             parent.appendChild(thumbnail);
         
-                                            return resolve(true);
+                                            return resolve();
                                         });
                                     });
                                 }

@@ -710,119 +710,111 @@ module.exports = {
                                   Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(function (entry) {
                                     entry.remove();
                                   });
-                                  (function () {
-                                    var _process2 = (0, _asyncToGenerator2["default"])(
-                                    /*#__PURE__*/
-                                    _regenerator["default"].mark(function _callee3() {
-                                      var fetch, _fetch, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, idx, value;
+                                  (0, _asyncToGenerator2["default"])(
+                                  /*#__PURE__*/
+                                  _regenerator["default"].mark(function _callee3() {
+                                    var fetch, _fetch, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, idx, value;
 
-                                      return _regenerator["default"].wrap(function _callee3$(_context3) {
-                                        while (1) {
-                                          switch (_context3.prev = _context3.next) {
-                                            case 0:
-                                              _fetch = function _ref4() {
-                                                _fetch = (0, _asyncToGenerator2["default"])(
-                                                /*#__PURE__*/
-                                                _regenerator["default"].mark(function _callee2(value) {
-                                                  return _regenerator["default"].wrap(function _callee2$(_context2) {
-                                                    while (1) {
-                                                      switch (_context2.prev = _context2.next) {
-                                                        case 0:
-                                                          return _context2.abrupt("return", new Promise(function (resolve) {
-                                                            $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
-                                                              index: data.index,
-                                                              type: data.search.type,
-                                                              slug: module.exports.convertToSlug(value, /["._' ]/g, '-')
-                                                            }, function (response) {
-                                                              var thumbnail = module.exports.convertStringToDOMElement(response);
-                                                              parent.appendChild(thumbnail);
-                                                              return resolve(true);
-                                                            });
-                                                          }));
+                                    return _regenerator["default"].wrap(function _callee3$(_context3) {
+                                      while (1) {
+                                        switch (_context3.prev = _context3.next) {
+                                          case 0:
+                                            _fetch = function _ref4() {
+                                              _fetch = (0, _asyncToGenerator2["default"])(
+                                              /*#__PURE__*/
+                                              _regenerator["default"].mark(function _callee2(value) {
+                                                return _regenerator["default"].wrap(function _callee2$(_context2) {
+                                                  while (1) {
+                                                    switch (_context2.prev = _context2.next) {
+                                                      case 0:
+                                                        return _context2.abrupt("return", new Promise(function (resolve) {
+                                                          $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+                                                            index: data.index,
+                                                            type: data.search.type,
+                                                            slug: module.exports.convertToSlug(value, /["._' ]/g, '-')
+                                                          }, function (response) {
+                                                            var thumbnail = module.exports.convertStringToDOMElement(response);
+                                                            parent.appendChild(thumbnail);
+                                                            return resolve();
+                                                          });
+                                                        }));
 
-                                                        case 1:
-                                                        case "end":
-                                                          return _context2.stop();
-                                                      }
+                                                      case 1:
+                                                      case "end":
+                                                        return _context2.stop();
                                                     }
-                                                  }, _callee2);
-                                                }));
-                                                return _fetch.apply(this, arguments);
-                                              };
+                                                  }
+                                                }, _callee2);
+                                              }));
+                                              return _fetch.apply(this, arguments);
+                                            };
 
-                                              fetch = function _ref3(_x2) {
-                                                return _fetch.apply(this, arguments);
-                                              };
+                                            fetch = function _ref3(_x2) {
+                                              return _fetch.apply(this, arguments);
+                                            };
 
-                                              _iteratorNormalCompletion = true;
-                                              _didIteratorError = false;
-                                              _iteratorError = undefined;
-                                              _context3.prev = 5;
-                                              _iterator = array.entries()[Symbol.iterator]();
+                                            _iteratorNormalCompletion = true;
+                                            _didIteratorError = false;
+                                            _iteratorError = undefined;
+                                            _context3.prev = 5;
+                                            _iterator = array.entries()[Symbol.iterator]();
 
-                                            case 7:
-                                              if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                                                _context3.next = 14;
-                                                break;
-                                              }
-
-                                              _step$value = (0, _slicedToArray2["default"])(_step.value, 2), idx = _step$value[0], value = _step$value[1];
-                                              _context3.next = 11;
-                                              return fetch(value);
-
-                                            case 11:
-                                              _iteratorNormalCompletion = true;
-                                              _context3.next = 7;
+                                          case 7:
+                                            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                              _context3.next = 14;
                                               break;
+                                            }
 
-                                            case 14:
-                                              _context3.next = 20;
+                                            _step$value = (0, _slicedToArray2["default"])(_step.value, 2), idx = _step$value[0], value = _step$value[1];
+                                            _context3.next = 11;
+                                            return fetch(value);
+
+                                          case 11:
+                                            _iteratorNormalCompletion = true;
+                                            _context3.next = 7;
+                                            break;
+
+                                          case 14:
+                                            _context3.next = 20;
+                                            break;
+
+                                          case 16:
+                                            _context3.prev = 16;
+                                            _context3.t0 = _context3["catch"](5);
+                                            _didIteratorError = true;
+                                            _iteratorError = _context3.t0;
+
+                                          case 20:
+                                            _context3.prev = 20;
+                                            _context3.prev = 21;
+
+                                            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                                              _iterator["return"]();
+                                            }
+
+                                          case 23:
+                                            _context3.prev = 23;
+
+                                            if (!_didIteratorError) {
+                                              _context3.next = 26;
                                               break;
+                                            }
 
-                                            case 16:
-                                              _context3.prev = 16;
-                                              _context3.t0 = _context3["catch"](5);
-                                              _didIteratorError = true;
-                                              _iteratorError = _context3.t0;
+                                            throw _iteratorError;
 
-                                            case 20:
-                                              _context3.prev = 20;
-                                              _context3.prev = 21;
+                                          case 26:
+                                            return _context3.finish(23);
 
-                                              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                                                _iterator["return"]();
-                                              }
+                                          case 27:
+                                            return _context3.finish(20);
 
-                                            case 23:
-                                              _context3.prev = 23;
-
-                                              if (!_didIteratorError) {
-                                                _context3.next = 26;
-                                                break;
-                                              }
-
-                                              throw _iteratorError;
-
-                                            case 26:
-                                              return _context3.finish(23);
-
-                                            case 27:
-                                              return _context3.finish(20);
-
-                                            case 28:
-                                            case "end":
-                                              return _context3.stop();
-                                          }
+                                          case 28:
+                                          case "end":
+                                            return _context3.stop();
                                         }
-                                      }, _callee3, null, [[5, 16, 20, 28], [21,, 23, 27]]);
-                                    }));
-
-                                    function process() {
-                                      return _process2.apply(this, arguments);
-                                    }
-
-                                    return process;
-                                  })()();
+                                      }
+                                    }, _callee3, null, [[5, 16, 20, 28], [21,, 23, 27]]);
+                                  }))();
                                 });
                                 $(dynamicModal).modal({
                                   show: true,
