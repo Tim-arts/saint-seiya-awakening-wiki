@@ -132,8 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
+    $(document).on("click", ".suggestion .delete-image", function () {
+        let index = this.getAttribute("data-index");
+        let type = this.getAttribute("data-type");
+        let slug = this.getAttribute("data-slug");
+        let choice = window["Modal_Choices"]["choices--search-elements-" + type + "-" + index].choice;
+        
+        choice.removeActiveItemsByValue(slug);
+        this.parentElement.remove();
+    });
     $(document).on("click", ".suggestion .require-modal", function (e) {
-        dynamicModal = helpers.prepareMakeDynamicModal(this, dynamicModal, Choices);
+        helpers.prepareMakeDynamicModal(this, dynamicModal, Choices).then((result) => {
+            dynamicModal = result;
+        });
         
         e.preventDefault();
     });

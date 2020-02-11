@@ -128,7 +128,7 @@ module.exports = {
     
         return el;
     },
-    prepareMakeDynamicModal (self, dynamicModal, Choices) {
+    async prepareMakeDynamicModal(self, dynamicModal, Choices) {
         let data = {};
         data.index = self.getAttribute("data-index");
         data.search = {
@@ -138,7 +138,7 @@ module.exports = {
             return Array.from(self.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(x => x.getAttribute("data-slug"));
         });
         data.modal = {
-            id: "choice-"+ data.search.type +"-cosmos-" + data.index,
+            id: "choice-" + data.search.type + "-cosmos-" + data.index,
             title: "Add cosmo(s)",
         };
         data.modal.submitId = data.modal.id + "-submit";
@@ -154,79 +154,91 @@ module.exports = {
             return;
         }
     
-        return (async function () {
+        async function process () {
             function request () {
-                return new Promise (resolve => {
-                    module.exports.makeDynamicModal(data, Choices, self, resolve);
-                });
-            }
-            
-            return request();
-        })();
-    },
-    makeDynamicModal (data, Choices, linkElement, resolve) {
-        $.post("../../api/partials/generate-modal", data, (response) => {
-            let dynamicModal = this.convertStringToDOMElement(response);
-            document.body.appendChild(dynamicModal);
-            
-            let submit = document.getElementById(data.modal.submitId);
-            let select = document.getElementById("search-elements-" + data.search.type);
-            let Choice = new Choices(select, {
-                duplicateItemsAllowed: false,
-                searchFloor: 3,
-                searchResultLimit: 5,
-                removeItems: true,
-                removeItemButton: true,
-                itemSelectText: null,
-                callbackOnCreateTemplates: () => {
-                    return {
-                        dropdown(classes, attr) {
-                            return module.exports.returnCustomDropdownTemplateElement(classes, attr);
-                        },
-                        choice(classes, attr) {
-                            return module.exports.returnCustomChoiceTemplateElement(classes, attr);
+                return new Promise(resolve => {
+                    $.post("../../api/partials/generate-modal", data, (response) => {
+                        let dynamicModal = module.exports.convertStringToDOMElement(response);
+                        document.body.appendChild(dynamicModal);
+                    
+                        let submit = document.getElementById(data.modal.submitId);
+                        let select = document.getElementById("search-elements-" + data.search.type);
+                        let Choice = new Choices(select, {
+                            duplicateItemsAllowed: false,
+                            searchFloor: 3,
+                            searchResultLimit: 5,
+                            removeItems: true,
+                            removeItemButton: true,
+                            itemSelectText: null,
+                            callbackOnCreateTemplates: () => {
+                                return {
+                                    dropdown(classes, attr) {
+                                        return module.exports.returnCustomDropdownTemplateElement(classes, attr);
+                                    },
+                                    choice(classes, attr) {
+                                        return module.exports.returnCustomChoiceTemplateElement(classes, attr);
+                                    }
+                                }
+                            }
+                        });
+                    
+                        let elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
+                        if (!elementAtIndex) {
+                            window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
+                                choice: Choice,
+                                modal: dynamicModal
+                            };
                         }
-                    }
-                }
-            });
-            
-            let elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
-            if (!elementAtIndex) {
-                window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
-                    choice: Choice,
-                    modal: dynamicModal
-                };
-            }
-    
-            submit.addEventListener("click", function () {
-                let array = Choice.getValue(true);
-                let parent = linkElement.parentElement.parentElement;
-                
-                Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(entry => {
-                    entry.remove();
-                });
-                
-                array.forEach(entry => {
-                    $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
-                        slug: module.exports.convertToSlug(entry, /["._' ]/g, '-')
-                    }, (response) => {
-                        let thumbnail = module.exports.convertStringToDOMElement(response);
-                        parent.appendChild(thumbnail);
+                        
+                        submit.addEventListener("click", function () {
+                            let array = Choice.getValue(true);
+                            let parent = self.parentElement.parentElement;
+                        
+                            // Delete previous thumbnails
+                            Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(entry => {
+                                entry.remove();
+                            });
+                            
+                            (async function process () {
+                                async function fetch (value) {
+                                    return new Promise (resolve => {
+                                        $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+                                            index: data.index,
+                                            type: data.search.type,
+                                            slug: module.exports.convertToSlug(value, /["._' ]/g, '-')
+                                        }, (response) => {
+                                            let thumbnail = module.exports.convertStringToDOMElement(response);
+                                            parent.appendChild(thumbnail);
+        
+                                            return resolve(true);
+                                        });
+                                    });
+                                }
+                                
+                                for (const [idx, value] of array.entries()) {
+                                    await fetch(value);
+                                }
+                            })();
+                        });
+                    
+                        $(dynamicModal).modal({
+                            show: true,
+                            backdrop: "static",
+                            keyboard: false
+                        });
+                    
+                        return resolve({
+                            el: dynamicModal,
+                            choice: Choice,
+                            link: self
+                        });
                     });
                 });
-            });
-    
-            $(dynamicModal).modal({
-                show: true,
-                backdrop: "static",
-                keyboard: false
-            });
-            
-            return resolve({
-                el: dynamicModal,
-                choice: Choice,
-                link: linkElement
-            });
-        });
+            }
+        
+            return request();
+        }
+        
+        return await process();
     }
 };

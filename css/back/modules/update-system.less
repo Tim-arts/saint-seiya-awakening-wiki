@@ -118,21 +118,49 @@ form {
             .image-container {
                 position: relative;
                 display: inline-block;
+                cursor: pointer;
 
                 img {
                     width: 48px;
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+                }
+
+                .delete-image {
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                    opacity: 0;
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+
+                    i {
+                        color: white;
+                        transform: translate(50%, 50%);
+                        pointer-events: none;
+                    }
                 }
 
                 &.placeholder {
-                    cursor: pointer;
-
                     img {
-                        will-change: opacity;
-                        transition: opacity @time-transition-05 @transition-1;
                         opacity: @opacity-concat;
                     }
+                }
 
-                    &:hover {
+                &:hover {
+                    &:not(.placeholder) {
+                        img {
+                            opacity: @opacity-concat;
+                        }
+
+                        .delete-image {
+                            opacity: 1;
+                        }
+                    }
+
+                    &.placeholder {
                         img {
                             opacity: 1;
                         }

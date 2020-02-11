@@ -916,23 +916,45 @@ form .cosmos-suggestions .suggestion .image-container,
 form .skills-suggestions .suggestion .image-container {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 form .cosmos-suggestions .suggestion .image-container img,
 form .skills-suggestions .suggestion .image-container img {
   width: 48px;
+  will-change: opacity;
+  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-form .cosmos-suggestions .suggestion .image-container.placeholder,
-form .skills-suggestions .suggestion .image-container.placeholder {
-  cursor: pointer;
+form .cosmos-suggestions .suggestion .image-container .delete-image,
+form .skills-suggestions .suggestion .image-container .delete-image {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+form .cosmos-suggestions .suggestion .image-container .delete-image i,
+form .skills-suggestions .suggestion .image-container .delete-image i {
+  color: white;
+  transform: translate(50%, 50%);
+  pointer-events: none;
 }
 form .cosmos-suggestions .suggestion .image-container.placeholder img,
 form .skills-suggestions .suggestion .image-container.placeholder img {
-  will-change: opacity;
-  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   opacity: .3;
 }
-form .cosmos-suggestions .suggestion .image-container.placeholder:hover img,
-form .skills-suggestions .suggestion .image-container.placeholder:hover img {
+form .cosmos-suggestions .suggestion .image-container:hover:not(.placeholder) img,
+form .skills-suggestions .suggestion .image-container:hover:not(.placeholder) img {
+  opacity: .3;
+}
+form .cosmos-suggestions .suggestion .image-container:hover:not(.placeholder) .delete-image,
+form .skills-suggestions .suggestion .image-container:hover:not(.placeholder) .delete-image {
+  opacity: 1;
+}
+form .cosmos-suggestions .suggestion .image-container:hover.placeholder img,
+form .skills-suggestions .suggestion .image-container:hover.placeholder img {
   opacity: 1;
 }
 form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"],
