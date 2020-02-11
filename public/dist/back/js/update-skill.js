@@ -35,16 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -478,11 +478,9 @@ document.addEventListener("DOMContentLoaded", function () {
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../base":1,"./../modules/InputFile":2,"@babel/runtime/helpers/interopRequireDefault":10,"autocompleter":15,"sortablejs":19}],4:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
@@ -568,7 +566,7 @@ module.exports = {
       method: "POST",
       dataType: 'json',
       success: function () {
-        var _ref = (0, _asyncToGenerator2["default"])(
+        var _success = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/
         _regenerator["default"].mark(function _callee(response) {
           var request;
@@ -576,7 +574,7 @@ module.exports = {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  request = function _ref2() {
+                  request = function _ref() {
                     var data = response.data,
                         count = data.length;
 
@@ -620,9 +618,11 @@ module.exports = {
           }, _callee);
         }));
 
-        return function success(_x) {
-          return _ref.apply(this, arguments);
-        };
+        function success(_x) {
+          return _success.apply(this, arguments);
+        }
+
+        return success;
       }(),
       error: function error(response) {
         console.log(response);
@@ -647,14 +647,14 @@ module.exports = {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var Modal =
 /*#__PURE__*/

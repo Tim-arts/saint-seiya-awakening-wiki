@@ -366,8 +366,8 @@
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-12 mb-3">
-                    <div class="row head">
+                <div class="col-12 header">
+                    <div class="row content">
                         <div class="col-1 index">Index</div>
                         <div class="col-1 fr-name">Name (FR)</div>
                         <div class="col-1 en-name">Name (EN)</div>
@@ -381,75 +381,148 @@
                 <%=/* saintData.cosmos_suggestions() */%>
                 <div class="col-12 suggestions">
                     <div class="row suggestion starter">
-                        <div class="col-1 index">
-                            <div class="py-1">0</div>
-                        </div>
-                        <div class="col-1 fr-name">
-                            <div class="py-1" contenteditable="true">Berserk</div>
-                        </div>
-                        <div class="col-1 en-name">
-                            <div class="py-1" contenteditable="true">Berserk</div>
-                        </div>
-                        <div class="col-2 lunar-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                        </div>
-                        <div class="col-2 solar-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                        </div>
-                        <div class="col-2 star-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                        </div>
-                        <div class="col-2 legendary-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
-                        </div>
-                        <div class="col-1 actions">
-                            <button type="button" class="delete form-control not-full-width"><i class="material-icons">add</i></button>
-                        </div>
-                        <div class="col-6 fr-description mt-3">
-                            <div contenteditable="true">Description...</div>
-                        </div>
-                        <div class="col-6 en-description mt-3">
-                            <div contenteditable="true">Description...</div>
+                        <div class="col-12">
+                            <div class="row content">
+                                <div class="col-1 index">
+                                    <div class="py-1">0</div>
+                                </div>
+                                <div class="col-1 fr-name">
+                                    <div class="py-1" contenteditable="true" data-text="Berserk"></div>
+                                </div>
+                                <div class="col-1 en-name">
+                                    <div class="py-1" contenteditable="true" data-text="Berserk"></div>
+                                </div>
+                                <div class="col-2 lunar-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                </div>
+                                <div class="col-2 solar-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                </div>
+                                <div class="col-2 star-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                </div>
+                                <div class="col-2 legendary-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                </div>
+                                <div class="col-1 actions">
+                                    <button type="button" class="delete form-control not-full-width"><i class="material-icons">add</i></button>
+                                </div>
+                                <div class="col-6 fr-description mt-3">
+                                    <div contenteditable="true" data-text="EN Description..."></div>
+                                </div>
+                                <div class="col-6 en-description mt-3">
+                                    <div contenteditable="true" data-text="EN Description..."></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row suggestion active">
-                        <div class="col-1 index">
-                            <div class="py-1">1</div>
-                        </div>
-                        <div class="col-1 fr-name">
-                            <div class="py-1" contenteditable="true">Berserk</div>
-                        </div>
-                        <div class="col-1 en-name">
-                            <div class="py-1" contenteditable="true">Berserk</div>
-                        </div>
-                        <div class="col-2 lunar-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/bloom.png" alt="Lunar cosmo" />
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/body-care.png" alt="Lunar cosmo" />
-                        </div>
-                        <div class="col-2 solar-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Solar cosmo" />
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/eagle-eye.png" alt="Solar cosmo" />
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/rosary.png" alt="Solar cosmo" />
-                        </div>
-                        <div class="col-2 star-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/butterfly.png" alt="Star cosmo" />
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Star cosmo" />
-                        </div>
-                        <div class="col-2 legendary-cosmos">
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/blood-elf.png" alt="Legendary cosmo" />
-                            <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/chimera.png" alt="Legendary cosmo" />
-                        </div>
-                        <div class="col-1 actions">
-                            <button type="button" class="delete form-control not-full-width"><i class="material-icons">close</i></button>
-                        </div>
-                        <div class="col-6 fr-description mt-3">
-                            <div contenteditable="true">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
-                            </div>
-                        </div>
-                        <div class="col-6 en-description mt-3">
-                            <div contenteditable="true">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
+                        <div class="col-12">
+                            <div class="row content">
+                                <div class="col-1 index">
+                                    <div class="py-1">1</div>
+                                </div>
+                                <div class="col-1 fr-name">
+                                    <div class="py-1" contenteditable="true" data-text="Berserk">Berserk</div>
+                                </div>
+                                <div class="col-1 en-name">
+                                    <div class="py-1" contenteditable="true" data-text="Berserk">Berserk</div>
+                                </div>
+                                <div class="col-2 lunar-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/bloom.png" alt="Lunar cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/body-care.png" alt="Lunar cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 solar-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Solar cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/eagle-eye.png" alt="Solar cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/rosary.png" alt="Solar cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 star-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/butterfly.png" alt="Star cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/crystal-fire.png" alt="Star cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 legendary-cosmos">
+                                    <div class="image-container placeholder">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/blood-elf.png" alt="Legendary cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                    <div class="image-container">
+                                        <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/chimera.png" alt="Legendary cosmo" />
+                                        <div class="delete-image">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1 actions">
+                                    <button type="button" class="delete form-control not-full-width"><i class="material-icons">close</i></button>
+                                </div>
+                                <div class="col-6 fr-description mt-3">
+                                    <div contenteditable="true" data-text="EN Description...">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
+                                    </div>
+                                </div>
+                                <div class="col-6 en-description mt-3">
+                                    <div contenteditable="true" data-text="EN Description...">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor condimentum hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sapien lacus, consectetur id tristique nec, vehicula vitae lorem. Aliquam eu tellus elementum, ullamcorper lacus nec, imperdiet lacus. Mauris gravida, mi eget accumsan tristique, urna orci viverra arcu, a ullamcorper erat dolor nec nisi. In sed neque eu eros eleifend accumsan.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

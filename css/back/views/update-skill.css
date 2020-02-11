@@ -721,6 +721,9 @@ body {
   border-color: #00EC98 !important;
   box-shadow: none;
 }
+.wrapper #content .form-control[type="button"]:hover {
+  border-color: #00EC98 !important;
+}
 @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px;
@@ -865,39 +868,28 @@ form select {
 form select:focus option:checked {
   background: #262635;
 }
-form .cosmos-suggestions .head,
-form .skills-suggestions .head {
+form .cosmos-suggestions .header,
+form .skills-suggestions .header {
   font-weight: bold;
   color: #fff;
 }
+form .cosmos-suggestions .header .content,
+form .skills-suggestions .header .content {
+  border-top: 1px solid #00EC98;
+  border-radius: 4px 4px 0 0;
+}
+form .cosmos-suggestions .header .content,
+form .skills-suggestions .header .content,
+form .cosmos-suggestions .suggestions .content,
+form .skills-suggestions .suggestions .content {
+  background-color: rgba(21, 21, 29, 0.5);
+  padding: 15px 0;
+  margin: 0;
+  border-bottom: 1px solid #00EC98;
+}
 form .cosmos-suggestions .suggestion,
 form .skills-suggestions .suggestion {
-  background-color: rgba(21, 21, 29, 0.5);
-  padding-top: 15px;
   /* Shared */
-}
-form .cosmos-suggestions .suggestion.starter .index,
-form .skills-suggestions .suggestion.starter .index,
-form .cosmos-suggestions .suggestion.starter .fr-name,
-form .skills-suggestions .suggestion.starter .fr-name,
-form .cosmos-suggestions .suggestion.starter .en-name,
-form .skills-suggestions .suggestion.starter .en-name,
-form .cosmos-suggestions .suggestion.starter .fr-description,
-form .skills-suggestions .suggestion.starter .fr-description,
-form .cosmos-suggestions .suggestion.starter .en-description,
-form .skills-suggestions .suggestion.starter .en-description {
-  color: rgba(255, 255, 255, 0.3);
-}
-form .cosmos-suggestions .suggestion.starter img,
-form .skills-suggestions .suggestion.starter img {
-  filter: invert(1);
-  will-change: opacity;
-  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  opacity: .3;
-}
-form .cosmos-suggestions .suggestion.starter img:hover,
-form .skills-suggestions .suggestion.starter img:hover {
-  opacity: 1;
 }
 form .cosmos-suggestions .suggestion.active .index,
 form .skills-suggestions .suggestion.active .index,
@@ -920,24 +912,85 @@ form .skills-suggestions .suggestion .en-name {
   top: 5px;
   position: relative;
 }
-form .cosmos-suggestions .suggestion img,
-form .skills-suggestions .suggestion img {
-  width: 48px;
+form .cosmos-suggestions .suggestion .image-container,
+form .skills-suggestions .suggestion .image-container {
+  position: relative;
   display: inline-block;
   cursor: pointer;
 }
-form .cosmos-suggestions .suggestion .fr-description,
-form .skills-suggestions .suggestion .fr-description,
-form .cosmos-suggestions .suggestion .en-description,
-form .skills-suggestions .suggestion .en-description {
-  padding: 10px 15px;
-  border-bottom: 1px solid #00EC98;
+form .cosmos-suggestions .suggestion .image-container img,
+form .skills-suggestions .suggestion .image-container img {
+  width: 48px;
+  will-change: opacity;
+  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-form .cosmos-suggestions .suggestion .fr-description div,
-form .skills-suggestions .suggestion .fr-description div,
-form .cosmos-suggestions .suggestion .en-description div,
-form .skills-suggestions .suggestion .en-description div {
+form .cosmos-suggestions .suggestion .image-container .delete-image,
+form .skills-suggestions .suggestion .image-container .delete-image {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+form .cosmos-suggestions .suggestion .image-container .delete-image i,
+form .skills-suggestions .suggestion .image-container .delete-image i {
+  color: white;
+  transform: translate(50%, 50%);
+  pointer-events: none;
+}
+form .cosmos-suggestions .suggestion .image-container:not(.placeholder):hover img,
+form .skills-suggestions .suggestion .image-container:not(.placeholder):hover img {
+  opacity: .3;
+}
+form .cosmos-suggestions .suggestion .image-container:not(.placeholder):hover .delete-image,
+form .skills-suggestions .suggestion .image-container:not(.placeholder):hover .delete-image {
+  opacity: 1;
+}
+form .cosmos-suggestions .suggestion .image-container.placeholder img,
+form .skills-suggestions .suggestion .image-container.placeholder img {
+  opacity: .3;
+}
+form .cosmos-suggestions .suggestion .image-container.placeholder:hover img,
+form .skills-suggestions .suggestion .image-container.placeholder:hover img {
+  opacity: 1;
+}
+form .cosmos-suggestions .suggestion .fr-description > div,
+form .skills-suggestions .suggestion .fr-description > div,
+form .cosmos-suggestions .suggestion .en-description > div,
+form .skills-suggestions .suggestion .en-description > div {
   padding: 5px 0;
+}
+form .cosmos-suggestions .suggestion .index [contenteditable="true"],
+form .skills-suggestions .suggestion .index [contenteditable="true"],
+form .cosmos-suggestions .suggestion .fr-name [contenteditable="true"],
+form .skills-suggestions .suggestion .fr-name [contenteditable="true"],
+form .cosmos-suggestions .suggestion .en-name [contenteditable="true"],
+form .skills-suggestions .suggestion .en-name [contenteditable="true"],
+form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"],
+form .skills-suggestions .suggestion .fr-description [contenteditable="true"],
+form .cosmos-suggestions .suggestion .en-description [contenteditable="true"],
+form .skills-suggestions .suggestion .en-description [contenteditable="true"] {
+  cursor: text;
+}
+form .cosmos-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
+form .skills-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
+form .cosmos-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
+form .skills-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
+form .cosmos-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
+form .skills-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
+form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
+form .skills-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
+form .cosmos-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before,
+form .skills-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before {
+  color: rgba(255, 255, 255, 0.3);
+  content: attr(data-text);
+}
+form .cosmos-suggestions .suggestion:last-child .content,
+form .skills-suggestions .suggestion:last-child .content {
+  border-radius: 0 0 4px 4px;
 }
 form .cosmos-suggestions .actions button[type="button"],
 form .skills-suggestions .actions button[type="button"] {

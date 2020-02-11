@@ -739,6 +739,9 @@ body {
   border-color: #00EC98 !important;
   box-shadow: none;
 }
+.wrapper #content .form-control[type="button"]:hover {
+  border-color: #00EC98 !important;
+}
 @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px;

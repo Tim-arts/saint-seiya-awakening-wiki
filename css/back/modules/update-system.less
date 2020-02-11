@@ -154,40 +154,32 @@ form {
     }
 
     .cosmos-suggestions, .skills-suggestions {
-        .head {
+        @alpha-index: 3;
+        @str-dot: ".";
+        @str-class: "white-alpha-";
+        @variable-concat: ~"@{str-class}@{alpha-index}";
+        @opacity-concat: ~"@{str-dot}@{alpha-index}";
+
+        .header {
             font-weight: bold;
             color: @white;
+
+            .content {
+                border-top: 1px solid @success;
+                border-radius: @radius-default @radius-default 0 0;
+            }
+        }
+
+        .header, .suggestions {
+            .content {
+                background-color: @grey-dark-2-faded-5;
+                padding: 15px 0;
+                margin: 0;
+                border-bottom: 1px solid @success;
+            }
         }
 
         .suggestion {
-            background-color: @grey-dark-2-faded-5;
-            padding-top: 15px;
-
-            &.starter {
-                @alpha-index: 3;
-
-                .index, .fr-name, .en-name, .fr-description, .en-description {
-                    @str: "white-alpha-";
-                    @concat: ~"@{str}@{alpha-index}";
-
-                    color: @@concat;
-                }
-
-                img {
-                    @str: ".";
-                    @concat: ~"@{str}@{alpha-index}";
-
-                    filter: invert(1);
-                    will-change: opacity;
-                    transition: opacity @time-transition-05 @transition-1;
-                    opacity: @concat;
-
-                    &:hover {
-                        opacity: 1;
-                    }
-                }
-            }
-
             &.active {
                 .index, .fr-name, .en-name, .fr-description, .en-description {
                     color: @white;
@@ -200,18 +192,79 @@ form {
                 position: relative;
             }
 
-            img {
-                width: 48px;
+            .image-container {
+                position: relative;
                 display: inline-block;
                 cursor: pointer;
+
+                img {
+                    width: 48px;
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+                }
+
+                .delete-image {
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                    opacity: 0;
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+
+                    i {
+                        color: white;
+                        transform: translate(50%, 50%);
+                        pointer-events: none;
+                    }
+                }
+
+                &:not(.placeholder) {
+                    &:hover {
+                        img {
+                            opacity: @opacity-concat;
+                        }
+
+                        .delete-image {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                &.placeholder {
+                    img {
+                        opacity: @opacity-concat;
+                    }
+
+                    &:hover {
+                        img {
+                            opacity: 1;
+                        }
+                    }
+                }
             }
 
             .fr-description, .en-description {
-                padding: 10px 15px;
-                border-bottom: 1px solid @success;
-
-                div {
+                > div {
                     padding: 5px 0;
+                }
+            }
+
+            .index, .fr-name, .en-name, .fr-description, .en-description {
+                [contenteditable="true"] {
+                    cursor: text;
+
+                    &:empty:not(:focus):before {
+                        color: @@variable-concat;
+                        content:attr(data-text);
+                    }
+                }
+            }
+
+            &:last-child {
+                .content {
+                    border-radius: 0 0 @radius-default @radius-default;
                 }
             }
         }
