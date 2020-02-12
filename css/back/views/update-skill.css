@@ -872,60 +872,48 @@ form select {
 form select:focus option:checked {
   background: #262635;
 }
-form .cosmos-suggestions .header,
-form .skills-suggestions .header {
+form .elements-suggestions .header {
   font-weight: bold;
   color: #fff;
 }
-form .cosmos-suggestions .header .content,
-form .skills-suggestions .header .content {
+form .elements-suggestions .header .content {
   border-top: 1px solid #00EC98;
   border-radius: 4px 4px 0 0;
 }
-form .cosmos-suggestions .header .content,
-form .skills-suggestions .header .content,
-form .cosmos-suggestions .suggestions .content,
-form .skills-suggestions .suggestions .content {
+form .elements-suggestions .header .content,
+form .elements-suggestions .suggestions .content {
   background-color: rgba(21, 21, 29, 0.5);
   padding: 15px 0;
   margin: 0;
   border-bottom: 1px solid #00EC98;
 }
-form .cosmos-suggestions .suggestion .index,
-form .skills-suggestions .suggestion .index,
-form .cosmos-suggestions .suggestion .fr-name,
-form .skills-suggestions .suggestion .fr-name,
-form .cosmos-suggestions .suggestion .en-name,
-form .skills-suggestions .suggestion .en-name,
-form .cosmos-suggestions .suggestion .fr-description,
-form .skills-suggestions .suggestion .fr-description,
-form .cosmos-suggestions .suggestion .en-description,
-form .skills-suggestions .suggestion .en-description {
+form .elements-suggestions .suggestion .index,
+form .elements-suggestions .suggestion .fr-name,
+form .elements-suggestions .suggestion .en-name,
+form .elements-suggestions .suggestion .fr-description,
+form .elements-suggestions .suggestion .en-description {
   color: #fff;
 }
-form .cosmos-suggestions .suggestion .index,
-form .skills-suggestions .suggestion .index,
-form .cosmos-suggestions .suggestion .fr-name,
-form .skills-suggestions .suggestion .fr-name,
-form .cosmos-suggestions .suggestion .en-name,
-form .skills-suggestions .suggestion .en-name {
+form .elements-suggestions .suggestion .index,
+form .elements-suggestions .suggestion .fr-name,
+form .elements-suggestions .suggestion .en-name {
   top: 5px;
   position: relative;
 }
-form .cosmos-suggestions .suggestion .image-container,
-form .skills-suggestions .suggestion .image-container {
+form .elements-suggestions .suggestion .image-container {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-form .cosmos-suggestions .suggestion .image-container img,
-form .skills-suggestions .suggestion .image-container img {
-  width: 48px;
+form .elements-suggestions .suggestion .image-container a {
+  display: block;
+}
+form .elements-suggestions .suggestion .image-container img {
   will-change: opacity;
   transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  pointer-events: none;
 }
-form .cosmos-suggestions .suggestion .image-container .delete-image,
-form .skills-suggestions .suggestion .image-container .delete-image {
+form .elements-suggestions .suggestion .image-container .remove-thumbnail {
   width: 100%;
   height: 100%;
   top: 0;
@@ -935,74 +923,59 @@ form .skills-suggestions .suggestion .image-container .delete-image {
   will-change: opacity;
   transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-form .cosmos-suggestions .suggestion .image-container .delete-image i,
-form .skills-suggestions .suggestion .image-container .delete-image i {
+form .elements-suggestions .suggestion .image-container .remove-thumbnail i {
   color: white;
   transform: translate(50%, 50%);
   pointer-events: none;
 }
-form .cosmos-suggestions .suggestion .image-container.placeholder img,
-form .skills-suggestions .suggestion .image-container.placeholder img {
+form .elements-suggestions .suggestion .image-container:not(.placeholder) img {
+  width: 48px;
+}
+form .elements-suggestions .suggestion .image-container.placeholder img {
+  width: 42px;
   opacity: .3;
 }
-form .cosmos-suggestions .suggestion .image-container:hover:not(.placeholder) img,
-form .skills-suggestions .suggestion .image-container:hover:not(.placeholder) img {
+form .elements-suggestions .suggestion .image-container:hover:not(.placeholder) img {
   opacity: .3;
 }
-form .cosmos-suggestions .suggestion .image-container:hover:not(.placeholder) .delete-image,
-form .skills-suggestions .suggestion .image-container:hover:not(.placeholder) .delete-image {
+form .elements-suggestions .suggestion .image-container:hover:not(.placeholder) .remove-thumbnail {
   opacity: 1;
 }
-form .cosmos-suggestions .suggestion .image-container:hover.placeholder img,
-form .skills-suggestions .suggestion .image-container:hover.placeholder img {
+form .elements-suggestions .suggestion .image-container:hover.placeholder img {
   opacity: 1;
 }
-form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"],
-form .skills-suggestions .suggestion .fr-description [contenteditable="true"],
-form .cosmos-suggestions .suggestion .en-description [contenteditable="true"],
-form .skills-suggestions .suggestion .en-description [contenteditable="true"] {
+form .elements-suggestions .suggestion .fr-description [contenteditable="true"],
+form .elements-suggestions .suggestion .en-description [contenteditable="true"] {
   padding: 5px 0;
 }
-form .cosmos-suggestions .suggestion .index [contenteditable="true"],
-form .skills-suggestions .suggestion .index [contenteditable="true"],
-form .cosmos-suggestions .suggestion .fr-name [contenteditable="true"],
-form .skills-suggestions .suggestion .fr-name [contenteditable="true"],
-form .cosmos-suggestions .suggestion .en-name [contenteditable="true"],
-form .skills-suggestions .suggestion .en-name [contenteditable="true"],
-form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"],
-form .skills-suggestions .suggestion .fr-description [contenteditable="true"],
-form .cosmos-suggestions .suggestion .en-description [contenteditable="true"],
-form .skills-suggestions .suggestion .en-description [contenteditable="true"] {
+form .elements-suggestions .suggestion .index [contenteditable="true"],
+form .elements-suggestions .suggestion .fr-name [contenteditable="true"],
+form .elements-suggestions .suggestion .en-name [contenteditable="true"],
+form .elements-suggestions .suggestion .fr-description [contenteditable="true"],
+form .elements-suggestions .suggestion .en-description [contenteditable="true"] {
   cursor: text;
 }
-form .cosmos-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
-form .skills-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
-form .cosmos-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
-form .skills-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
-form .cosmos-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
-form .skills-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
-form .cosmos-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
-form .skills-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
-form .cosmos-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before,
-form .skills-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before {
+form .elements-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
+form .elements-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
+form .elements-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
+form .elements-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
+form .elements-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before {
   color: rgba(255, 255, 255, 0.3);
   content: attr(data-text);
 }
-form .cosmos-suggestions .suggestion:last-child .content,
-form .skills-suggestions .suggestion:last-child .content {
+form .elements-suggestions .suggestion:last-child .content {
   border-radius: 0 0 4px 4px;
 }
-form .cosmos-suggestions .actions button[type="button"],
-form .skills-suggestions .actions button[type="button"] {
+form .elements-suggestions .actions button[type="button"] {
   width: 32px;
   height: 32px;
 }
-form .cosmos-suggestions .actions button[type="button"] i,
-form .skills-suggestions .actions button[type="button"] i {
+form .elements-suggestions .actions button[type="button"] i {
   font-size: 16px;
   position: relative;
   top: -2px;
   left: -6px;
+  pointer-events: none;
 }
 .main-description {
   min-height: 180px !important;

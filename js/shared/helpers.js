@@ -1,6 +1,3 @@
-import Choices from "choices.js";
-import Modal from "./modules/ModalResponse";
-
 module.exports = {
     constants: {
         urls: {
@@ -69,9 +66,13 @@ module.exports = {
     },
     convertStringToDOMElement (string) {
         let wrapper = document.createElement('div');
-        wrapper.innerHTML= string;
-    
+        wrapper.innerHTML = string;
+        [...wrapper.childNodes].forEach(elm => elm.nodeType !== 1 && elm.parentNode.removeChild(elm));
+        
         return wrapper.firstChild;
+    },
+    hasClass (el, className) {
+        return el.classList.contains(className);
     },
     updateSuggestions (options) {
         $.ajax({
@@ -109,136 +110,5 @@ module.exports = {
                 console.log(response);
             }
         });
-    },
-    returnCustomDropdownTemplateElement (classes, attr) {
-        const el = Choices.defaults.templates.dropdown.call(this, classes, attr);
-        el.classList.add("static-dropdown");
-        return el;
-    },
-    returnCustomChoiceTemplateElement (classes, attr) {
-        const el = Choices.defaults.templates.choice.call(this, classes, attr);
-        const span = document.createElement("span");
-        const img = document.createElement("img");
-        const slug = this.convertToSlug(attr.value, /["._' ]/g, '-');
-    
-        img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/" + slug + ".png";
-    
-        span.appendChild(img);
-        el.insertAdjacentElement("afterbegin", span);
-    
-        return el;
-    },
-    async prepareMakeDynamicModal(self, dynamicModal, Choices) {
-        let data = {};
-        data.index = self.getAttribute("data-index");
-        data.search = {
-            type: self.getAttribute("data-type")
-        };
-        data.selectedElements = (() => {
-            return Array.from(self.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(x => x.getAttribute("data-slug"));
-        });
-        data.modal = {
-            id: "choice-" + data.search.type + "-cosmos-" + data.index,
-            title: "Add cosmo(s)",
-        };
-        data.modal.submitId = data.modal.id + "-submit";
-    
-        let elementAtIndex = window["Modal_Choices"]["choices--search-elements-" + data.search.type + "-" + data.index];
-        if (elementAtIndex) {
-            $(elementAtIndex.modal).modal({
-                show: true,
-                backdrop: "static",
-                keyboard: false
-            });
-        
-            return;
-        }
-    
-        async function process () {
-            function request () {
-                return new Promise(resolve => {
-                    $.post("../../api/partials/generate-modal", data, (response) => {
-                        let dynamicModal = module.exports.convertStringToDOMElement(response);
-                        document.body.appendChild(dynamicModal);
-                    
-                        let submit = document.getElementById(data.modal.submitId);
-                        let select = document.getElementById("search-elements-" + data.search.type);
-                        let Choice = new Choices(select, {
-                            duplicateItemsAllowed: false,
-                            searchFloor: 3,
-                            searchResultLimit: 5,
-                            removeItems: true,
-                            removeItemButton: true,
-                            itemSelectText: null,
-                            callbackOnCreateTemplates: () => {
-                                return {
-                                    dropdown(classes, attr) {
-                                        return module.exports.returnCustomDropdownTemplateElement(classes, attr);
-                                    },
-                                    choice(classes, attr) {
-                                        return module.exports.returnCustomChoiceTemplateElement(classes, attr);
-                                    }
-                                }
-                            }
-                        });
-                    
-                        let elementAtIndex = window["Modal_Choices"][Choice._baseId + "-" + data.index];
-                        if (!elementAtIndex) {
-                            window["Modal_Choices"][Choice._baseId + "-" + data.index] = {
-                                choice: Choice,
-                                modal: dynamicModal
-                            };
-                        }
-                        
-                        submit.addEventListener("click", function () {
-                            let array = Choice.getValue(true);
-                            let parent = self.parentElement.parentElement;
-                        
-                            // Delete previous thumbnails
-                            Array.from(parent.querySelectorAll(".image-container:not(.placeholder)")).forEach(entry => {
-                                entry.remove();
-                            });
-                            
-                            (async function () {
-                                async function fetch (value) {
-                                    return new Promise (resolve => {
-                                        $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
-                                            index: data.index,
-                                            type: data.search.type,
-                                            slug: module.exports.convertToSlug(value, /["._' ]/g, '-')
-                                        }, (response) => {
-                                            let thumbnail = module.exports.convertStringToDOMElement(response);
-                                            parent.appendChild(thumbnail);
-        
-                                            return resolve();
-                                        });
-                                    });
-                                }
-                                
-                                for (const [idx, value] of array.entries()) {
-                                    await fetch(value);
-                                }
-                            })();
-                        });
-                    
-                        $(dynamicModal).modal({
-                            show: true,
-                            backdrop: "static",
-                            keyboard: false
-                        });
-                    
-                        return resolve({
-                            el: dynamicModal,
-                            choice: Choice,
-                            link: self
-                        });
-                    });
-                });
-            }
-        
-            return request();
-        }
-        
-        return await process();
     }
 };

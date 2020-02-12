@@ -79,7 +79,7 @@ form {
         }
     }
 
-    .cosmos-suggestions, .skills-suggestions {
+    .elements-suggestions {
         @alpha-index: 3;
         @str-dot: ".";
         @str-class: "white-alpha-";
@@ -120,13 +120,17 @@ form {
                 display: inline-block;
                 cursor: pointer;
 
-                img {
-                    width: 48px;
-                    will-change: opacity;
-                    transition: opacity @time-transition-05 @transition-1;
+                a {
+                    display: block;
                 }
 
-                .delete-image {
+                img {
+                    will-change: opacity;
+                    transition: opacity @time-transition-05 @transition-1;
+                    pointer-events: none;
+                }
+
+                .remove-thumbnail {
                     width: 100%;
                     height: 100%;
                     top: 0;
@@ -143,8 +147,15 @@ form {
                     }
                 }
 
+                &:not(.placeholder) {
+                    img {
+                        width: 48px;
+                    }
+                }
+
                 &.placeholder {
                     img {
+                        width: 42px;
                         opacity: @opacity-concat;
                     }
                 }
@@ -155,7 +166,7 @@ form {
                             opacity: @opacity-concat;
                         }
 
-                        .delete-image {
+                        .remove-thumbnail {
                             opacity: 1;
                         }
                     }
@@ -202,6 +213,7 @@ form {
                     position: relative;
                     top: -2px;
                     left: -6px;
+                    pointer-events: none;
                 }
             }
         }

@@ -118,7 +118,7 @@
 
             } else {
                 %>
-                    <div class="col-12 mt-2">Il n'y a aucune suggestion de cosmos existante.</div>
+                    <div class="col-12 mt-2 warning">Il n'y a aucune suggestion de cosmos existante.</div>
                 <%
             }
         },
@@ -127,7 +127,7 @@
 
             } else {
                 %>
-                    <div class="col-12">Il n'y a aucune suggestion de skills existante.</div>
+                    <div class="col-12 mt-2 warning">Il n'y a aucune suggestion de skills existante.</div>
                 <%
             }
         },
@@ -266,7 +266,7 @@
 
     <div class="e-s-4"></div>
 
-    <div class="row cosmos-suggestions mb-4">
+    <div id="cosmos-suggestions" class="row elements-suggestions mb-4">
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
@@ -289,42 +289,7 @@
                     </div>
                 </div>
                 <div class="col-12 suggestions">
-                    <div class="row suggestion starter">
-                        <div class="col-12">
-                            <div class="row content">
-                                <div class="col-1 index">
-                                    <div class="py-1" contenteditable="true" data-text="0"></div>
-                                </div>
-                                <div class="col-1 fr-name">
-                                    <div class="py-1" contenteditable="true" data-text="Berserk"></div>
-                                </div>
-                                <div class="col-1 en-name">
-                                    <div class="py-1" contenteditable="true" data-text="Berserk"></div>
-                                </div>
-                                <div class="col-2 solar-cosmos">
-                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "solar", index: "0"}) %>
-                                </div>
-                                <div class="col-2 lunar-cosmos">
-                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "lunar", index: "0"}) %>
-                                </div>
-                                <div class="col-2 star-cosmos">
-                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "star", index: "0"}) %>
-                                </div>
-                                <div class="col-2 legendary-cosmos">
-                                    <%- include("partials/add-thumbnail-cosmo-suggestion", {placeholder: true, type: "legendary", index: "0"}) %>
-                                </div>
-                                <div class="col-1 actions">
-                                    <button type="button" id="add-cosmos-suggestion" class="delete form-control not-full-width"><i class="material-icons">add</i></button>
-                                </div>
-                                <div class="col-6 fr-description mt-3">
-                                    <div contenteditable="true" data-text="FR Description..."></div>
-                                </div>
-                                <div class="col-6 en-description mt-3">
-                                    <div contenteditable="true" data-text="EN Description..."></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%- include("partials/add-cosmos-suggestion", {index: "0", starter: true}) %>
                 </div>
                 <%= saintData.cosmos_suggestions() %>
             </div>
@@ -374,7 +339,7 @@
         </div>
     </div>
 
-    <div class="row skills-suggestions mb-4">
+    <div id="skills-suggestions" class="row elements-suggestions mb-4">
         <div class="col-12">
             <div class="row">
                 <div class="col-12">

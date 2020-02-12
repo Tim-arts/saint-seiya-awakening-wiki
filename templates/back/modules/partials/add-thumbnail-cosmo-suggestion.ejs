@@ -1,11 +1,11 @@
-<div class="image-container<%= locals.placeholder ? " placeholder" : "" %>">
+<div class="image-container<%= locals.placeholder ? " placeholder" : "" %>" <%= locals.slug ? "data-slug=" + slug : "" %>>
     <% if (locals.placeholder) { %>
-        <a href="#" class="require-modal" data-index="<%= locals.index ? index : "" %>" data-type="<%= locals.type ? type : "" %>">
+        <a href="#" class="trigger-modal" data-index="<%= locals.index ? index : "" %>" data-type="<%= locals.type ? type : "" %>">
             <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/v1/resources/plus.svg" alt="Add cosmo" />
         </a>
     <% } else { %>
         <img src="https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/<%= locals.slug ? slug : "" %>.png" alt="Add cosmo" />
-        <div class="delete-image" data-slug="<%= locals.slug ? slug : "" %>" data-index="<%= locals.index ? index : "" %>" data-type="<%= locals.type ? type : "" %>">
+        <div class="remove-thumbnail" data-slug="<%= locals.slug ? slug : "" %>" data-index="<%= locals.index ? index : "" %>" data-type="<%= locals.type ? type : "" %>">
             <i class="material-icons">close</i>
         </div>
     <% } %>

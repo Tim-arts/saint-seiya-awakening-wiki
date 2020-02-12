@@ -1,9 +1,9 @@
 require("./../base");
 
 import Sortable from "sortablejs";
-import Choices from "choices.js";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
+import CreateSuggestionCosmos from "./../modules/CreateSuggestionCosmos";
 import helpers from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let inputFileElement = document.getElementById("custom-file");
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
-    
-    let addSkillSuggestionPriority = document.getElementById("add-skills-suggestion-priority");
+    let suggestionsElement = document.getElementById("cosmos-suggestions");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let hasChanged = false;
     let data;
     let dynamicModal;
-    window["Modal_Choices"] = {};
     
     /* Constructors */
     let InputFileConstructor = new InputFile(inputFileElement, {
@@ -65,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         size: 256
     });
     let ModalConstructor = new Modal(modalElement);
+    let SuggestionsContructor = new CreateSuggestionCosmos(suggestionsElement);
     
     /* Events */
     formElement.addEventListener("submit", (e) => {
@@ -121,31 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
     
-    addSkillSuggestionPriority.addEventListener("click", function () {
-        let container = document.getElementById("skills-suggestions-container"),
-            index = container.querySelectorAll(".skills-suggestion").length;
-        
-        $.post("../../api/partials/add-skill-suggestion", {
-            index: index
-        }, (response) => {
-            container.insertAdjacentHTML("beforeend", response);
-        });
-    });
-    
-    $(document).on("click", ".suggestion .delete-image", function () {
-        let index = this.getAttribute("data-index");
-        let type = this.getAttribute("data-type");
-        let slug = this.getAttribute("data-slug");
-        let choice = window["Modal_Choices"]["choices--search-elements-" + type + "-" + index].choice;
-        
-        choice.removeActiveItemsByValue(slug);
-        this.parentElement.remove();
-    });
-    $(document).on("click", ".suggestion .require-modal", function (e) {
-        helpers.prepareMakeDynamicModal(this, dynamicModal, Choices).then((result) => {
-            dynamicModal = result;
-        });
-        
-        e.preventDefault();
-    });
+    // addSkillSuggestionPriority.addEventListener("click", function () {
+    //     let container = document.getElementById("skills-suggestions-container"),
+    //         index = container.querySelectorAll(".skills-suggestion").length;
+    //
+    //     $.post("../../api/partials/add-skill-suggestion", {
+    //         index: index
+    //     }, (response) => {
+    //         container.insertAdjacentHTML("beforeend", response);
+    //     });
+    // });
 });

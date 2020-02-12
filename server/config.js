@@ -52,6 +52,7 @@ app.use('/api', routes.API.partials.linkedModifiedSkill());
 app.use('/api', routes.API.partials.autocompleteSuggestion());
 app.use('/api', routes.API.partials.addThumbnailCosmoSuggestion());
 app.use('/api', routes.API.partials.generateModal());
+app.use('/api', routes.API.partials.addCosmosSuggestion());
 
 /* Back */
 app.use('/back', routes.back.home(router));
