@@ -1,68 +1,101 @@
 import Choices from "choices.js";
 const helpers = require("./../../shared/helpers");
+const cosmosTypes = require("./../../../fixtures/data/modules/cosmos-types");
 
 export default class CreateSuggestionCosmos {
     constructor(el) {
         let _this = this;
         this.el = el;
-        this.constants = {
-            solar: "solar",
-            lunar: "lunar",
-            star: "star",
-            legendary: "legendary"
-        };
-        this.suggestions = [];
-        this.selectors = {
-            triggerModal: "trigger-modal",
-            addSuggestion: "add-suggestion",
-            removeSuggestion: "remove-suggestion",
-            removeThumbnail: "remove-thumbnail"
-        };
-        this.container = el.querySelector(".suggestions");
-        this.elements = (() => {
-            let data = [];
+        this.constants = (() => {
+            let data = {};
             
-            Array.from(this.getSuggestions()).forEach(suggestion => {
-                let object = {
-                    solar: suggestion.querySelector(".solar-cosmos"),
-                    lunar: suggestion.querySelector(".lunar-cosmos"),
-                    star: suggestion.querySelector(".star-cosmos"),
-                    legendary: suggestion.querySelector(".legendary-cosmos"),
-                    actions: {
-                        add: suggestion.querySelector(".actions .add-suggestion"),
-                        delete: suggestion.querySelector(".actions .remove-suggestion")
-                    }
-                };
-                
-                data.push(object);
+            cosmosTypes.forEach(type => {
+                type = type.toLowerCase();
+                data[type] = type;
             });
             
             return data;
         })();
+        this.suggestions = [];
+        this.index = 0;
+        this.selectors = {
+            triggerModal: "trigger-modal",
+            createSuggestion: "create-suggestion",
+            removeSuggestion: "remove-suggestion",
+            removeThumbnail: "remove-thumbnail"
+        };
+        this.container = el.querySelector(".suggestions");
+        this.elements = [];
         
         document.addEventListener("click", function (e) {
             let target = e.target;
             
             if (helpers.hasClass(target, _this.selectors.triggerModal)) {
                 _this.triggerModal(target);
-            } else if (helpers.hasClass(target, _this.selectors.addSuggestion)) {
-                _this.addSuggestion()
+            } else if (helpers.hasClass(target, _this.selectors.createSuggestion)) {
+                _this.createSuggestion();
             } else if (helpers.hasClass(target, _this.selectors.removeSuggestion)) {
-                _this.removeSuggestion();
+                let index = target.getAttribute("data-index");
+                
+                _this.removeElement(index);
+                _this.removeSuggestion(index);
             } else if (helpers.hasClass(target, _this.selectors.removeThumbnail)) {
                 _this.removeSuggestionThumbnail(target);
             }
         }, false);
+    
+        // Init elements
+        this.suggestions[0] = {};
+        Array.from(this.getSuggestions()).forEach(suggestion => {
+            _this.addElement(suggestion);
+        });
         
         return this;
     }
     
-    addElement (index) {
-    
+    addElement (HTMLElement) {
+        let element = {
+            suggestion: HTMLElement,
+            solar: HTMLElement.querySelector(".solar-cosmos"),
+            lunar: HTMLElement.querySelector(".lunar-cosmos"),
+            star: HTMLElement.querySelector(".star-cosmos"),
+            legendary: HTMLElement.querySelector(".legendary-cosmos"),
+            actions: {
+                create: HTMLElement.querySelector(".actions .create-suggestion"),
+                delete: HTMLElement.querySelector(".actions .remove-suggestion")
+            }
+        };
+        
+        this.elements.push(element);
     }
     
     removeElement (index) {
+        this.elements[index].suggestion.remove();
+        delete this.elements[index];
+        
+        for (let type in this.constants) {
+            if (this.suggestions[index][this.constants[type]]) {
+                this.suggestions[index][this.constants[type]].modal.remove();
+            }
+        }
+    }
     
+    addSuggestion (data) {
+        for (let i = 0; i < data.index; i++) {
+            if (!this.suggestions[i]) {
+                this.suggestions[i] = null;
+            }
+        }
+    
+        this.suggestions[data.index][data.type] = {
+            modal: data.modal,
+            choice: data.choice,
+            link: data.link
+        }
+    }
+    
+    removeSuggestion (index) {
+        this.suggestions[index] = {};
     }
     
     getElementByIndexByType (index, type) {
@@ -73,10 +106,10 @@ export default class CreateSuggestionCosmos {
         return this.container.querySelectorAll(".suggestion");
     }
     
-    addSuggestion () {
+    createSuggestion () {
         let _this = this,
             data = {
-                index: this.getSuggestions().length,
+                index: ++this.index,
                 starter: false,
                 elements: {
                     solar: (() => {
@@ -108,24 +141,11 @@ export default class CreateSuggestionCosmos {
         
         $.post("../../api/partials/add-cosmos-suggestion", data, (response) => {
             let HTMLElement = helpers.convertStringToDOMElement(response);
-            
-            _this.suggestions.push({
-                solar: HTMLElement.querySelector(".solar-cosmos"),
-                lunar: HTMLElement.querySelector(".lunar-cosmos"),
-                star: HTMLElement.querySelector(".star-cosmos"),
-                legendary: HTMLElement.querySelector(".legendary-cosmos"),
-                actions: {
-                    add: HTMLElement.querySelector(".actions .add-suggestion"),
-                    delete: HTMLElement.querySelector(".actions .remove-suggestion")
-                }
-            });
-            _this.transferStaticData(data.index);
+    
+            _this.addElement(HTMLElement);
             _this.container.appendChild(HTMLElement);
+            _this.transferStaticData(data.index);
         });
-    }
-    
-    removeSuggestion () {
-    
     }
     
     triggerModal (link) {
@@ -154,7 +174,10 @@ export default class CreateSuggestionCosmos {
         let type = link.getAttribute("data-type");
         let slug = link.getAttribute("data-slug");
         
-        this.suggestions[index][type].choice.removeActiveItemsByValue(slug);
+        if (this.suggestions[index][type]) {
+            this.suggestions[index][type].choice.removeActiveItemsByValue(slug);
+        }
+        
         link.parentElement.remove();
     }
     
@@ -172,9 +195,9 @@ export default class CreateSuggestionCosmos {
         let data = {};
         data.index = link.getAttribute("data-index");
         data.type = link.getAttribute("data-type");
-        data.slugs = this.convertThumbnailsToSlugs(data.index, data.type);
+        data.selected = this.convertThumbnailsToSlugs(data.index, data.type);
         data.modal = {
-            id: "choice-" + data.type + "-cosmos-" + data.index,
+            id: "choice-" + data.type + "-cosmos-" + helpers.generateUuidv4(),
             title: "Add cosmo(s)",
         };
         data.modal.submitId = data.modal.id + "-submit";
@@ -186,22 +209,20 @@ export default class CreateSuggestionCosmos {
         let _this = this,
             data = this.prepareData(link);
         
-        // "choices--search-elements-" + data.type + "-" + data.index
-        
         (async function process () {
             return new Promise(resolve => {
                 $.post("../../api/partials/generate-modal", data, (response) => {
                     let elements = _this.createModal(data, link, response);
                     
-                    _this.suggestions[data.index] = {
-                        [data.type]: {
-                            modal: elements.modal,
-                            choice: elements.choice,
-                            link: link
-                        }
-                    };
+                    _this.addSuggestion({
+                        index: data.index,
+                        type: data.type,
+                        modal: elements.modal,
+                        choice: elements.choice,
+                        link: link
+                    });
                     
-                    return resolve(_this.suggestions[data.index][data.type]);
+                    return resolve();
                 });
             });
         })();
@@ -232,25 +253,25 @@ export default class CreateSuggestionCosmos {
         });
         
         submit.addEventListener("click", function () {
-            let array = choice.getValue(true);
-            
+            let currentIndex = this.getAttribute("data-index"),
+                array = choice.getValue(true);
             if (array.length === 0) {
                 return;
             }
             
             // Delete previous thumbnails
-            _this.removeSuggestionThumbnails(data.index, data.type);
+            _this.removeSuggestionThumbnails(currentIndex, data.type);
             
             (async function () {
                 async function fetch (value) {
                     return new Promise (resolve => {
                         $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
-                            index: data.index,
+                            index: currentIndex,
                             type: data.type,
                             slug: helpers.convertToSlug(value, /["._' ]/g, '-')
                         }, (response) => {
                             let thumbnail = helpers.convertStringToDOMElement(response),
-                                parent = _this.getElementByIndexByType(data.index, data.type);
+                                parent = _this.getElementByIndexByType(currentIndex, data.type);
                             parent.appendChild(thumbnail);
                             
                             return resolve();
@@ -278,12 +299,24 @@ export default class CreateSuggestionCosmos {
     }
     
     transferStaticData (index) {
-        // Clear view
-        for (let key in this.constants) {
-            this.getSuggestionThumbnails(0, this.constants[key]).forEach(element => {
+        // Move data
+        this.suggestions[index] = this.suggestions[0];
+        this.removeSuggestion(0);
+        
+        // Update view
+        for (let type in this.constants) {
+            this.getSuggestionThumbnails(0, this.constants[type]).forEach(element => {
                 element.remove();
             });
+            
+            if (this.suggestions[index][type]) {
+                this.updateSubmitIndex(index, this.constants[type]);
+            }
         }
+    }
+    
+    updateSubmitIndex (index, type) {
+        this.suggestions[index][type].modal.querySelector(".submit").setAttribute("data-index", index);
     }
     
     returnCustomDropdownTemplateElement (classes, attr) {

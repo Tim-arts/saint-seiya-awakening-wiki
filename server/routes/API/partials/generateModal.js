@@ -11,13 +11,15 @@ module.exports = function () {
             type: req.body.type
         }, (err, cosmos) => {
             res.render("back/modules/partials/generate-modal", {
+                index: req.body.index,
+                type: req.body.type,
+                selected: req.body.selected,
                 modal: {
                     title: req.body.modal.title,
                     id: req.body.modal.id,
                     submitId: req.body.modal.submitId
                 },
                 elements: cosmos,
-                type: req.body.type,
                 selectedElements: req.body.selectedElements
             });
         });

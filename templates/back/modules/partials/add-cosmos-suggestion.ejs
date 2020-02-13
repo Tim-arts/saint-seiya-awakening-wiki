@@ -11,27 +11,24 @@
             <div class="col-1 en-name">
                 <div class="py-1" contenteditable="true" data-text="Berserk"></div>
             </div>
-            <div class="col-2 solar-cosmos">
-                <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: "solar", index: index}) %>
-
-                <% if (locals.elements) { %>
-                    <% elements.solar.forEach(element => { %>
-                        <%- include("add-thumbnail-cosmo-suggestion", {placeholder: false, type: "solar", index: index, slug: element}) %>
-                    <% }) %>
-                <% } %>
-            </div>
-            <div class="col-2 lunar-cosmos">
-                <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: "lunar", index: index}) %>
-            </div>
-            <div class="col-2 star-cosmos">
-                <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: "star", index: index}) %>
-            </div>
-            <div class="col-2 legendary-cosmos">
-                <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: "legendary", index: index}) %>
-            </div>
+            <% cosmosTypes.forEach(type => { %>
+                <% type = type.toLowerCase() %>
+                <div class="col-2 <%= type %>-cosmos">
+                    <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: type, index: index}) %>
+                    <%
+                        if (locals.elements && locals.elements[type]) {
+                            elements[type].forEach(element => {
+                                %>
+                                    <%- include("add-thumbnail-cosmo-suggestion", {placeholder: false, type: type, index: index, slug: element}) %>
+                                <%
+                            });
+                        }
+                    %>
+                </div>
+            <% }) %>
             <div class="col-1 actions">
                 <% if (boolStarter) { %>
-                    <button type="button" id="add-cosmos-suggestion" class="add-suggestion form-control not-full-width"><i class="material-icons">add</i></button>
+                    <button type="button" id="add-cosmos-suggestion" class="create-suggestion form-control not-full-width"><i class="material-icons">add</i></button>
                 <% } else { %>
                     <button type="button" data-index="<%= index %>" class="remove-suggestion form-control remove not-full-width"><i class="material-icons">close</i></button>
                 <% } %>

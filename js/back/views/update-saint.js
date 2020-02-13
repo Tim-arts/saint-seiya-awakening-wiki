@@ -120,6 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
     
+    $("#test").on("click", function () {
+        console.log(SuggestionsContructor.suggestions);
+    })
+    
     // addSkillSuggestionPriority.addEventListener("click", function () {
     //     let container = document.getElementById("skills-suggestions-container"),
     //         index = container.querySelectorAll(".skills-suggestion").length;
