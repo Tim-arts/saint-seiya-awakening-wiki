@@ -121,8 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     
     $("#test").on("click", function () {
-        console.log(SuggestionsContructor.suggestions);
-    })
+        let value = SuggestionsContructor.getValue();
+        console.log(value);
+    });
     
     // addSkillSuggestionPriority.addEventListener("click", function () {
     //     let container = document.getElementById("skills-suggestions-container"),

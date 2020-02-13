@@ -890,8 +890,8 @@ form .elements-suggestions .suggestions .content {
 form .elements-suggestions .suggestion .index,
 form .elements-suggestions .suggestion .fr-name,
 form .elements-suggestions .suggestion .en-name,
-form .elements-suggestions .suggestion .fr-description,
-form .elements-suggestions .suggestion .en-description {
+form .elements-suggestions .suggestion .fr-comment,
+form .elements-suggestions .suggestion .en-comment {
   color: #fff;
 }
 form .elements-suggestions .suggestion .index,
@@ -944,22 +944,22 @@ form .elements-suggestions .suggestion .image-container:hover:not(.placeholder) 
 form .elements-suggestions .suggestion .image-container:hover.placeholder img {
   opacity: 1;
 }
-form .elements-suggestions .suggestion .fr-description [contenteditable="true"],
-form .elements-suggestions .suggestion .en-description [contenteditable="true"] {
+form .elements-suggestions .suggestion .fr-comment [contenteditable="true"],
+form .elements-suggestions .suggestion .en-comment [contenteditable="true"] {
   padding: 5px 0;
 }
 form .elements-suggestions .suggestion .index [contenteditable="true"],
 form .elements-suggestions .suggestion .fr-name [contenteditable="true"],
 form .elements-suggestions .suggestion .en-name [contenteditable="true"],
-form .elements-suggestions .suggestion .fr-description [contenteditable="true"],
-form .elements-suggestions .suggestion .en-description [contenteditable="true"] {
+form .elements-suggestions .suggestion .fr-comment [contenteditable="true"],
+form .elements-suggestions .suggestion .en-comment [contenteditable="true"] {
   cursor: text;
 }
 form .elements-suggestions .suggestion .index [contenteditable="true"]:empty:not(:focus):before,
 form .elements-suggestions .suggestion .fr-name [contenteditable="true"]:empty:not(:focus):before,
 form .elements-suggestions .suggestion .en-name [contenteditable="true"]:empty:not(:focus):before,
-form .elements-suggestions .suggestion .fr-description [contenteditable="true"]:empty:not(:focus):before,
-form .elements-suggestions .suggestion .en-description [contenteditable="true"]:empty:not(:focus):before {
+form .elements-suggestions .suggestion .fr-comment [contenteditable="true"]:empty:not(:focus):before,
+form .elements-suggestions .suggestion .en-comment [contenteditable="true"]:empty:not(:focus):before {
   color: rgba(255, 255, 255, 0.3);
   content: attr(data-text);
 }

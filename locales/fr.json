@@ -171,5 +171,6 @@
 	"great_eclipse_ii_skill_description_main": "Inflige 520% de dégâts cosmiques à 1 ennemi. Cette attaque vole de la vie égale à 70% des dégâts infligés et la vie excédentaire sera convertie en vie maximum (la vie maximum convertie ne peut excéder 80% de votre vie maximum originale).",
 	"scarab_cosmo_name": "Scarabée",
 	"scarab_cosmo_description": "Augmente la vie de 15% en combat et pour chaque tranche de 10% de vie perdue, augmente la réflexion de dégâts de 3% supplémentaires",
-	"scarab_cosmo_comment": ""
+	"scarab_cosmo_comment": "",
+	"eagle_eye_cosmo_comment": ""
 }

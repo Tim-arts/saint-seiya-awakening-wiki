@@ -56,6 +56,10 @@ export default class CreateSuggestionCosmos {
     addElement (HTMLElement) {
         let element = {
             suggestion: HTMLElement,
+            name: {
+                fr: HTMLElement.querySelector(".fr-name"),
+                en: HTMLElement.querySelector(".en-name")
+            },
             solar: HTMLElement.querySelector(".solar-cosmos"),
             lunar: HTMLElement.querySelector(".lunar-cosmos"),
             star: HTMLElement.querySelector(".star-cosmos"),
@@ -63,6 +67,10 @@ export default class CreateSuggestionCosmos {
             actions: {
                 create: HTMLElement.querySelector(".actions .create-suggestion"),
                 delete: HTMLElement.querySelector(".actions .remove-suggestion")
+            },
+            comments: {
+                fr: HTMLElement.querySelector(".fr-comment"),
+                en: HTMLElement.querySelector(".en-comment")
             }
         };
         
@@ -300,8 +308,11 @@ export default class CreateSuggestionCosmos {
     
     transferStaticData (index) {
         // Move data
+        this.elements[index].name.fr.childNodes[1].innerText = this.elements[0].name.fr.innerText;
+        this.elements[index].name.en.childNodes[1].innerText = this.elements[0].name.en.innerText;
+        this.elements[index].comments.fr.childNodes[1].innerText = this.elements[0].comments.fr.innerText;
+        this.elements[index].comments.en.childNodes[1].innerText = this.elements[0].comments.en.innerText;
         this.suggestions[index] = this.suggestions[0];
-        this.removeSuggestion(0);
         
         // Update view
         for (let type in this.constants) {
@@ -313,6 +324,13 @@ export default class CreateSuggestionCosmos {
                 this.updateSubmitIndex(index, this.constants[type]);
             }
         }
+        
+        // Reset data
+        this.removeSuggestion(0);
+        this.elements[0].name.fr.childNodes[1].innerText = "";
+        this.elements[0].name.en.childNodes[1].innerText = "";
+        this.elements[0].comments.fr.childNodes[1].innerText = "";
+        this.elements[0].comments.en.childNodes[1].innerText = "";
     }
     
     updateSubmitIndex (index, type) {
@@ -337,5 +355,33 @@ export default class CreateSuggestionCosmos {
         el.insertAdjacentElement("afterbegin", span);
         
         return el;
+    }
+    
+    getValue () {
+        let _this = this,
+            results = [];
+        
+        this.suggestions.forEach((suggestion, i) => {
+            let data = {
+                template_name: {
+                    fr: _this.elements[i].name.fr.innerText,
+                    en: _this.elements[i].name.en.innerText
+                },
+                comment: {
+                    fr: _this.elements[i].comments.fr.innerText,
+                    en: _this.elements[i].comments.en.innerText
+                }
+            };
+            
+            for (let type in _this.constants) {
+                if (suggestion[_this.constants[type]]) {
+                    data[_this.constants[type]] = suggestion[_this.constants[type]].choice.getValue(true);
+                }
+            }
+            
+            results.push(data);
+        });
+        
+        return results;
     }
 }

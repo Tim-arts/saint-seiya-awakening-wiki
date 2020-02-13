@@ -30,7 +30,7 @@ const saints = {
                 "lunar": String,
                 "solar": String,
                 "star": String,
-                "comment": String
+                "comments": String
             }
         ],
         skills_suggestions: [
