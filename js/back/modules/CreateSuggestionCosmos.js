@@ -240,6 +240,7 @@ export default class CreateSuggestionCosmos {
         let _this = this;
         let modal = helpers.convertStringToDOMElement(modalAsString);
         let submit = modal.querySelector(".submit");
+        let close = modal.querySelector(".close");
         let select = modal.querySelector("select");
         let choice = new Choices(select, {
             duplicateItemsAllowed: false,
@@ -259,8 +260,9 @@ export default class CreateSuggestionCosmos {
                 }
             }
         });
+        let values;
         
-        submit.addEventListener("click", function () {
+        submit.addEventListener("click", function (e) {
             let currentIndex = this.getAttribute("data-index"),
                 array = choice.getValue(true);
             if (array.length === 0) {
@@ -291,6 +293,21 @@ export default class CreateSuggestionCosmos {
                     await fetch(value);
                 }
             })();
+            
+            e.preventDefault();
+        });
+    
+        $(modal).on("show.bs.modal", () => {
+            values = choice.getValue(true);
+        });
+
+        close.addEventListener("click", () => {
+            let currentValues = choice.getValue(true);
+            let comparison = currentValues.filter(n => !values.includes(n));
+            
+            comparison.forEach(value => {
+                choice.removeActiveItemsByValue(value);
+            });
         });
         
         document.body.appendChild(modal);

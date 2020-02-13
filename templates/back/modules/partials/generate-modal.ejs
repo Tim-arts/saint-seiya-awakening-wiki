@@ -3,6 +3,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><%= modal.title %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -11,7 +14,7 @@
                             <span><%= capitalize(type) %> type</span>
                             <i class="material-icons">search</i>
                         </label>
-                        <select id="search-elements-<%= type %>" class="custom-select form-control static-dropdown" multiple>
+                        <select id="search-elements-<%= type %>" class="custom-select form-control" multiple>
                             <option placeholder>Ex: <%= __(elements[0].name) %></option>
                             <%
                                 for (let i = 0, count = elements.length; i < count; i++) {
@@ -31,7 +34,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="<%= modal.submitId %>" type="button" class="submit custom-theme theme-3 mx-auto" data-index="<%= index %>" data-dismiss="modal">Save</button>
+                <button id="<%= modal.submitId %>" type="button" class="submit custom-theme theme-3 mx-auto" data-index="<%= index %>" data-dismiss="modal">Validate</button>
             </div>
         </div>
     </div>
