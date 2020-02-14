@@ -73,4 +73,14 @@ export default class CreateSkillsSuggestion {
         this.priorities[index].priorityElement.remove();
         this.priorities[index].removeElement.remove();
     }
+    
+    getValue () {
+        return {
+            priorities: this.priorities.map(priority => priority.priorityElement.value),
+            comment: {
+                fr: this.elements.comments.fr.children[0].innerHTML.trim(),
+                en: this.elements.comments.en.children[0].innerHTML.trim()
+            }
+        };
+    }
 }
