@@ -66,10 +66,9 @@ module.exports = {
     },
     convertStringToDOMElement (string) {
         let wrapper = document.createElement('div');
-        wrapper.innerHTML = string;
-        [...wrapper.childNodes].forEach(elm => elm.nodeType !== 1 && elm.parentNode.removeChild(elm));
+        wrapper.innerHTML = string.trim();
         
-        return wrapper.firstChild;
+        return Array.from(wrapper.childNodes).filter(node => node.nodeName !== "#text");
     },
     hasClass (el, className) {
         return el.classList.contains(className);

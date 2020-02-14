@@ -47,7 +47,7 @@ app.use('/api', routes.API.skills());
 app.use('/api', routes.API.cosmos());
 app.use('/api', routes.API.controllers());
 /* API Partials */
-app.use('/api', routes.API.partials.addSkillSuggestion());
+app.use('/api', routes.API.partials.addSkillSuggestionPriority());
 app.use('/api', routes.API.partials.linkedModifiedSkill());
 app.use('/api', routes.API.partials.autocompleteSuggestion());
 app.use('/api', routes.API.partials.addThumbnailCosmoSuggestion());

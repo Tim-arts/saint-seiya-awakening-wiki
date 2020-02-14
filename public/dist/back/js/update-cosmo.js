@@ -393,8 +393,6 @@ var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefa
 
 var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
 
-var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -469,11 +467,10 @@ module.exports = {
   },
   convertStringToDOMElement: function convertStringToDOMElement(string) {
     var wrapper = document.createElement('div');
-    wrapper.innerHTML = string;
-    (0, _toConsumableArray2["default"])(wrapper.childNodes).forEach(function (elm) {
-      return elm.nodeType !== 1 && elm.parentNode.removeChild(elm);
+    wrapper.innerHTML = string.trim();
+    return Array.from(wrapper.childNodes).filter(function (node) {
+      return node.nodeName !== "#text";
     });
-    return wrapper.firstChild;
   },
   hasClass: function hasClass(el, className) {
     return el.classList.contains(className);
@@ -548,7 +545,7 @@ module.exports = {
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":8,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":14,"@babel/runtime/regenerator":15}],6:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":8,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/regenerator":15}],6:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

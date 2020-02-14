@@ -3,7 +3,8 @@ require("./../base");
 import Sortable from "sortablejs";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
-import CreateSuggestionCosmos from "./../modules/CreateSuggestionCosmos";
+import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";
+import CreateSkillsSuggestion from "./../modules/CreateSkillsSuggestion";
 import helpers from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let inputFileElement = document.getElementById("custom-file");
     let avatarElement = document.getElementById("avatar");
     let modalElement = document.getElementById("response-modal");
-    let suggestionsElement = document.getElementById("cosmos-suggestions");
+    let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
+    let skillsSuggestionsElement = document.getElementById("skills-suggestions");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -55,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
     let hasChanged = false;
     let data;
-    let dynamicModal;
     
     /* Constructors */
     let InputFileConstructor = new InputFile(inputFileElement, {
@@ -63,7 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
         size: 256
     });
     let ModalConstructor = new Modal(modalElement);
-    let SuggestionsContructor = new CreateSuggestionCosmos(suggestionsElement);
+    let SuggestionsContructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
+    let SkillsContructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
     
     /* Events */
     formElement.addEventListener("submit", (e) => {
@@ -119,20 +121,4 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         }
     };
-    
-    $("#test").on("click", function () {
-        let value = SuggestionsContructor.getValue();
-        console.log(value);
-    });
-    
-    // addSkillSuggestionPriority.addEventListener("click", function () {
-    //     let container = document.getElementById("skills-suggestions-container"),
-    //         index = container.querySelectorAll(".skills-suggestion").length;
-    //
-    //     $.post("../../api/partials/add-skill-suggestion", {
-    //         index: index
-    //     }, (response) => {
-    //         container.insertAdjacentHTML("beforeend", response);
-    //     });
-    // });
 });

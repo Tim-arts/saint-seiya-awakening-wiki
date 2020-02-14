@@ -2,7 +2,7 @@ import Choices from "choices.js";
 const helpers = require("./../../shared/helpers");
 const cosmosTypes = require("./../../../fixtures/data/modules/cosmos-types");
 
-export default class CreateSuggestionCosmos {
+export default class CreateCosmosSuggestion {
     constructor(el) {
         let _this = this;
         this.el = el;
@@ -20,8 +20,8 @@ export default class CreateSuggestionCosmos {
         this.index = 0;
         this.selectors = {
             triggerModal: "trigger-modal",
-            createSuggestion: "create-suggestion",
-            removeSuggestion: "remove-suggestion",
+            createSuggestion: "create-cosmos-suggestion",
+            removeSuggestion: "remove-cosmos-suggestion",
             removeThumbnail: "remove-thumbnail"
         };
         this.container = el.querySelector(".suggestions");
@@ -148,8 +148,8 @@ export default class CreateSuggestionCosmos {
             };
         
         $.post("../../api/partials/add-cosmos-suggestion", data, (response) => {
-            let HTMLElement = helpers.convertStringToDOMElement(response);
-    
+            let HTMLElement = helpers.convertStringToDOMElement(response)[0];
+            
             _this.addElement(HTMLElement);
             _this.container.appendChild(HTMLElement);
             _this.transferStaticData(data.index);
@@ -238,7 +238,7 @@ export default class CreateSuggestionCosmos {
     
     createModal (data, link, modalAsString) {
         let _this = this;
-        let modal = helpers.convertStringToDOMElement(modalAsString);
+        let modal = helpers.convertStringToDOMElement(modalAsString)[0];
         let submit = modal.querySelector(".submit");
         let close = modal.querySelector(".close");
         let select = modal.querySelector("select");
@@ -280,7 +280,7 @@ export default class CreateSuggestionCosmos {
                             type: data.type,
                             slug: helpers.convertToSlug(value, /["._' ]/g, '-')
                         }, (response) => {
-                            let thumbnail = helpers.convertStringToDOMElement(response),
+                            let thumbnail = helpers.convertStringToDOMElement(response)[0],
                                 parent = _this.getElementByIndexByType(currentIndex, data.type);
                             parent.appendChild(thumbnail);
                             

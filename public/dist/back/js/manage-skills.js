@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"cookies-js":15}],2:[function(require,module,exports){
+},{"cookies-js":11}],2:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -136,14 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./../base":1,"@babel/runtime/helpers/interopRequireDefault":9,"autocompleter":14}],3:[function(require,module,exports){
+},{"./../../shared/helpers":3,"./../../shared/modules/ModalResponse":4,"./../base":1,"@babel/runtime/helpers/interopRequireDefault":8,"autocompleter":10}],3:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
-
-var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
@@ -219,11 +217,10 @@ module.exports = {
   },
   convertStringToDOMElement: function convertStringToDOMElement(string) {
     var wrapper = document.createElement('div');
-    wrapper.innerHTML = string;
-    (0, _toConsumableArray2["default"])(wrapper.childNodes).forEach(function (elm) {
-      return elm.nodeType !== 1 && elm.parentNode.removeChild(elm);
+    wrapper.innerHTML = string.trim();
+    return Array.from(wrapper.childNodes).filter(function (node) {
+      return node.nodeName !== "#text";
     });
-    return wrapper.firstChild;
   },
   hasClass: function hasClass(el, className) {
     return el.classList.contains(className);
@@ -298,7 +295,7 @@ module.exports = {
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":6,"@babel/runtime/helpers/interopRequireDefault":9,"@babel/runtime/helpers/toConsumableArray":12,"@babel/runtime/regenerator":13}],4:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":5,"@babel/runtime/helpers/interopRequireDefault":8,"@babel/runtime/regenerator":9}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -399,19 +396,7 @@ function () {
 
 exports["default"] = Modal;
 
-},{"@babel/runtime/helpers/classCallCheck":7,"@babel/runtime/helpers/createClass":8,"@babel/runtime/helpers/interopRequireDefault":9}],5:[function(require,module,exports){
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-module.exports = _arrayWithoutHoles;
-},{}],6:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":6,"@babel/runtime/helpers/createClass":7,"@babel/runtime/helpers/interopRequireDefault":8}],5:[function(require,module,exports){
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -449,7 +434,7 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -457,7 +442,7 @@ function _classCallCheck(instance, Constructor) {
 }
 
 module.exports = _classCallCheck;
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -475,7 +460,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 module.exports = _createClass;
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
@@ -483,34 +468,10 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],10:[function(require,module,exports){
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-module.exports = _iterableToArray;
-},{}],11:[function(require,module,exports){
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-module.exports = _nonIterableSpread;
-},{}],12:[function(require,module,exports){
-var arrayWithoutHoles = require("./arrayWithoutHoles");
-
-var iterableToArray = require("./iterableToArray");
-
-var nonIterableSpread = require("./nonIterableSpread");
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":5,"./iterableToArray":10,"./nonIterableSpread":11}],13:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":16}],14:[function(require,module,exports){
+},{"regenerator-runtime":12}],10:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -899,7 +860,7 @@ module.exports = require("regenerator-runtime");
 }));
 
 
-},{}],15:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*
  * Cookies.js - 1.2.3
  * https://github.com/ScottHamper/Cookies
@@ -1072,7 +1033,7 @@ module.exports = require("regenerator-runtime");
         global.Cookies = cookiesExport;
     }
 })(typeof window === 'undefined' ? this : window);
-},{}],16:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *

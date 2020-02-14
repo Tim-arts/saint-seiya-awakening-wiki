@@ -113,15 +113,6 @@
                 <%
             }
         },
-        skills_suggestions: () => {
-            if (locals.saint || (locals.saint && !!!saint.skills_suggestions.length)) {
-
-            } else {
-                %>
-                    <div class="col-12 mt-2 warning">Il n'y a aucune suggestion de skills existante.</div>
-                <%
-            }
-        },
         characteristics: {
             levels: () => {
                 for (let i = 0, count = levels.length; i < count; i++) {
@@ -261,7 +252,7 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
-                    <h2 id="test" class="h5 mt-0">Suggestions de cosmos</h2>
+                    <h2 id="test" class="h5 mt-0">Ajouter une suggestion de cosmos</h2>
                 </div>
             </div>
         </div>
@@ -288,7 +279,7 @@
 
     <div class="e-s-4"></div>
 
-    <div class="row mb-4">
+    <div id="skills-suggestions" class="elements-suggestions row mb-4">
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
@@ -296,50 +287,36 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-2">
             <div class="row">
-                <div class="col-2">
-                    <div class="row">
+                <div class="col-12 header">
+                    <div class="row content">
+                        <div class="col-2 priorities">Priorités</div>
+                        <div class="col-4 fr-comment">Comment (FR)</div>
+                        <div class="col-4 en-comment">Comment (EN)</div>
+                        <div class="col-1 offset-1 actions">Actions</div>
+                    </div>
+                </div>
+                <div class="col-12 suggestions">
+                    <div class="row suggestion starter">
                         <div class="col-12">
-                            <label for="skills-suggestions" class="w-100 position-relative">
-                                <span>Priorités</span>
-                                <span>
-                                    <button type="button" id="add-skills-suggestion-priority" class="button form-control position-absolute"><i class="material-icons">add</i></button>
-                                </span>
-                            </label>
-                            <input type="number" id="skills-suggestions" name="skills-suggestions" placeholder="Ex: 1133" class="form-control" value="1111" readonly />
+                            <div class="row content">
+                                <div class="col-2 priorities">
+                                    <%- include("partials/add-skill-suggestion-priority", {index: 0}) %>
+                                </div>
+                                <div class="col-4 fr-comment">
+                                    <div class="py-1" contenteditable="true" data-text="Comment..."></div>
+                                </div>
+                                <div class="col-4 en-comment">
+                                    <div class="py-1" contenteditable="true" data-text="Comment..."></div>
+                                </div>
+                                <div class="col-1 offset-1 actions">
+                                    <button type="button" class="create-skills-suggestion form-control not-full-width"><i class="material-icons">add</i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div id="skills-suggestions-container" class="row">
-                        <%- include("partials/add-skill-suggestion", {index: 0}) %>
-                    </div>
                 </div>
-                <div class="col-4">
-                    <label for="fr-skill-suggestion-comment">Commentaire (FR)</label>
-                    <textarea id="fr-skill-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
-                </div>
-                <div class="col-4">
-                    <label for="en-skill-suggestion-comment">Commentaire (EN)</label>
-                    <textarea id="en-skill-suggestion-comment" class="form-control main-description" minlength="10"></textarea>
-                </div>
-                <div class="col-2">
-                    <button id="add-skills-suggestion" type="button" class="btn btn-lg custom-theme theme-3 fit align-center">Ajouter</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="skills-suggestions" class="row elements-suggestions mb-4">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h5 mt-0">Suggestions de compétences</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="row">
-                <%= saintData.skills_suggestions() %>
             </div>
         </div>
     </div>

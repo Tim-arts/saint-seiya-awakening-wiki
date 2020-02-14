@@ -945,6 +945,7 @@ form .elements-suggestions .suggestion .image-container:hover.placeholder img {
 }
 form .elements-suggestions .suggestion .fr-comment [contenteditable="true"],
 form .elements-suggestions .suggestion .en-comment [contenteditable="true"] {
+  height: 100%;
   padding: 5px 0;
 }
 form .elements-suggestions .suggestion .index [contenteditable="true"],
