@@ -68,25 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "elements",
         fetch: (text) => {
             text = convertToSlug(text, /["._' ]/g, "-");
-            let suggestions = elements.filter(n => n.slug.toLowerCase().indexOf(text) > -1),
-                results = (() => {
-                    let results = [];
-                    
-                    for (let i = 0, iCount = suggestions.length; i < iCount; i++) {
-                        for (let j = 0, jCount = elements.length; j < jCount; j++) {
-                            if (elements[j].getAttribute("data-slug") === suggestions[i].slug) {
-                                results.push(elements[j]);
-                            }
-                        }
-                    }
-                    
-                    return results;
-                })();
+            
+            let suggestions = elements.filter(e => e.getAttribute("data-slug").indexOf(text) > -1);
             
             resetDisplay(elements, "hide");
-            
             elements.forEach((element) => { element.classList.add("hide"); });
-            results.forEach((result) => { result.classList.remove("hide"); });
+            suggestions.forEach(suggestion => { suggestion.classList.remove("hide"); });
         },
         onSelect: null,
         preventSubmit: true
