@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return data;
         })();
     let hasChanged = false;
-    let data;
     
     /* Constructors */
     let InputFileConstructor = new InputFile(inputFile, {
@@ -67,8 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         
         let selectVerificationConstructor = new SelectVerification(document.querySelectorAll("select[required]"));
-        
-        data = {
+        let data = {
             "_id": _data._id,
             "name": {
                 "en": document.getElementById("en-name").value,

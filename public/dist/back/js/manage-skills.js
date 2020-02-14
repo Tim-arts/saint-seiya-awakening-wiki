@@ -105,30 +105,15 @@ document.addEventListener("DOMContentLoaded", function () {
     className: "elements",
     fetch: function fetch(text) {
       text = (0, _helpers.convertToSlug)(text, /["._' ]/g, "-");
-
-      var suggestions = elements.filter(function (n) {
-        return n.slug.toLowerCase().indexOf(text) > -1;
-      }),
-          results = function () {
-        var results = [];
-
-        for (var i = 0, iCount = suggestions.length; i < iCount; i++) {
-          for (var j = 0, jCount = elements.length; j < jCount; j++) {
-            if (elements[j].getAttribute("data-slug") === suggestions[i].slug) {
-              results.push(elements[j]);
-            }
-          }
-        }
-
-        return results;
-      }();
-
+      var suggestions = elements.filter(function (e) {
+        return e.getAttribute("data-slug").indexOf(text) > -1;
+      });
       (0, _helpers.resetDisplay)(elements, "hide");
       elements.forEach(function (element) {
         element.classList.add("hide");
       });
-      results.forEach(function (result) {
-        result.classList.remove("hide");
+      suggestions.forEach(function (suggestion) {
+        suggestion.classList.remove("hide");
       });
     },
     onSelect: null,

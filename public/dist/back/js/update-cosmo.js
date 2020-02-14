@@ -209,7 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }();
 
   var hasChanged = false;
-  var data;
   /* Constructors */
 
   var InputFileConstructor = new _InputFile["default"](inputFile, {
@@ -222,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
   formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     var selectVerificationConstructor = new _SelectVerification["default"](document.querySelectorAll("select[required]"));
-    data = {
+    var data = {
       "_id": _data._id,
       "name": {
         "en": document.getElementById("en-name").value,

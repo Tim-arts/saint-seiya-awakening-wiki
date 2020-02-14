@@ -145,9 +145,16 @@
                         <%
                         break;
                     case Boolean:
+                        let value;
+
+                        if (locals.cosmo) {
+                            value = cosmo.obtainment_system[systems[system].name.toLowerCase()];
+                        } else {
+                            value = systems[system].data;
+                        }
                         %>
                             <div class="col-6 mt-4">
-                                <input type="checkbox" id="obtainment-system-<%= slug %>" name="obtainment-system-<%= slug %>" <%= systems[system].data ? "checked='true'" : "" %> />
+                                <input type="checkbox" id="obtainment-system-<%= slug %>" name="obtainment-system-<%= slug %>" <%= value ? "checked='true'" : "" %> />
                                 <label for="obtainment-system-<%= slug %>" class="ml-1"><%= name %></label>
                             </div>
                         <%

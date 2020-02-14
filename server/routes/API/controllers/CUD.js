@@ -60,7 +60,7 @@ module.exports = (Model, type) => {
                 {
                     _id: data._id
                 },
-                helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural),
+                    helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural),
                 {
                     upsert: true
                 },
