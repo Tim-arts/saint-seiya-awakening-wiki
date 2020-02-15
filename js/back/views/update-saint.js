@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
     let formElement = document.getElementById("update-saint");
     
-    let avatarInputFileElement = document.getElementById("custom-file");
-    let avatarProcessedInputFileElement = document.getElementById("large-avatar-input");
-    let avatarMaskProcessedInputFileElement = document.getElementById("large-avatar-mask-input");
+    let avatarInputFileElement = document.getElementById("avatar-input");
+    let avatarProcessedInputFileElement = document.getElementById("avatar-processed-input");
+    let avatarMaskProcessedInputFileElement = document.getElementById("avatar-mask-processed-input");
     
-    let avatarImgElement = document.getElementById("avatar");
-    let avatarProcessedImgElement = document.getElementById("large-avatar");
-    let avatarMaskProcessedImgElement = document.getElementById("large-avatar-mask");
-    let largeAvatarResultImgElement = document.getElementById("large-avatar-result");
+    let avatarImgElement = document.getElementById("avatar-image");
+    let avatarProcessedImgElement = document.getElementById("avatar-processed-image");
+    let avatarMaskProcessedImgElement = document.getElementById("avatar-mask-processed-image");
+    let largeAvatarResultImgElement = document.getElementById("avatar-processed-result-image");
     
     let modalElement = document.getElementById("response-modal");
     let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         
         $.post("../../api/composite-image-with-mask", data, (response) => {
-            AvatarImageResult = response.result;
+            avatarImageResult = response.result;
             
             helpers.updateThumbnail(largeAvatarResultImgElement, response.result);
         });
