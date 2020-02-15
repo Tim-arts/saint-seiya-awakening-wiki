@@ -125,7 +125,7 @@ export default class CreateSkillsSuggestion {
                 }
             });
         });
-    
-        return results;
+        
+        return results = results.filter(r => r.priorities.length >= 2 || (r.priorities[1] && r.priorities[1] !== ""));
     }
 }

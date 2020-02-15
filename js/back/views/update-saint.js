@@ -121,8 +121,4 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         }
     };
-    
-    $("#skills-suggestions").on("click", function () {
-        SkillsContructor.getValue();
-    });
 });
