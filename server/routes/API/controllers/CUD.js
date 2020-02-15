@@ -12,13 +12,21 @@ module.exports = (Model, type) => {
             let data = req.body.data,
             folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
             
-            /* Upload new cosmo image on CDN */
+            /* Upload new image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
                 file: data.image,
                 public_id: data.slug,
                 folder: folder,
                 allowed_formats: "jpeg,jpg,png"
             });
+            if (type === "saints" && data.largeImage) {
+                helpers.uploadFileIntoCDN(cloudinary, {
+                    file: data.largeImage,
+                    public_id: "large-image",
+                    folder: folder,
+                    allowed_formats: "jpeg,jpg,png",
+                });
+            }
         
             /* Upload translation files on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
@@ -46,13 +54,21 @@ module.exports = (Model, type) => {
             let data = req.body.data,
                 folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
         
-            /* Update cosmo image on CDN */
+            /* Update image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
                 file: data.image,
                 public_id: data.slug,
                 folder: folder,
                 allowed_formats: "jpeg,jpg,png",
             });
+            if (type === "saints" && data.largeImage) {
+                helpers.uploadFileIntoCDN(cloudinary, {
+                    file: data.largeImage,
+                    public_id: "large-image",
+                    folder: folder,
+                    allowed_formats: "jpeg,jpg,png",
+                });
+            }
         
             /* Upload translation files on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
@@ -87,13 +103,19 @@ module.exports = (Model, type) => {
     
         delete: function (req, res) {
             let data = req.body.data,
-                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/" + data.slug) : global.utils.translations[type].path + data.slug;
+                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
         
             /* Delete cosmo image from CDN */
             helpers.deleteFileFromCDN(cloudinary, {
-                file: folder,
+                file: folder + data.slug,
                 resource_type: "image"
             });
+            if (type === "saints") {
+                helpers.deleteFileFromCDN(cloudinary, {
+                    file: folder + "large-avatar",
+                    resource_type: "image"
+                });
+            }
         
             // Delete translations from CDN
             helpers.deleteFileFromCDN(cloudinary, {

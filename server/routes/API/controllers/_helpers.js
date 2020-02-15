@@ -102,7 +102,7 @@ module.exports = {
                 
                 break;
             case "saints":
-                comment = data.slug_underscore + "_" + singularType + "_description";
+                comment = data.slug_underscore + "_" + singularType + "_comment";
     
                 enTranslation[[name]] = data.name.en;
                 enTranslation[[comment]] = data.comment.en;
@@ -183,6 +183,8 @@ module.exports = {
                         data.skills_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_skills__suggestion_" + i;
                     });
                 }
+                
+                delete data.largeImage;
                 
                 break;
             default:

@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     title: "Success!",
                     backdrop: "static",
                     submit: () => {
+                        console.log(hasChanged)
                         window.location.reload(true);
                     },
                     hideCloseButton: true
@@ -77,7 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let SkillsConstructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
     
     /* Events */
-    formElement.addEventListener("submit", () => {
+    formElement.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
         if (!hasChanged) {
             ModalConstructor.show({
                 message: "noChanges",
@@ -148,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hasChanged = true;
     });
     window.onbeforeunload = () => {
+        console.log(hasChanged);
         if (hasChanged) {
             return true;
         }

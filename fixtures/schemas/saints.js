@@ -10,12 +10,16 @@ const saints = {
             type: String,
             unique: true
         },
+        slug_underscore: {
+            type: String,
+            unique: true
+        },
         comment: String,
         rank: String,
         damage_type: String,
         focus: String,
         roles: {
-            type: String,
+            type: Array,
             maxItems: 8
         },
         main_skills: {
