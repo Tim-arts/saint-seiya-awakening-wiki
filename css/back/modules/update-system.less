@@ -197,24 +197,51 @@ form {
                 }
             }
 
+            .actions {
+                button[type="button"] {
+                    width: 32px;
+                    height: 32px;
+                    display: inline-block;
+                    top: 3px;
+                    position: relative;
+
+                    i {
+                        font-size: 16px;
+                        position: relative;
+                        top: -2px;
+                        left: -6px;
+                        pointer-events: none;
+                    }
+                }
+            }
+
+            .priorities {
+                input[type="number"] {
+                    display: inline-block;
+
+                    &.starter {
+                        width: calc(100% - 44px);
+                    }
+                }
+
+                button[type="button"] {
+                    width: 38px;
+                    height: 38px;
+                    top: 0; right: 15px;
+                    position: absolute;
+
+                    i {
+                        right: 7px;
+                        top: -1px;
+                        position: relative;
+                        pointer-events: none;
+                    }
+                }
+            }
+
             &:last-child {
                 .content {
                     border-radius: 0 0 @radius-default @radius-default;
-                }
-            }
-        }
-
-        .actions {
-            button[type="button"] {
-                width: 32px;
-                height: 32px;
-
-                i {
-                    font-size: 16px;
-                    position: relative;
-                    top: -2px;
-                    left: -6px;
-                    pointer-events: none;
                 }
             }
         }

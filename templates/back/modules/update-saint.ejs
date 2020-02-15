@@ -291,31 +291,15 @@
             <div class="row">
                 <div class="col-12 header">
                     <div class="row content">
+                        <div class="col-1 index">Index</div>
                         <div class="col-2 priorities">Priorités</div>
                         <div class="col-4 fr-comment">Comment (FR)</div>
                         <div class="col-4 en-comment">Comment (EN)</div>
-                        <div class="col-1 offset-1 actions">Actions</div>
+                        <div class="col-1 actions">Actions</div>
                     </div>
                 </div>
                 <div class="col-12 suggestions">
-                    <div class="row suggestion starter">
-                        <div class="col-12">
-                            <div class="row content">
-                                <div class="col-2 priorities">
-                                    <%- include("partials/add-skill-suggestion-priority", {index: 0}) %>
-                                </div>
-                                <div class="col-4 fr-comment">
-                                    <div class="py-1" contenteditable="true" data-text="Comment..."></div>
-                                </div>
-                                <div class="col-4 en-comment">
-                                    <div class="py-1" contenteditable="true" data-text="Comment..."></div>
-                                </div>
-                                <div class="col-1 offset-1 actions">
-                                    <button type="button" class="create-skills-suggestion form-control not-full-width"><i class="material-icons">add</i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%- include("partials/add-skills-suggestion", {index: 0, indexPriority: 0, starter: true}) %>
                 </div>
             </div>
         </div>

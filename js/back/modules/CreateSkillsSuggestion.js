@@ -5,82 +5,127 @@ export default class CreateSkillsSuggestion {
         let _this = this;
         this.el = el;
         this.selectors = {
-            createPriority: "create-skills-suggestion",
-            removePriority: "remove-skills-suggestion"
+            createSuggestion: "create-skills-suggestion",
+            removeSuggestion: "remove-skills-suggestion",
+            createPriority: "create-skills-suggestion-priority"
         };
-        this.elements = {
-            container: el.querySelector(".suggestion")
-        };
-        this.elements.prioritiesContainer = this.elements.container.querySelector(".priorities");
-        this.elements.priorities = Array.from(this.elements.container.querySelectorAll(".priority"));
-        this.elements.actions = {
-            create: this.elements.container.querySelector(".actions .create-skills-suggestion"),
-            delete: this.elements.container.querySelector(".actions .remove-skills-suggestion")
-        };
-        this.elements.comments = {
-            fr: this.elements.container.querySelector(".fr-comment"),
-            en: this.elements.container.querySelector(".en-comment")
-        };
+        this.container = el.querySelector(".suggestions");
         this.index = 0;
-        this.priorities = [];
+        this.suggestions = [];
     
         document.addEventListener("click", function (e) {
             let target = e.target;
-        
-            if (helpers.hasClass(target, _this.selectors.createPriority)) {
-                _this.createPriority();
-            } else if (helpers.hasClass(target, _this.selectors.removePriority)) {
+            
+            if (helpers.hasClass(target, _this.selectors.createSuggestion)) {
+                _this.createSuggestion();
+            } else if (helpers.hasClass(target, _this.selectors.removeSuggestion)) {
                 let index = target.getAttribute("data-index");
-                _this.removePriority(index);
+                
+                _this.deleteSuggestion(index);
+            } else if (helpers.hasClass(target, _this.selectors.createPriority)) {
+                let index = target.getAttribute("data-index");
+                
+                _this.createPriority(index);
             }
         }, false);
     
         // Init elements
-        Array.from(this.elements.priorities).forEach(priority => {
-            _this.updatePriorities(priority);
+        this.getSuggestions().forEach((suggestion) => {
+            this._addSuggestion(suggestion);
         });
         
         return this;
     }
     
-    updatePriorities (element_0, element_1) {
-        this.priorities.push({
-            priorityElement: element_0,
-            removeElement: element_1
-        });
+    getSuggestions () {
+        return Array.from(this.container.querySelectorAll(".suggestion"));
     }
     
-    prepareData () {
-        return {
-            index: ++this.index
+    _addPriorities (index, HTMLElement) {
+        this.suggestions[index].priorities.push(HTMLElement);
+    }
+    
+    _addSuggestion (HTMLElement) {
+        let suggestion = {
+            suggestion: HTMLElement,
+            indexPriority: 0,
+            prioritiesContainer: HTMLElement.querySelector(".priorities"),
+            priorities: Array.from(HTMLElement.querySelectorAll(".priority")),
+            actions: {
+                create: HTMLElement.querySelector(".actions .create-skills-suggestion"),
+                delete: HTMLElement.querySelector(".actions .remove-skills-suggestion")
+            },
+            comments: {
+                fr: HTMLElement.querySelector(".fr-comment"),
+                en: HTMLElement.querySelector(".en-comment")
+            }
         };
+        
+        this.suggestions.push(suggestion);
     }
     
-    createPriority () {
-        let _this = this,
-            data = this.prepareData();
+    _removeSuggestion (index) {
+        this.suggestions[index] = {};
+    }
     
-        $.post("../../api/partials/add-skill-suggestion-priority", data, (response) => {
-            let HTMLElement = helpers.convertStringToDOMElement(response);
+    createSuggestion () {
+        let _this = this,
+            data = {
+                index: ++this.index,
+                indexPriority: 0,
+                starter: true
+            };
+    
+        $.post("../../api/partials/add-skills-suggestion", data, (response) => {
+            let HTMLElement = helpers.convertStringToDOMElement(response)[0];
             
-            _this.elements.prioritiesContainer.appendChild(HTMLElement[0]);
-            _this.elements.actions.create.parentElement.appendChild(HTMLElement[1]);
-            _this.updatePriorities(HTMLElement[0], HTMLElement[1]);
+            _this._addSuggestion(HTMLElement);
+            _this.container.appendChild(HTMLElement);
         });
     }
     
-    removePriority (index) {
-        this.priorities[index].priorityElement.remove();
-        this.priorities[index].removeElement.remove();
+    deleteSuggestion (index) {
+        this.suggestions[index].suggestion.remove();
+        this._removeSuggestion(index);
+    }
+    
+    createPriority (index) {
+        let _this = this,
+            data = {
+                index: index,
+                indexPriority: ++this.suggestions[index]["indexPriority"],
+                starter: false
+            };
+        
+        $.post("../../api/partials/add-skill-suggestion-priority", data, (response) => {
+            let HTMLElement = helpers.convertStringToDOMElement(response)[0];
+            
+            _this.suggestions[data.index].prioritiesContainer.appendChild(HTMLElement);
+            _this._addPriorities(data.index, HTMLElement);
+        });
     }
     
     getValue () {
-        return {
-            priorities: this.priorities.map(priority => priority.priorityElement.value),
-            comment: {
-                fr: this.elements.comments.fr.children[0].innerHTML.trim(),
-                en: this.elements.comments.en.children[0].innerHTML.trim()
-            }
-        };
+        let results = [];
+        
+        this.suggestions.forEach(suggestion => {
+            results.push({
+                priorities: (() => {
+                    let data = [];
+        
+                    suggestion.priorities.forEach(priority => {
+                        data.push(priority.value);
+                    });
+        
+                    return data;
+                })(),
+                comments: {
+                    fr: suggestion.comments.fr.children[0].innerHTML.trim(),
+                    en: suggestion.comments.en.children[0].innerHTML.trim()
+                }
+            });
+        });
+    
+        return results;
     }
 }

@@ -4,6 +4,7 @@ const autocompleteSuggestion = require("./partials/autocomplete-suggestion");
 const addThumbnailCosmoSuggestion = require("./partials/add-thumbnail-cosmo-suggestion");
 const generateModal = require("./partials/generateModal");
 const addCosmosSuggestion = require("./partials/add-cosmos-suggestion");
+const addSkillsSuggestion = require("./partials/add-skills-suggestion");
 
 module.exports = {
     addSkillSuggestionPriority,
@@ -11,5 +12,6 @@ module.exports = {
     autocompleteSuggestion,
     addThumbnailCosmoSuggestion,
     generateModal,
-    addCosmosSuggestion
+    addCosmosSuggestion,
+    addSkillsSuggestion
 };

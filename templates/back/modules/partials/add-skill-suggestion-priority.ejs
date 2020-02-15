@@ -1,8 +1,6 @@
-<input type="number" id="skill-priority-<%= index %>" class="form-control priority <%= index === 0 ? "" : "mt-2" %>" <%= index === 0 ? 'value=1111 readonly=readonly' : '' %> />
 <%
-    if (index !== 0) {
-        %>
-            <button type="button" data-index="<%= index %>" class="remove-skills-suggestion form-control remove not-full-width mt-3"><i class="material-icons">close</i></button>
-        <%
-    }
+    let numberIndex = Number(index);
+    let boolStarter = JSON.parse(starter);
 %>
+
+<input type="number" id="skill-priority-<%= index + "-" + indexPriority %>" class="form-control priority<%= !boolStarter ? " mt-2" : "" %><%= boolStarter ? " starter" : "" %>" <%= numberIndex === 0 ? 'value=1111 readonly=readonly' : '' %> />
