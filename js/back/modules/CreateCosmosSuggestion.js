@@ -152,7 +152,7 @@ export default class CreateCosmosSuggestion {
             
             _this.addElement(HTMLElement);
             _this.container.appendChild(HTMLElement);
-            // _this.transferStaticData(data.index);
+            _this.transferStaticData(data.index);
         });
     }
     
@@ -323,32 +323,32 @@ export default class CreateCosmosSuggestion {
         };
     }
     
-    // transferStaticData (index) {
-    //     // Move data
-    //     this.elements[index].name.fr.childNodes[1].innerText = this.elements[0].name.fr.innerText;
-    //     this.elements[index].name.en.childNodes[1].innerText = this.elements[0].name.en.innerText;
-    //     this.elements[index].comments.fr.childNodes[1].innerText = this.elements[0].comments.fr.innerText;
-    //     this.elements[index].comments.en.childNodes[1].innerText = this.elements[0].comments.en.innerText;
-    //     this.suggestions[index] = this.suggestions[0];
-    //
-    //     // Update view
-    //     for (let type in this.constants) {
-    //         this.getSuggestionThumbnails(0, this.constants[type]).forEach(element => {
-    //             element.remove();
-    //         });
-    //
-    //         if (this.suggestions[index][type]) {
-    //             this.updateSubmitIndex(index, this.constants[type]);
-    //         }
-    //     }
-    //
-    //     // Reset data
-    //     this.removeSuggestion(0);
-    //     this.elements[0].name.fr.childNodes[1].innerText = "";
-    //     this.elements[0].name.en.childNodes[1].innerText = "";
-    //     this.elements[0].comments.fr.childNodes[1].innerText = "";
-    //     this.elements[0].comments.en.childNodes[1].innerText = "";
-    // }
+    transferStaticData (index) {
+        // Move data
+        this.elements[index].name.fr.childNodes[1].innerText = this.elements[0].name.fr.innerText;
+        this.elements[index].name.en.childNodes[1].innerText = this.elements[0].name.en.innerText;
+        this.elements[index].comments.fr.childNodes[1].innerText = this.elements[0].comments.fr.innerText;
+        this.elements[index].comments.en.childNodes[1].innerText = this.elements[0].comments.en.innerText;
+        this.suggestions[index] = this.suggestions[0];
+        
+        // Update view
+        for (let type in this.constants) {
+            this.getSuggestionThumbnails(0, this.constants[type]).forEach(element => {
+                element.remove();
+            });
+            
+            if (this.suggestions[index][type]) {
+                this.updateSubmitIndex(index, this.constants[type]);
+            }
+        }
+        
+        // Reset data
+        this.removeSuggestion(0);
+        this.elements[0].name.fr.childNodes[1].innerText = "";
+        this.elements[0].name.en.childNodes[1].innerText = "";
+        this.elements[0].comments.fr.childNodes[1].innerText = "";
+        this.elements[0].comments.en.childNodes[1].innerText = "";
+    }
     
     updateSubmitIndex (index, type) {
         this.suggestions[index][type].modal.querySelector(".submit").setAttribute("data-index", index);
