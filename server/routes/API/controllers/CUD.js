@@ -9,19 +9,20 @@ const helpers = require("./_helpers");
 module.exports = (Model, type) => {
     return {
         create: function (req, res) {
-            let data = req.body.data;
-        
+            let data = req.body.data,
+            folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
+            
             /* Upload new cosmo image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
                 file: data.image,
                 public_id: data.slug,
-                folder: global.utils.translations[type].path,
-                allowed_formats: "jpeg,jpg,png",
+                folder: folder,
+                allowed_formats: "jpeg,jpg,png"
             });
         
             /* Upload translation files on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
-        
+            
             /* Create the new document into database */
             Model.create(helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural), (error, document) => {
                 if (error) {
@@ -42,13 +43,14 @@ module.exports = (Model, type) => {
         },
     
         update: function (req, res) {
-            let data = req.body.data;
+            let data = req.body.data,
+                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
         
             /* Update cosmo image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
                 file: data.image,
                 public_id: data.slug,
-                folder: global.utils.translations[type].path,
+                folder: folder,
                 allowed_formats: "jpeg,jpg,png",
             });
         
@@ -84,11 +86,12 @@ module.exports = (Model, type) => {
         },
     
         delete: function (req, res) {
-            let data = req.body.data;
+            let data = req.body.data,
+                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/" + data.slug) : global.utils.translations[type].path + data.slug;
         
             /* Delete cosmo image from CDN */
             helpers.deleteFileFromCDN(cloudinary, {
-                file: global.utils.translations[type].path + data.slug,
+                file: folder,
                 resource_type: "image"
             });
         

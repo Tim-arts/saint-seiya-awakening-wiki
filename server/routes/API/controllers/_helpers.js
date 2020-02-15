@@ -54,12 +54,13 @@ module.exports = {
         // Shared entry
         let name = data.slug_underscore + "_" + singularType + "_name";
         let enTranslation = {},
-            frTranslation = {};
+            frTranslation = {},
+            comment;
         
         switch (pluralType) {
             case "cosmos":
-                let description = data.slug_underscore + "_" + singularType + "_description",
-                    comment = data.slug_underscore + "_" + singularType + "_comment";
+                let description = data.slug_underscore + "_" + singularType + "_description";
+                comment = data.slug_underscore + "_" + singularType + "_comment";
     
                 enTranslation[[name]] = data.name.en;
                 enTranslation[[description]] = data.description.en;
@@ -101,7 +102,35 @@ module.exports = {
                 
                 break;
             case "saints":
+                comment = data.slug_underscore + "_" + singularType + "_description";
+    
+                enTranslation[[name]] = data.name.en;
+                enTranslation[[comment]] = data.comment.en;
                 
+                frTranslation[[name]] = data.name.fr;
+                frTranslation[[comment]] = data.comment.fr;
+                
+                if (data.cosmos_suggestions) {
+                    data.cosmos_suggestions.forEach((suggestion, i) => {
+                        let template_name_suggestion = data.slug_underscore + "_" + singularType + "_template_name_suggestion_" + i,
+                            comment_suggestion = data.slug_underscore + "_" + singularType + "_cosmos_suggestion_" + i;
+        
+                        enTranslation[[template_name_suggestion]] = suggestion.template_name.en;
+                        frTranslation[[template_name_suggestion]] = suggestion.template_name.fr;
+        
+                        enTranslation[[comment_suggestion]] = suggestion.comment.en;
+                        frTranslation[[comment_suggestion]] = suggestion.comment.fr;
+                    });
+                }
+                
+                if (data.skills_suggestions) {
+                    data.skills_suggestions.forEach((suggestion, i) => {
+                        let comment_suggestion = data.slug_underscore + "_" + singularType + "_skills__suggestion_" + i;
+        
+                        enTranslation[[comment_suggestion]] = suggestion.comment.en;
+                        frTranslation[[comment_suggestion]] = suggestion.comment.fr;
+                    });
+                }
                 
                 break;
             default:
@@ -141,6 +170,19 @@ module.exports = {
                 break;
             case "saints":
                 data.comment = data.slug_underscore + "_" + singularType +"_comment";
+    
+                if (data.cosmos_suggestions) {
+                    data.cosmos_suggestions.forEach((suggestion, i) => {
+                        data.cosmos_suggestions[i].template_name = data.slug_underscore + "_" + singularType + "_template_name_suggestion_" + i;
+                        data.cosmos_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_cosmos_suggestion_" + i;
+                    });
+                }
+    
+                if (data.skills_suggestions) {
+                    data.skills_suggestions.forEach((suggestion, i) => {
+                        data.skills_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_skills__suggestion_" + i;
+                    });
+                }
                 
                 break;
             default:

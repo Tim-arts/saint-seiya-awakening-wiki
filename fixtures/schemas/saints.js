@@ -26,16 +26,16 @@ const saints = {
         cosmos_suggestions: [
             {
                 "template_name": String,
-                "legendary": String,
-                "lunar": String,
-                "solar": String,
-                "star": String,
+                "solar": Array,
+                "lunar": Array,
+                "star": Array,
+                "legendary": Array,
                 "comments": String
             }
         ],
         skills_suggestions: [
             {
-                "priority": Array,
+                "priorities": Array,
                 "comment": String
             }
         ],

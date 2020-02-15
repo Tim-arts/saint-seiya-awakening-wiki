@@ -69,7 +69,7 @@ export default class CreateCosmosSuggestion {
                 create: HTMLElement.querySelector(".actions .create-suggestion"),
                 delete: HTMLElement.querySelector(".actions .remove-suggestion")
             },
-            comments: {
+            comment: {
                 fr: HTMLElement.querySelector(".fr-comment"),
                 en: HTMLElement.querySelector(".en-comment")
             }
@@ -386,8 +386,8 @@ export default class CreateCosmosSuggestion {
                     en: _this.elements[i].name.en.innerText
                 },
                 comment: {
-                    fr: _this.elements[i].comments.fr.innerText,
-                    en: _this.elements[i].comments.en.innerText
+                    fr: _this.elements[i].comment.fr.innerText,
+                    en: _this.elements[i].comment.en.innerText
                 }
             };
             

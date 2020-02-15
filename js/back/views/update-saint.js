@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "image": (() => {
-                return avatarElement.src === helpers.constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
+                return avatarElement.src === helpers.constants.urls.saint ? null : InputFileConstructor.options.img.src;
             })(),
             rank: document.getElementById("ranks").value,
             damage_type: document.getElementById("damage-types").value,

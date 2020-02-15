@@ -55,7 +55,7 @@ export default class CreateSkillsSuggestion {
                 create: HTMLElement.querySelector(".actions .create-skills-suggestion"),
                 delete: HTMLElement.querySelector(".actions .remove-skills-suggestion")
             },
-            comments: {
+            comment: {
                 fr: HTMLElement.querySelector(".fr-comment"),
                 en: HTMLElement.querySelector(".en-comment")
             }
@@ -119,9 +119,9 @@ export default class CreateSkillsSuggestion {
         
                     return data;
                 })(),
-                comments: {
-                    fr: suggestion.comments.fr.children[0].innerHTML.trim(),
-                    en: suggestion.comments.en.children[0].innerHTML.trim()
+                comment: {
+                    fr: suggestion.comment.fr.children[0].innerHTML.trim(),
+                    en: suggestion.comment.en.children[0].innerHTML.trim()
                 }
             });
         });
