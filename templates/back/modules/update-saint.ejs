@@ -295,6 +295,46 @@
 
     <div class="e-s-4"></div>
 
+    <%-
+        include("partials/image-composite", {
+            title: "Composite an avatar with a mask",
+            maxSize: "256kb",
+            ids: {
+                block: "composite-avatar-container",
+                avatar: {
+                    input: "composite-avatar-input",
+                    image: "composite-avatar-image"
+                },
+                mask: {
+                    input: "composite-avatar-mask-input",
+                    image: "composite-avatar-mask-image"
+                },
+                result: "composite-avatar-result",
+                process: "composite-avatar-process"
+            }
+        })
+    %>
+
+    <%-
+        include("partials/image-composite", {
+            title: "Add a large avatar and composite with a mask",
+            maxSize: "1mo",
+            ids: {
+                block: "composite-large-avatar-container",
+                avatar: {
+                    input: "composite-large-avatar-input",
+                    image: "composite-large-avatar-image"
+                },
+                mask: {
+                    input: "composite-large-avatar-mask-input",
+                    image: "composite-large-avatar-mask-image"
+                },
+                result: "composite-large-avatar-result",
+                process: "composite-large-avatar-process"
+            }
+        })
+    %>
+
     <div class="row mb-4">
         <div class="col-6">
             <label for="fr-comment">Partie commentaire (FR)</label>
@@ -303,29 +343,6 @@
         <div class="col-6">
             <label for="en-comment">Partie commentaire (EN)</label>
             <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <h2 class="h5 mt-0">Sharp the avatar from a mask</h2>
-        </div>
-        <div class="col-4 thumb-container large-display">
-            <label for="avatar-processed-input" class="pointer">Upload image <span class="small font-weight-bold">(max 1mo)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
-            <input type="file" id="avatar-processed-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
-            <img src="<%= cloudinary.url("resources/image.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" id="avatar-processed-image" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
-        </div>
-        <div class="col-4 thumb-container large-display">
-            <label for="avatar-mask-processed-input" class="pointer">Upload mask <span class="small font-weight-bold">(max 1mo)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
-            <input type="file" id="avatar-mask-processed-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
-            <img src="<%= cloudinary.url("resources/mask.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" id="avatar-mask-processed-image" class="img-fluid img big object-fit-contain rounded pointer" alt="Mask" />
-        </div>
-        <div class="col-4 thumb-container large-display result">
-            <label for="" class="pointer">Result</label>
-            <img src="<%= cloudinary.url("resources/image-mask-result.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" id="avatar-processed-result-image" class="img-fluid img big object-fit-contain rounded" alt="Avatar processed" />
-        </div>
-        <div class="col-12 text-center">
-            <button type="button" id="start-process-processing" class="custom-theme theme-1">Start image processing</button>
         </div>
     </div>
 

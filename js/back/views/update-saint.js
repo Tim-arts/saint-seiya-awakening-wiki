@@ -4,25 +4,19 @@ import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
 import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";
 import CreateSkillsSuggestion from "./../modules/CreateSkillsSuggestion";
+import CompositeImage from "./../modules/CompositeImages";
 import helpers from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
     let formElement = document.getElementById("update-saint");
-    
     let avatarInputFileElement = document.getElementById("avatar-input");
-    let avatarProcessedInputFileElement = document.getElementById("avatar-processed-input");
-    let avatarMaskProcessedInputFileElement = document.getElementById("avatar-mask-processed-input");
-    
     let avatarImgElement = document.getElementById("avatar-image");
-    let avatarProcessedImgElement = document.getElementById("avatar-processed-image");
-    let avatarMaskProcessedImgElement = document.getElementById("avatar-mask-processed-image");
-    let largeAvatarResultImgElement = document.getElementById("avatar-processed-result-image");
-    
     let modalElement = document.getElementById("response-modal");
     let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
     let skillsSuggestionsElement = document.getElementById("skills-suggestions");
-    let startProcessComposition = document.getElementById("start-process-processing");
+    let compositeAvatarElement = document.getElementById("composite-avatar-container");
+    let compositeLargeAvatarElement = document.getElementById("composite-large-avatar-container");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -63,21 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
         
         return data;
     })();
-    let hasChanged = false,
-        avatarImageResult;
+    let hasChanged = false;
     
     /* Constructors */
     let AvatarConstructor = new InputFile(avatarInputFileElement, {
         img: avatarImgElement,
         size: 256
     });
-    let AvatarProcessedConstructor = new InputFile(avatarProcessedInputFileElement, {
-        img: avatarProcessedImgElement,
-        size: 1024
+    let CompositeAvatarConstructor = new CompositeImage(InputFile, compositeAvatarElement, {
+        size: 1024,
+        updateThumbnail: helpers.updateThumbnail
     });
-    let AvatarMaskProcessedConstructor = new InputFile(avatarMaskProcessedInputFileElement, {
-        img: avatarMaskProcessedImgElement,
-        size: 1024
+    let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, compositeLargeAvatarElement, {
+        size: 1024,
+        updateThumbnail: helpers.updateThumbnail
     });
     let ModalConstructor = new Modal(modalElement);
     let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
@@ -108,9 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "image": (() => {
-                if (avatarImageResult) return avatarImageResult;
+                let value = CompositeAvatarConstructor.getValue();
+                if (value) return value;
+                
                 return avatarImgElement.src === helpers.constants.urls.saint ? null : AvatarConstructor.options.img.src;
             })(),
+            "largeImage": CompositeLargeAvatarConstructor.getValue(),
             "rank": document.getElementById("ranks").value,
             "damage_type": document.getElementById("damage-types").value,
             "focus": document.getElementById("focus").value,
@@ -145,19 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 hasChanged = false;
                 _data.messageAction();
             }
-        });
-    });
-    
-    startProcessComposition.addEventListener("click", () => {
-        let data = {
-            image: AvatarProcessedConstructor.options.img.src,
-            mask: AvatarMaskProcessedConstructor.options.img.src
-        };
-        
-        $.post("../../api/composite-image-with-mask", data, (response) => {
-            avatarImageResult = response.result;
-            
-            helpers.updateThumbnail(largeAvatarResultImgElement, response.result);
         });
     });
     
