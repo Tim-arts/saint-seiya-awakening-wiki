@@ -181,11 +181,7 @@
 
     <div class="row mb-4">
         <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h5 mt-0">Caractéristiques du saint</h2>
-                </div>
-            </div>
+            <h2 class="h5 mt-0">Caractéristiques du saint</h2>
         </div>
         <div class="col-12 mt-2">
             <div class="row">
@@ -253,11 +249,7 @@
 
     <div id="cosmos-suggestions" class="row elements-suggestions mb-4">
         <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 id="test" class="h5 mt-0">Ajouter une suggestion de cosmos</h2>
-                </div>
-            </div>
+            <h2 id="test" class="h5 mt-0">Ajouter une suggestion de cosmos</h2>
         </div>
         <div class="col-12 mt-2">
             <div class="row">
@@ -284,11 +276,7 @@
 
     <div id="skills-suggestions" class="elements-suggestions row mb-4">
         <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h5 mt-0">Ajouter une suggestion de compétences</h2>
-                </div>
-            </div>
+            <h2 class="h5 mt-0">Ajouter une suggestion de compétences</h2>
         </div>
         <div class="col-12 mt-2">
             <div class="row">
@@ -321,22 +309,23 @@
         </div>
     </div>
 
-    <div class="e-s-5"></div>
-
     <div class="row">
+        <div class="col-12">
+            <h2 class="h5 mt-0">Sharp the avatar from a mask</h2>
+        </div>
         <div class="col-4 thumb-container large-display">
-            <label for="large-avatar-input" class="pointer">Upload image <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+            <label for="large-avatar-input" class="pointer">Upload image <span class="small font-weight-bold">(max 1mo)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
             <input type="file" id="large-avatar-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
             <img src="<%= saintData.large_avatar %>" id="large-avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
         </div>
         <div class="col-4 thumb-container large-display">
-            <label for="large-avatar-mask-input" class="pointer">Upload mask <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+            <label for="large-avatar-mask-input" class="pointer">Upload mask <span class="small font-weight-bold">(max 1mo)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
             <input type="file" id="large-avatar-mask-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
-            <img src="<%= saintData.large_avatar_mask %>" id="large-avatar-mask" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+            <img src="<%= saintData.large_avatar_mask %>" id="large-avatar-mask" class="img-fluid img big object-fit-contain rounded pointer" alt="Mask" />
         </div>
-        <div class="col-4 thumb-container large-display">
+        <div class="col-4 thumb-container large-display result">
             <label for="" class="pointer">Result</label>
-            <img src="<%= saintData.large_avatar_result %>" id="large-avatar-result" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+            <img src="<%= saintData.large_avatar_result %>" id="large-avatar-result" class="img-fluid img big object-fit-contain rounded" alt="Avatar processed" />
         </div>
         <div class="col-12 text-center">
             <button type="button" id="start-process-processing" class="custom-theme theme-1">Start image processing</button>

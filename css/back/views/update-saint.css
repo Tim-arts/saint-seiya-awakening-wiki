@@ -874,7 +874,7 @@ form .thumb-container.large-display label {
   white-space: nowrap;
 }
 form .thumb-container.large-display img {
-  height: 256px;
+  height: 200px;
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
