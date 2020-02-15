@@ -39,6 +39,9 @@
             })()
         },
         image: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        large_avatar: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        large_avatar_mask: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        large_avatar_result: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
         ranks: () => {
             for (let i = 0, count = ranks.length; i < count; i++) {
                 let cleanType = convertToSlug(ranks[i], /[ ]/g),
@@ -315,6 +318,28 @@
         <div class="col-6">
             <label for="en-comment">Partie commentaire (EN)</label>
             <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
+        </div>
+    </div>
+
+    <div class="e-s-5"></div>
+
+    <div class="row">
+        <div class="col-4 thumb-container large-display">
+            <label for="large-avatar-input" class="pointer">Upload image <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+            <input type="file" id="large-avatar-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+            <img src="<%= saintData.large_avatar %>" id="large-avatar" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+        </div>
+        <div class="col-4 thumb-container large-display">
+            <label for="large-avatar-mask-input" class="pointer">Upload mask <span class="small font-weight-bold">(max 256kb)</span>: <span class="text-gold"><%= !locals.saint ? "default.png" : "" %></span></label>
+            <input type="file" id="large-avatar-mask-input" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+            <img src="<%= saintData.large_avatar_mask %>" id="large-avatar-mask" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+        </div>
+        <div class="col-4 thumb-container large-display">
+            <label for="" class="pointer">Result</label>
+            <img src="<%= saintData.large_avatar_result %>" id="large-avatar-result" class="img-fluid img big object-fit-contain rounded pointer" alt="Avatar" />
+        </div>
+        <div class="col-12 text-center">
+            <button type="button" id="start-process-composition" class="custom-theme theme-1">Start image composition</button>
         </div>
     </div>
 

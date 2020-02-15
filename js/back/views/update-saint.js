@@ -1,6 +1,5 @@
 require("./../base");
 
-import Sortable from "sortablejs";
 import InputFile from "./../modules/InputFile";
 import Modal from "./../../shared/modules/ModalResponse";
 import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";
@@ -11,10 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
     let formElement = document.getElementById("update-saint");
     let inputFileElement = document.getElementById("custom-file");
+    let largeAvatarElement = document.getElementById("large-avatar-input");
+    let largeAvatarMaskElement = document.getElementById("large-avatar-mask-input");
     let avatarElement = document.getElementById("avatar");
+    let largeAvatarImgElement = document.getElementById("large-avatar");
+    let largeAvatarMaskImgElement = document.getElementById("large-avatar-mask");
+    let largeAvatarResultElement = document.getElementById("large-avatar-result");
     let modalElement = document.getElementById("response-modal");
     let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
     let skillsSuggestionsElement = document.getElementById("skills-suggestions");
+    let startProcessComposition = document.getElementById("start-process-composition");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -58,9 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let hasChanged = false;
     
     /* Constructors */
-    let InputFileConstructor = new InputFile(inputFileElement, {
+    let AvatarConstructor = new InputFile(inputFileElement, {
         img: avatarElement,
         size: 256
+    });
+    let LargeAvatarConstructor = new InputFile(largeAvatarElement, {
+        img: largeAvatarImgElement,
+        size: 1024
+    });
+    let LargeAvatarMaskConstructor = new InputFile(largeAvatarMaskElement, {
+        img: largeAvatarMaskImgElement,
+        size: 1024
     });
     let ModalConstructor = new Modal(modalElement);
     let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
@@ -91,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "image": (() => {
-                return avatarElement.src === helpers.constants.urls.saint ? null : InputFileConstructor.options.img.src;
+                return avatarElement.src === helpers.constants.urls.saint ? null : AvatarConstructor.options.img.src;
             })(),
             rank: document.getElementById("ranks").value,
             damage_type: document.getElementById("damage-types").value,
@@ -127,6 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 hasChanged = false;
                 _data.messageAction();
             }
+        });
+    });
+    
+    startProcessComposition.addEventListener("click", () => {
+        let data = {
+            image: LargeAvatarConstructor.options.img.src,
+            mask: LargeAvatarMaskConstructor.options.img.src
+        };
+        
+        $.post("../../api/composite-image-with-mask", data, (response) => {
+            helpers.updateThumbnail(largeAvatarResultElement, response.result);
         });
     });
     

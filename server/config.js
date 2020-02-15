@@ -54,6 +54,8 @@ app.use('/api', routes.API.partials.addThumbnailCosmoSuggestion());
 app.use('/api', routes.API.partials.generateModal());
 app.use('/api', routes.API.partials.addCosmosSuggestion());
 app.use('/api', routes.API.partials.addSkillsSuggestion());
+/* Back-end processes */
+app.use('/api', routes.API.compositeImageWithMask());
 
 /* Back */
 app.use('/back', routes.back.home(router));

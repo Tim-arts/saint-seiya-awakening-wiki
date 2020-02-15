@@ -4,6 +4,7 @@ const skills = require("./skills");
 const cosmos = require("./cosmos");
 const controllers = require("./controllers");
 const partials = require("./partials");
+const compositeImageWithMask = require("./composite-image-with-mask");
 
 module.exports = {
     saints,
@@ -11,5 +12,6 @@ module.exports = {
     skills,
     cosmos,
     controllers,
-    partials
+    partials,
+    compositeImageWithMask
 };
