@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return data;
     })();
     let hasChanged = false;
-    let data;
     
     /* Constructors */
     let InputFileConstructor = new InputFile(inputFileElement, {
@@ -64,13 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
         size: 256
     });
     let ModalConstructor = new Modal(modalElement);
-    let SuggestionsContructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
-    let SkillsContructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
+    let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
+    let SkillsConstructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
     
     /* Events */
-    formElement.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
+    formElement.addEventListener("submit", () => {
         if (!hasChanged) {
             ModalConstructor.show({
                 message: "noChanges",
@@ -81,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        data = {
+        let data = {
             "_id": _data._id,
             "name": {
                 "en": document.getElementById("en-name").value,
@@ -100,8 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
             damage_type: document.getElementById("damage-types").value,
             focus: document.getElementById("focus").value,
             roles: helpers.getSelectMultipleValue("roles"),
-            cosmos_suggestions: SuggestionsContructor.getValue(),
-            skills_suggestions: SkillsContructor.getValue(),
+            cosmos_suggestions: SuggestionsConstructor.getValue(),
+            skills_suggestions: SkillsConstructor.getValue(),
             characteristics: {
                 [document.getElementById("saint-levels").value]: {
                     "hp": document.getElementById("characteristic-hp").value,

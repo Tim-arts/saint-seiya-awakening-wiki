@@ -32,6 +32,7 @@ export default class CreateCosmosSuggestion {
             
             if (helpers.hasClass(target, _this.selectors.triggerModal)) {
                 _this.triggerModal(target);
+                e.preventDefault();
             } else if (helpers.hasClass(target, _this.selectors.createSuggestion)) {
                 _this.createSuggestion();
             } else if (helpers.hasClass(target, _this.selectors.removeSuggestion)) {
@@ -42,8 +43,6 @@ export default class CreateCosmosSuggestion {
             } else if (helpers.hasClass(target, _this.selectors.removeThumbnail)) {
                 _this.removeSuggestionThumbnail(target);
             }
-            
-            e.preventDefault();
         }, false);
     
         // Init elements

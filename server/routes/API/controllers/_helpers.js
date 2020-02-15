@@ -101,6 +101,8 @@ module.exports = {
                 
                 break;
             case "saints":
+                
+                
                 break;
             default:
                 console.log("Type isn't recognized!");
@@ -138,6 +140,7 @@ module.exports = {
                 
                 break;
             case "saints":
+                data.comment = data.slug_underscore + "_" + singularType +"_comment";
                 
                 break;
             default:
