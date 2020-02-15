@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let modalElement = document.getElementById("response-modal");
     let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
     let skillsSuggestionsElement = document.getElementById("skills-suggestions");
-    let startProcessComposition = document.getElementById("start-process-composition");
+    let startProcessComposition = document.getElementById("start-process-processing");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
