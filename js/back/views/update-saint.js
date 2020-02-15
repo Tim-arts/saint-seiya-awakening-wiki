@@ -87,11 +87,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
+            "comment": {
+                "en": document.getElementById("en-comment").value,
+                "fr": document.getElementById("fr-comment").value
+            },
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "image": (() => {
                 return avatarElement.src === helpers.constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
-            })()
+            })(),
+            rank: document.getElementById("ranks").value,
+            damage_type: document.getElementById("damage-types").value,
+            focus: document.getElementById("focus").value,
+            roles: helpers.getSelectMultipleValue("roles"),
+            cosmos_suggestions: SuggestionsContructor.getValue(),
+            skills_suggestions: SkillsContructor.getValue(),
+            characteristics: {
+                [document.getElementById("saint-levels").value]: {
+                    "hp": document.getElementById("characteristic-hp").value,
+                    "p.atk": document.getElementById("characteristic-p.atk").value,
+                    "c.atk": document.getElementById("characteristic-c.atk").value,
+                    "p.def": document.getElementById("characteristic-p.def").value,
+                    "c.def": document.getElementById("characteristic-c.def").value,
+                    "speed": document.getElementById("characteristic-speed").value
+                }
+            }
         };
         
         $.post(formElement.getAttribute("action"), {

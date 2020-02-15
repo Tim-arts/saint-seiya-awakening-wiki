@@ -42,6 +42,8 @@ export default class CreateCosmosSuggestion {
             } else if (helpers.hasClass(target, _this.selectors.removeThumbnail)) {
                 _this.removeSuggestionThumbnail(target);
             }
+            
+            e.preventDefault();
         }, false);
     
         // Init elements
@@ -399,6 +401,7 @@ export default class CreateCosmosSuggestion {
             results.push(data);
         });
         
-        return results;
+        // If at least one suggestion has a thumbnail
+        return results = results.filter((r) => Object.keys(_this.constants).map(c => r[c]).some(r => typeof r === 'object'));
     }
 }

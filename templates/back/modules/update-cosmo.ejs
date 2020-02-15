@@ -62,7 +62,7 @@
                             selected = cleanAttribute === convertToSlug(cosmo.basic_attributes.types[0], /[ ]/g) ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-1-<%= cleanAttribute %>" value="<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 },
@@ -75,7 +75,7 @@
                             selected = cleanAttribute === convertToSlug(cosmo.basic_attributes.types[1], /[ ]/g) ? "selected": "";
                         }
                     %>
-                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                        <option id="cosmo-attribute-2-<%= cleanAttribute %>" value="<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                     <%
                     }
                 }
@@ -91,7 +91,7 @@
                         selected = cleanAttribute === convertToSlug(cosmo.bonus_attributes.type, /[ ]/g) ? "selected" : "";
                     }
                 %>
-                    <option id="type-<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
+                    <option id="type-<%= cleanAttribute %>" value="<%= cleanAttribute %>" <%= selected %>><%= attributes[i] %></option>
                 <%
                 }
             },
@@ -106,7 +106,7 @@
                     selected = cleanType === convertToSlug(cosmo.type, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
+                <option id="type-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= types[i] %></option>
             <%
             }
         },
@@ -136,7 +136,7 @@
                                                 selected = cosmo.obtainment_system[slug].map(v => v.toLowerCase()).indexOf(cleanEntry) > -1 ? "selected": "";
                                             }
                                             %>
-                                                <option id="entry-<%= cleanEntry %>" <%= selected %>><%= array[i] %></option>
+                                                <option id="entry-<%= cleanEntry %>" value="<%= cleanEntry %>" <%= selected %>><%= array[i] %></option>
                                             <%
                                         }
                                     %>

@@ -48,7 +48,7 @@
                     selected = cleanType === convertToSlug(saint.rank, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="rank-<%= cleanType %>" name="type-<%= cleanType %>" <%= selected %>><%= ranks[i] %></option>
+                <option id="rank-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= ranks[i] %></option>
             <%
             }
         },
@@ -61,7 +61,7 @@
                     selected = cleanType === convertToSlug(saint.damage_type, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="damage-type-<%= cleanType %>" name="damage-type-<%= cleanType %>" <%= selected %>><%= types[i] %></option>
+                <option id="damage-type-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= types[i] %></option>
             <%
             }
         },
@@ -74,7 +74,7 @@
                     selected = cleanType === convertToSlug(saint.focus, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="focus-<%= cleanType %>" name="focus-<%= cleanType %>" <%= selected %>><%= focus[i] %></option>
+                <option id="focus-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= focus[i] %></option>
             <%
             }
         },
@@ -87,7 +87,7 @@
                     selected = cleanType === convertToSlug(saint.roles, /[ ]/g) ? "selected": "";
                 }
             %>
-                <option id="role-<%= cleanType %>" name="focus-<%= cleanType %>" <%= selected %>><%= roles[i] %></option>
+                <option id="role-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= roles[i] %></option>
             <%
             }
         },

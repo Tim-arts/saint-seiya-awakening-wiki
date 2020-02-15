@@ -3,7 +3,7 @@ require("./../base");
 import InputFile from "./../modules/InputFile";
 import SelectVerification from "./../../front/modules/SelectVerification";
 import Modal from "./../../shared/modules/ModalResponse";
-import { constants, generateUuidv4, convertToSlug } from "../../shared/helpers";
+import helpers, { constants, generateUuidv4, convertToSlug } from "../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
     /* Elements */
@@ -84,14 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             "basic_attributes": {
                 "types": [
-                    (() => {
-                        let select = document.getElementById("cosmos-attributes-1");
-                        return select.options[select.selectedIndex].value.toLowerCase();
-                    })(),
-                    (() => {
-                        let select = document.getElementById("cosmos-attributes-2");
-                        return select.options[select.selectedIndex].value.toLowerCase();
-                    })()
+                    document.getElementById("cosmos-attributes-1").value,
+                    document.getElementById("cosmos-attributes-2").value
                 ],
                 "values": {
                     "SS": {
@@ -109,25 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             "bonus_attributes": {
-                "type": (() => {
-                    let select = document.getElementById("bonus-attributes");
-                    return select.options[select.selectedIndex].value.toLowerCase();
-                })(),
+                "type": document.getElementById("bonus-attributes").value,
                 "value": document.getElementById("bonus-attribute-value").value
             },
-            "type": (() => {
-                let select = document.getElementById("cosmos-types");
-                return select.options[select.selectedIndex].value.toLowerCase();
-            })(),
+            "type": document.getElementById("cosmos-types").value,
             "obtainment_system": {
-                "shrine": (() => {
-                    let select = document.getElementById("obtainment-system-shrine");
-                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
-                })(),
-                "titans": (() => {
-                    let select = document.getElementById("obtainment-system-titans");
-                    return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
-                })(),
+                "shrine": helpers.getSelectMultipleValue("obtainment-system-shrine"),
+                "titans": helpers.getSelectMultipleValue("obtainment-system-titans"),
                 "shop": !!document.getElementById("obtainment-system-shop").checked
             },
             "image": (() => {

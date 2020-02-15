@@ -109,5 +109,9 @@ module.exports = {
                 console.log(response);
             }
         });
+    },
+    getSelectMultipleValue (id) {
+        let select = document.getElementById(id);
+        return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
     }
 };

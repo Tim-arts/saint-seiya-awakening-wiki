@@ -480,6 +480,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -631,10 +633,16 @@ module.exports = {
         console.log(response);
       }
     });
+  },
+  getSelectMultipleValue: function getSelectMultipleValue(id) {
+    var select = document.getElementById(id);
+    return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
+      return e.value;
+    })) : null;
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":7,"@babel/runtime/helpers/interopRequireDefault":10,"@babel/runtime/regenerator":14}],5:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":7,"@babel/runtime/helpers/interopRequireDefault":10,"@babel/runtime/helpers/toConsumableArray":13,"@babel/runtime/regenerator":14}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"cookies-js":16}],2:[function(require,module,exports){
+},{"cookies-js":18}],2:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -140,12 +140,10 @@ function () {
 
 exports["default"] = InputFile;
 
-},{"./../../shared/helpers":5,"@babel/runtime/helpers/classCallCheck":9,"@babel/runtime/helpers/createClass":10,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":14}],3:[function(require,module,exports){
+},{"./../../shared/helpers":5,"@babel/runtime/helpers/classCallCheck":9,"@babel/runtime/helpers/createClass":10,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":15}],3:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
@@ -155,7 +153,7 @@ var _SelectVerification = _interopRequireDefault(require("./../../front/modules/
 
 var _ModalResponse = _interopRequireDefault(require("./../../shared/modules/ModalResponse"));
 
-var _helpers = require("../../shared/helpers");
+var _helpers = _interopRequireWildcard(require("../../shared/helpers"));
 
 require("./../base");
 
@@ -238,13 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "fr": document.getElementById("fr-comment").value
       },
       "basic_attributes": {
-        "types": [function () {
-          var select = document.getElementById("cosmos-attributes-1");
-          return select.options[select.selectedIndex].value.toLowerCase();
-        }(), function () {
-          var select = document.getElementById("cosmos-attributes-2");
-          return select.options[select.selectedIndex].value.toLowerCase();
-        }()],
+        "types": [document.getElementById("cosmos-attributes-1").value, document.getElementById("cosmos-attributes-2").value],
         "values": {
           "SS": {
             "level_10": [document.getElementById("ss-cosmos-attributes-value-1").value, document.getElementById("ss-cosmos-attributes-value-2").value]
@@ -255,29 +247,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       "bonus_attributes": {
-        "type": function () {
-          var select = document.getElementById("bonus-attributes");
-          return select.options[select.selectedIndex].value.toLowerCase();
-        }(),
+        "type": document.getElementById("bonus-attributes").value,
         "value": document.getElementById("bonus-attribute-value").value
       },
-      "type": function () {
-        var select = document.getElementById("cosmos-types");
-        return select.options[select.selectedIndex].value.toLowerCase();
-      }(),
+      "type": document.getElementById("cosmos-types").value,
       "obtainment_system": {
-        "shrine": function () {
-          var select = document.getElementById("obtainment-system-shrine");
-          return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
-            return e.value;
-          })) : null;
-        }(),
-        "titans": function () {
-          var select = document.getElementById("obtainment-system-titans");
-          return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
-            return e.value;
-          })) : null;
-        }(),
+        "shrine": _helpers["default"].getSelectMultipleValue("obtainment-system-shrine"),
+        "titans": _helpers["default"].getSelectMultipleValue("obtainment-system-titans"),
         "shop": !!document.getElementById("obtainment-system-shop").checked
       },
       "image": function () {
@@ -341,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-},{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/modules/ModalResponse":6,"./../base":1,"./../modules/InputFile":2,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":14}],4:[function(require,module,exports){
+},{"../../shared/helpers":5,"./../../front/modules/SelectVerification":4,"./../../shared/modules/ModalResponse":6,"./../base":1,"./../modules/InputFile":2,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/interopRequireWildcard":12}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -389,6 +365,8 @@ exports["default"] = SelectVerification;
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
 
@@ -541,10 +519,16 @@ module.exports = {
         console.log(response);
       }
     });
+  },
+  getSelectMultipleValue: function getSelectMultipleValue(id) {
+    var select = document.getElementById(id);
+    return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
+      return e.value;
+    })) : null;
   }
 };
 
-},{"@babel/runtime/helpers/asyncToGenerator":8,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/regenerator":15}],6:[function(require,module,exports){
+},{"@babel/runtime/helpers/asyncToGenerator":8,"@babel/runtime/helpers/interopRequireDefault":11,"@babel/runtime/helpers/toConsumableArray":15,"@babel/runtime/regenerator":17}],6:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -730,18 +714,74 @@ function _interopRequireDefault(obj) {
 
 module.exports = _interopRequireDefault;
 },{}],12:[function(require,module,exports){
+var _typeof = require("../helpers/typeof");
+
+function _getRequireWildcardCache() {
+  if (typeof WeakMap !== "function") return null;
+  var cache = new WeakMap();
+
+  _getRequireWildcardCache = function _getRequireWildcardCache() {
+    return cache;
+  };
+
+  return cache;
+}
+
+function _interopRequireWildcard(obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache();
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+module.exports = _interopRequireWildcard;
+},{"../helpers/typeof":16}],13:[function(require,module,exports){
 function _iterableToArray(iter) {
   if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
 module.exports = _iterableToArray;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
 module.exports = _nonIterableSpread;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -753,10 +793,28 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":7,"./iterableToArray":12,"./nonIterableSpread":13}],15:[function(require,module,exports){
+},{"./arrayWithoutHoles":7,"./iterableToArray":13,"./nonIterableSpread":14}],16:[function(require,module,exports){
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+},{}],17:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":17}],16:[function(require,module,exports){
+},{"regenerator-runtime":19}],18:[function(require,module,exports){
 /*
  * Cookies.js - 1.2.3
  * https://github.com/ScottHamper/Cookies
@@ -929,7 +987,7 @@ module.exports = require("regenerator-runtime");
         global.Cookies = cookiesExport;
     }
 })(typeof window === 'undefined' ? this : window);
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
