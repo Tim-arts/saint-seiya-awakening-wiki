@@ -348,7 +348,7 @@ small,
   box-shadow: 0 0 5px 0 #15151d;
 }
 .custom-theme.theme-5:hover {
-  box-shadow: 0 0 15px 8px #15151d;
+  box-shadow: 0 0 15px 4px #15151d;
 }
 .modal {
   cursor: pointer;
