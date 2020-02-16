@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const cloudinary = require("cloudinary").v2;
-const getJSON = require("get-json");
-
-// Import dependencies
-const helpers = require("./_helpers");
 
 // Import model
 const Saints = require("./../../../fixtures/models/saints");
@@ -27,54 +22,28 @@ module.exports = function () {
                 _id: _id
             }, (err, saint) => {
                 if (saint) {
-                    cloudinary.api.resources({
-                        public_ids: ".json",
-                        prefix: "translations/saints/" + saint.slug + "/",
-                        resource_type: "raw",
-                        type: "upload",
-                        max_results: 2
-                    }, (error, result) => {
-                        if (error) {
-                            console.log(error);
-                            
-                            return res.render("back/views/edit-saint", {
-                                characteristics: characteristics,
-                                focus: focus,
-                                ranks: ranks,
-                                roles: roles,
-                                types: types,
-                                cosmosTypes: cosmosTypes,
-                                saint: saint,
-                                locales: null
+                    function getCosmos () {
+                        return new Promise (resolve => {
+                            Cosmos.find({}, (err, cosmos) => {
+                                if (cosmos) {
+                                    resolve(cosmos);
+                                }
                             });
-                        }
-                        
-                        function getCosmos () {
-                            return new Promise (resolve => {
-                                Cosmos.find({}, (err, cosmos) => {
-                                    if (cosmos) {
-                                        resolve(cosmos);
-                                    }
-                                });
-                            });
-                        }
-                        
-                        if (result) {
-                            (async function render () {
-                                res.render("back/views/edit-saint", {
-                                    characteristics: characteristics,
-                                    focus: focus,
-                                    ranks: ranks,
-                                    roles: roles,
-                                    types: types,
-                                    cosmosTypes: cosmosTypes,
-                                    saint: saint,
-                                    cosmos: await getCosmos(),
-                                    locales: await helpers.getLocales(getJSON, result)
-                                });
-                            })();
-                        }
-                    });
+                        });
+                    }
+    
+                    (async function render () {
+                        res.render("back/views/edit-saint", {
+                            characteristics: characteristics,
+                            focus: focus,
+                            ranks: ranks,
+                            roles: roles,
+                            types: types,
+                            cosmosTypes: cosmosTypes,
+                            saint: saint,
+                            cosmos: await getCosmos()
+                        });
+                    })();
                 } else {
                     res.render("No saint to edit!");
                 }

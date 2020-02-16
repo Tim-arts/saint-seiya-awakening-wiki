@@ -11,32 +11,12 @@
     let saintData = {
         title: locals.saint ? "Modification de : <span class='text-green'>" + __(saint.name) + "</span>" : data.head.title,
         name: {
-            en: locals.saint ? locales[0][saint.slug_underscore + '_saint_name'] : "",
-            fr: locals.saint ? locales[1][saint.slug_underscore + '_saint_name'] : ""
+            en: locals.saint ? __({phrase: saint.name, locale: 'en'}) : "",
+            fr: locals.saint ? __({phrase: saint.name, locale: 'fr'}) : ""
         },
         comment: {
-            en: (() => {
-                let result = "";
-
-                if(locals.saint) {
-                    if (saint.comment) {
-                        result = locales[0][saint.slug_underscore + '_saint_comment'];
-                    }
-                }
-
-                return result;
-            })(),
-            fr: (() => {
-                let result = "";
-
-                if(locals.saint) {
-                    if (saint.comment) {
-                        result = locales[1][saint.slug_underscore + '_saint_comment'];
-                    }
-                }
-
-                return result;
-            })()
+            en: __({phrase: saint.comment, locale: 'en'}),
+            fr: __({phrase: saint.comment, locale: 'fr'})
         },
         image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {
             fetch_format: "auto", quality: "auto", secure: true
