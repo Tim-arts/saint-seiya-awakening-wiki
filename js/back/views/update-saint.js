@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "roles": helpers.getSelectMultipleValue("roles"),
             "cosmos_suggestions": SuggestionsConstructor.getValue(),
             "skills_suggestions": SkillsConstructor.getValue(),
-            "characteristics": {
-                [document.getElementById("saint-levels").value]: {
+            "characteristics": [
+                {
                     "hp": document.getElementById("characteristic-hp").value,
                     "p.atk": document.getElementById("characteristic-p.atk").value,
                     "c.atk": document.getElementById("characteristic-c.atk").value,
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "c.def": document.getElementById("characteristic-c.def").value,
                     "speed": document.getElementById("characteristic-speed").value
                 }
-            }
+            ]
         };
         
         $.post(formElement.getAttribute("action"), {

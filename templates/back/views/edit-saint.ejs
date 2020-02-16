@@ -33,22 +33,6 @@
         responseModalData = {
             title: "Warning!",
             id: "response-modal"
-        },
-        choicesSolarModalData = {
-            title: "Add cosmo(s)",
-            id: "autocomplete-solar-cosmos"
-        },
-        choicesLunarModalData = {
-            title: "Add cosmo(s)",
-            id: "autocomplete-lunar-cosmos"
-        },
-        choicesStarModalData = {
-            title: "Add cosmo(s)",
-            id: "autocomplete-star-cosmos"
-        },
-        choicesLegendaryModalData = {
-            title: "Add cosmo(s)",
-            id: "autocomplete-legendary-cosmos"
         };
     %>
     <%- include("./../layout/head", {head: data.head}) %>
@@ -64,9 +48,5 @@
             </div>
         </section>
         <%- include("./../modules/modal/response", {data: responseModalData}) %>
-        <%- include("./../modules/modal/choices", {data: choicesSolarModalData, cosmos: cosmos, type: "solar"}) %>
-        <%- include("./../modules/modal/choices", {data: choicesLunarModalData, cosmos: cosmos, type: "lunar"}) %>
-        <%- include("./../modules/modal/choices", {data: choicesStarModalData, cosmos: cosmos, type: "star"}) %>
-        <%- include("./../modules/modal/choices", {data: choicesLegendaryModalData, cosmos: cosmos, type: "legendary"}) %>
     </body>
 </html>

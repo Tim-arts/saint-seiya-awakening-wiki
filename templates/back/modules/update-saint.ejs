@@ -38,7 +38,9 @@
                 return result;
             })()
         },
-        image: locals.saint ? cloudinary.url("saints/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {
+            fetch_format: "auto", quality: "auto", secure: true
+        }) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
         ranks: () => {
             for (let i = 0, count = ranks.length; i < count; i++) {
                 let cleanType = convertToSlug(ranks[i], /[ ]/g),
@@ -84,7 +86,7 @@
                     selected;
 
                 if (locals.saint) {
-                    selected = cleanType === convertToSlug(saint.roles, /[ ]/g) ? "selected": "";
+                    selected = saint.roles.indexOf(cleanType) > -1 ? "selected": "";
                 }
             %>
                 <option id="role-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= roles[i] %></option>
@@ -92,46 +94,42 @@
             }
         },
         handle_skills: (object) => {
-            if (locals.saint || (locals.saint && !!!object.length)) {
-                for (let i = 0, count = object.length; i < count; i++) {
-                    let skill = object[i];
-
-                    %>
-                        <div class="col-<%= (12 / count) %>">
-                            <div class="main-skill">
-                                <img src="<%= cloudinary.url("skills/" + skill[i].slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Skill icon" />
-                                <span><%= __(skill.name) %></span>
-                            </div>
-                        </div>
-                    <%
-                }
-            } else {
+            if (!locals.saints || (locals.saint && !object) || (locals.saints && object.length === 0)) {
                 %>
                     <div class="col-12">
                         <div class="h6 text-white mb-0">Aucune compétence n'est actuellement liée !</div>
                     </div>
                 <%
+
+                return;
+            }
+
+            for (let i = 0, count = object.length; i < count; i++) {
+                let skill = object[i];
+                %>
+                    <div class="col-<%= (12 / count) %>">
+                        <div class="main-skill">
+                            <img src="<%= cloudinary.url("skills/" + skill[i].slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Skill icon" />
+                            <span><%= __(skill.name) %></span>
+                        </div>
+                    </div>
+                <%
             }
         },
         characteristics: {
-            levels: () => {
-                for (let i = 0, count = levels.length; i < count; i++) {
-                    let level = levels[i];
-
-                    %>
-                        <option id="level-<%= level %>" value="<%= level %>"><%= level %></option>
-                    <%
-                }
-            },
             generate_fields: () => {
                 for (let i = 0, count = characteristics.length; i < count; i++) {
                     let characteristic = characteristics[i],
-                        cleanCharacteristic = characteristic.toLowerCase();
+                        cleanCharacteristic = characteristic.toLowerCase(),
+                        value = "";
 
+                    if (locals.saint) {
+                        value = saint.characteristics[0][cleanCharacteristic];
+                    }
                     %>
                         <div class="col-1">
                             <label for="characteristic-<%= cleanCharacteristic %>"><%= characteristic %></label>
-                            <input type="number" id="characteristic-<%= cleanCharacteristic %>" class="form-control" />
+                            <input type="number" id="characteristic-<%= cleanCharacteristic %>" value="<%= value %>" class="form-control" />
                         </div>
                     <%
                 }
@@ -185,8 +183,8 @@
                 <div class="col-2">
                     <label for="saint-levels">Niveau</label>
                     <select id="saint-levels" class="custom-select form-control">
-                        <option selected disabled>Choose a level</option>
-                        <%= saintData.characteristics.levels() %>
+                        <option disabled>Choose a level</option>
+                        <option id="level-80" value="80" selected>80</option>
                     </select>
                 </div>
                 <%= saintData.characteristics.generate_fields() %>
@@ -219,7 +217,6 @@
         <div class="col-3 form-group">
             <label for="roles">Roles <a href="#" class="very-small">(RESET)</a></label>
             <select id="roles" class="custom-select form-control" multiple>
-                <option selected disabled>Choose an attribute</option>
                 <%= saintData.roles() %>
             </select>
         </div>
@@ -311,7 +308,8 @@
                 },
                 result: "composite-avatar-result",
                 process: "composite-avatar-process"
-            }
+            },
+            defaultImage: cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true})
         })
     %>
 
@@ -331,7 +329,8 @@
                 },
                 result: "composite-large-avatar-result",
                 process: "composite-large-avatar-process"
-            }
+            },
+            defaultImage: cloudinary.url("saints/" + saint.slug + "/large-image.png", {fetch_format: "auto", quality: "auto", secure: true})
         })
     %>
 

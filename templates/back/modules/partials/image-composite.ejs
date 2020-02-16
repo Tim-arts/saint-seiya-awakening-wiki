@@ -1,3 +1,7 @@
+<%
+    let baseImage = cloudinary.url("resources/image-mask-result.png", {fetch_format: "auto", quality: "auto", secure: true});
+%>
+
 <div id="<%= ids.block %>" class="row">
     <div class="col-12">
         <h2 class="h5 mt-0"><%= title %></h2>
@@ -14,7 +18,7 @@
     </div>
     <div class="col-4 thumb-container large-display result">
         <label for="<%= ids.result %>" class="pointer">Result</label>
-        <img src="<%= cloudinary.url("resources/image-mask-result.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" id="<%= ids.result %>" class="img-fluid img big object-fit-contain rounded" alt="Avatar processed" />
+        <img src="<%= defaultImage ? defaultImage : baseImage %>" id="<%= ids.result %>" class="img-fluid img big object-fit-contain rounded" alt="Avatar processed" />
     </div>
     <div class="col-12 text-center">
         <button type="button" id="<%= ids.process %>" class="process custom-theme theme-1">Start image processing</button>

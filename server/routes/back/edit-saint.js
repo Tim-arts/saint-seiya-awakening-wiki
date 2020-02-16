@@ -8,10 +8,18 @@ const helpers = require("./_helpers");
 
 // Import model
 const Saints = require("./../../../fixtures/models/saints");
+const Cosmos = require("./../../../fixtures/models/cosmos");
 
 module.exports = function () {
     // Route: /back/update-saint/:id
     router.get('/update-saint/:id', function (req, res) {
+        const characteristics = require("./../../../fixtures/data/modules/saints-characteristics");
+        const focus = require("./../../../fixtures/data/modules/saints-focus");
+        const ranks = require("./../../../fixtures/data/modules/saints-ranks");
+        const roles = require("./../../../fixtures/data/modules/saints-roles");
+        const types = require("./../../../fixtures/data/modules/saints-types");
+        const cosmosTypes = require("./../../../fixtures/data/modules/cosmos-types");
+        
         if (req.params.id && req.params.id.length === 37) {
             const _id = req.params.id.substring(1);
     
@@ -28,17 +36,40 @@ module.exports = function () {
                     }, (error, result) => {
                         if (error) {
                             console.log(error);
-    
-                            res.render("back/views/edit-saint", {
+                            
+                            return res.render("back/views/edit-saint", {
+                                characteristics: characteristics,
+                                focus: focus,
+                                ranks: ranks,
+                                roles: roles,
+                                types: types,
+                                cosmosTypes: cosmosTypes,
                                 saint: saint,
                                 locales: null
+                            });
+                        }
+                        
+                        function getCosmos () {
+                            return new Promise (resolve => {
+                                Cosmos.find({}, (err, cosmos) => {
+                                    if (cosmos) {
+                                        resolve(cosmos);
+                                    }
+                                });
                             });
                         }
                         
                         if (result) {
                             (async function render () {
                                 res.render("back/views/edit-saint", {
+                                    characteristics: characteristics,
+                                    focus: focus,
+                                    ranks: ranks,
+                                    roles: roles,
+                                    types: types,
+                                    cosmosTypes: cosmosTypes,
                                     saint: saint,
+                                    cosmos: await getCosmos(),
                                     locales: await helpers.getLocales(getJSON, result)
                                 });
                             })();

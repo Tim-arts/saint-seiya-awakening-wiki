@@ -29,30 +29,21 @@ const saints = {
         additional_skills: Array,
         cosmos_suggestions: [
             {
-                "template_name": String,
-                "solar": Array,
-                "lunar": Array,
-                "star": Array,
-                "legendary": Array,
-                "comments": String
+                template_name: String,
+                solar: Array,
+                lunar: Array,
+                star: Array,
+                legendary: Array,
+                comments: String
             }
         ],
         skills_suggestions: [
             {
-                "priorities": Array,
-                "comment": String
+                priorities: Array,
+                comment: String
             }
         ],
-        characteristics: {
-            80: {
-                "hp": String,
-                "p.atk": String,
-                "c.atk": String,
-                "p.def": String,
-                "c.def": String,
-                "speed": String
-            }
-        }
+        characteristics: Array
     }
 };
 

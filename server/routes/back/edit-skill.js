@@ -29,7 +29,7 @@ module.exports = function () {
                         if (error) {
                             console.log(error);
                 
-                            res.render("back/views/edit-skill", {
+                            return res.render("back/views/edit-skill", {
                                 skill: skill,
                                 locales: null
                             });

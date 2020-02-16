@@ -12,7 +12,6 @@ module.exports = function () {
         const ranks = require("./../../../fixtures/data/modules/saints-ranks");
         const roles = require("./../../../fixtures/data/modules/saints-roles");
         const types = require("./../../../fixtures/data/modules/saints-types");
-        const levels = require("./../../../fixtures/data/modules/saints-levels");
         const cosmosTypes = require("./../../../fixtures/data/modules/cosmos-types");
         
         Cosmos.find({}, (err, cosmos) => {
@@ -23,7 +22,6 @@ module.exports = function () {
                     ranks: ranks,
                     roles: roles,
                     types: types,
-                    levels: levels,
                     cosmosTypes: cosmosTypes
                 });
             }
@@ -35,7 +33,6 @@ module.exports = function () {
                     ranks: ranks,
                     roles: roles,
                     types: types,
-                    levels: levels,
                     cosmos: cosmos,
                     cosmosTypes: cosmosTypes
                 });

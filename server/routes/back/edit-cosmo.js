@@ -33,7 +33,7 @@ module.exports = function () {
                         if (error) {
                             console.log(error);
     
-                            res.render("back/views/edit-cosmo", {
+                            return res.render("back/views/edit-cosmo", {
                                 attributes: attributes,
                                 types: types,
                                 cosmo: cosmo,
