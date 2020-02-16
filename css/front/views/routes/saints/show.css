@@ -356,6 +356,18 @@ small,
   color: #fff;
   border-radius: 4px;
 }
+.custom-theme.theme-5 {
+  color: #fff;
+  background-color: #15151d;
+  border-radius: 50%;
+  will-change: box-shadow;
+  transition: box-shadow 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  border: 2px solid #00EC98;
+  box-shadow: 0 0 5px 0 #15151d;
+}
+.custom-theme.theme-5:hover {
+  box-shadow: 0 0 15px 8px #15151d;
+}
 .modal {
   cursor: pointer;
 }

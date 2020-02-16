@@ -3,7 +3,8 @@ const cookies = require("cookies-js");
 document.addEventListener("DOMContentLoaded", () => {
     let sidebarToggleButton = document.getElementById("sidebar-collapse"),
         sidebar = document.getElementById("sidebar"),
-        languagesButtons = Array.from(document.querySelectorAll(".language"));
+        languagesButtons = Array.from(document.querySelectorAll(".language")),
+        goTopElement = document.getElementById("go-top");
     
     sidebarToggleButton.addEventListener("click", function () {
         let iconElement = this.querySelector("i");
@@ -26,5 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
             e.preventDefault();
         });
+    });
+    
+    goTopElement.addEventListener("click", () => {
+        $(sidebar.nextElementSibling).animate({
+            scrollTop: 0
+        }, 200);
     });
 });

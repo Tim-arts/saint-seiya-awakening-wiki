@@ -137,4 +137,19 @@
         .text-white();
         .rounded();
     }
+
+    &.theme-5 {
+        color: @white;
+        background-color: @grey-dark-2;
+        border-radius: @radius-circled;
+        will-change: box-shadow;
+        transition: box-shadow @time-transition-05 @transition-1;
+
+        .borders-green();
+        .box-shadow(0 0 5px 0, @grey-dark-2);
+
+        &:hover {
+            .box-shadow(0 0 15px 8px, @grey-dark-2);
+        }
+    }
 }

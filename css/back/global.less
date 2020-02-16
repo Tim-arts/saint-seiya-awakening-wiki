@@ -12,6 +12,7 @@ body {
     height: 100vh;
     align-items: stretch;
     perspective: 1500px;
+    overflow: hidden;
 
     #sidebar {
         width: @sidebar-width;
@@ -208,6 +209,26 @@ body {
                     border-color: @success !important;
                 }
             }
+        }
+    }
+}
+
+#go-top {
+    @size: 33px;
+
+    width: @size;
+    height: @size;
+    bottom: 16px; right: 38px;
+    position: fixed;
+
+    i {
+        font-size: 21px;
+        left: 4px; top: 4px;
+        position: absolute;
+        pointer-events: none;
+
+        &:focus {
+            outline: none;
         }
     }
 }

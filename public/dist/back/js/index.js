@@ -6,7 +6,8 @@ var cookies = require("cookies-js");
 document.addEventListener("DOMContentLoaded", function () {
   var sidebarToggleButton = document.getElementById("sidebar-collapse"),
       sidebar = document.getElementById("sidebar"),
-      languagesButtons = Array.from(document.querySelectorAll(".language"));
+      languagesButtons = Array.from(document.querySelectorAll(".language")),
+      goTopElement = document.getElementById("go-top");
   sidebarToggleButton.addEventListener("click", function () {
     var iconElement = this.querySelector("i");
 
@@ -27,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
       location.reload(true);
       e.preventDefault();
     });
+  });
+  goTopElement.addEventListener("click", function () {
+    $(sidebar.nextElementSibling).animate({
+      scrollTop: 0
+    }, 200);
   });
 });
 
