@@ -1030,4 +1030,8 @@ label[for="skills-suggestions"] span:last-child button[type="button"] i {
   position: relative;
   top: -1px;
 }
+select[multiple] {
+  min-height: 185px;
+  overflow-y: hidden;
+}
 /*# sourceMappingURL=update-saint.css.map */
