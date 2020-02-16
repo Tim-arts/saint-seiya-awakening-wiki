@@ -429,7 +429,7 @@ header nav .menu .lock-icon {
 header nav .menu form input {
   background-color: #2a2a40;
   border: 2px solid transparent;
-  border-radius: 50px;
+  border-radius: 50%;
   padding: 0.5rem;
   width: 40px;
   opacity: 0;
@@ -602,7 +602,7 @@ body {
   padding: 15px;
 }
 .wrapper #sidebar .sidebar-header img {
-  border-radius: 50px;
+  border-radius: 50%;
 }
 .wrapper #sidebar .sidebar-header h3 {
   margin-left: 15px;

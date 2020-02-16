@@ -175,9 +175,8 @@
 	"scarab_cosmo_comment": "",
 	"eagle_eye_cosmo_comment": "",
 	"arayashiki_shaka_saint_name": "Arayashiki Shaka",
-	"arayashiki_shaka_saint_skills__suggestion_0": "arayashiki_shaka_saint_skills_suggestion_0",
-	"arayashiki_shaka_saint_skills_suggestion_0": "PVE",
-	"arayashiki_shaka_saint_comment": "Arayashiki Shaka comment",
 	"arayashiki_shaka_saint_template_name_suggestion_0": "Basic",
-	"arayashiki_shaka_saint_cosmos_suggestion_0": "Suggestion comment"
+	"arayashiki_shaka_saint_comment_skills_suggestion_0": "PvE",
+	"arayashiki_shaka_saint_comment": "Arayashiki Shaka comment",
+	"arayashiki_shaka_saint_comment_cosmos_suggestion_0": "Suggestion comment 0"
 }

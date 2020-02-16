@@ -30,7 +30,7 @@ const saints = {
         cosmos_suggestions: [
             {
                 template_name: String,
-                comments: String,
+                comment: String,
                 elements: {
                     solar: Array,
                     lunar: Array,

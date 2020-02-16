@@ -113,7 +113,7 @@ module.exports = {
                 if (data.cosmos_suggestions) {
                     data.cosmos_suggestions.forEach((suggestion, i) => {
                         let template_name_suggestion = data.slug_underscore + "_" + singularType + "_template_name_suggestion_" + i,
-                            comment_suggestion = data.slug_underscore + "_" + singularType + "_cosmos_suggestion_" + i;
+                            comment_suggestion = data.slug_underscore + "_" + singularType + "_comment_cosmos_suggestion_" + i;
         
                         enTranslation[[template_name_suggestion]] = suggestion.template_name.en;
                         frTranslation[[template_name_suggestion]] = suggestion.template_name.fr;
@@ -125,7 +125,7 @@ module.exports = {
                 
                 if (data.skills_suggestions) {
                     data.skills_suggestions.forEach((suggestion, i) => {
-                        let comment_suggestion = data.slug_underscore + "_" + singularType + "_skills_suggestion_" + i;
+                        let comment_suggestion = data.slug_underscore + "_" + singularType + "_comment_skills_suggestion_" + i;
         
                         enTranslation[[comment_suggestion]] = suggestion.comment.en;
                         frTranslation[[comment_suggestion]] = suggestion.comment.fr;
@@ -174,13 +174,13 @@ module.exports = {
                 if (data.cosmos_suggestions) {
                     data.cosmos_suggestions.forEach((suggestion, i) => {
                         data.cosmos_suggestions[i].template_name = data.slug_underscore + "_" + singularType + "_template_name_suggestion_" + i;
-                        data.cosmos_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_cosmos_suggestion_" + i;
+                        data.cosmos_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_comment_cosmos_suggestion_" + i;
                     });
                 }
     
                 if (data.skills_suggestions) {
                     data.skills_suggestions.forEach((suggestion, i) => {
-                        data.skills_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_skills__suggestion_" + i;
+                        data.skills_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_comment_skills_suggestion_" + i;
                     });
                 }
                 

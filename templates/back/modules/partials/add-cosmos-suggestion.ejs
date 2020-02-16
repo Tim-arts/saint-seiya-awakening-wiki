@@ -1,6 +1,8 @@
 <%
     let numberIndex = Number(index);
     let starterClass = numberIndex === 0 ? " starter" : "";
+    let templateNameFrValue = locals.saint ? __({phrase: template_name, locale: 'fr'}) : "";
+    let templateNameEnValue = locals.saint ? __({phrase: template_name, locale: 'en'}) : "";
     let commentFrValue = locals.saint ? __({phrase: comment, locale: 'fr'}) : "";
     let commentEnValue = locals.saint ? __({phrase: comment, locale: 'en'}) : "";
 %>
@@ -12,10 +14,10 @@
                 <div class="py-1"><%= index %></div>
             </div>
             <div class="col-1 fr-name">
-                <div class="py-1" contenteditable="true" data-text="Berserk"></div>
+                <div class="py-1" contenteditable="true" data-text="Berserk"><%= templateNameFrValue %></div>
             </div>
             <div class="col-1 en-name">
-                <div class="py-1" contenteditable="true" data-text="Berserk"></div>
+                <div class="py-1" contenteditable="true" data-text="Berserk"><%= templateNameEnValue %></div>
             </div>
             <% cosmosTypes.forEach(type => { %>
                 <% type = type.toLowerCase() %>
