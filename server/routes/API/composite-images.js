@@ -5,8 +5,8 @@ const router = express.Router();
 const Jimp = require("jimp");
 
 module.exports = function () {
-    // Route: /api/composite-image-with-mask
-    router.post('/composite-image-with-mask', function(req, res) {
+    // Route: /api/composite-images
+    router.post('/composite-images', function(req, res) {
         let image = req.body.image;
         let mask = req.body.mask;
     

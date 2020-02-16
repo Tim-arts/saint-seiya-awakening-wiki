@@ -1,5 +1,11 @@
-<% let boolStarter = JSON.parse(starter) %>
-<div class="row suggestion<%= boolStarter ? " starter" : "" %>">
+<%
+    let numberIndex = Number(index);
+    let starterClass = numberIndex === 0 ? " starter" : "";
+    let commentFrValue = locals.saint ? __({phrase: comment, locale: 'fr'}) : "";
+    let commentEnValue = locals.saint ? __({phrase: comment, locale: 'en'}) : "";
+%>
+
+<div class="row suggestion<%= starterClass %>">
     <div class="col-12">
         <div class="row content">
             <div class="col-1 index">
@@ -14,12 +20,25 @@
             <% cosmosTypes.forEach(type => { %>
                 <% type = type.toLowerCase() %>
                 <div class="col-2 <%= type %>-cosmos">
-                    <%- include("add-thumbnail-cosmo-suggestion", {placeholder: true, type: type, index: index}) %>
+                    <%-
+                        include("add-thumbnail-cosmo-suggestion", {
+                            index: numberIndex,
+                            placeholder: true,
+                            type: type
+                        })
+                    %>
                     <%
                         if (locals.elements && locals.elements[type]) {
                             elements[type].forEach(element => {
                                 %>
-                                    <%- include("add-thumbnail-cosmo-suggestion", {placeholder: false, type: type, index: index, slug: element}) %>
+                                    <%-
+                                        include("add-thumbnail-cosmo-suggestion", {
+                                            placeholder: false,
+                                            type: type,
+                                            index: index,
+                                            slug: element
+                                        })
+                                    %>
                                 <%
                             });
                         }
@@ -27,17 +46,17 @@
                 </div>
             <% }) %>
             <div class="col-1 actions">
-                <% if (boolStarter) { %>
+                <% if (numberIndex === 0) { %>
                     <button type="button" class="create-cosmos-suggestion form-control not-full-width"><i class="material-icons">add</i></button>
                 <% } else { %>
                     <button type="button" data-index="<%= index %>" class="remove-cosmos-suggestion form-control remove not-full-width"><i class="material-icons">close</i></button>
                 <% } %>
             </div>
             <div class="col-6 fr-comment mt-3">
-                <div contenteditable="true" data-text="FR Comment..."></div>
+                <div contenteditable="true" data-text="FR Comment..."><%= commentFrValue %></div>
             </div>
             <div class="col-6 en-comment mt-3">
-                <div contenteditable="true" data-text="EN Comment..."></div>
+                <div contenteditable="true" data-text="EN Comment..."><%= commentEnValue %></div>
             </div>
         </div>
     </div>

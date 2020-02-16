@@ -30,17 +30,19 @@ const saints = {
         cosmos_suggestions: [
             {
                 template_name: String,
-                solar: Array,
-                lunar: Array,
-                star: Array,
-                legendary: Array,
-                comments: String
+                comments: String,
+                elements: {
+                    solar: Array,
+                    lunar: Array,
+                    star: Array,
+                    legendary: Array,
+                }
             }
         ],
         skills_suggestions: [
             {
-                priorities: Array,
-                comment: String
+                comment: String,
+                priorities: Array
             }
         ],
         characteristics: Array

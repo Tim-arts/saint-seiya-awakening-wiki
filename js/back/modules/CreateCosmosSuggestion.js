@@ -55,19 +55,21 @@ export default class CreateCosmosSuggestion {
     }
     
     addElement (HTMLElement) {
-        let element = {
+        let object = {
             suggestion: HTMLElement,
             name: {
                 fr: HTMLElement.querySelector(".fr-name"),
                 en: HTMLElement.querySelector(".en-name")
             },
-            solar: HTMLElement.querySelector(".solar-cosmos"),
-            lunar: HTMLElement.querySelector(".lunar-cosmos"),
-            star: HTMLElement.querySelector(".star-cosmos"),
-            legendary: HTMLElement.querySelector(".legendary-cosmos"),
-            actions: {
-                create: HTMLElement.querySelector(".actions .create-suggestion"),
-                delete: HTMLElement.querySelector(".actions .remove-suggestion")
+            elements: {
+                solar: HTMLElement.querySelector(".solar-cosmos"),
+                lunar: HTMLElement.querySelector(".lunar-cosmos"),
+                star: HTMLElement.querySelector(".star-cosmos"),
+                legendary: HTMLElement.querySelector(".legendary-cosmos"),
+                actions: {
+                    create: HTMLElement.querySelector(".actions .create-cosmos-suggestion"),
+                    delete: HTMLElement.querySelector(".actions .remove-cosmos-suggestion")
+                }
             },
             comment: {
                 fr: HTMLElement.querySelector(".fr-comment"),
@@ -75,7 +77,7 @@ export default class CreateCosmosSuggestion {
             }
         };
         
-        this.elements.push(element);
+        this.elements.push(object);
     }
     
     removeElement (index) {
@@ -108,7 +110,7 @@ export default class CreateCosmosSuggestion {
     }
     
     getElementByIndexByType (index, type) {
-        return this.elements[index][type];
+        return this.elements[index].elements[type];
     }
     
     getSuggestions () {
@@ -175,7 +177,7 @@ export default class CreateCosmosSuggestion {
     }
     
     getSuggestionThumbnails (index, type) {
-        return Array.from(this.elements[index][type].querySelectorAll(".image-container:not(.placeholder)"))
+        return Array.from(this.elements[index].elements[type].querySelectorAll(".image-container:not(.placeholder)"))
     }
     
     removeSuggestionThumbnail (link) {
@@ -283,6 +285,7 @@ export default class CreateCosmosSuggestion {
                         }, (response) => {
                             let thumbnail = helpers.convertStringToDOMElement(response)[0],
                                 parent = _this.getElementByIndexByType(currentIndex, data.type);
+                            
                             parent.appendChild(thumbnail);
                             
                             return resolve();
@@ -328,8 +331,8 @@ export default class CreateCosmosSuggestion {
         // Move data
         this.elements[index].name.fr.childNodes[1].innerText = this.elements[0].name.fr.innerText;
         this.elements[index].name.en.childNodes[1].innerText = this.elements[0].name.en.innerText;
-        this.elements[index].comments.fr.childNodes[1].innerText = this.elements[0].comments.fr.innerText;
-        this.elements[index].comments.en.childNodes[1].innerText = this.elements[0].comments.en.innerText;
+        this.elements[index].comment.fr.childNodes[1].innerText = this.elements[0].comment.fr.innerText;
+        this.elements[index].comment.en.childNodes[1].innerText = this.elements[0].comment.en.innerText;
         this.suggestions[index] = this.suggestions[0];
         
         // Update view
@@ -347,8 +350,8 @@ export default class CreateCosmosSuggestion {
         this.removeSuggestion(0);
         this.elements[0].name.fr.childNodes[1].innerText = "";
         this.elements[0].name.en.childNodes[1].innerText = "";
-        this.elements[0].comments.fr.childNodes[1].innerText = "";
-        this.elements[0].comments.en.childNodes[1].innerText = "";
+        this.elements[0].comment.fr.childNodes[1].innerText = "";
+        this.elements[0].comment.en.childNodes[1].innerText = "";
     }
     
     updateSubmitIndex (index, type) {
@@ -388,12 +391,13 @@ export default class CreateCosmosSuggestion {
                 comment: {
                     fr: _this.elements[i].comment.fr.innerText,
                     en: _this.elements[i].comment.en.innerText
-                }
+                },
+                elements: {}
             };
             
             for (let type in _this.constants) {
                 if (suggestion[_this.constants[type]]) {
-                    data[_this.constants[type]] = suggestion[_this.constants[type]].choice.getValue(true);
+                    data.elements[_this.constants[type]] = suggestion[_this.constants[type]].choice.getValue(true);
                 }
             }
             
@@ -401,6 +405,6 @@ export default class CreateCosmosSuggestion {
         });
         
         // If at least one suggestion has a thumbnail
-        return results = results.filter((r) => Object.keys(_this.constants).map(c => r[c]).some(r => typeof r === 'object'));
+        return results = results.filter((r) => Object.keys(_this.constants).map(c => r.elements[c]).some(r => typeof r === 'object'));
     }
 }

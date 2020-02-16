@@ -9,7 +9,6 @@ module.exports = function () {
     router.post('/partials/add-cosmos-suggestion', function (req, res) {
         res.render("back/modules/partials/add-cosmos-suggestion", {
             index: req.body.index,
-            starter: req.body.starter,
             elements: req.body.elements,
             cosmosTypes: types
         });

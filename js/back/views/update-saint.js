@@ -119,10 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
             "characteristics": [
                 {
                     "hp": document.getElementById("characteristic-hp").value,
-                    "p.atk": document.getElementById("characteristic-p.atk").value,
-                    "c.atk": document.getElementById("characteristic-c.atk").value,
-                    "p.def": document.getElementById("characteristic-p.def").value,
-                    "c.def": document.getElementById("characteristic-c.def").value,
+                    "p-atk": document.getElementById("characteristic-p.atk").value,
+                    "c-atk": document.getElementById("characteristic-c.atk").value,
+                    "p-def": document.getElementById("characteristic-p.def").value,
+                    "c-def": document.getElementById("characteristic-c.def").value,
                     "speed": document.getElementById("characteristic-speed").value
                 }
             ]
@@ -151,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
         hasChanged = true;
     });
     window.onbeforeunload = () => {
-        console.log(hasChanged);
         if (hasChanged) {
             return true;
         }

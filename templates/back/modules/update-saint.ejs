@@ -119,17 +119,17 @@
         characteristics: {
             generate_fields: () => {
                 for (let i = 0, count = characteristics.length; i < count; i++) {
-                    let characteristic = characteristics[i],
-                        cleanCharacteristic = characteristic.toLowerCase(),
-                        value = "";
+                    let characteristic = characteristics[i].toLowerCase(),
+                        cleanCharacteristic = convertToSlug(characteristic, /[. ]/g),
+                        value;
 
                     if (locals.saint) {
                         value = saint.characteristics[0][cleanCharacteristic];
                     }
                     %>
                         <div class="col-1">
-                            <label for="characteristic-<%= cleanCharacteristic %>"><%= characteristic %></label>
-                            <input type="number" id="characteristic-<%= cleanCharacteristic %>" value="<%= value %>" class="form-control" />
+                            <label for="characteristic-<%= characteristic %>"><%= characteristics[i] %></label>
+                            <input type="number" id="characteristic-<%= characteristic %>" value="<%= value %>" class="form-control" />
                         </div>
                     <%
                 }
@@ -260,7 +260,35 @@
                     </div>
                 </div>
                 <div class="col-12 suggestions">
-                    <%- include("partials/add-cosmos-suggestion", {index: "0", starter: true}) %>
+                    <% if (!locals.saint) { %>
+                        <%-
+                            include("partials/add-cosmos-suggestion", {
+                                index: 0
+                            })
+                        %>
+                    <% } else if (saint.cosmos_suggestions.length === 1) { %>
+                        <%-
+                            include("partials/add-cosmos-suggestion", {
+                                index: 0,
+                                elements: saint.cosmos_suggestions[0].elements,
+                                comment: saint.cosmos_suggestions[0].comment
+                            })
+                        %>
+                    <% } else { %>
+                        <%
+                            saint.cosmos_suggestions.forEach((suggestion, i) => {
+                                %>
+                                    <%-
+                                        include("partials/add-cosmos-suggestion", {
+                                            index: i,
+                                            elements: suggestion.elements,
+                                            comment: suggestion.comment
+                                        })
+                                    %>
+                                <%
+                            });
+                        %>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -284,7 +312,35 @@
                     </div>
                 </div>
                 <div class="col-12 suggestions">
-                    <%- include("partials/add-skills-suggestion", {index: 0, indexPriority: 0, starter: true}) %>
+                    <% if (!locals.saint) { %>
+                        <%-
+                            include("partials/add-skills-suggestion", {
+                                index: 0
+                            })
+                        %>
+                    <% } else if (saint.skills_suggestions.length === 1) { %>
+                        <%-
+                            include("partials/add-skills-suggestion", {
+                                index: 0,
+                                priorities: saint.skills_suggestions[0].priorities,
+                                comment: saint.skills_suggestions[0].comment
+                            })
+                        %>
+                    <% } else { %>
+                        <%
+                            saint.skills_suggestions.forEach((suggestion, i) => {
+                                %>
+                                    <%-
+                                    include("partials/add-cosmos-suggestion", {
+                                        index: i,
+                                        priorities: suggestion.priorities,
+                                        comment: suggestion.comment
+                                    })
+                                    %>
+                                <%
+                            });
+                        %>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -293,7 +349,7 @@
     <div class="e-s-4"></div>
 
     <%-
-        include("partials/image-composite", {
+        include("partials/composite-images", {
             title: "Composite an avatar with a mask",
             maxSize: "256kb",
             ids: {
@@ -309,12 +365,12 @@
                 result: "composite-avatar-result",
                 process: "composite-avatar-process"
             },
-            defaultImage: cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true})
+            url: locals.saint ? "saints/" + saint.slug + "/" + saint.slug + ".png" : "resources/composite-images/image.png"
         })
     %>
 
     <%-
-        include("partials/image-composite", {
+        include("partials/composite-images", {
             title: "Add a large avatar and composite with a mask",
             maxSize: "1mo",
             ids: {
@@ -330,7 +386,7 @@
                 result: "composite-large-avatar-result",
                 process: "composite-large-avatar-process"
             },
-            defaultImage: cloudinary.url("saints/" + saint.slug + "/large-image.png", {fetch_format: "auto", quality: "auto", secure: true})
+            url: locals.saint ? "saints/" + saint.slug + "/large-image.png" : "resources/composite-images/image.png"
         })
     %>
 

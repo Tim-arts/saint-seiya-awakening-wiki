@@ -1,26 +1,51 @@
 <%
     let numberIndex = Number(index);
-    let numberIndexPriority = Number(indexPriority);
-    let boolStarter = JSON.parse(starter);
+    let starterClass = numberIndex === 0 ? " starter" : "";
+    let commentFrValue = locals.saint ? __({phrase: comment, locale: 'fr'}) : "";
+    let commentEnValue = locals.saint ? __({phrase: comment, locale: 'en'}) : "";
 %>
 
-<div class="row suggestion<%= boolStarter ? " starter" : "" %>">
+<div class="row suggestion<%= starterClass %>">
     <div class="col-12">
         <div class="row content">
             <div class="col-1 index"><%= index %></div>
             <div class="col-2 priorities">
-                <%- include("add-skill-suggestion-priority", {index: index, indexPriority: indexPriority, starter: boolStarter}) %>
-                <% if (numberIndexPriority === 0) { %>
+                <% if (!locals.saint) { %>
+                    <%-
+                        include("add-skill-suggestion-priority", {
+                            index: numberIndex,
+                            indexPriority: 0
+                        })
+                    %>
                     <button type="button" class="create-skills-suggestion-priority form-control not-full-width" data-index="<%= index %>">
                         <i class="material-icons">add</i>
                     </button>
+                <% } else { %>
+                    <%
+                        priorities.forEach((priority, i) => {
+                            %>
+                                <%-
+                                    include("add-skill-suggestion-priority", {
+                                        index: numberIndex,
+                                        indexPriority: i,
+                                        priority: priority
+                                    })
+                                %>
+                                <% if (i === 0) { %>
+                                    <button type="button" class="create-skills-suggestion-priority form-control not-full-width" data-index="<%= index %>">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                <% } %>
+                            <%
+                        });
+                    %>
                 <% } %>
             </div>
             <div class="col-4 fr-comment">
-                <div class="py-1" contenteditable="true" data-text="Comment..."></div>
+                <div class="py-1" contenteditable="true" data-text="Comment..."><%= commentFrValue %></div>
             </div>
             <div class="col-4 en-comment">
-                <div class="py-1" contenteditable="true" data-text="Comment..."></div>
+                <div class="py-1" contenteditable="true" data-text="Comment..."><%= commentEnValue %></div>
             </div>
             <div class="col-1 actions">
                 <% if (numberIndex === 0) { %>

@@ -125,7 +125,7 @@ module.exports = {
                 
                 if (data.skills_suggestions) {
                     data.skills_suggestions.forEach((suggestion, i) => {
-                        let comment_suggestion = data.slug_underscore + "_" + singularType + "_skills__suggestion_" + i;
+                        let comment_suggestion = data.slug_underscore + "_" + singularType + "_skills_suggestion_" + i;
         
                         enTranslation[[comment_suggestion]] = suggestion.comment.en;
                         frTranslation[[comment_suggestion]] = suggestion.comment.fr;

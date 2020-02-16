@@ -33,7 +33,7 @@ export default class CompositeImages {
                 mask: _this.constructors.mask.options.img.src
             };
 
-            $.post("../../api/composite-image-with-mask", data, (response) => {
+            $.post("../../api/composite-images", data, (response) => {
                 _this.result = response.result;
     
                 options.updateThumbnail(_this.elements.result, response.result);

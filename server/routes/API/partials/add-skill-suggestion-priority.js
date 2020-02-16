@@ -6,8 +6,7 @@ module.exports = function () {
     router.post("/partials/add-skill-suggestion-priority", function (req, res) {
         res.render("back/modules/partials/add-skill-suggestion-priority", {
             index: req.body.index,
-            indexPriority: req.body.indexPriority,
-            starter: req.body.starter
+            indexPriority: req.body.indexPriority
         });
     });
     
