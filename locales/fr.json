@@ -172,10 +172,5 @@
 	"scarab_cosmo_name": "Scarabée",
 	"scarab_cosmo_description": "Augmente la vie de 15% en combat et pour chaque tranche de 10% de vie perdue, augmente la réflexion de dégâts de 3% supplémentaires",
 	"scarab_cosmo_comment": "",
-	"eagle_eye_cosmo_comment": "",
-	"arayashiki_shaka_saint_template_name_suggestion_0": "Basique",
-	"arayashiki_shaka_saint_comment_skills_suggestion_0": "JcE",
-	"arayashiki_shaka_saint_name": "Shaka Arayashiki",
-	"arayashiki_shaka_saint_comment": "Commentaire sur Shaka Arayashiki",
-	"arayashiki_shaka_saint_comment_cosmos_suggestion_0": "Commentaire suggestion 0"
+	"eagle_eye_cosmo_comment": ""
 }
