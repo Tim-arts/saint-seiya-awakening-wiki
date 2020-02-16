@@ -29,7 +29,7 @@ const skills = {
         awakening_skill_id: String,
         isPassive: Boolean,
         linked_modified_skills: Array,
-        _timestamp: new Date.now()
+        _date: new Date.now()
     }
 };
 
