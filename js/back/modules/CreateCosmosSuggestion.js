@@ -46,9 +46,19 @@ export default class CreateCosmosSuggestion {
         }, false);
     
         // Init elements
-        this.suggestions[0] = {};
-        this.getSuggestions().forEach(suggestion => {
+        this.getSuggestions().forEach((suggestion, i) => {
+            let index = suggestion.getAttribute("data-index");
+            
             _this.addElement(suggestion);
+            
+            for (let type in _this.constants) {
+                let array = _this.getSuggestionThumbnails(index, _this.constants[type]);
+                
+                if (array.length > 0) {
+                    let target = _this.elements[i].elements[type].querySelector(".placeholder a");
+                    _this.triggerModal(target, true);
+                }
+            }
         });
         
         return this;
@@ -97,7 +107,11 @@ export default class CreateCosmosSuggestion {
                 this.suggestions[i] = null;
             }
         }
-    
+        
+        if (!this.suggestions[data.index]) {
+            this.suggestions[data.index] = {};
+        }
+        
         this.suggestions[data.index][data.type] = {
             modal: data.modal,
             choice: data.choice,
@@ -159,7 +173,7 @@ export default class CreateCosmosSuggestion {
         });
     }
     
-    triggerModal (link) {
+    triggerModal (link, init) {
         let index = link.getAttribute("data-index"),
             type = link.getAttribute("data-type");
         
@@ -173,7 +187,7 @@ export default class CreateCosmosSuggestion {
             return;
         }
         
-        this.makeModal(link);
+        this.makeModal(link, init);
     }
     
     getSuggestionThumbnails (index, type) {
@@ -212,18 +226,19 @@ export default class CreateCosmosSuggestion {
             title: "Add cosmo(s)",
         };
         data.modal.submitId = data.modal.id + "-submit";
+        data.selectedElements = this.getValues(link);
         
         return data;
     }
     
-    makeModal (link) {
+    makeModal (link, init) {
         let _this = this,
             data = this.prepareData(link);
         
         (async function process () {
             return new Promise(resolve => {
                 $.post("../../api/partials/generate-modal", data, (response) => {
-                    let elements = _this.createModal(data, link, response);
+                    let elements = _this.createModal(data, link, response, init);
                     
                     _this.addSuggestion({
                         index: data.index,
@@ -239,7 +254,7 @@ export default class CreateCosmosSuggestion {
         })();
     }
     
-    createModal (data, link, modalAsString) {
+    createModal (data, link, modalAsString, init) {
         let _this = this;
         let modal = helpers.convertStringToDOMElement(modalAsString)[0];
         let submit = modal.querySelector(".submit");
@@ -315,11 +330,14 @@ export default class CreateCosmosSuggestion {
         });
         
         document.body.appendChild(modal);
-        $(modal).modal({
-            show: true,
-            backdrop: "static",
-            keyboard: false
-        });
+        
+        if (!init) {
+            $(modal).modal({
+                show: true,
+                backdrop: "static",
+                keyboard: false
+            });
+        }
         
         return {
             modal: modal,
@@ -406,5 +424,9 @@ export default class CreateCosmosSuggestion {
         
         // If at least one suggestion has a thumbnail
         return results = results.filter((r) => Object.keys(_this.constants).map(c => r.elements[c]).some(r => typeof r === 'object'));
+    }
+    
+    getValues (link) {
+        return Array.from(link.parentElement.parentElement.querySelectorAll(".image-container:not(.placeholder)")).map(e => e.getAttribute("data-slug"));
     }
 }
