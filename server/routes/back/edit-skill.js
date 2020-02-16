@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const cloudinary = require("cloudinary").v2;
-const getJSON = require("get-json");
 
 // Import dependencies
 const helpers = require("./_helpers");
@@ -19,31 +17,11 @@ module.exports = function () {
                 _id: _id
             }, (err, skill) => {
                 if (skill) {
-                    cloudinary.api.resources({
-                        public_ids: ".json",
-                        prefix: "translations/skills/" + skill.slug + "/",
-                        resource_type: "raw",
-                        type: "upload",
-                        max_results: 2
-                    }, (error, result) => {
-                        if (error) {
-                            console.log(error);
-                
-                            return res.render("back/views/edit-skill", {
-                                skill: skill,
-                                locales: null
-                            });
-                        }
-            
-                        if (result) {
-                            (async function () {
-                                res.render("back/views/edit-skill", {
-                                    skill: await helpers.getSkillsModified(Skills, skill),
-                                    locales: await helpers.getLocales(getJSON, result)
-                                });
-                            })();
-                        }
-                    });
+                    (async function () {
+                        res.render("back/views/edit-skill", {
+                            skill: await helpers.getSkillsModified(Skills, skill)
+                        });
+                    })();
                 } else {
                     res.render("No skill to edit!");
                 }

@@ -11,36 +11,16 @@
     let cosmoData = {
         title: locals.cosmo ? "Modification de : <span class='text-green'>" + __(cosmo.name) + "</span>" : data.head.title,
         name: {
-            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_name'] : "",
-            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_name'] : ""
+            en: locals.cosmo ? __({phrase: cosmo.name, locale: 'en'}) : "",
+            fr: locals.cosmo ? __({phrase: cosmo.name, locale: 'fr'}) : ""
         },
         description: {
-            en: locals.cosmo ? locales[0][cosmo.slug_underscore + '_cosmo_description'] : "",
-            fr: locals.cosmo ? locales[1][cosmo.slug_underscore + '_cosmo_description'] : ""
+            en: locals.cosmo ? __({phrase: cosmo.description, locale: 'en'}) : "",
+            fr: locals.cosmo ? __({phrase: cosmo.description, locale: 'fr'}) : ""
         },
         comment: {
-            en: (() => {
-                let result = "";
-
-                if(locals.cosmo) {
-                    if (cosmo.comment) {
-                        result = locales[0][cosmo.slug_underscore + '_cosmo_comment'];
-                    }
-                }
-
-                return result;
-            })(),
-            fr: (() => {
-                let result = "";
-
-                if(locals.cosmo) {
-                    if (cosmo.comment) {
-                        result = locales[1][cosmo.slug_underscore + '_cosmo_comment'];
-                    }
-                }
-
-                return result;
-            })()
+            en: locals.cosmo ? __({phrase: cosmo.comment, locale: 'en'}) : "",
+            fr: locals.cosmo ? __({phrase: cosmo.comment, locale: 'fr'}) : ""
         },
         image: locals.cosmo ? cloudinary.url("cosmos/" + cosmo.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("cosmos/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
         basic_attributes: {

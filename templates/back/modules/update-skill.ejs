@@ -35,18 +35,18 @@
             }
         },
         name: {
-            en: locals.skill ? locales[0][skill.slug_underscore + '_skill_name'] : "",
-            fr: locals.skill ? locales[1][skill.slug_underscore + '_skill_name'] : ""
+            en: locals.skill ? __({phrase: skill.name, locale: 'en'}) : "",
+            fr: locals.skill ? __({phrase: skill.name, locale: 'fr'}) : ""
         },
         description: {
             main: {
-                en: locals.skill ? locales[0][skill.slug_underscore + '_skill_description_main'] : "",
-                fr: locals.skill ? locales[1][skill.slug_underscore + '_skill_description_main'] : ""
+                en: locals.skill ? __({phrase: skill.description.main, locale: 'en'}) : "",
+                fr: locals.skill ? __({phrase: skill.description.main, locale: 'fr'}) : ""
             },
             levels: () => {
                 for (let i = 1, count = 5; i <= count; i++) {
-                    let enDescription = locals.skill ? locales[0][skill.slug_underscore + '_skill_description_level_' + i] : "",
-                        frDescription = locals.skill ? locales[1][skill.slug_underscore + '_skill_description_level_' + i] : "";
+                    let enDescription = locals.skill ? __({phrase: skill.description.levels[i], locale: 'en'}) : "",
+                        frDescription = locals.skill ? __({phrase: skill.description.levels[i], locale: 'fr'}) : "";
                     %>
                         <div class="col-6 mb-4">
                             <label for="level-<%= i %>-description-fr">Description compétence niveau <%= i %> (FR)</label>
