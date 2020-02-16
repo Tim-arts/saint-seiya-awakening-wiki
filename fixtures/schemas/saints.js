@@ -46,7 +46,7 @@ const saints = {
             }
         ],
         characteristics: Array,
-        _date: new Date.now()
+        _date: Date.now()
     }
 };
 

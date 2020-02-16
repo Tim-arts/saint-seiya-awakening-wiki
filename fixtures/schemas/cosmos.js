@@ -58,7 +58,7 @@ const cosmos = {
             shop: Boolean
         },
         exclusive_cn: Boolean,
-        _date: new Date.now()
+        _date: Date.now()
     }
 };
 
