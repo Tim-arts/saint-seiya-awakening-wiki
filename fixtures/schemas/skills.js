@@ -28,8 +28,7 @@ const skills = {
         linked_saint_id: String,
         awakening_skill_id: String,
         isPassive: Boolean,
-        linked_modified_skills: Array,
-        _date: Date.now()
+        linked_modified_skills: Array
     }
 };
 

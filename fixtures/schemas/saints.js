@@ -45,8 +45,7 @@ const saints = {
                 priorities: Array
             }
         ],
-        characteristics: Array,
-        _date: Date.now()
+        characteristics: Array
     }
 };
 
