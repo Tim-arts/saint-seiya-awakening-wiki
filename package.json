@@ -1,6 +1,6 @@
 {
   "name": "saint-seiya-awakening-wiki",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "- Download the project in local from Github.\r - Install [Git](https://git-scm.com/download/win) on your machine and [Node.js](https://nodejs.org/en/).\r - Open the local project from an IDE and open the console.",
   "main": "build.js",
   "dependencies": {
