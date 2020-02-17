@@ -2,6 +2,12 @@ const cosmos = {
     name: "cosmos",
     template: {
         _id: String,
+        _date: {
+            type: "date"
+        },
+        lastUpdateTime: {
+            type: "date"
+        },
         name: {
             type: String,
             unique: true

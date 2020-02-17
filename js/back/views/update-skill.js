@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         data = {
             "_id": _data._id,
+            "_date": Date.now(),
+            "lastUpdateTime": Date.now(),
             "type": typesSkill.value,
             "name": {
                 "en": document.getElementById("en-name").value,

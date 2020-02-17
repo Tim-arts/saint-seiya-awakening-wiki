@@ -52,7 +52,8 @@ module.exports = (Model, type) => {
     
         update: function (req, res) {
             let data = req.body.data,
-                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
+                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path,
+                immutableFields = ["_date"];
         
             /* Update image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
@@ -69,6 +70,11 @@ module.exports = (Model, type) => {
                     allowed_formats: "jpeg,jpg,png",
                 });
             }
+            
+            // Prevent immutable/readonly fields to be updated when an update occurs
+            immutableFields.forEach(field => {
+                if (data[field]) delete data[field];
+            });
         
             /* Upload translation files on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);

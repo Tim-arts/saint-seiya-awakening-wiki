@@ -227,6 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var selectVerificationConstructor = new _SelectVerification["default"](document.querySelectorAll("select[required]"));
     var data = {
       "_id": _data._id,
+      "_date": Date.now(),
+      "lastUpdateTime": Date.now(),
       "name": {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value

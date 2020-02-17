@@ -2,7 +2,15 @@ const skills = {
     name: "skills",
     template: {
         _id: String,
-        type: {type: String},
+        _date: {
+            type: "date"
+        },
+        lastUpdateTime: {
+            type: "date"
+        },
+        type: {
+            type: String
+        },
         name: {
             type: String,
             unique: true
