@@ -80,6 +80,8 @@ module.exports = {
             method: "POST",
             dataType: 'json',
             success: async function (response) {
+                if (!response || response.length === 0) return options.update();
+                
                 function request () {
                     let data = response.data,
                         count = data.length;

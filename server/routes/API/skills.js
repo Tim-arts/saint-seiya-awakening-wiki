@@ -15,7 +15,7 @@ module.exports = function () {
         let data = req.body.data,
             regex = new RegExp(data, 'i');
         
-        Skills.find({_id: {$ne: req.body.$ne}, name: regex}, (err, skills) => {
+        Skills.find({_id: {$ne: req.body.$ne}, _name: regex}, (err, skills) => {
             if (err) {
                 res.json({
                     error: true,

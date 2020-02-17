@@ -15,7 +15,7 @@ module.exports = function () {
         let data = req.body.data,
             regex = new RegExp(data, 'i');
         
-        Saints.find({name: regex}, (err, saints) => {
+        Saints.find({_name: regex}, (err, saints) => {
             if (err) {
                 res.json({
                     error: true,

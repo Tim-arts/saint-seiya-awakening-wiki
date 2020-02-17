@@ -273,16 +273,24 @@ module.exports = {
                     });
                   };
 
+                  if (!(!response || response.length === 0)) {
+                    _context.next = 3;
+                    break;
+                  }
+
+                  return _context.abrupt("return", options.update());
+
+                case 3:
                   _context.t0 = options;
-                  _context.next = 4;
+                  _context.next = 6;
                   return request();
 
-                case 4:
+                case 6:
                   _context.t1 = _context.sent;
 
                   _context.t0.update.call(_context.t0, _context.t1);
 
-                case 6:
+                case 8:
                 case "end":
                   return _context.stop();
               }
@@ -316,9 +324,9 @@ module.exports = {
   },
   getSelectMultipleValue: function getSelectMultipleValue(id) {
     var select = document.getElementById(id);
-    return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
+    return (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
       return e.value;
-    })) : null;
+    }));
   }
 };
 
