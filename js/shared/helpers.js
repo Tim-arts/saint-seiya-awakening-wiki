@@ -91,7 +91,7 @@ module.exports = {
                     return new Promise (resolve => {
                         for (let i = 0; i < count; i++) {
                             $.post(options.partialUrl, {
-                                name: data[i].name
+                                name: data[i]._name
                             }, (response) => {
                                 data[i].div = response;
         
@@ -123,12 +123,12 @@ module.exports = {
         div.insertAdjacentElement("afterbegin", image);
         
         // Replace the name slugged from DB by the name from the AJAX response
-        data.name = div.innerText;
+        data._name = div.innerText;
     
         return div;
     },
     getSelectMultipleValue (id) {
         let select = document.getElementById(id);
-        return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
+        return [...Array.from(select.querySelectorAll("option:checked"),e => e.value)];
     }
 };

@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -72,6 +72,7 @@ function () {
 
     _this.el = el;
     _this.options = options;
+    _this.options.size = _this.options.size * 1000;
     _this.$el = $(this.el);
     _this.label = this.el.previousElementSibling.nodeName === 'LABEL';
 
@@ -90,8 +91,8 @@ function () {
       var files = this.files,
           fileName;
 
-      if (!_this.checkFilesSize(files)) {
-        alert.log("File too big!");
+      if (_this.checkFilesSize(files)) {
+        alert("File too big!");
         return;
       }
 
@@ -125,8 +126,7 @@ function () {
       var state = (0, _toConsumableArray2["default"])(files).map(function (x) {
         return x.size > _this2.options.size;
       });
-      state = state.indexOf(true) > -1;
-      return state;
+      return state.indexOf(true) > -1;
     }
   }, {
     key: "checkFilesAuthorizedFormat",
@@ -244,12 +244,12 @@ document.addEventListener("DOMContentLoaded", function () {
     data = {
       "_id": _data._id,
       "_date": Date.now(),
-      "lastUpdateTime": Date.now(),
-      "type": typesSkill.value,
-      "name": {
+      "_name": {
         "en": document.getElementById("en-name").value,
         "fr": document.getElementById("fr-name").value
       },
+      "lastUpdateTime": Date.now(),
+      "type": typesSkill.value,
       "slug": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
       "slug_underscore": _helpers["default"].convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
       "description": {
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
     onSelect: function onSelect(skill) {
       var imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
           imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png";
-      this.input.value = skill.name;
+      this.input.value = skill._name;
       this.input.setAttribute("data-serialize", skill._id);
 
       _helpers["default"].updateThumbnail(imageElement, imageSrc);
@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
       $.post("../../api/partials/linked-modified-skill", {
         _id: skill._id,
         slug: skill.slug,
-        name: skill.name
+        name: skill._name
       }, function (html) {
         skillsSortable.insertAdjacentHTML("beforeend", html);
         sortable.destroy();
@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
     onSelect: function onSelect(saint) {
       var imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
           imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/" + saint.slug + ".png";
-      this.input.value = saint.name;
+      this.input.value = saint._name;
       this.input.setAttribute("data-serialize", saint._id);
 
       _helpers["default"].updateThumbnail(imageElement, imageSrc);
@@ -464,7 +464,8 @@ document.addEventListener("DOMContentLoaded", function () {
       submitContent: "Confirm",
       submit: function submit() {
         _this.parentElement.parentElement.remove();
-      }
+      },
+      hideCloseButton: false
     });
   });
 
@@ -474,13 +475,11 @@ document.addEventListener("DOMContentLoaded", function () {
 },{"./../../shared/helpers":4,"./../../shared/modules/ModalResponse":5,"./../base":1,"./../modules/InputFile":2,"@babel/runtime/helpers/interopRequireDefault":10,"autocompleter":15,"sortablejs":18}],4:[function(require,module,exports){
 "use strict";
 
-var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
-
-var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
@@ -569,7 +568,7 @@ module.exports = {
       method: "POST",
       dataType: 'json',
       success: function () {
-        var _ref = (0, _asyncToGenerator2["default"])(
+        var _success = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/
         _regenerator["default"].mark(function _callee(response) {
           var request;
@@ -577,7 +576,7 @@ module.exports = {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  request = function _ref2() {
+                  request = function _ref() {
                     var data = response.data,
                         count = data.length;
 
@@ -588,7 +587,7 @@ module.exports = {
                     return new Promise(function (resolve) {
                       var _loop = function _loop(i) {
                         $.post(options.partialUrl, {
-                          name: data[i].name
+                          name: data[i]._name
                         }, function (response) {
                           data[i].div = response;
 
@@ -621,9 +620,11 @@ module.exports = {
           }, _callee);
         }));
 
-        return function success(_x) {
-          return _ref.apply(this, arguments);
-        };
+        function success(_x) {
+          return _success.apply(this, arguments);
+        }
+
+        return success;
       }(),
       error: function error(response) {
         console.log(response);
@@ -642,14 +643,14 @@ module.exports = {
 
     div.insertAdjacentElement("afterbegin", image); // Replace the name slugged from DB by the name from the AJAX response
 
-    data.name = div.innerText;
+    data._name = div.innerText;
     return div;
   },
   getSelectMultipleValue: function getSelectMultipleValue(id) {
     var select = document.getElementById(id);
-    return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
+    return (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
       return e.value;
-    })) : null;
+    }));
   }
 };
 
@@ -658,14 +659,14 @@ module.exports = {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var Modal =
 /*#__PURE__*/

@@ -266,7 +266,6 @@ export default class CreateCosmosSuggestion {
             searchResultLimit: 5,
             removeItems: true,
             removeItemButton: true,
-            itemSelectText: null,
             callbackOnCreateTemplates: () => {
                 return {
                     dropdown(classes, attr) {

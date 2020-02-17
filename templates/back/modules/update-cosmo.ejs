@@ -9,10 +9,10 @@
    }
 
     let cosmoData = {
-        title: locals.cosmo ? "Modification de : <span class='text-green'>" + __(cosmo.name) + "</span>" : data.head.title,
-        name: {
-            en: locals.cosmo ? __({phrase: cosmo.name, locale: 'en'}) : "",
-            fr: locals.cosmo ? __({phrase: cosmo.name, locale: 'fr'}) : ""
+        title: locals.cosmo ? "Modification de : <span class='text-green'>" + __(cosmo._name) + "</span>" : data.head.title,
+        _name: {
+            en: locals.cosmo ? __({phrase: cosmo._name, locale: 'en'}) : "",
+            fr: locals.cosmo ? __({phrase: cosmo._name, locale: 'fr'}) : ""
         },
         description: {
             en: locals.cosmo ? __({phrase: cosmo.description, locale: 'en'}) : "",
@@ -163,12 +163,12 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Rosaire" class="form-control" minlength="3" <%= locals.cosmo ? "readonly" : "" %> value="<%= cosmoData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Rosaire" class="form-control" minlength="3" <%= locals.cosmo ? "readonly" : "" %> value="<%= cosmoData._name.fr %>" />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Rosary" class="form-control" minlength="3" <%= locals.cosmo ? "readonly" : "" %> value="<%= cosmoData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Rosary" class="form-control" minlength="3" <%= locals.cosmo ? "readonly" : "" %> value="<%= cosmoData._name.en %>" required />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
             </div>

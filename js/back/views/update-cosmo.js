@@ -69,11 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let data = {
             "_id": _data._id,
             "_date": Date.now(),
-            "lastUpdateTime": Date.now(),
-            "name": {
+            "_name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
+            "lastUpdateTime": Date.now(),
             "slug": convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "description": {

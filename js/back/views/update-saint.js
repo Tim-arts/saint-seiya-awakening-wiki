@@ -94,11 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let data = {
             "_id": _data._id,
             "_date": Date.now(),
-            "lastUpdateTime": Date.now(),
-            "name": {
+            "_name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
+            "lastUpdateTime": Date.now(),
             "comment": {
                 "en": document.getElementById("en-comment").value,
                 "fr": document.getElementById("fr-comment").value
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "largeImage": CompositeLargeAvatarConstructor.getValue(),
             "rank": document.getElementById("ranks").value,
             "damage_type": document.getElementById("damage-types").value,
-            "focus": document.getElementById("focus").value,
+            "focus": helpers.getSelectMultipleValue("focus"),
             "roles": helpers.getSelectMultipleValue("roles"),
             "cosmos_suggestions": SuggestionsConstructor.getValue(),
             "skills_suggestions": SkillsConstructor.getValue(),

@@ -5,12 +5,12 @@ const saints = {
         _date: {
             type: "date"
         },
-        lastUpdateTime: {
-            type: "date"
-        },
-        name: {
+        _name: {
             type: String,
             unique: true
+        },
+        lastUpdateTime: {
+            type: "date"
         },
         slug: {
             type: String,
@@ -23,7 +23,7 @@ const saints = {
         comment: String,
         rank: String,
         damage_type: String,
-        focus: String,
+        focus: Array,
         roles: {
             type: Array,
             maxItems: 8

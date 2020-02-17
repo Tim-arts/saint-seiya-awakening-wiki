@@ -5,7 +5,7 @@
                 <%- cloudinary.image("saints/" + data.slug + "/full.png", {fetch_format: "auto", quality: "auto", secure: true}) %>
             </div>
             <p class="card-title text-center <%= data.rank.toLowerCase() + "-rank" %>">
-                <%= data.name %>
+                <%= __(data._name) %>
             </p>
         </div>
     </a>

@@ -5,15 +5,15 @@ const skills = {
         _date: {
             type: "date"
         },
+        _name: {
+            type: String,
+            unique: true
+        },
         lastUpdateTime: {
             type: "date"
         },
         type: {
             type: String
-        },
-        name: {
-            type: String,
-            unique: true
         },
         slug: {
             type: String,

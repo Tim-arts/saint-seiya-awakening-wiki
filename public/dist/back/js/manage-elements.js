@@ -255,7 +255,7 @@ module.exports = {
                     return new Promise(function (resolve) {
                       var _loop = function _loop(i) {
                         $.post(options.partialUrl, {
-                          name: data[i].name
+                          name: data[i]._name
                         }, function (response) {
                           data[i].div = response;
 
@@ -311,14 +311,14 @@ module.exports = {
 
     div.insertAdjacentElement("afterbegin", image); // Replace the name slugged from DB by the name from the AJAX response
 
-    data.name = div.innerText;
+    data._name = div.innerText;
     return div;
   },
   getSelectMultipleValue: function getSelectMultipleValue(id) {
     var select = document.getElementById(id);
-    return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
+    return (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {
       return e.value;
-    })) : null;
+    }));
   }
 };
 

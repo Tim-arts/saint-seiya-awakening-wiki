@@ -9,10 +9,10 @@
    }
 
     let saintData = {
-        title: locals.saint ? "Modification de : <span class='text-green'>" + __(saint.name) + "</span>" : data.head.title,
-        name: {
-            en: locals.saint ? __({phrase: saint.name, locale: 'en'}) : "",
-            fr: locals.saint ? __({phrase: saint.name, locale: 'fr'}) : ""
+        title: locals.saint ? "Modification de : <span class='text-green'>" + __(saint._name) + "</span>" : data.head.title,
+        _name: {
+            en: locals.saint ? __({phrase: saint._name, locale: 'en'}) : "",
+            fr: locals.saint ? __({phrase: saint._name, locale: 'fr'}) : ""
         },
         comment: {
             en: __({phrase: saint.comment, locale: 'en'}),
@@ -52,8 +52,8 @@
                 let cleanType = convertToSlug(focus[i], /[ ]/g),
                     selected;
 
-                if (locals.saint) {
-                    selected = cleanType === convertToSlug(saint.focus, /[ ]/g) ? "selected": "";
+                if (locals.saint && saint.focus[i]) {
+                    selected = cleanType === convertToSlug(saint.focus[i], /[ ]/g) ? "selected": "";
                 }
             %>
                 <option id="focus-<%= cleanType %>" value="<%= cleanType %>" <%= selected %>><%= focus[i] %></option>
@@ -133,12 +133,12 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Milo du Scorpion" class="form-control" minlength="3" <%= locals.saint ? "readonly" : "" %> value="<%= saintData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Milo du Scorpion" class="form-control" minlength="3" <%= locals.saint ? "readonly" : "" %> value="<%= saintData._name.fr %>" />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Scorpio Milo" class="form-control" minlength="3" <%= locals.saint ? "readonly" : "" %> value="<%= saintData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Scorpio Milo" class="form-control" minlength="3" <%= locals.saint ? "readonly" : "" %> value="<%= saintData._name.en %>" required />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
             </div>
@@ -189,8 +189,7 @@
         </div>
         <div class="col-3 form-group">
             <label for="focus">Focus <a href="#" class="very-small">(RESET)</a></label>
-            <select id="focus" class="custom-select form-control">
-                <option selected disabled>Choose an attribute</option>
+            <select id="focus" class="custom-select form-control h-auto" multiple>
                 <%= saintData.focus() %>
             </select>
         </div>

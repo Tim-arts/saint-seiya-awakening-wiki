@@ -62,11 +62,11 @@ module.exports = {
                 let description = data.slug_underscore + "_" + singularType + "_description";
                 comment = data.slug_underscore + "_" + singularType + "_comment";
     
-                enTranslation[[name]] = data.name.en;
+                enTranslation[[name]] = data._name.en;
                 enTranslation[[description]] = data.description.en;
                 enTranslation[[comment]] = data.comment.en;
     
-                frTranslation[[name]] = data.name.fr;
+                frTranslation[[name]] = data._name.fr;
                 frTranslation[[description]] = data.description.fr;
                 frTranslation[[comment]] = data.comment.fr;
                 
@@ -74,10 +74,10 @@ module.exports = {
             case "skills":
                 let mainDescription = data.slug_underscore + "_" + singularType + "_description_main";
     
-                enTranslation[[name]] = data.name.en;
+                enTranslation[[name]] = data._name.en;
                 enTranslation[[mainDescription]] = data.description.main.en;
     
-                frTranslation[[name]] = data.name.fr;
+                frTranslation[[name]] = data._name.fr;
                 frTranslation[[mainDescription]] = data.description.main.fr;
                 
                 if (data.type === "main") {
@@ -104,10 +104,10 @@ module.exports = {
             case "saints":
                 comment = data.slug_underscore + "_" + singularType + "_comment";
     
-                enTranslation[[name]] = data.name.en;
+                enTranslation[[name]] = data._name.en;
                 enTranslation[[comment]] = data.comment.en;
                 
-                frTranslation[[name]] = data.name.fr;
+                frTranslation[[name]] = data._name.fr;
                 frTranslation[[comment]] = data.comment.fr;
                 
                 if (data.cosmos_suggestions) {
@@ -149,9 +149,11 @@ module.exports = {
         this.uploadTranslations(cloudinary, enTranslation, frTranslation, folder);
     },
     formatData (data, singularType, pluralType) {
+        let propertiesToDelete = ["image"];
+        
         // If update, name has been removed because it's immutable
-        if (data.name) {
-            data.name = data.slug_underscore + "_" + singularType + "_name";
+        if (data._name) {
+            data._name = data.slug_underscore + "_" + singularType + "_name";
         }
         
         switch (pluralType) {
@@ -192,8 +194,11 @@ module.exports = {
             default:
                 console.log("Type isn't recognized!");
         }
+    
+        propertiesToDelete.forEach(property => {
+            if (data[property]) delete data[property];
+        });
         
-        delete data.image;
         return data;
     }
 };

@@ -86,12 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
         data = {
             "_id": _data._id,
             "_date": Date.now(),
-            "lastUpdateTime": Date.now(),
-            "type": typesSkill.value,
-            "name": {
+            "_name": {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
+            "lastUpdateTime": Date.now(),
+            "type": typesSkill.value,
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "description": {
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png";
             
-            this.input.value = skill.name;
+            this.input.value = skill._name;
             this.input.setAttribute("data-serialize", skill._id);
             helpers.updateThumbnail(imageElement, imageSrc);
         },
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
             $.post("../../api/partials/linked-modified-skill", {
                 _id: skill._id,
                 slug: skill.slug,
-                name: skill.name
+                name: skill._name
             }, (html) => {
                 skillsSortable.insertAdjacentHTML("beforeend", html);
                 
@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/" + saint.slug + ".png";
             
-            this.input.value = saint.name;
+            this.input.value = saint._name;
             this.input.setAttribute("data-serialize", saint._id);
             helpers.updateThumbnail(imageElement, imageSrc);
         },

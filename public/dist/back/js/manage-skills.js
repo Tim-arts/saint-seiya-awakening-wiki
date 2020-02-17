@@ -257,7 +257,7 @@ module.exports = {
                     return new Promise(function (resolve) {
                       var _loop = function _loop(i) {
                         $.post(options.partialUrl, {
-                          name: data[i].name
+                          name: data[i]._name
                         }, function (response) {
                           data[i].div = response;
 
@@ -311,7 +311,7 @@ module.exports = {
 
     div.insertAdjacentElement("afterbegin", image); // Replace the name slugged from DB by the name from the AJAX response
 
-    data.name = div.innerText;
+    data._name = div.innerText;
     return div;
   },
   getSelectMultipleValue: function getSelectMultipleValue(id) {

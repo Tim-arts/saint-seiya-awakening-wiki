@@ -50,6 +50,7 @@
     "fixtures": "node fixtures/handleFixtures.js -e true -a true",
     "mongodump": "mongodump --uri \"<connection_string>\" --out \"C:Users\\Tim\\Desktop\"",
     "mongoexport": "mongoexport --uri \"<connection_string>\" --pretty --collection collectionName --out \"C:\\Users\\Tim\\Desktop\\collectionName.json\" --jsonArray",
+    "mongoimport": "mongoimport --uri uri (without retryWrites and w arguments) --collection collectionName --file fileName.json --jsonArray",
     "download-file": "heroku ps:copy <file_path.file_ext> --app saint-seiya-awakening-wiki"
   },
   "repository": {

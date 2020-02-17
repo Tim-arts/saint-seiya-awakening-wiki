@@ -5,12 +5,12 @@ const cosmos = {
         _date: {
             type: "date"
         },
-        lastUpdateTime: {
-            type: "date"
-        },
-        name: {
+        _name: {
             type: String,
             unique: true
+        },
+        lastUpdateTime: {
+            type: "date"
         },
         description: String,
         comment: String,

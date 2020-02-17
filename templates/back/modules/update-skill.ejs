@@ -9,7 +9,7 @@
    }
 
     let skillData = {
-        title: locals.skill ? "Modification de : <span class='text-green'>" + __(skill.name) + "</span>" : data.head.title,
+        title: locals.skill ? "Modification de : <span class='text-green'>" + __(skill._name) + "</span>" : data.head.title,
         types_skill: () => {
             let types = [
                 {
@@ -34,9 +34,9 @@
                 <%
             }
         },
-        name: {
-            en: locals.skill ? __({phrase: skill.name, locale: 'en'}) : "",
-            fr: locals.skill ? __({phrase: skill.name, locale: 'fr'}) : ""
+        _name: {
+            en: locals.skill ? __({phrase: skill._name, locale: 'en'}) : "",
+            fr: locals.skill ? __({phrase: skill._name, locale: 'fr'}) : ""
         },
         description: {
             main: {
@@ -78,7 +78,7 @@
                         <%- include("partials/linked-modified-skill", {
                             _id: s._id,
                             slug: s.slug,
-                            name: __(s.name)
+                            name: __(s._name)
                         }) %>
                     <%
                 }
@@ -111,11 +111,11 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData._name.fr %>" />
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData._name.en %>" required />
                 </div>
             </div>
         </div>

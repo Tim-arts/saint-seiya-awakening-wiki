@@ -13,6 +13,7 @@ export default class InputFile {
 
         _this.el = el;
         _this.options = options;
+        _this.options.size = _this.options.size * 1000;
         _this.$el = $(this.el);
         _this.label = this.el.previousElementSibling.nodeName === 'LABEL';
         
@@ -31,8 +32,8 @@ export default class InputFile {
             let files = this.files,
                 fileName;
     
-            if (!_this.checkFilesSize(files)) {
-                alert.log("File too big!");
+            if (_this.checkFilesSize(files)) {
+                alert("File too big!");
         
                 return;
             }
@@ -62,9 +63,7 @@ export default class InputFile {
     
     checkFilesSize (files) {
         let state = [...files].map(x => x.size > this.options.size);
-        state = state.indexOf(true) > -1;
-        
-        return state;
+        return state.indexOf(true) > -1;
     }
     
     checkFilesAuthorizedFormat () {
