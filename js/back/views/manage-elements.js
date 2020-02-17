@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             elementParent.remove();
                         }
                     });
-                }
+                },
+                hideCloseButton: false
             });
         });
     });

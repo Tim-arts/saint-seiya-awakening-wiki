@@ -18,7 +18,7 @@ export default class Modal {
             successfullyAdded: "The item has been successfully added!",
             successfullyUpdated: "The item has been successfully updated!",
             deleteConfirmation: "Do you really want to delete this item?",
-            pendingTranslation: "You cannot edit an item with a pending translation, please restart the server to build all the associated translations, in order to be able to edit this item."
+            pendingTranslation: "You cannot edit an item with a pending translation, please build all the associated translations in order to be able to edit this item."
         };
         this.options = {};
         
@@ -36,7 +36,11 @@ export default class Modal {
         if (options.message) this.changeContent(options.message);
         if (options.submitContent) this.changeSubmitButton(options.submitContent);
         if (options.closeContent) this.changeCloseButton(options.closeContent);
-        if (options.hideCloseButton) this.hideCloseButton();
+        if (options.hideCloseButton) {
+            this.hideCloseButton();
+        } else {
+            this.showCloseButton();
+        }
         
         this.options = options;
         
@@ -64,6 +68,10 @@ export default class Modal {
     
     hideCloseButton () {
         this.closeButton.classList.add("hide");
+    }
+    
+    showCloseButton () {
+        this.closeButton.classList.remove("hide");
     }
     
     submit (submit) {
