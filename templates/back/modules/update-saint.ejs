@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Scorpio Milo" class="form-control" minlength="3" value="<%= saintData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Scorpio Milo" class="form-control" minlength="3" <%= locals.saint ? "readonly" : "" %> value="<%= saintData.name.en %>" required />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> Le nom doit correspondre à celui utilisé dans le jeu <span class="font-weight-bold">·</span></div>
                 </div>
             </div>

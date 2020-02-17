@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>
-                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" value="<%= skillData.name.en %>" required />
+                    <input type="text" id="en-name" name="en-name" placeholder="Ex: Great Eclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData.name.en %>" required />
                 </div>
             </div>
         </div>

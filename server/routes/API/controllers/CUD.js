@@ -53,7 +53,7 @@ module.exports = (Model, type) => {
         update: function (req, res) {
             let data = req.body.data,
                 folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path,
-                immutableFields = ["_date"];
+                immutableFields = ["_date", "name"];
         
             /* Update image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
