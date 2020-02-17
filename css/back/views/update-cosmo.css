@@ -886,6 +886,7 @@ form .thumb-container img {
   position: absolute;
   top: -40px;
   right: 15px;
+  border-radius: 50%;
   will-change: opacity;
   transition: opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
