@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         debounceWaitMs: 100,
         className: "skill",
         onSelect: function (skill) {
-            let imageElement = this.input.parentElement.parentElement.querySelector("img"),
+            let imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
                 imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + skill.slug + ".png";
             
             this.input.value = skill.name;
@@ -205,22 +205,17 @@ document.addEventListener("DOMContentLoaded", () => {
             helpers.updateThumbnail(imageElement, imageSrc);
         },
         fetch: (data, update) => {
-            let options = {
+            helpers.updateSuggestions({
                 ajaxUrl: "../../api/skills",
                 partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
                     data: data
                 },
                 update: update
-            };
-            
-            helpers.updateSuggestions(options);
+            });
         },
         render: (skill) => {
-            let div = helpers.convertStringToDOMElement(skill.div);
-            skill.name = div.innerHTML;
-            
-            return div;
+            return helpers.addThumbnailIntoContainer(skill);
         },
         customize: (input, inputRect, container) => {
             input.parentElement.appendChild(container);
@@ -254,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         },
         fetch: (data, update) => {
-            let options = {
+            helpers.updateSuggestions({
                 ajaxUrl: "../../api/skills",
                 partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
@@ -262,12 +257,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     $ne: _data._id
                 },
                 update: update
-            };
-    
-            helpers.updateSuggestions(options);
+            });
         },
         render: (skill) => {
-            return helpers.convertStringToDOMElement(skill.div);
+            return helpers.addThumbnailIntoContainer(skill);
         },
         customize: (input, inputRect, container) => {
             skillsSortable.appendChild(container);
@@ -282,30 +275,25 @@ document.addEventListener("DOMContentLoaded", () => {
         debounceWaitMs: 100,
         className: "saint",
         onSelect: function (saint) {
-            let imageElement = this.input.parentElement.parentElement.querySelector("img"),
-                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/thumbnail.png";
+            let imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
+                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/" + saint.slug + ".png";
             
             this.input.value = saint.name;
             this.input.setAttribute("data-serialize", saint._id);
             helpers.updateThumbnail(imageElement, imageSrc);
         },
         fetch: (data, update) => {
-            let options = {
+            helpers.updateSuggestions({
                 ajaxUrl: "../../api/saints",
                 partialUrl: "../../api/partials/autocomplete-suggestion",
                 data: {
                     data: data
                 },
                 update: update
-            };
-    
-            helpers.updateSuggestions(options);
+            });
         },
         render: (saint) => {
-            let div = helpers.convertStringToDOMElement(saint.div);
-            saint.name = div.innerHTML;
-    
-            return div;
+            return helpers.addThumbnailIntoContainer(saint, true);
         },
         customize: (input, inputRect, container) => {
             input.parentElement.appendChild(container);

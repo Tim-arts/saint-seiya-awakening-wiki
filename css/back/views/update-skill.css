@@ -776,6 +776,14 @@ body {
   will-change: background-color;
   transition: background-color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+.autocomplete .suggestion img {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: -3px;
+  border-radius: 50%;
+}
 .autocomplete .suggestion:hover,
 .autocomplete .suggestion.selected {
   background-color: #2b2b3b;

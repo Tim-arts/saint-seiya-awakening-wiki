@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
 var _require = require("./../../shared/helpers"),
     updateThumbnail = _require.updateThumbnail;
@@ -330,12 +330,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var SelectVerification =
 /**
@@ -372,11 +372,13 @@ exports["default"] = SelectVerification;
 },{"@babel/runtime/helpers/classCallCheck":9,"@babel/runtime/helpers/interopRequireDefault":11}],5:[function(require,module,exports){
 "use strict";
 
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
+
+var _regenerator = _interopRequireDefault2(require("@babel/runtime/regenerator"));
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
@@ -465,7 +467,7 @@ module.exports = {
       method: "POST",
       dataType: 'json',
       success: function () {
-        var _success = (0, _asyncToGenerator2["default"])(
+        var _ref = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/
         _regenerator["default"].mark(function _callee(response) {
           var request;
@@ -473,7 +475,7 @@ module.exports = {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  request = function _ref() {
+                  request = function _ref2() {
                     var data = response.data,
                         count = data.length;
 
@@ -517,16 +519,29 @@ module.exports = {
           }, _callee);
         }));
 
-        function success(_x) {
-          return _success.apply(this, arguments);
-        }
-
-        return success;
+        return function success(_x) {
+          return _ref.apply(this, arguments);
+        };
       }(),
       error: function error(response) {
         console.log(response);
       }
     });
+  },
+  addThumbnailIntoContainer: function addThumbnailIntoContainer(data, subfolder) {
+    var div = this.convertStringToDOMElement(data.div)[0],
+        image = document.createElement("img");
+
+    if (subfolder) {
+      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + data.slug + "/" + data.slug + ".png";
+    } else {
+      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + data.slug + ".png";
+    }
+
+    div.insertAdjacentElement("afterbegin", image); // Replace the name slugged from DB by the name from the AJAX response
+
+    data.name = div.innerText;
+    return div;
   },
   getSelectMultipleValue: function getSelectMultipleValue(id) {
     var select = document.getElementById(id);
@@ -541,14 +556,14 @@ module.exports = {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
-
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var Modal =
 /*#__PURE__*/

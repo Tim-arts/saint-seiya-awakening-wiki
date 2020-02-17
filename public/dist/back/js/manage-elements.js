@@ -298,6 +298,21 @@ module.exports = {
       }
     });
   },
+  addThumbnailIntoContainer: function addThumbnailIntoContainer(data, subfolder) {
+    var div = this.convertStringToDOMElement(data.div)[0],
+        image = document.createElement("img");
+
+    if (subfolder) {
+      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + data.slug + "/" + data.slug + ".png";
+    } else {
+      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + data.slug + ".png";
+    }
+
+    div.insertAdjacentElement("afterbegin", image); // Replace the name slugged from DB by the name from the AJAX response
+
+    data.name = div.innerText;
+    return div;
+  },
   getSelectMultipleValue: function getSelectMultipleValue(id) {
     var select = document.getElementById(id);
     return select.selectedIndex !== 0 ? (0, _toConsumableArray2["default"])(Array.from(select.querySelectorAll("option:checked"), function (e) {

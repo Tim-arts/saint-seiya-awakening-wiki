@@ -110,6 +110,23 @@ module.exports = {
             }
         });
     },
+    addThumbnailIntoContainer (data, subfolder) {
+        let div = this.convertStringToDOMElement(data.div)[0],
+            image = document.createElement("img");
+    
+        if (subfolder) {
+            image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + data.slug + "/" + data.slug + ".png";
+        } else {
+            image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + data.slug + ".png";
+        }
+        
+        div.insertAdjacentElement("afterbegin", image);
+        
+        // Replace the name slugged from DB by the name from the AJAX response
+        data.name = div.innerText;
+    
+        return div;
+    },
     getSelectMultipleValue (id) {
         let select = document.getElementById(id);
         return select.selectedIndex !== 0 ? [...Array.from(select.querySelectorAll("option:checked"),e => e.value)] : null;
