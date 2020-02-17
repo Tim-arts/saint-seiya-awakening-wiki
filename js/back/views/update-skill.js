@@ -308,7 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
             submitContent: "Confirm",
             submit: () => {
                 this.parentElement.parentElement.remove();
-            }
+            },
+            hideCloseButton: false
         });
     });
     
