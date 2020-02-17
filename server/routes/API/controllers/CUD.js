@@ -70,14 +70,14 @@ module.exports = (Model, type) => {
                     allowed_formats: "jpeg,jpg,png",
                 });
             }
-            
+        
+            /* Upload translation files on CDN */
+            helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
+    
             // Prevent immutable/readonly fields to be updated when an update occurs
             immutableFields.forEach(field => {
                 if (data[field]) delete data[field];
             });
-        
-            /* Upload translation files on CDN */
-            helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
             
             /* Update the document into database */
             Model.updateOne(

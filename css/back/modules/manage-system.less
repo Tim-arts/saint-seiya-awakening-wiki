@@ -72,21 +72,24 @@ h1 {
     }
 
     .element-container {
-        padding: 20px;
         border-radius: @radius-double @radius-double 0 0;
         height: 250px;
+
+        a {
+            padding: 20px;
+            display: block;
+        }
     }
 
     .element-tools {
         background-color: @black-alpha-1;
-        padding: 10px;
-        padding-bottom: 12px;
         border-radius: 0 0 @radius-double @radius-double;
         border: 2px solid @green-faded-3;
         border-top: 0;
 
         a {
             font-size: 12px;
+            padding: 10px;
             display: block;
         }
     }

@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="col-6">
                     <label for="fr-name">Name (FR)</label>
-                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" value="<%= skillData.name.fr %>" />
+                    <input type="text" id="fr-name" name="fr-name" placeholder="Ex: Grande Éclipse I" class="form-control" minlength="3" <%= locals.skill ? "readonly" : "" %> value="<%= skillData.name.fr %>" />
                 </div>
                 <div class="col-6">
                     <label for="en-name">Name (EN) <span class="font-weight-bold text-error">*</span></label>

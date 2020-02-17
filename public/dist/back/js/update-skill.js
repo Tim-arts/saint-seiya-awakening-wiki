@@ -688,7 +688,8 @@ function () {
       noChanges: "You haven't changed any data!",
       successfullyAdded: "The item has been successfully added!",
       successfullyUpdated: "The item has been successfully updated!",
-      deleteConfirmation: "Do you really want to delete this item?"
+      deleteConfirmation: "Do you really want to delete this item?",
+      pendingTranslation: "You cannot edit an item with a pending translation!"
     };
     this.options = {};
     $(document).on("click", this.submitButton, function (e) {

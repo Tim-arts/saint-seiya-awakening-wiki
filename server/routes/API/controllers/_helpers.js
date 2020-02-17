@@ -149,8 +149,10 @@ module.exports = {
         this.uploadTranslations(cloudinary, enTranslation, frTranslation, folder);
     },
     formatData (data, singularType, pluralType) {
-        // Shared entry
-        data.name = data.slug_underscore + "_" + singularType + "_name";
+        // If update, name has been removed because it's immutable
+        if (data.name) {
+            data.name = data.slug_underscore + "_" + singularType + "_name";
+        }
         
         switch (pluralType) {
             case "cosmos":

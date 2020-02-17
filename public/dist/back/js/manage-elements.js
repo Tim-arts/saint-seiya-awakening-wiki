@@ -97,6 +97,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   elements.forEach(function (element) {
+    element.addEventListener("click", function (e) {
+      var link = this.querySelector("a");
+
+      if (link.innerText.indexOf("_") > -1) {
+        ModalConstructor.show({
+          message: "pendingTranslation",
+          hideCloseButton: true
+        }); // Blocks redirection
+
+        e.preventDefault();
+      }
+    });
     element.querySelector("img").addEventListener("error", function () {
       this.src = _helpers.constants.urls.skill;
       this.onerror = null;
@@ -332,7 +344,8 @@ function () {
       noChanges: "You haven't changed any data!",
       successfullyAdded: "The item has been successfully added!",
       successfullyUpdated: "The item has been successfully updated!",
-      deleteConfirmation: "Do you really want to delete this item?"
+      deleteConfirmation: "Do you really want to delete this item?",
+      pendingTranslation: "You cannot edit an item with a pending translation!"
     };
     this.options = {};
     $(document).on("click", this.submitButton, function (e) {

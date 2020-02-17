@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     title: "Success!",
                     backdrop: "static",
                     submit: () => {
-                        console.log(hasChanged)
                         window.location.reload(true);
                     },
                     hideCloseButton: true

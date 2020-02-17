@@ -54,6 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     elements.forEach((element) => {
+        element.addEventListener("click", function (e) {
+            let link = this.querySelector("a");
+            
+            if (link.innerText.indexOf("_") > -1) {
+                ModalConstructor.show({
+                    message: "pendingTranslation",
+                    hideCloseButton: true
+                });
+                
+                // Blocks redirection
+                e.preventDefault();
+            }
+        });
         element.querySelector("img").addEventListener("error", function () {
             this.src = constants.urls.skill;
             this.onerror = null;
