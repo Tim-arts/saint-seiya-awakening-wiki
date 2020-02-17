@@ -709,16 +709,16 @@ body {
 .wrapper #content form label.pointer:hover {
   color: #fff;
 }
-.wrapper #content form label ~ .small {
-  font-size: 10px;
-  color: #f6e5a1;
-}
 .wrapper #content form textarea {
   min-height: 100px;
 }
 .wrapper #content form button[type="button"].align-center {
   transform: translateY(110%);
   position: relative;
+}
+.wrapper #content form .small {
+  font-size: 10px;
+  color: #f6e5a1;
 }
 .wrapper #content .form-control {
   color: #fff;

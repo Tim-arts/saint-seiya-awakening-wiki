@@ -575,7 +575,7 @@ function () {
       successfullyAdded: "The item has been successfully added!",
       successfullyUpdated: "The item has been successfully updated!",
       deleteConfirmation: "Do you really want to delete this item?",
-      pendingTranslation: "You cannot edit an item with a pending translation!"
+      pendingTranslation: "You cannot edit an item with a pending translation, please restart the server to build all the associated translations, in order to be able to edit this item."
     };
     this.options = {};
     $(document).on("click", this.submitButton, function (e) {

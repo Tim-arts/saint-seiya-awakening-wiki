@@ -30,7 +30,8 @@ export default class CompositeImages {
         this.elements.process.addEventListener("click", () => {
             let data = {
                 image: _this.constructors.avatar.options.img.src,
-                mask: _this.constructors.mask.options.img.src
+                mask: _this.constructors.mask.options.img.src,
+                crop: options.crop
             };
 
             $.post("../../api/composite-images", data, (response) => {

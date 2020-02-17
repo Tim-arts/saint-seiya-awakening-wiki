@@ -84,14 +84,14 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/muli/v21/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/muli/v20/7Aulp_0qiz-aVz7u3PJLcUMYOFnOkEk30e0.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/materialicons/v53/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf) format('truetype');
 }
 .material-icons {
   font-family: 'Material Icons';
@@ -727,16 +727,16 @@ body {
 .wrapper #content form label.pointer:hover {
   color: #fff;
 }
-.wrapper #content form label ~ .small {
-  font-size: 10px;
-  color: #f6e5a1;
-}
 .wrapper #content form textarea {
   min-height: 100px;
 }
 .wrapper #content form button[type="button"].align-center {
   transform: translateY(110%);
   position: relative;
+}
+.wrapper #content form .small {
+  font-size: 10px;
+  color: #f6e5a1;
 }
 .wrapper #content .form-control {
   color: #fff;
@@ -836,20 +836,22 @@ h1 i {
   transition: border-color cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
 .element .element-container {
-  padding: 20px;
   border-radius: 8px 8px 0 0;
   height: 250px;
 }
+.element .element-container a {
+  padding: 20px;
+  display: block;
+}
 .element .element-tools {
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  padding-bottom: 12px;
   border-radius: 0 0 8px 8px;
   border: 2px solid rgba(0, 236, 152, 0.3);
   border-top: 0;
 }
 .element .element-tools a {
   font-size: 12px;
+  padding: 10px;
   display: block;
 }
 .element:hover .element-container,

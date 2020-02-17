@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, compositeLargeAvatarElement, {
         size: 1024,
-        updateThumbnail: helpers.updateThumbnail
+        updateThumbnail: helpers.updateThumbnail,
+        crop: {x: 60, y: 39, w: 136, h: 177}
     });
     let ModalConstructor = new Modal(modalElement);
     let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
