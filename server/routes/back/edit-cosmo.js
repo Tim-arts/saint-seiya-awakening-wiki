@@ -16,7 +16,8 @@ module.exports = function () {
     
             Cosmos.findOne({
                 _id: _id
-            }, (err, cosmo) => {
+            }, (error, cosmo) => {
+                if (error) console.log(error);
                 if (cosmo) {
                     res.render("back/views/edit-cosmo", {
                         attributes: attributes,

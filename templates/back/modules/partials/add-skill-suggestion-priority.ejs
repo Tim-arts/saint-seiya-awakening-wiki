@@ -6,7 +6,7 @@
     let marginTop = !boolStarter ? " mt-2" : "";
     let starterClass = boolStarter ? " starter" : "";
     let readonly = numberIndexPriority === 0 ? 'value=1111 readonly=readonly' : '';
-    let prefilled = locals.saint ? ("value=" + priority) : "";
+    let prefilled = locals.saint && locals.priority ? ("value=" + priority) : "";
 %>
 
 <input type="number" id="skill-priority-<%= inputId %>" class="form-control priority<%= marginTop %><%= starterClass %>" <%= readonly %><%= prefilled %> />

@@ -1,8 +1,9 @@
 // APP METHODS
 module.exports = {
     htmlDisplay: html => html.replace(/\n/g, '<br>'),
-    convertToSlug (string, expression) {
-        return string.trim().toLowerCase().replace(expression, "-");
+    convertToSlug (string, expression, replace) {
+        let replaceValue = replace ? replace : "-";
+        return string.trim().toLowerCase().replace(expression, replaceValue);
     },
     capitalize (string) {
         let result;

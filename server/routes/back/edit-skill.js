@@ -15,7 +15,8 @@ module.exports = function () {
     
             Skills.findOne({
                 _id: _id
-            }, (err, skill) => {
+            }, (error, skill) => {
+                if (error) console.log(error);
                 if (skill) {
                     (async function () {
                         res.render("back/views/edit-skill", {

@@ -1,8 +1,8 @@
 <%
     let numberIndex = Number(index);
     let starterClass = numberIndex === 0 ? " starter" : "";
-    let commentFrValue = locals.saint ? __({phrase: comment, locale: 'fr'}) : "";
-    let commentEnValue = locals.saint ? __({phrase: comment, locale: 'en'}) : "";
+    let commentFrValue = locals.saint && locals.comment ? __({phrase: comment, locale: 'fr'}) : "";
+    let commentEnValue = locals.saint && locals.comment ? __({phrase: comment, locale: 'en'}) : "";
 %>
 
 <div class="row suggestion<%= starterClass %>">
@@ -10,7 +10,7 @@
         <div class="row content">
             <div class="col-1 index"><%= index %></div>
             <div class="col-2 priorities">
-                <% if (!locals.saint) { %>
+                <% if (!locals.saint || (locals.saint && saint.skills_suggestions.length === 0)) { %>
                     <%-
                         include("add-skill-suggestion-priority", {
                             index: numberIndex,

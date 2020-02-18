@@ -1,10 +1,10 @@
 <%
     let numberIndex = Number(index);
     let starterClass = numberIndex === 0 ? " starter" : "";
-    let templateNameFrValue = locals.saint ? __({phrase: template_name, locale: 'fr'}) : "";
-    let templateNameEnValue = locals.saint ? __({phrase: template_name, locale: 'en'}) : "";
-    let commentFrValue = locals.saint ? __({phrase: comment, locale: 'fr'}) : "";
-    let commentEnValue = locals.saint ? __({phrase: comment, locale: 'en'}) : "";
+    let templateNameFrValue = locals.saint && locals.template_name ? __({phrase: template_name, locale: 'fr'}) : "";
+    let templateNameEnValue = locals.saint && locals.template_name ? __({phrase: template_name, locale: 'en'}) : "";
+    let commentFrValue = locals.saint && locals.comment ? __({phrase: comment, locale: 'fr'}) : "";
+    let commentEnValue = locals.saint && locals.comment ? __({phrase: comment, locale: 'en'}) : "";
 %>
 
 <div class="row suggestion<%= starterClass %>" data-index="<%= index %>">

@@ -1,3 +1,5 @@
+const arayashiki = require("./../data/modules/saints-arayashiki");
+
 const saints = {
     name: "saints",
     template: {
@@ -51,7 +53,13 @@ const saints = {
                 priorities: Array
             }
         ],
-        characteristics: Array
+        characteristics: Array,
+        arayashiki: (() => {
+            let object = {};
+            Object.keys(arayashiki).forEach(key => object[key.toLowerCase()] = Object);
+            
+            return object;
+        })()
     }
 };
 

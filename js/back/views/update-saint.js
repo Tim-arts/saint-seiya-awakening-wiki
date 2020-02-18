@@ -112,6 +112,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 return avatarImgElement.src === helpers.constants.urls.saint ? null : AvatarConstructor.options.img.src;
             })(),
             "largeImage": CompositeLargeAvatarConstructor.getValue(),
+            "arayashiki": (() => {
+                let container = document.getElementById("arayashiki-attributes");
+                let letterElements = Array.from(container.querySelectorAll(".letter"));
+                let object = {};
+                
+                letterElements.forEach(element => {
+                    let key = element.getAttribute("data-letter");
+                    let count = Number(element.getAttribute("data-count"));
+                    let selects = element.querySelectorAll("select");
+                    let inputs = element.querySelectorAll("input");
+                    let obj = {};
+                    
+                    for (let i = 0; i < count; i++) {
+                        let attribute = selects[i].value;
+                        let value = inputs[i].value;
+                        
+                        if (attribute) {
+                            obj[attribute] = value;
+                        }
+                    }
+                    
+                    object[key] = obj;
+                });
+                
+                return object;
+            })(),
             "rank": document.getElementById("ranks").value,
             "damage_type": document.getElementById("damage-types").value,
             "focus": helpers.getSelectMultipleValue("focus"),
