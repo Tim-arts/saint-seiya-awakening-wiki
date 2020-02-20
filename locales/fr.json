@@ -175,11 +175,18 @@
 	"eagle_eye_cosmo_comment": "",
 	"arayashiki_shaka_saint_name": "Shaka Arayashiki",
 	"arayashiki_shaka_saint_comment": "Commentaire sur Shaka Arayashiki",
-	"arayashiki_shaka_saint_template_name_suggestion_0": "Basique",
-	"arayashiki_shaka_saint_comment_cosmos_suggestion_0": "Cosmos de base",
+	"arayashiki_shaka_saint_template_name_suggestion_0": "",
+	"arayashiki_shaka_saint_comment_cosmos_suggestion_0": "",
 	"arayashiki_shaka_saint_comment_skills_suggestion_0": "Orienté JcE",
 	"scorpio_milo_saint_name": "Milo du Scorpion",
 	"scorpio_milo_saint_comment": "Commentaire sur Milo",
-	"scorpio_milo_saint_template_name_suggestion_0": "Basique",
-	"scorpio_milo_saint_comment_cosmos_suggestion_0": "Cosmos de base"
+	"scorpio_milo_saint_template_name_suggestion_0": "",
+	"scorpio_milo_saint_comment_cosmos_suggestion_0": "",
+	"purple_nether_cosmo_comment": "",
+	"libra_dohko_saint_name": "Dohko de la Balance",
+	"libra_dohko_saint_comment": "",
+	"aries_mu_saint_name": "Mü du Bélier",
+	"aries_mu_saint_comment": "",
+	"aries_shion_saint_name": "Shion du Bélier",
+	"aries_shion_saint_comment": ""
 }

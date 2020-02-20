@@ -102,7 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let CosmosConstructorValue = CosmosConstructor.getValue(),
             SkillsConstructorValue = SkillsConstructor.getValue();
         
-        if (!hasChanged || CosmosConstructorValue.length === 0 || SkillsConstructorValue.length === 0) {
+        if (CosmosConstructorValue.length > 0 || SkillsConstructorValue.length > 0) {
+            hasChanged = true;
+        }
+        
+        if (!hasChanged) {
             ModalConstructor.show({
                 message: "noChanges",
                 changeSubmitButton: "Close",

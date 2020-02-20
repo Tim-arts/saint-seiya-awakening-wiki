@@ -18,7 +18,9 @@ module.exports = function (i18n) {
         // sets a custom cookie name to parse locale settings from
         cookie: 'lang',
         // where to store json files - defaults to './locales'
-        directory: global.utils.dirPath + 'locales'
+        directory: global.utils.dirPath + 'locales',
+        autoReload: true,
+        updateFiles: true
     });
     
     function init (req, res, next) {

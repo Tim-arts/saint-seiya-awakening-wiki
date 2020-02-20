@@ -13,6 +13,10 @@ module.exports = (cloudinary) => {
         {
             cdn: global.utils.translations.skills.cdn,
             plural: global.utils.translations.skills.plural
+        },
+        {
+            cdn: global.utils.translations.saints.cdn,
+            plural: global.utils.translations.saints.plural
         }
     ];
     

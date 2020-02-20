@@ -156,8 +156,8 @@ module.exports = {
         const enFileName = global.utils.dirPath + "locales/data/" + pluralType + "/" + data.slug + "/en.json";
         const frFileName = global.utils.dirPath + "locales/data/" + pluralType + "/" + data.slug + "/fr.json";
         
-        fs.promises.mkdir(path.dirname(enFileName), {recursive: true}).then(x => fs.promises.writeFile(enFileName, JSON.stringify(enTranslation, null, 4)));
-        fs.promises.mkdir(path.dirname(frFileName), {recursive: true}).then(x => fs.promises.writeFile(frFileName, JSON.stringify(frTranslation, null, 4)));
+        fs.promises.mkdir(path.dirname(enFileName), {recursive: true}).then(x => fs.promises.writeFile(enFileName, JSON.stringify(enTranslation, null, 4) + "\n", "utf8"));
+        fs.promises.mkdir(path.dirname(frFileName), {recursive: true}).then(x => fs.promises.writeFile(frFileName, JSON.stringify(frTranslation, null, 4) + "\n", "utf8"));
         
         this.uploadTranslations(cloudinary, enTranslation, frTranslation, folder);
     },
