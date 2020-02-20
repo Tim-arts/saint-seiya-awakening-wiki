@@ -10,7 +10,7 @@
     <div class="element-container">
         <input type="file" id="skin-<%= index %>" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
         <img src="<%= imageValue %>" id="skin-image-<%= index %>" class="img-fluid img big object-fit-contain pointer" alt="Avatar" />
-        <label for="skin-<%= index %>"><%= capitalize(imageName) %></label>
+        <label for="skin-<%= index %>"><%= capitalize(convertToSlug(imageName, /[-]/g, " ")) %></label>
         <% if (!starter) { %>
             <a href="#" class="close">
                 <i class="material-icons">close</i>

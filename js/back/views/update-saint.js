@@ -174,9 +174,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     "speed": document.getElementById("characteristic-speed").value
                 }
             ],
-            "skins": Array.from(skinsContainer.querySelectorAll(".skin:not(.starter)")).map(e => {
-                return {"name": e.getAttribute("data-name")}
-            })
+            "skins": (() => {
+                let array = [];
+                
+                Array.from(skinsContainer.querySelectorAll(".skin:not(.starter)")).map(e => {
+                    array.push({
+                        "name": e.getAttribute("data-name"),
+                        "img": e.querySelector("img").src
+                    })
+                });
+                
+                return array;
+            })()
         };
         
         $.post(formElement.getAttribute("action"), {
