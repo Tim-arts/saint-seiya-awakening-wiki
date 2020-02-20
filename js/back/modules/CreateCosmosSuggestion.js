@@ -292,7 +292,7 @@ export default class CreateCosmosSuggestion {
             (async function () {
                 async function fetch (value) {
                     return new Promise (resolve => {
-                        $.post("../../api/partials/add-thumbnail-cosmo-suggestion", {
+                        $.post("../../api/partials/add-cosmo-suggestion-thumbnail", {
                             index: currentIndex,
                             type: data.type,
                             slug: helpers.convertToSlug(value, /["._' ]/g, '-')

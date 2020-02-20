@@ -1,5 +1,5 @@
 export default class CompositeImages {
-    constructor(InputFile, el, options) {
+    constructor(InputFile, updateThumbnail, el, options) {
         let _this = this;
         
         this.el = el;
@@ -37,7 +37,7 @@ export default class CompositeImages {
             $.post("../../api/composite-images", data, (response) => {
                 _this.result = response.result;
     
-                options.updateThumbnail(_this.elements.result, response.result);
+                updateThumbnail(_this.elements.result, response.result);
             });
         });
         

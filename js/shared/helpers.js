@@ -46,8 +46,9 @@ module.exports = {
             element.classList.remove(className);
         });
     },
-    convertToSlug (string, expression, replacer) {
-        return string.trim().toLowerCase().replace(expression, replacer);
+    convertToSlug (string, expression, replace) {
+        let replaceValue = replace ? replace : "-";
+        return string.trim().toLowerCase().replace(expression, replaceValue);
     },
     applyPassive (bool, elements) {
         if (bool) {

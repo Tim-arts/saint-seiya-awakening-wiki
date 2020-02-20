@@ -1,0 +1,20 @@
+<%
+    starter = JSON.parse(starter);
+    let starterValue = starter ? " starter" : "";
+    let defaultName = !locals.saint ? "default.png" : "";
+    let imageName = locals.img ? img.name : "";
+    let imageValue = locals.img ? img.data : cloudinary.url("saints/default_skin.png", {fetch_format: "auto", quality: "auto", secure: true});
+%>
+
+<div class="col-2 skin text-center mb-2<%= starterValue %>" data-name="<%= imageName %>">
+    <div class="element-container">
+        <input type="file" id="skin-<%= index %>" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
+        <img src="<%= imageValue %>" id="skin-image-<%= index %>" class="img-fluid img big object-fit-contain pointer" alt="Avatar" />
+        <label for="skin-<%= index %>"><%= capitalize(imageName) %></label>
+        <% if (!starter) { %>
+            <a href="#" class="close">
+                <i class="material-icons">close</i>
+            </a>
+        <% } %>
+    </div>
+</div>

@@ -47,15 +47,15 @@
                     </div>
                     <div id="elements-container" class="row">
                         <div class="col-2 element-placeholder h-100 text-center">
-                            <a href="/back/add-skill" class="d-block">
-                                <div class="element-container">
+                            <div class="element-container">
+                                <a href="/back/add-skill" class="d-block">
                                     <img src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Default skill" />
                                     <h2 class="h6 mt-4">
                                         <i class="material-icons">add_circle_outline</i>
                                         <span>Create a skill</span>
                                     </h2>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                         <%
                             let urls = {

@@ -1,10 +1,12 @@
 require("./../base");
 
 import InputFile from "./../modules/InputFile";
+import CompositeImage from "./../modules/CompositeImages";
+import AddSkinThumbnail from "./../modules/AddSkinThumbnail";
 import Modal from "./../../shared/modules/ModalResponse";
 import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";
 import CreateSkillsSuggestion from "./../modules/CreateSkillsSuggestion";
-import CompositeImage from "./../modules/CompositeImages";
+
 import helpers from "./../../shared/helpers";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -64,18 +66,36 @@ document.addEventListener("DOMContentLoaded", () => {
         img: avatarImgElement,
         size: 256
     });
-    let CompositeAvatarConstructor = new CompositeImage(InputFile, compositeAvatarElement, {
-        size: 1024,
-        updateThumbnail: helpers.updateThumbnail
+    let CompositeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeAvatarElement, {
+        size: 1024
     });
-    let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, compositeLargeAvatarElement, {
+    let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeLargeAvatarElement, {
         size: 1024,
-        updateThumbnail: helpers.updateThumbnail,
         crop: {x: 60, y: 39, w: 136, h: 177}
     });
     let ModalConstructor = new Modal(modalElement);
     let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
     let SkillsConstructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
+    
+    let skinsContainer = (() => {
+        let skins = document.getElementById("skins"),
+            container = skins.querySelector(".skins"),
+            input = skins.querySelector(".skin.starter input"),
+            img = skins.querySelector(".skin.starter img");
+        
+        new AddSkinThumbnail({
+            container : container,
+            input: input,
+            img: img,
+            size: 256,
+            convertToSlug: helpers.convertToSlug,
+            convertStringToDOMElement: helpers.convertStringToDOMElement,
+            generateUuidv4: helpers.generateUuidv4,
+            modal: ModalConstructor
+        });
+        
+        return container;
+    })();
     
     /* Events */
     formElement.addEventListener("submit", (e) => {
@@ -103,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-comment").value,
                 "fr": document.getElementById("fr-comment").value
             },
-            "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
+            "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "image": (() => {
                 let value = CompositeAvatarConstructor.getValue();
@@ -153,7 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "c-def": document.getElementById("characteristic-c.def").value,
                     "speed": document.getElementById("characteristic-speed").value
                 }
-            ]
+            ],
+            "skins": Array.from(skinsContainer.querySelectorAll(".skin:not(.starter)")).map(e => {
+                return {"name": e.getAttribute("data-name")}
+            })
         };
         
         $.post(formElement.getAttribute("action"), {

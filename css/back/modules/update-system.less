@@ -264,4 +264,38 @@ form {
             }
         }
     }
+
+    .skin {
+        position: relative;
+        overflow: hidden;
+
+        &.starter {
+            img {
+                width: 100%;
+            }
+        }
+
+        &:not(.starter) {
+            img {
+                width: 80%;
+                border-radius: @radius-circled;
+                top: 23px;
+                position: relative;
+            }
+        }
+
+        label {
+            top: 40px;
+            position: relative;
+        }
+
+        .close {
+            color: @white;
+            top: 0; right: 0;
+            position: absolute;
+            text-shadow: none;
+            will-change: color;
+            transition: color @time-transition-05 @transition-1;
+        }
+    }
 }

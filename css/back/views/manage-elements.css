@@ -809,7 +809,6 @@ h1 i {
   border-radius: 50%;
 }
 .element-placeholder .element-container {
-  padding: 52px 20px;
   border-radius: 8px;
   border-color: rgba(130, 46, 255, 0.3);
   will-change: border-color;
@@ -823,6 +822,9 @@ h1 i {
   position: relative;
   top: 5px;
   left: -3px;
+}
+.element-placeholder .element-container a {
+  padding: 52px 20px;
 }
 .element-placeholder .element-container:hover {
   border-color: #822EFF;

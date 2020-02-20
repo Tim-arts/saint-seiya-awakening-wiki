@@ -1,0 +1,29 @@
+<div id="skins" class="row mb-4">
+    <div class="col-12">
+        <h2 class="h5 mt-0">Ajouter des skins<span class="small d-inline-block ml-2">(l'image uploadée doit être correctement nommée en fonction du nom du skin)</span></h2>
+    </div>
+    <div class="col-12 mt-2">
+        <div class="row skins">
+            <%-
+                include("add-skin-thumbnail", {
+                    index: 0,
+                    starter: true
+                })
+            %>
+            <%
+                if (locals.saint && saint.skins > 0) {
+                    for (let i = 1; i < saint.skins; i++) {
+                        %>
+                            <%-
+                                include("add-skin-thumbnail", {
+                                    index: i,
+                                    starter: false
+                                })
+                            %>
+                        <%
+                    }
+                }
+            %>
+        </div>
+    </div>
+</div>

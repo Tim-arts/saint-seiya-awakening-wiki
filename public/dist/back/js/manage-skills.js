@@ -199,8 +199,9 @@ module.exports = {
       element.classList.remove(className);
     });
   },
-  convertToSlug: function convertToSlug(string, expression, replacer) {
-    return string.trim().toLowerCase().replace(expression, replacer);
+  convertToSlug: function convertToSlug(string, expression, replace) {
+    var replaceValue = replace ? replace : "-";
+    return string.trim().toLowerCase().replace(expression, replaceValue);
   },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {

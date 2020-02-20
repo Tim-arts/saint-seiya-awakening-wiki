@@ -1052,6 +1052,32 @@ form .elements-suggestions .suggestion .priorities button[type="button"] i {
 form .elements-suggestions .suggestion:last-child .content {
   border-radius: 0 0 4px 4px;
 }
+form .skin {
+  position: relative;
+  overflow: hidden;
+}
+form .skin.starter img {
+  width: 100%;
+}
+form .skin:not(.starter) img {
+  width: 80%;
+  border-radius: 50%;
+  top: 23px;
+  position: relative;
+}
+form .skin label {
+  top: 40px;
+  position: relative;
+}
+form .skin .close {
+  color: #fff;
+  top: 0;
+  right: 0;
+  position: absolute;
+  text-shadow: none;
+  will-change: color;
+  transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
 label[for="skills-suggestions"] span:last-child {
   width: 26px;
   height: 26px;

@@ -73,8 +73,7 @@ function () {
     _this.el = el;
     _this.options = options;
     _this.options.size = _this.options.size * 1000;
-    _this.$el = $(this.el);
-    _this.label = this.el.previousElementSibling.nodeName === 'LABEL';
+    _this.label = this.el.previousElementSibling ? this.el.previousElementSibling.nodeName === 'LABEL' : "";
 
     if (_this.label) {
       _this.label = this.el.previousElementSibling;
@@ -83,7 +82,7 @@ function () {
 
 
     _this.options.img.addEventListener("click", function () {
-      _this.$el.trigger("click");
+      _this.el.click();
     }); // When the image has been selected
 
 
@@ -531,8 +530,9 @@ module.exports = {
       element.classList.remove(className);
     });
   },
-  convertToSlug: function convertToSlug(string, expression, replacer) {
-    return string.trim().toLowerCase().replace(expression, replacer);
+  convertToSlug: function convertToSlug(string, expression, replace) {
+    var replaceValue = replace ? replace : "-";
+    return string.trim().toLowerCase().replace(expression, replaceValue);
   },
   applyPassive: function applyPassive(bool, elements) {
     if (bool) {

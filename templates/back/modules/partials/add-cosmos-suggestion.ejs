@@ -23,7 +23,7 @@
                 <% type = type.toLowerCase() %>
                 <div class="col-2 <%= type %>-cosmos">
                     <%-
-                        include("add-thumbnail-cosmo-suggestion", {
+                        include("add-cosmo-suggestion-thumbnail", {
                             index: numberIndex,
                             placeholder: true,
                             type: type
@@ -34,7 +34,7 @@
                             elements[type].forEach(element => {
                                 %>
                                     <%-
-                                        include("add-thumbnail-cosmo-suggestion", {
+                                        include("add-cosmo-suggestion-thumbnail", {
                                             placeholder: false,
                                             type: type,
                                             index: index,

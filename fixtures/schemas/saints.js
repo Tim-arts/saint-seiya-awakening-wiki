@@ -59,7 +59,12 @@ const saints = {
             Object.keys(arayashiki).forEach(key => object[key.toLowerCase()] = Object);
             
             return object;
-        })()
+        })(),
+        skins: [
+            {
+                name: String
+            }
+        ]
     }
 };
 

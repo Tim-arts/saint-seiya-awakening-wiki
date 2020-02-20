@@ -14,8 +14,7 @@ export default class InputFile {
         _this.el = el;
         _this.options = options;
         _this.options.size = _this.options.size * 1000;
-        _this.$el = $(this.el);
-        _this.label = this.el.previousElementSibling.nodeName === 'LABEL';
+        _this.label = this.el.previousElementSibling ? this.el.previousElementSibling.nodeName === 'LABEL' : "";
         
         if (_this.label) {
             _this.label = this.el.previousElementSibling;
@@ -24,7 +23,7 @@ export default class InputFile {
 
         // When the user click on the image, trigger click on the input itself
         _this.options.img.addEventListener("click", function () {
-            _this.$el.trigger("click");
+            _this.el.click();
         });
 
         // When the image has been selected

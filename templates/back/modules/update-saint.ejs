@@ -20,7 +20,7 @@
         },
         image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {
             fetch_format: "auto", quality: "auto", secure: true
-        }) : cloudinary.url("saints/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
+        }) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
         ranks: () => {
             for (let i = 0, count = ranks.length; i < count; i++) {
                 let cleanType = convertToSlug(ranks[i], /[ ]/g),
@@ -216,7 +216,7 @@
 
     <div id="arayashiki-attributes" class="row mb-4">
         <div class="col-12">
-            <h2 class="h5 mt-0">Huitième sens (Arayashiki) : niveau 1</h2>
+            <h2 class="h5 mt-0">Huitième sens (niveau 1)</h2>
         </div>
         <div class="col-12 mt-2">
             <div class="row">
@@ -423,7 +423,7 @@
                 result: "composite-avatar-result",
                 process: "composite-avatar-process"
             },
-            url: locals.saint ? "saints/" + saint.slug + "/" + saint.slug + ".png" : "resources/composite-images/image-mask-result.png"
+            url: locals.saint ? ("saints/" + saint.slug + "/" + saint.slug + ".png") : "resources/composite-images/image-mask-result.png"
         })
     %>
 
@@ -444,18 +444,27 @@
                 result: "composite-large-avatar-result",
                 process: "composite-large-avatar-process"
             },
-            url: locals.saint ? "saints/" + saint.slug + "/large-image.png" : "resources/composite-images/image-mask-result.png"
+            url: locals.saint ? ("saints/" + saint.slug + "/large-image.png") : "resources/composite-images/image-mask-result.png"
         })
     %>
 
+    <%- include("partials/add-skins-thumbnail") %>
+
     <div class="row mb-4">
-        <div class="col-6">
-            <label for="fr-comment">Partie commentaire (FR)</label>
-            <textarea id="fr-comment" name="fr-comment" class="form-control"><%= saintData.comment.fr %></textarea>
+        <div class="col-12">
+            <h2 class="h5 mt-0">Ajouter des commentaires sur le saint</h2>
         </div>
-        <div class="col-6">
-            <label for="en-comment">Partie commentaire (EN)</label>
-            <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
+        <div class="col-12 mt-2">
+            <div class="row">
+                <div class="col-6">
+                    <label for="fr-comment">Partie commentaire (FR)</label>
+                    <textarea id="fr-comment" name="fr-comment" class="form-control"><%= saintData.comment.fr %></textarea>
+                </div>
+                <div class="col-6">
+                    <label for="en-comment">Partie commentaire (EN)</label>
+                    <textarea id="en-comment" name="en-comment" class="form-control"><%= saintData.comment.en %></textarea>
+                </div>
+            </div>
         </div>
     </div>
 
