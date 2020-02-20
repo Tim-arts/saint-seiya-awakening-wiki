@@ -28,7 +28,7 @@ module.exports = (Model, type) => {
                 });
             }
         
-            /* Upload translation files on CDN */
+            /* Upload translation files and skins on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
             
             /* Create the new document into database */
@@ -71,7 +71,7 @@ module.exports = (Model, type) => {
                 });
             }
         
-            /* Upload translation files on CDN */
+            /* Upload translation files and skins on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
     
             // Prevent immutable/readonly fields to be updated when an update occurs

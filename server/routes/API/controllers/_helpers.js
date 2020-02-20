@@ -132,6 +132,19 @@ module.exports = {
                     });
                 }
                 
+                if (data.skins.length > 0) {
+                    let skinFolder = "saints/" + data.slug + "/skins/";
+                    
+                    data.skins.forEach(skin => {
+                        this.uploadFileIntoCDN(cloudinary, {
+                            file: skin.img,
+                            public_id: skin.name,
+                            folder: skinFolder,
+                            allowed_formats: "jpeg,jpg,png"
+                        });
+                    });
+                }
+                
                 break;
             default:
                 console.log("Type isn't recognized!");
