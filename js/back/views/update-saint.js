@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         crop: {x: 60, y: 39, w: 136, h: 177}
     });
     let ModalConstructor = new Modal(modalElement);
-    let SuggestionsConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
+    let CosmosConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
     let SkillsConstructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
     
     let skinsContainer = (() => {
@@ -99,7 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
         
-        if (!hasChanged) {
+        let CosmosConstructorValue = CosmosConstructor.getValue(),
+            SkillsConstructorValue = SkillsConstructor.getValue();
+        
+        if (!hasChanged || CosmosConstructorValue.length === 0 || SkillsConstructorValue.length === 0) {
             ModalConstructor.show({
                 message: "noChanges",
                 changeSubmitButton: "Close",
@@ -160,8 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "damage_type": document.getElementById("damage-types").value,
             "focus": helpers.getSelectMultipleValue("focus"),
             "roles": helpers.getSelectMultipleValue("roles"),
-            "cosmos_suggestions": SuggestionsConstructor.getValue(),
-            "skills_suggestions": SkillsConstructor.getValue(),
+            "cosmos_suggestions": CosmosConstructorValue,
+            "skills_suggestions": SkillsConstructorValue,
             "characteristics": [
                 {
                     "hp": document.getElementById("characteristic-hp").value,

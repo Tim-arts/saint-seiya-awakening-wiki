@@ -132,7 +132,7 @@ module.exports = {
                     });
                 }
                 
-                if (data.skins.length > 0) {
+                if (data.skins && data.skins.length > 0) {
                     let skinFolder = "saints/" + data.slug + "/skins/";
                     
                     data.skins.forEach(skin => {
