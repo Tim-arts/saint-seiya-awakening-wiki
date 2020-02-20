@@ -165,20 +165,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    awakeningSkillElement.addEventListener("change", function () {
+    awakeningSkillElement.addEventListener("input", function () {
         if (this.value === "") {
             let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-                imageSrc = helpers.default.urls.skill;
+                imageSrc = helpers.constants.urls.skill;
             
             this.removeAttribute("data-serialize");
             helpers.updateThumbnail(imageElement, imageSrc);
         }
     });
     
-    linkedSaintIdElement.addEventListener("change", function () {
+    linkedSaintIdElement.addEventListener("input", function () {
         if (this.value === "") {
             let imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-                imageSrc = helpers.default.urls.saint;
+                imageSrc = helpers.constants.urls.saint;
             
             this.removeAttribute("data-serialize");
             helpers.updateThumbnail(imageElement, imageSrc);

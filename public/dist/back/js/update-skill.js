@@ -321,19 +321,19 @@ document.addEventListener("DOMContentLoaded", function () {
       cost: costElement
     });
   });
-  awakeningSkillElement.addEventListener("change", function () {
+  awakeningSkillElement.addEventListener("input", function () {
     if (this.value === "") {
       var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-          imageSrc = _helpers["default"]["default"].urls.skill;
+          imageSrc = _helpers["default"].constants.urls.skill;
       this.removeAttribute("data-serialize");
 
       _helpers["default"].updateThumbnail(imageElement, imageSrc);
     }
   });
-  linkedSaintIdElement.addEventListener("change", function () {
+  linkedSaintIdElement.addEventListener("input", function () {
     if (this.value === "") {
       var imageElement = this.parentElement.nextElementSibling.querySelector("img"),
-          imageSrc = _helpers["default"]["default"].urls.saint;
+          imageSrc = _helpers["default"].constants.urls.saint;
       this.removeAttribute("data-serialize");
 
       _helpers["default"].updateThumbnail(imageElement, imageSrc);
