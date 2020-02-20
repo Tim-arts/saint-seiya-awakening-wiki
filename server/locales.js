@@ -4,7 +4,7 @@ const merge = require("gulp-merge-json");
 let languages = global.utils.locales.languages.map(a => a.id);
 
 languages.forEach((value) => {
-    gulp.src(global.utils.dirPath + "locales/**/"+ value +".json")
+    gulp.src(global.utils.dirPath + "locales/**/" + value + ".json")
         .pipe(merge({
             "fileName": value + ".json"
         }))
