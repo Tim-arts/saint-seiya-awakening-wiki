@@ -111,13 +111,15 @@ export default class CreateSkillsSuggestion {
         this.suggestions.forEach(suggestion => {
             results.push({
                 priorities: (() => {
-                    let data = [];
+                    let array = [];
         
                     suggestion.priorities.forEach(priority => {
-                        data.push(priority.value);
+                        array.push(priority.value);
                     });
-        
-                    return data;
+    
+                    // Remove empty, null or undefined values
+                    array.filter(Boolean);
+                    return array;
                 })(),
                 comment: {
                     fr: suggestion.comment.fr.children[0].innerHTML.trim(),

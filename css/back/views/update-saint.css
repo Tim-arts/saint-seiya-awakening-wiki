@@ -1071,6 +1071,7 @@ form .skin label {
   top: 25px;
   position: relative;
   margin-bottom: 0;
+  cursor: text;
 }
 form .skin label:empty::before {
   color: rgba(0, 236, 152, 0.3);
