@@ -27,7 +27,7 @@ export default class AddSkinThumbnail {
             
             let __this = this;
             let data = {
-                index: options.generateUuidv4(),
+                index: options.helpers.generateUuidv4(),
                 starter: false
             };
     
@@ -36,12 +36,12 @@ export default class AddSkinThumbnail {
                 reader.onload = function (e) {
                     setTimeout(() => {
                         data.skin = {
-                            name: options.convertToSlug(_this.options.input.value.split('\\').pop().split(".")[0], /["._' ]/g),
+                            name: options.helpers.convertToSlug(_this.options.input.value.split('\\').pop().split(".")[0], /["._' ]/g),
                             data: e.target.result
                         };
     
                         $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
-                            let HTMLElement = options.convertStringToDOMElement(response)[0];
+                            let HTMLElement = options.helpers.convertStringToDOMElement(response)[0];
                             HTMLElement.querySelector(".close").addEventListener("click", (e) => {
                                 options.modal.show({
                                     message: "deleteConfirmation",
@@ -78,6 +78,19 @@ export default class AddSkinThumbnail {
                 
                 e.preventDefault();
             });
+        });
+    
+        document.addEventListener("click", function (e) {
+            if (options.helpers.hasClass(e.target, "label-editable")) e.preventDefault();
+        }, false);
+    
+        document.addEventListener("input", function (e) {
+            let target = e.target;
+            
+            if (options.helpers.hasClass(target, "label-editable")) {
+                let value = target.innerText;
+                target.parentElement.parentElement.setAttribute("data-name", value);
+            }
         });
         
         return this;

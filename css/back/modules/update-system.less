@@ -268,6 +268,7 @@ form {
     .skin {
         position: relative;
         overflow: hidden;
+        padding: 15px;
 
         &.starter {
             img {
@@ -277,16 +278,23 @@ form {
 
         &:not(.starter) {
             img {
-                width: 80%;
+                width: 75%;
                 border-radius: @radius-circled;
-                top: 23px;
+                top: 15px;
                 position: relative;
             }
         }
 
         label {
-            top: 40px;
+            padding: 5px 0;
+            top: 25px;
             position: relative;
+            margin-bottom: 0;
+
+            &:empty::before {
+                color: @green-faded-3;
+                content:attr(data-text);
+            }
         }
 
         .close {

@@ -1055,19 +1055,26 @@ form .elements-suggestions .suggestion:last-child .content {
 form .skin {
   position: relative;
   overflow: hidden;
+  padding: 15px;
 }
 form .skin.starter img {
   width: 100%;
 }
 form .skin:not(.starter) img {
-  width: 80%;
+  width: 75%;
   border-radius: 50%;
-  top: 23px;
+  top: 15px;
   position: relative;
 }
 form .skin label {
-  top: 40px;
+  padding: 5px 0;
+  top: 25px;
   position: relative;
+  margin-bottom: 0;
+}
+form .skin label:empty::before {
+  color: rgba(0, 236, 152, 0.3);
+  content: attr(data-text);
 }
 form .skin .close {
   color: #fff;

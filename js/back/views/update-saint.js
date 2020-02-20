@@ -88,9 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             input: input,
             img: img,
             size: 256,
-            convertToSlug: helpers.convertToSlug,
-            convertStringToDOMElement: helpers.convertStringToDOMElement,
-            generateUuidv4: helpers.generateUuidv4,
+            helpers: helpers,
             modal: ModalConstructor
         });
         
