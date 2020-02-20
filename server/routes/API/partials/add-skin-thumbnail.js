@@ -7,7 +7,7 @@ module.exports = function () {
         res.render("back/modules/partials/add-skin-thumbnail", {
             index: req.body.index,
             starter: req.body.starter,
-            img: req.body.img
+            skin: req.body.skin
         });
     });
     

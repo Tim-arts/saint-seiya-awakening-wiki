@@ -2,6 +2,7 @@ export default class AddSkinThumbnail {
     constructor(options) {
         let _this = this;
         this.container = options.container;
+        this.closeElements = Array.from(options.container.querySelectorAll(".close"));
         this.options = options;
         _this.options.size = _this.options.size * 1000;
         
@@ -34,22 +35,25 @@ export default class AddSkinThumbnail {
                 let reader = new FileReader();
                 reader.onload = function (e) {
                     setTimeout(() => {
-                        data.img = {
+                        data.skin = {
                             name: options.convertToSlug(_this.options.input.value.split('\\').pop().split(".")[0], /["._' ]/g),
                             data: e.target.result
                         };
     
                         $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
                             let HTMLElement = options.convertStringToDOMElement(response)[0];
-                            HTMLElement.querySelector(".close").addEventListener("click", () => {
+                            HTMLElement.querySelector(".close").addEventListener("click", (e) => {
                                 options.modal.show({
                                     message: "deleteConfirmation",
                                     submitContent: "Confirm",
-                                    submit: function submit() {
+                                    closeContent: "Cancel",
+                                    submit: () => {
                                         HTMLElement.remove();
                                     },
                                     hideCloseButton: false
                                 });
+                                
+                                e.preventDefault();
                             });
                             
                             _this.container.appendChild(HTMLElement);
@@ -58,6 +62,22 @@ export default class AddSkinThumbnail {
                 };
                 reader.readAsDataURL(__this.files[0]);
             }
+        });
+    
+        this.closeElements.forEach(closeElement => {
+            closeElement.addEventListener("click", function (e) {
+                options.modal.show({
+                    message: "deleteConfirmation",
+                    submitContent: "Confirm",
+                    closeContent: "Cancel",
+                    submit: () => {
+                        this.parentElement.parentElement.remove();
+                    },
+                    hideCloseButton: false
+                });
+                
+                e.preventDefault();
+            });
         });
         
         return this;

@@ -461,6 +461,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ModalConstructor.show({
       message: "deleteConfirmation",
       submitContent: "Confirm",
+      closeContent: "Cancel",
       submit: function submit() {
         _this.parentElement.parentElement.remove();
       },

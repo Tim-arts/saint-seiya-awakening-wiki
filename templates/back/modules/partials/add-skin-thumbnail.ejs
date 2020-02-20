@@ -2,15 +2,26 @@
     starter = JSON.parse(starter);
     let starterValue = starter ? " starter" : "";
     let defaultName = !locals.saint ? "default.png" : "";
-    let imageName = locals.img ? img.name : "";
-    let imageValue = locals.img ? img.data : cloudinary.url("saints/default_skin.png", {fetch_format: "auto", quality: "auto", secure: true});
+    let skinName = locals.skin ? skin.name : "";
+    let skinImageValue;
+
+    if (locals.skin) {
+        if (skin.data) {
+            skinImageValue = skin.data;
+        } else {
+            let removeUrl = "saints/" + saint.slug + "/skins/" + skin.name + ".png";
+            skinImageValue = cloudinary.url(removeUrl, {fetch_format: "auto", quality: "auto", secure: true});
+        }
+    } else {
+        skinImageValue = cloudinary.url("saints/default_skin.png", {fetch_format: "auto", quality: "auto", secure: true});
+    }
 %>
 
-<div class="col-2 skin text-center mb-2<%= starterValue %>" data-name="<%= imageName %>">
+<div class="col-2 skin text-center mb-2<%= starterValue %>" data-name="<%= skinName %>">
     <div class="element-container">
         <input type="file" id="skin-<%= index %>" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png">
-        <img src="<%= imageValue %>" id="skin-image-<%= index %>" class="img-fluid img big object-fit-contain pointer" alt="Avatar" />
-        <label for="skin-<%= index %>"><%= capitalize(convertToSlug(imageName, /[-]/g, " ")) %></label>
+        <img src="<%= skinImageValue %>" id="skin-image-<%= index %>" class="img-fluid img big object-fit-contain" alt="Avatar" />
+        <label for="skin-<%= index %>"><%= capitalize(convertToSlug(skinName, /[-]/g, " ")) %></label>
         <% if (!starter) { %>
             <a href="#" class="close">
                 <i class="material-icons">close</i>

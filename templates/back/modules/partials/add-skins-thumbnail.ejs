@@ -11,17 +11,19 @@
                 })
             %>
             <%
-                if (locals.saint && saint.skins > 0) {
-                    for (let i = 1; i < saint.skins; i++) {
+                let count = saint.skins.length;
+                if (locals.saint && count > 0) {
+                    saint.skins.forEach((skin, i) => {
                         %>
                             <%-
                                 include("add-skin-thumbnail", {
                                     index: i,
-                                    starter: false
+                                    starter: false,
+                                    skin: skin
                                 })
                             %>
                         <%
-                    }
+                    });
                 }
             %>
         </div>

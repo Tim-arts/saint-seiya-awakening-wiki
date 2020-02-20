@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
       ModalConstructor.show({
         message: "deleteConfirmation",
         backdrop: "static",
-        submitContent: "Yes",
-        closeContent: "No",
+        submitContent: "Confirm",
+        closeContent: "Cancel",
         submit: function submit() {
           var elementParent = _this.closest(".element"),
               href = _this.href,

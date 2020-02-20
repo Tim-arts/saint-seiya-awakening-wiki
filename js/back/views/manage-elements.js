@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ModalConstructor.show({
                 message: "deleteConfirmation",
                 backdrop: "static",
-                submitContent: "Yes",
-                closeContent: "No",
+                submitContent: "Confirm",
+                closeContent: "Cancel",
                 submit: () => {
                     let elementParent = _this.closest(".element"),
                         href = _this.href,
