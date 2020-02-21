@@ -86,6 +86,21 @@ module.exports = {
             })()
         ]);
     },
+    getLinkedSaint (Saints, skill) {
+        return new Promise (resolve => {
+            if (!skill.linked_saint_id) {
+                return resolve(skill);
+            }
+    
+            Saints.findOne({
+                _id: skill.linked_saint_id
+            }, (err, linkedSaint) => {
+                if (linkedSaint) {
+                    resolve(linkedSaint);
+                }
+            });
+        });
+    },
     getSkillsModified (Skills, skill) {
         return new Promise (resolve => {
             let count = skill.linked_modified_skills.length;

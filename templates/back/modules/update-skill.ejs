@@ -63,7 +63,10 @@
         image: locals.skill ? cloudinary.url("skills/" + skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("skills/default.png", { fetch_format: "auto", quality: "auto", secure: true }),
         skill_index: locals.skill ? skill.skill_index : "",
         cost: locals.skill ? skill.cost : "",
-        linked_saint_id: locals.skill ? skill.linked_saint_id : "",
+        linked_saint_id: {
+            name: locals.skill && locals.saint ? __(saint._name) : "",
+            avatar: locals.skill && locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true})
+        },
         awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
         is_passive: locals.skill ? skill.is_passive: "",
         linked_modified_skills: () => {
@@ -196,11 +199,11 @@
                         <span>Saint correspondant</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id %>" />
+                    <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id.name %>" />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
-                    <img class="not-input-file" src="<%= cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Saint image" />
+                    <img class="not-input-file" src="<%= skillData.linked_saint_id.avatar %>" alt="Saint image" />
                 </div>
             </div>
         </div>

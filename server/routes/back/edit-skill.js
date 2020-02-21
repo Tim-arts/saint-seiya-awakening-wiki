@@ -6,6 +6,7 @@ const helpers = require("./_helpers");
 
 // Import model
 const Skills = require("./../../../fixtures/models/skills");
+const Saints = require("./../../../fixtures/models/saints");
 
 module.exports = function () {
     // Route: /back/update-skill/:id
@@ -20,6 +21,7 @@ module.exports = function () {
                 if (skill) {
                     (async function () {
                         res.render("back/views/edit-skill", {
+                            saint: await helpers.getLinkedSaint(Saints, skill),
                             skill: await helpers.getSkillsModified(Skills, skill)
                         });
                     })();
