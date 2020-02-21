@@ -1,15 +1,4 @@
-const gulp = require("gulp");
-const merge = require("gulp-merge-json");
-
-let languages = global.utils.locales.languages.map(a => a.id);
-
-languages.forEach((language) => {
-    gulp.src(global.utils.dirPath + "locales/**/" + language + ".json")
-        .pipe(merge({
-            "fileName": language + ".json"
-        }))
-        .pipe(gulp.dest(global.utils.dirPath + "locales"));
-});
+const languages = require("./updateLocales")();
 
 module.exports = function (i18n) {
     i18n.configure({

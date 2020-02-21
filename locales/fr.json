@@ -120,7 +120,7 @@
 	"wind_elf_cosmo_description": "En combat augmente votre attaque cosmique de 10%. Pour chaque ennemi touché (hors invocations) vous gagnez 4% d'attaque cosmique pendant 3 tours.",
 	"windflower_cosmo_name": "Anémone",
 	"windflower_cosmo_description": "Lors de l'attaque, réduit la chance statut de la cible de 20 % pendant 2 manches.",
-	"cosmos_costs_name": "Priorités des attributs secondaires cosmiques",
+	"cosmos_costs_name": "Amélioration de cosmo (SS)",
 	"cosmos_costs_title_0": "Niveau",
 	"cosmos_costs_title_1": "Cosmo expérience",
 	"cosmos_costs_title_2": "Or",
@@ -192,5 +192,12 @@
 	"hades_saint_name": "Hadès",
 	"hades_saint_comment": "",
 	"aquarius_camus_saint_name": "Camus du Verseau",
-	"aquarius_camus_saint_comment": ""
+	"aquarius_camus_saint_comment": "",
+	"taurus_aldebaran_saint_name": "Aldébaran du Taureau",
+	"taurus_aldebaran_saint_comment": "",
+	"cosmos_subattributes_priorities_name": "Priorités des attributs secondaires cosmiques",
+	"divine_cloth_seiya_saint_name": "Seiya Armure Divine",
+	"divine_cloth_seiya_saint_comment": "",
+	"divine_cloth_phoenix_ikki_saint_name": "Ikki Armure Divine",
+	"divine_cloth_phoenix_ikki_saint_comment": ""
 }

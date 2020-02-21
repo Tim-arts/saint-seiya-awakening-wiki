@@ -121,7 +121,7 @@
 	"water_curtain_cosmo_description": "When crowd controlled while at below 50% HP, skip to the next round and get an extra move.",
 	"wind_elf_cosmo_description": "Increases Cosmo Damage Multiplier by 10% during combat. When dealing damage to non-summoned units, this effect is increased by 4% (Lasts 3 rounds).",
 	"windflower_cosmo_description": "When attaking, decreases the target's Status HIT by 20% for 2 rounds",
-	"cosmos_costs_name": "Cosmos subattributes priorities",
+	"cosmos_costs_name": "Level up SS Cosmo",
 	"cosmos_costs_title_0": "Level",
 	"cosmos_costs_title_1": "Cosmo XP",
 	"cosmos_costs_title_2": "Gold",
@@ -194,5 +194,12 @@
 	"hades_saint_name": "Hades",
 	"hades_saint_comment": "",
 	"aquarius_camus_saint_name": "Aquarius Camus",
-	"aquarius_camus_saint_comment": ""
+	"aquarius_camus_saint_comment": "",
+	"taurus_aldebaran_saint_name": "Taurus Aldebaran",
+	"taurus_aldebaran_saint_comment": "",
+	"cosmos_subattributes_priorities_name": "Cosmos subattributes priorities",
+	"divine_cloth_seiya_saint_name": "Divine Cloth Seiya",
+	"divine_cloth_seiya_saint_comment": "",
+	"divine_cloth_phoenix_ikki_saint_name": "Divine Cloth Phoenix Ikki",
+	"divine_cloth_phoenix_ikki_saint_comment": ""
 }

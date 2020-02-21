@@ -1082,7 +1082,7 @@ form .skin label:empty::before {
 form .skin .close {
   color: #fff;
   top: 0;
-  right: 0;
+  right: 15px;
   position: absolute;
   text-shadow: none;
   will-change: color;

@@ -5,6 +5,7 @@ const cloudinary = require("cloudinary").v2;
 
 // Import dependencies
 const helpers = require("./_helpers");
+const updateLocales = require("./../../../updateLocales");
 
 module.exports = (Model, type) => {
     return {
@@ -48,6 +49,8 @@ module.exports = (Model, type) => {
                     });
                 }
             });
+    
+            updateLocales();
         },
     
         update: function (req, res) {
@@ -105,6 +108,8 @@ module.exports = (Model, type) => {
                         });
                     }
                 });
+    
+            updateLocales();
         },
     
         delete: function (req, res) {
