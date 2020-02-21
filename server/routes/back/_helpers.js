@@ -86,8 +86,25 @@ module.exports = {
             })()
         ]);
     },
+    getAwakeningSkill (Skills, skill) {
+        return new Promise (resolve => {
+            if (!skill.awakening_skill_id) {
+                return resolve(skill);
+            }
+            
+            Skills.findOne({
+                _id: skill.awakening_skill_id
+            }, (err, awakeningSkill) => {
+                if (awakeningSkill) {
+                    resolve(awakeningSkill);
+                }
+            });
+        });
+    },
     getLinkedSaint (Saints, skill) {
         return new Promise (resolve => {
+            console.log(skill.linked_saint_id);
+            
             if (!skill.linked_saint_id) {
                 return resolve(skill);
             }

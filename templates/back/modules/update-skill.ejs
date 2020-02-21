@@ -44,17 +44,18 @@
                 fr: locals.skill ? __({phrase: skill.description.main, locale: 'fr'}) : ""
             },
             levels: () => {
-                for (let i = 1, count = 5; i <= count; i++) {
-                    let enDescription = locals.skill ? __({phrase: skill.description.levels[i], locale: 'en'}) : "",
+                for (let i = 0, count = 5; i < count; i++) {
+                    let currentIndex = i + 1,
+                        enDescription = locals.skill ? __({phrase: skill.description.levels[i], locale: 'en'}) : "",
                         frDescription = locals.skill ? __({phrase: skill.description.levels[i], locale: 'fr'}) : "";
                     %>
                         <div class="col-6 mb-4">
-                            <label for="level-<%= i %>-description-fr">Description compétence niveau <%= i %> (FR)</label>
-                            <textarea id="level-<%= i %>-description-fr" name="level-<%= i %>-description-fr" class="form-control" minlength="10"><%= frDescription %></textarea>
+                            <label for="level-<%= currentIndex %>-description-fr">Description compétence niveau <%= currentIndex %> (FR)</label>
+                            <textarea id="level-<%= currentIndex %>-description-fr" class="form-control" minlength="10"><%= frDescription %></textarea>
                         </div>
                         <div class="col-6">
-                            <label for="level-<%= i %>-description-en">Description compétence niveau <%= i %> (EN)</label>
-                            <textarea id="level-<%= i %>-description-en" name="level-<%= i %>-description-en" class="form-control" minlength="10"><%= enDescription %></textarea>
+                            <label for="level-<%= currentIndex %>-description-en">Description compétence niveau <%= currentIndex %> (EN)</label>
+                            <textarea id="level-<%= currentIndex %>-description-en" class="form-control" minlength="10"><%= enDescription %></textarea>
                         </div>
                     <%
                 }
@@ -64,10 +65,15 @@
         skill_index: locals.skill ? skill.skill_index : "",
         cost: locals.skill ? skill.cost : "",
         linked_saint_id: {
-            name: locals.skill && locals.saint ? __(saint._name) : "",
-            avatar: locals.skill && locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true})
+            name: locals.skill && locals.linked_saint ? __(linked_saint._name) : "",
+            avatar: locals.skill && locals.linked_saint ? cloudinary.url("saints/" + linked_saint.slug + "/" + linked_saint.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+            serialize: locals.skill && locals.linked_saint ? linked_saint._id : ""
         },
-        awakening_skill_id: locals.skill ? skill.awakening_skill_id: "",
+        awakening_skill_id: {
+            name: locals.skill && locals.awakening_skill ? __(awakening_skill._name) : "",
+            avatar: locals.skill && locals.awakening_skill ? cloudinary.url("skills/" + awakening_skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+            serialize: locals.skill && locals.awakening_skill ? awakening_skill._id : ""
+        },
         is_passive: locals.skill ? skill.is_passive: "",
         linked_modified_skills: () => {
             if (locals.skill) {
@@ -170,11 +176,11 @@
                         <span>Compétence éveillée correspondante (RC)</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="awakening-skill-id" name="awakening-skill-id" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakening_skill_id %>" />
+                    <input type="text" id="awakening-skill-id" name="awakening-skill-id" placeholder="Ex: Greatest Caution" class="form-control" value="<%= skillData.awakening_skill_id.name %>" data-serialize="<%= skillData.awakening_skill_id.serialize %>" />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">
-                    <img class="not-input-file" src="<%= cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}) %>" alt="Awakening skill image" />
+                    <img class="not-input-file" src="<%= skillData.awakening_skill_id.avatar %>" alt="Awakening skill image" />
                 </div>
             </div>
         </div>
@@ -199,7 +205,7 @@
                         <span>Saint correspondant</span>
                         <i class="material-icons">search</i>
                     </label>
-                    <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id.name %>" />
+                    <input type="text" id="linked-saint-id" name="linked-saint-id" placeholder="Ex: Arayshiki Shaka" class="form-control" value="<%= skillData.linked_saint_id.name %>" data-serialize="<%= skillData.linked_saint_id.serialize %>" />
                     <div class="small mt-1"><span class="font-weight-bold">·</span> 3 caractères minimum <span class="font-weight-bold">·</span></div>
                 </div>
                 <div class="col-4 thumb-container">

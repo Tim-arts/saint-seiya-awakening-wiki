@@ -21,7 +21,8 @@ module.exports = function () {
                 if (skill) {
                     (async function () {
                         res.render("back/views/edit-skill", {
-                            saint: await helpers.getLinkedSaint(Saints, skill),
+                            awakening_skill: await helpers.getAwakeningSkill(Skills, skill),
+                            linked_saint: await helpers.getLinkedSaint(Saints, skill),
                             skill: await helpers.getSkillsModified(Skills, skill)
                         });
                     })();
