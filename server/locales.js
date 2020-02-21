@@ -19,6 +19,7 @@ module.exports = function (i18n) {
         cookie: 'lang',
         // where to store json files - defaults to './locales'
         directory: global.utils.dirPath + 'locales',
+        autoReload: true,
         updateFiles: true
     });
     
