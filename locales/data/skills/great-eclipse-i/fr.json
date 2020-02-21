@@ -1,9 +1,9 @@
 {
     "great_eclipse_i_skill_name": "Grande Éclipse I",
     "great_eclipse_i_skill_description_main": "Après avoir lancé \"Grande Éclipse I\", les neuf planètes s'alignent en 2 tours avant qu'Hadès ne joue et tous les ennemis verront alors leur vie réduite de 15% (inclut la vie maximum; les ennemis d'un certain niveau ne sont pas affectés mais subiront à la place 200% de dégâts bruts), et la compétence sera remplacée par \"Grande Éclipse II\", faisant 520% de dégâts cosmiques à 1 ennemi. Cette attaque vole un montant de vie égal à 70% des dégâts infligés et la vie excédentaire sera convertie en vie max (la vie maximum convertie ne peut excéder 80% de votre vie maximum originale).",
-    "great_eclipse_i_skill_description_level_1": "I. Vie réduite de 15%. II. Multiplicateur de dégâts de 520%, 70% de vol de vie.",
-    "great_eclipse_i_skill_description_level_2": "I. Vie réduite de 20%. II. Multiplicateur de dégâts de 560%, 80% de vol de vie.",
-    "great_eclipse_i_skill_description_level_3": "I. Vie réduite de 25%. II. Multiplicateur de dégâts de 600%, 90% de vol de vie.",
-    "great_eclipse_i_skill_description_level_4": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 660%, 100% de vol de vie.",
-    "great_eclipse_i_skill_description_level_5": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 720%, 100% de vol de vie."
+    "great_eclipse_i_skill_description_level_1": "I. Vie réduite de 20%. II. Multiplicateur de dégâts de 560%, 80% de vol de vie.",
+    "great_eclipse_i_skill_description_level_2": "I. Vie réduite de 25%. II. Multiplicateur de dégâts de 600%, 90% de vol de vie.",
+    "great_eclipse_i_skill_description_level_3": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 660%, 100% de vol de vie.",
+    "great_eclipse_i_skill_description_level_4": "I. Vie réduite de 30%. II. Multiplicateur de dégâts de 720%, 100% de vol de vie.",
+    "great_eclipse_i_skill_description_level_5": ""
 }

@@ -1,9 +1,9 @@
 {
     "great_eclipse_i_skill_name": "Great Eclipse I",
     "great_eclipse_i_skill_description_main": "After launching \"Great Eclipse I\", the nine planets align in 2 rounds before Hades acts and all enemies will have their HP reduced by 15% (including Max HP; enemies in some levels aren't affected but instead take 200% true damage), and \"Great Eclipse II\" will be cast, dealing 520% C.DMG to 1 enemy. This attack steals HP equals to 70% of damage dealt and excess HP will be converted into Max HP (the converted Max HP cannot exceed 80% of your original Max HP).",
-    "great_eclipse_i_skill_description_level_1": "I. HP is reduced by 15%. II. 520% damage multiplier, 70% life steal.",
-    "great_eclipse_i_skill_description_level_2": "I. HP is reduced by 20%. II. 560% damage multiplier, 80% life steal.",
-    "great_eclipse_i_skill_description_level_3": "I. HP is reduced by 25%. II. 600% damage multiplier, 90% life steal.",
-    "great_eclipse_i_skill_description_level_4": "I. HP is reduced by 30%. II. 660% damage multiplier, 100% life steal.",
-    "great_eclipse_i_skill_description_level_5": "I. HP is reduced by 30%. II. 720% damage multiplier, 100% life steal."
+    "great_eclipse_i_skill_description_level_1": "I. HP is reduced by 20%. II. 560% damage multiplier, 80% life steal.",
+    "great_eclipse_i_skill_description_level_2": "I. HP is reduced by 25%. II. 600% damage multiplier, 90% life steal.",
+    "great_eclipse_i_skill_description_level_3": "I. HP is reduced by 30%. II. 660% damage multiplier, 100% life steal.",
+    "great_eclipse_i_skill_description_level_4": "I. HP is reduced by 30%. II. 720% damage multiplier, 100% life steal.",
+    "great_eclipse_i_skill_description_level_5": ""
 }
