@@ -1060,6 +1060,14 @@ form .skin {
 form .skin.starter img {
   width: 100%;
 }
+form .skin.starter label {
+  top: -5px;
+}
+form .skin.starter .large-image {
+  top: 0;
+  right: 15px;
+  position: absolute;
+}
 form .skin:not(.starter) img {
   width: 75%;
   height: 170px;
@@ -1068,16 +1076,18 @@ form .skin:not(.starter) img {
   position: relative;
   object-fit: cover;
 }
-form .skin label {
+form .skin:not(.starter) label {
   padding: 5px 0;
   top: 25px;
-  position: relative;
   margin-bottom: 0;
   cursor: text;
 }
-form .skin label:empty::before {
+form .skin:not(.starter) label:empty::before {
   color: rgba(0, 236, 152, 0.3);
   content: attr(data-text);
+}
+form .skin label {
+  position: relative;
 }
 form .skin .close {
   color: #fff;

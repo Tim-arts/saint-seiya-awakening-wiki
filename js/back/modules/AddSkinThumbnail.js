@@ -1,3 +1,5 @@
+import DirectCompositeImages from "./DirectCompositeImages";
+
 export default class AddSkinThumbnail {
     constructor(options) {
         let _this = this;
@@ -11,7 +13,12 @@ export default class AddSkinThumbnail {
         });
         
         this.options.input.addEventListener("change", function () {
-            let files = this.files;
+            let __this = this;
+            let files = __this.files;
+            
+            if (!__this.files[0] || !__this.files[1]) {
+                return;
+            }
             
             if (_this.checkFilesSize(files)) {
                 alert("File too big!");
@@ -25,43 +32,62 @@ export default class AddSkinThumbnail {
                 return;
             }
             
-            let __this = this;
-            let data = {
-                index: options.helpers.generateUuidv4(),
-                starter: false
-            };
-    
-            if (__this.files && __this.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    setTimeout(() => {
-                        data.skin = {
-                            name: options.helpers.convertToSlug(_this.options.input.value.split('\\').pop().split(".")[0], /["._' ]/g),
-                            data: e.target.result
-                        };
-    
-                        $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
-                            let HTMLElement = options.helpers.convertStringToDOMElement(response)[0];
-                            HTMLElement.querySelector(".close").addEventListener("click", (e) => {
-                                options.modal.show({
-                                    message: "deleteConfirmation",
-                                    submitContent: "Confirm",
-                                    closeContent: "Cancel",
-                                    submit: () => {
-                                        HTMLElement.remove();
-                                    },
-                                    hideCloseButton: false
-                                });
-                                
-                                e.preventDefault();
-                            });
-                            
-                            _this.container.appendChild(HTMLElement);
-                        });
-                    }, 0);
-                };
-                reader.readAsDataURL(__this.files[0]);
+            function fetch (file) {
+                return new Promise(resolve => {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        resolve(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
             }
+            
+            Promise.all([
+                fetch(__this.files[0]),
+                fetch(__this.files[1])
+            ]).then((values) => {
+                function process () {
+                    let crop = document.getElementById("large-image-checkbox").checked;
+                    
+                    return new Promise (resolve => {
+                        new DirectCompositeImages({
+                            image: values[1],
+                            mask: values[0],
+                            crop: crop ? {x: 60, y: 39, w: 136, h: 177} : null
+                        }, resolve);
+                    });
+                }
+                
+                (async function () {
+                    let data = {
+                        index: options.helpers.generateUuidv4(),
+                        starter: false,
+                        skin: {
+                            name: options.helpers.convertToSlug(__this.files[1].name.split(".")[0], /["._' ]/g),
+                            src: await process()
+                        }
+                    };
+                    
+                    $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
+                        let HTMLElement = options.helpers.convertStringToDOMElement(response)[0];
+                        HTMLElement.querySelector(".close").addEventListener("click", (e) => {
+                            options.modal.show({
+                                message: "deleteConfirmation",
+                                submitContent: "Confirm",
+                                closeContent: "Cancel",
+                                submit: () => {
+                                    HTMLElement.remove();
+                                },
+                                hideCloseButton: false
+                            });
+
+                            e.preventDefault();
+                        });
+
+                        _this.container.appendChild(HTMLElement);
+                    });
+                })();
+            });
         });
     
         this.closeElements.forEach(closeElement => {
@@ -88,7 +114,7 @@ export default class AddSkinThumbnail {
             let target = e.target;
             
             if (options.helpers.hasClass(target, "label-editable")) {
-                let value = target.innerText;
+                let value = options.helpers.convertToSlug(target.innerText, /[ ]/g);
                 target.parentElement.parentElement.setAttribute("data-name", value);
             }
         });

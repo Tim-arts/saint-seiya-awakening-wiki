@@ -28,7 +28,7 @@ module.exports = {
     },
     deleteTranslations (fs, data, folder) {
         const localFolder = global.utils.dirPath + "locales/data/" + folder + "/" + data.slug;
-        fs.rmdirSync(localFolder, { recursive: true });
+        fs.rmdirSync(localFolder, {recursive: true});
     },
     uploadTranslations (cloudinary, enTranslation, frTranslation, folder) {
         let enData = Buffer.from(JSON.stringify(enTranslation)).toString("Base64");
@@ -162,8 +162,6 @@ module.exports = {
         this.uploadTranslations(cloudinary, enTranslation, frTranslation, folder);
     },
     formatData (data, singularType, pluralType) {
-        let propertiesToDelete = ["image"];
-        
         // If update, name has been removed because it's immutable
         if (data._name) {
             data._name = data.slug_underscore + "_" + singularType + "_name";
@@ -201,16 +199,10 @@ module.exports = {
                     });
                 }
                 
-                delete data.largeImage;
-                
                 break;
             default:
                 console.log("Type isn't recognized!");
         }
-    
-        propertiesToDelete.forEach(property => {
-            if (data[property]) delete data[property];
-        });
         
         return data;
     }

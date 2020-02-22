@@ -175,13 +175,13 @@
 	"scarab_cosmo_comment": "",
 	"eagle_eye_cosmo_comment": "",
 	"arayashiki_shaka_saint_name": "Arayashiki Shaka",
-	"arayashiki_shaka_saint_comment": "Arayashiki Shaka comment",
+	"arayashiki_shaka_saint_comment": "",
 	"arayashiki_shaka_saint_template_name_suggestion_0": "",
 	"arayashiki_shaka_saint_comment_cosmos_suggestion_0": "",
 	"arayashiki_shaka_saint_comment_skills_suggestion_0": "PvE oriented",
 	"Great Eclipse II": "Great Eclipse II",
 	"scorpio_milo_saint_name": "Scorpio Milo",
-	"scorpio_milo_saint_comment": "Milo comment",
+	"scorpio_milo_saint_comment": "",
 	"purple_nether_cosmo_comment": "",
 	"scorpio_milo_saint_template_name_suggestion_0": "",
 	"scorpio_milo_saint_comment_cosmos_suggestion_0": "",
@@ -201,5 +201,7 @@
 	"divine_cloth_seiya_saint_name": "Divine Cloth Seiya",
 	"divine_cloth_seiya_saint_comment": "",
 	"divine_cloth_phoenix_ikki_saint_name": "Divine Cloth Phoenix Ikki",
-	"divine_cloth_phoenix_ikki_saint_comment": ""
+	"divine_cloth_phoenix_ikki_saint_comment": "",
+	"virgo_shaka_saint_name": "Virgo Shaka",
+	"virgo_shaka_saint_comment": ""
 }

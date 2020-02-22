@@ -767,6 +767,9 @@ module.exports = require("regenerator-runtime");
                   return;
               }
           }
+          if (keyCode >= 112 /* F1 */ && keyCode <= 123 /* F12 */) {
+              return;
+          }
           // the down key is used to open autocomplete
           if (keyCode === 40 /* Down */ && containerDisplayed()) {
               return;

@@ -274,6 +274,15 @@ form {
             img {
                 width: 100%;
             }
+
+            label {
+                top: -5px;
+            }
+
+            .large-image {
+                top: 0; right: 15px;
+                position: absolute;
+            }
         }
 
         &:not(.starter) {
@@ -285,19 +294,22 @@ form {
                 position: relative;
                 object-fit: cover;
             }
+
+            label {
+                padding: 5px 0;
+                top: 25px;
+                margin-bottom: 0;
+                cursor: text;
+
+                &:empty::before {
+                    color: @green-faded-3;
+                    content:attr(data-text);
+                }
+            }
         }
 
         label {
-            padding: 5px 0;
-            top: 25px;
             position: relative;
-            margin-bottom: 0;
-            cursor: text;
-
-            &:empty::before {
-                color: @green-faded-3;
-                content:attr(data-text);
-            }
         }
 
         .close {

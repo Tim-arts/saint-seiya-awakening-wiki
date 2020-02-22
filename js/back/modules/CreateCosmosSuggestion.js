@@ -283,6 +283,8 @@ export default class CreateCosmosSuggestion {
             let currentIndex = this.getAttribute("data-index"),
                 array = choice.getValue(true);
             if (array.length === 0) {
+                _this.removeSuggestionThumbnails(currentIndex, data.type);
+                
                 return;
             }
             
@@ -295,7 +297,7 @@ export default class CreateCosmosSuggestion {
                         $.post("../../api/partials/add-cosmo-suggestion-thumbnail", {
                             index: currentIndex,
                             type: data.type,
-                            slug: helpers.convertToSlug(value, /["._' ]/g, '-')
+                            slug: helpers.convertToSlug(value, /["._' ]/g, "-")
                         }, (response) => {
                             let thumbnail = helpers.convertStringToDOMElement(response)[0],
                                 parent = _this.getElementByIndexByType(currentIndex, data.type);
@@ -385,7 +387,7 @@ export default class CreateCosmosSuggestion {
         const el = Choices.defaults.templates.choice.call(this, classes, attr);
         const span = document.createElement("span");
         const img = document.createElement("img");
-        const slug = helpers.convertToSlug(attr.value, /["._' ]/g, '-');
+        const slug = helpers.convertToSlug(attr.value, /["._' ]/g, "-");
         
         img.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/" + slug + ".png";
         
@@ -422,7 +424,7 @@ export default class CreateCosmosSuggestion {
         });
         
         // If at least one suggestion has a thumbnail
-        return results = results.filter((r) => Object.keys(_this.constants).map(c => r.elements[c]).some(r => typeof r === 'object'));
+        return results = results.filter((r) => Object.keys(_this.constants).map(c => r.elements[c]).some(r => typeof r === "object"));
     }
     
     getValues (link) {

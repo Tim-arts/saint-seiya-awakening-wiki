@@ -20,13 +20,16 @@ module.exports = (Model, type) => {
                 folder: folder,
                 allowed_formats: "jpeg,jpg,png"
             });
-            if (type === "saints" && data.largeImage) {
-                helpers.uploadFileIntoCDN(cloudinary, {
-                    file: data.largeImage,
-                    public_id: "large-image",
-                    folder: folder,
-                    allowed_formats: "jpeg,jpg,png",
-                });
+            
+            if (type === "saints") {
+                if (data.largeImage) {
+                    helpers.uploadFileIntoCDN(cloudinary, {
+                        file: data.largeImage,
+                        public_id: "large-image",
+                        folder: folder,
+                        allowed_formats: "jpeg,jpg,png",
+                    });
+                }
             }
         
             /* Upload translation files and skins on CDN */
@@ -65,13 +68,16 @@ module.exports = (Model, type) => {
                 folder: folder,
                 allowed_formats: "jpeg,jpg,png",
             });
-            if (type === "saints" && data.largeImage) {
-                helpers.uploadFileIntoCDN(cloudinary, {
-                    file: data.largeImage,
-                    public_id: "large-image",
-                    folder: folder,
-                    allowed_formats: "jpeg,jpg,png",
-                });
+            
+            if (type === "saints") {
+                if (data.largeImage) {
+                    helpers.uploadFileIntoCDN(cloudinary, {
+                        file: data.largeImage,
+                        public_id: "large-image",
+                        folder: folder,
+                        allowed_formats: "jpeg,jpg,png",
+                    });
+                }
             }
         
             /* Upload translation files and skins on CDN */
@@ -121,6 +127,7 @@ module.exports = (Model, type) => {
                 file: folder + data.slug,
                 resource_type: "image"
             });
+            
             if (type === "saints") {
                 helpers.deleteFileFromCDN(cloudinary, {
                     file: folder + "large-avatar",

@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let skinsContainer = (() => {
         let skins = document.getElementById("skins"),
             container = skins.querySelector(".skins"),
-            input = skins.querySelector(".skin.starter input"),
+            input = skins.querySelector(".skin.starter input[type='file']"),
             img = skins.querySelector(".skin.starter img");
         
         new AddSkinThumbnail({
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 Array.from(skinsContainer.querySelectorAll(".skin:not(.starter)")).map(e => {
                     array.push({
-                        "name": helpers.convertToSlug(e.getAttribute("data-name")),
+                        "name": e.getAttribute("data-name"),
                         "img": e.querySelector("img").src
                     })
                 });
