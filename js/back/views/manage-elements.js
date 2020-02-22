@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     sortElements.addEventListener("keyup", function () {
         if (this.value.length <= 2) {
-            resetDisplay(elements, "hide");
+            resetDisplay(elements, "hide", 29);
         }
     });
     
@@ -81,13 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
         debounceWaitMs: 100,
         className: "elements",
         fetch: (text) => {
-            text = convertToSlug(text, /["._' ]/g, "-");
-            
+            text = convertToSlug(text, /["._' ]/g);
             let suggestions = elements.filter(e => e.getAttribute("data-slug").indexOf(text) > -1);
-            
-            resetDisplay(elements, "hide");
-            elements.forEach((element) => { element.classList.add("hide"); });
-            suggestions.forEach(suggestion => { suggestion.classList.remove("hide"); });
+    
+            elements.filter(e => !suggestions.includes(e)).filter(e => !e.classList.contains("hide")).forEach(e => e.classList.add("hide"));
+            suggestions.filter(e => !elements.includes(e)).filter(e => e.classList.contains("hide")).forEach(e => e.classList.remove("hide"));
         },
         onSelect: null,
         preventSubmit: true

@@ -526,10 +526,10 @@ module.exports = {
 
     return result;
   },
-  resetDisplay: function resetDisplay(elements, className) {
-    elements.forEach(function (element) {
-      element.classList.remove(className);
-    });
+  resetDisplay: function resetDisplay(elements, className, count) {
+    for (var i = 0; i < count; i++) {
+      elements[i].classList.remove(className);
+    }
   },
   convertToSlug: function convertToSlug(string, expression, replace) {
     var replaceValue = replace ? replace : "-";

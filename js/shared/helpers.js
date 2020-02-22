@@ -41,10 +41,10 @@ module.exports = {
         
         return result;
     },
-    resetDisplay (elements, className) {
-        elements.forEach((element) => {
-            element.classList.remove(className);
-        });
+    resetDisplay (elements, className, count) {
+        for (let i = 0; i < count; i++) {
+            elements[i].classList.remove(className);
+        }
     },
     convertToSlug (string, expression, replace) {
         let replaceValue = replace ? replace : "-";

@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   sortElements.addEventListener("keyup", function () {
     if (this.value.length <= 2) {
-      (0, _helpers.resetDisplay)(elements, "hide");
+      (0, _helpers.resetDisplay)(elements, "hide", 29);
     }
   });
   elements.forEach(function (element) {
@@ -123,16 +123,23 @@ document.addEventListener("DOMContentLoaded", function () {
     debounceWaitMs: 100,
     className: "elements",
     fetch: function fetch(text) {
-      text = (0, _helpers.convertToSlug)(text, /["._' ]/g, "-");
+      text = (0, _helpers.convertToSlug)(text, /["._' ]/g);
       var suggestions = elements.filter(function (e) {
         return e.getAttribute("data-slug").indexOf(text) > -1;
       });
-      (0, _helpers.resetDisplay)(elements, "hide");
-      elements.forEach(function (element) {
-        element.classList.add("hide");
+      elements.filter(function (e) {
+        return !suggestions.includes(e);
+      }).filter(function (e) {
+        return !e.classList.contains("hide");
+      }).forEach(function (e) {
+        return e.classList.add("hide");
       });
-      suggestions.forEach(function (suggestion) {
-        suggestion.classList.remove("hide");
+      suggestions.filter(function (e) {
+        return !elements.includes(e);
+      }).filter(function (e) {
+        return e.classList.contains("hide");
+      }).forEach(function (e) {
+        return e.classList.remove("hide");
       });
     },
     onSelect: null,
@@ -194,10 +201,10 @@ module.exports = {
 
     return result;
   },
-  resetDisplay: function resetDisplay(elements, className) {
-    elements.forEach(function (element) {
-      element.classList.remove(className);
-    });
+  resetDisplay: function resetDisplay(elements, className, count) {
+    for (var i = 0; i < count; i++) {
+      elements[i].classList.remove(className);
+    }
   },
   convertToSlug: function convertToSlug(string, expression, replace) {
     var replaceValue = replace ? replace : "-";
