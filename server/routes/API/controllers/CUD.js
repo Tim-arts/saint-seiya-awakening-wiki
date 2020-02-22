@@ -30,6 +30,15 @@ module.exports = (Model, type) => {
                         allowed_formats: "jpeg,jpg,png",
                     });
                 }
+    
+                if (data.veryLargeImage) {
+                    helpers.uploadFileIntoCDN(cloudinary, {
+                        file: data.veryLargeImage,
+                        public_id: "very-large-image",
+                        folder: folder,
+                        allowed_formats: "jpeg,jpg,png",
+                    });
+                }
             }
         
             /* Upload translation files and skins on CDN */
@@ -74,6 +83,15 @@ module.exports = (Model, type) => {
                     helpers.uploadFileIntoCDN(cloudinary, {
                         file: data.largeImage,
                         public_id: "large-image",
+                        folder: folder,
+                        allowed_formats: "jpeg,jpg,png",
+                    });
+                }
+                
+                if (data.veryLargeImage) {
+                    helpers.uploadFileIntoCDN(cloudinary, {
+                        file: data.veryLargeImage,
+                        public_id: "very-large-image",
                         folder: folder,
                         allowed_formats: "jpeg,jpg,png",
                     });

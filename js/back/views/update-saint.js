@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let skillsSuggestionsElement = document.getElementById("skills-suggestions");
     let compositeAvatarElement = document.getElementById("composite-avatar-container");
     let compositeLargeAvatarElement = document.getElementById("composite-large-avatar-container");
+    let compositeVeryLargeAvatarElement = document.getElementById("composite-very-large-avatar-container");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -67,11 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
         size: 256
     });
     let CompositeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeAvatarElement, {
-        size: 1024
+        size: 256
     });
     let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeLargeAvatarElement, {
-        size: 1024,
+        size: 256,
         crop: {x: 60, y: 39, w: 136, h: 177}
+    });
+    let CompositeVeryLargeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeVeryLargeAvatarElement, {
+        size: 1024
     });
     let ModalConstructor = new Modal(modalElement);
     let CosmosConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
@@ -137,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return avatarImgElement.src === helpers.constants.urls.saint ? null : AvatarConstructor.options.img.src;
             })(),
             "largeImage": CompositeLargeAvatarConstructor.getValue(),
+            "veryLargeImage": CompositeVeryLargeAvatarConstructor.getValue(),
             "arayashiki": (() => {
                 let container = document.getElementById("arayashiki-attributes");
                 let letterElements = Array.from(container.querySelectorAll(".letter"));

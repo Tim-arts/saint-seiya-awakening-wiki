@@ -410,7 +410,7 @@
 
     <%-
         include("partials/composite-images", {
-            title: "Composite an avatar with a mask",
+            title: "Composite an image <span class='small'>(avatar only)</span>",
             maxSize: "256kb",
             ids: {
                 block: "composite-avatar-container",
@@ -431,8 +431,8 @@
 
     <%-
         include("partials/composite-images", {
-            title: "Add a large avatar and composite with a mask",
-            maxSize: "1mo",
+            title: "Composite an image <span class='small'>(avatar with an extended bottom)</span>",
+            maxSize: "256kb",
             ids: {
                 block: "composite-large-avatar-container",
                 avatar: {
@@ -450,7 +450,30 @@
         })
     %>
 
+    <%-
+        include("partials/composite-images", {
+            title: "Composite an image <span class='small'>(very large avatar)</span>",
+            maxSize: "1mo",
+            ids: {
+                block: "composite-very-large-avatar-container",
+                avatar: {
+                    input: "composite-very-large-avatar-input",
+                    image: "composite-very-large-avatar-image"
+                },
+                mask: {
+                    input: "composite-very-large-avatar-mask-input",
+                    image: "composite-very-large-avatar-mask-image"
+                },
+                result: "composite-very-large-avatar-result",
+                process: "composite-very-large-avatar-process"
+            },
+            url: locals.saint ? ("saints/" + saint.slug + "/very-large-image.png") : "resources/composite-images/image-mask-result.png"
+        })
+    %>
+
     <%- include("partials/add-skins-thumbnail") %>
+
+    <div class="e-s-4"></div>
 
     <div class="row mb-4">
         <div class="col-12">
