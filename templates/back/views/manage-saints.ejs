@@ -67,7 +67,7 @@
 
                             for (let i = 0, count = saints.length; i < count; i++) {
                                 %>
-                                    <%- include("./../modules/show-element", {data: urls, element: saints[i]}); %>
+                                    <%- include("./../modules/show-element", {data: urls, element: saints[i], i: i}); %>
                                 <%
                             }
                         %>
