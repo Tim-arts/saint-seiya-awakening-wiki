@@ -103,8 +103,6 @@ module.exports = {
     },
     getLinkedSaint (Saints, skill) {
         return new Promise (resolve => {
-            console.log(skill.linked_saint_id);
-            
             if (!skill.linked_saint_id) {
                 return resolve(skill);
             }
