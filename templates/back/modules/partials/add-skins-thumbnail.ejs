@@ -6,17 +6,15 @@
         <div class="row skins library">
             <%-
                 include("add-skin-thumbnail", {
-                    index: 0,
                     starter: true
                 })
             %>
             <%
                 if (locals.saint && saint.skins.length > 0) {
-                    saint.skins.forEach((skin, i) => {
+                    saint.skins.forEach((skin) => {
                         %>
                             <%-
                                 include("add-skin-thumbnail", {
-                                    index: i,
                                     starter: false,
                                     skin: skin
                                 })

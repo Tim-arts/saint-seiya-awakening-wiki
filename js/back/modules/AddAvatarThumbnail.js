@@ -27,10 +27,6 @@ export default class AddAvatarThumbnail {
             let __this = this;
             let files = __this.files;
             
-            if (options.library && !__this.files[1]) {
-                return;
-            }
-            
             if (!__this.files[0] && !__this.files[1]) {
                 return;
             }
@@ -140,7 +136,6 @@ export default class AddAvatarThumbnail {
                 }
                 
                 let data = {
-                    index: _this.options.helpers.generateUuidv4(),
                     starter: false,
                     skin: {
                         name: _this.options.helpers.convertToSlug(__this.files[1].name.split(".")[0], /["._' ]/g),
@@ -148,34 +143,29 @@ export default class AddAvatarThumbnail {
                     }
                 };
     
-                $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
-                    let HTMLElement = _this.options.helpers.convertStringToDOMElement(response)[0];
-                    HTMLElement.querySelector(".close").addEventListener("click", (e) => {
-                        _this.options.modal.show({
-                            message: "deleteConfirmation",
-                            submitContent: "Confirm",
-                            closeContent: "Cancel",
-                            submit: () => {
-                                HTMLElement.remove();
-                            },
-                            hideCloseButton: false
-                        });
-            
-                        e.preventDefault();
-                    });
-        
-                    _this.container.appendChild(HTMLElement);
-                });
+                _this.addThumbnail(_this, data);
             })();
         });
     }
     
     singleProcess (__this) {
         let _this = this;
-        
-        this.fetch(__this.files[0]).then(value => {
-            _this.result = value;
-            _this.options.helpers.updateThumbnail(this.img, value);
+    
+        this.fetch(__this.files[0]).then(result => {
+            if (_this.options.library) {
+                let data = {
+                    starter: false,
+                    skin: {
+                        name: _this.options.helpers.convertToSlug(__this.files[0].name.split(".")[0], /["._' ]/g),
+                        src: result
+                    }
+                };
+                
+                _this.addThumbnail(_this, data);
+            } else {
+                _this.result = result;
+                _this.options.helpers.updateThumbnail(this.img, result);
+            }
         });
     }
     
@@ -212,5 +202,26 @@ export default class AddAvatarThumbnail {
         } else {
             return this.result;
         }
+    }
+    
+    addThumbnail (_this, data) {
+        $.post("../../api/partials/add-skin-thumbnail", data, (response) => {
+            let HTMLElement = _this.options.helpers.convertStringToDOMElement(response)[0];
+            HTMLElement.querySelector(".close").addEventListener("click", (e) => {
+                _this.options.modal.show({
+                    message: "deleteConfirmation",
+                    submitContent: "Confirm",
+                    closeContent: "Cancel",
+                    submit: () => {
+                        HTMLElement.remove();
+                    },
+                    hideCloseButton: false
+                });
+            
+                e.preventDefault();
+            });
+        
+            _this.container.appendChild(HTMLElement);
+        });
     }
 }

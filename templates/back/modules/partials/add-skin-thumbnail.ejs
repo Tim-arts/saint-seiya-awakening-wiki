@@ -24,11 +24,11 @@
                 <label for="extended-portrait-checkbox" class="small mb-0 pointer">Crop</label>
                 <input type="checkbox" id="extended-portrait-checkbox" class="pointer" />
             </div>
-            <input type="file" id="skin-<%= index %>" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png" multiple>
+            <input type="file" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png" multiple>
         <% } %>
-        <img src="<%= skinImageValue %>" id="skin-image-<%= index %>" class="img-fluid img big object-fit-contain<%= starter ? " pointer" : "" %>" alt="Avatar" />
+        <img src="<%= skinImageValue %>" class="img-fluid img big object-fit-contain<%= starter ? " pointer" : "" %>" alt="Avatar" />
         <% if (!starter) { %>
-            <label for="skin-<%= index %>" class="label-editable d-block" contenteditable="true" data-text="Skin name"><%= capitalize(convertToSlug(skinName, /[-]/g, " ")) %></label>
+            <label class="label-editable d-block" contenteditable="true" data-text="Skin name"><%= capitalize(convertToSlug(skinName, /[-]/g, " ")) %></label>
             <a href="#" class="close">
                 <i class="material-icons">close</i>
             </a>
