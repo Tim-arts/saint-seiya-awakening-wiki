@@ -125,7 +125,12 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch: function fetch(text) {
       text = (0, _helpers.convertToSlug)(text, /["._' ]/g);
       var suggestions = elements.filter(function (e) {
-        return e.getAttribute("data-slug").indexOf(text) > -1;
+        var name = JSON.parse(e.getAttribute("data-name"));
+        var check = [];
+        Object.keys(name).forEach(function (k) {
+          return check.push((0, _helpers.convertToSlug)(name[k], /["._' ]/g).indexOf(text) > -1);
+        });
+        return check.includes(true);
       });
       elements.filter(function (e) {
         return !suggestions.includes(e);
@@ -202,6 +207,8 @@ module.exports = {
     return result;
   },
   resetDisplay: function resetDisplay(elements, className, count) {
+    if (count > elements.length) count = elements.length;
+
     for (var i = 0; i < count; i++) {
       elements[i].classList.remove(className);
     }

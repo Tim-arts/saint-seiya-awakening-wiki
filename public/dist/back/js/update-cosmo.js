@@ -423,6 +423,8 @@ module.exports = {
     return result;
   },
   resetDisplay: function resetDisplay(elements, className, count) {
+    if (count > elements.length) count = elements.length;
+
     for (var i = 0; i < count; i++) {
       elements[i].classList.remove(className);
     }

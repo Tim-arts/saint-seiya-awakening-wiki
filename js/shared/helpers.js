@@ -42,6 +42,7 @@ module.exports = {
         return result;
     },
     resetDisplay (elements, className, count) {
+        if (count > elements.length) count = elements.length;
         for (let i = 0; i < count; i++) {
             elements[i].classList.remove(className);
         }

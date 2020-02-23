@@ -1,9 +1,13 @@
 <%
     let avatar = data.subfolder ? (data.path + element.slug + "/portrait.png") : (data.path + element.slug + ".png");
     let hideClass = i > 28 ? " hide" : "";
+    let name = {
+        fr: JSON.stringify(__({phrase: (element.slug_underscore + "_" + type + "_" + "name"), locale: "fr"})),
+        en: JSON.stringify(__({phrase: (element.slug_underscore + "_" + type + "_" + "name"), locale: "en"}))
+    };
 %>
 
-<div class="col-2 element text-center mb-4<%= hideClass %>" data-id="<%= element._id %>" data-slug="<%= element.slug %>">
+<div class="col-2 element text-center mb-4<%= hideClass %>" data-id="<%= element._id %>" data-name="<%= JSON.stringify(name) %>">
     <div class="element-container">
         <a href="<%= data.element + element._id %>">
             <div class="element-content">

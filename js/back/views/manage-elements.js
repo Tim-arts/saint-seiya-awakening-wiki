@@ -82,7 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "elements",
         fetch: (text) => {
             text = convertToSlug(text, /["._' ]/g);
-            let suggestions = elements.filter(e => e.getAttribute("data-slug").indexOf(text) > -1);
+            let suggestions = elements.filter(e => {
+                let name = JSON.parse(e.getAttribute("data-name"));
+                let check = [];
+                
+                Object.keys(name).forEach(k => check.push(convertToSlug(name[k], /["._' ]/g).indexOf(text) > -1));
+    
+                return check.includes(true);
+            });
     
             elements.filter(e => !suggestions.includes(e)).filter(e => !e.classList.contains("hide")).forEach(e => e.classList.add("hide"));
             suggestions.filter(e => !elements.includes(e)).filter(e => e.classList.contains("hide")).forEach(e => e.classList.remove("hide"));
