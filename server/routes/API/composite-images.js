@@ -29,7 +29,14 @@ module.exports = function () {
             async function getBuffer () {
                 if (crop) {
                     imageBuffer.mask(maskBuffer, 0, 0).crop(crop.x, crop.y, crop.w, crop.h).getBase64(Jimp.MIME_PNG, (error, result) => {
-                        if (error) console.log(error);
+                        if (error) {
+                            console.log(error);
+                            
+                            return res.json({
+                                result: error
+                            });
+                        }
+                        
                         buffer = result;
                     });
                 } else {

@@ -265,10 +265,10 @@ form {
         }
     }
 
-    .skin {
+    .item {
         position: relative;
         overflow: hidden;
-        padding: 15px;
+        padding: 15px 15px 30px;
 
         &.starter {
             img {
@@ -279,7 +279,7 @@ form {
                 top: -5px;
             }
 
-            .large-image {
+            .extended-portrait {
                 top: 0; right: 15px;
                 position: absolute;
             }
@@ -287,7 +287,7 @@ form {
 
         &:not(.starter) {
             img {
-                width: 75%;
+                width: 170px;
                 height: 170px;
                 border-radius: @radius-circled;
                 top: 15px;
@@ -298,8 +298,12 @@ form {
             label {
                 padding: 5px 0;
                 top: 25px;
-                margin-bottom: 0;
-                cursor: text;
+                margin: 0 auto;
+                cursor: pointer;
+
+                &[contenteditable] {
+                    cursor: text;
+                }
 
                 &:empty::before {
                     color: @green-faded-3;

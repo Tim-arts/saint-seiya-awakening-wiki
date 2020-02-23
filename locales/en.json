@@ -113,7 +113,7 @@
 	"roc_cosmo_description": "When attaking, 50% chance to gain 1 extra energy",
 	"rock_colossus_cosmo_description": "Gives you a shield at the start of the battle. Each point of Defense grants you 5 shield. Also increases you P.DMG and C.DMG Res by 25% for 1 round.",
 	"salamander_cosmo_description": "Increases Cosmo attack by 50% (can stack) in the next action round after killing the target (excluding summoned units)",
-	"silver_dragon_cosmo_description": "Eack attack has a 25% chance to inflict additional damage equal to 4% of the target's max HP (up to 110% x attack)",
+	"silver_dragon_cosmo_description": "",
 	"soapberry_cosmo_description": "After action, recovers 20% HP if below 45% HP",
 	"the_sword_of_damocles_cosmo_description": "Manually using a skill reduces initial Max Health by 24% and each energy spent (for a maximum of 4) increases P.ATK by 20% and P.Crit level by 200 (for main target).",
 	"two_horned_snake_cosmo_description": "Deal an extra 40% damage against Saints that have already acted this round.",
@@ -203,5 +203,11 @@
 	"divine_cloth_phoenix_ikki_saint_name": "Divine Cloth Phoenix Ikki",
 	"divine_cloth_phoenix_ikki_saint_comment": "",
 	"virgo_shaka_saint_name": "Virgo Shaka",
-	"virgo_shaka_saint_comment": ""
+	"virgo_shaka_saint_comment": "",
+	"sagittarius_aiolos_saint_name": "Sagittarius Aiolos",
+	"sagittarius_aiolos_saint_comment": "",
+	"sagittarius_aiolos_saint_template_name_suggestion_0": "",
+	"sagittarius_aiolos_saint_comment_cosmos_suggestion_0": "",
+	"silver_dragon_cosmo_comment": "",
+	"bloom_cosmo_comment": ""
 }

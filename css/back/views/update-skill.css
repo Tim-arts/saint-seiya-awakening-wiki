@@ -1052,44 +1052,47 @@ form .elements-suggestions .suggestion .priorities button[type="button"] i {
 form .elements-suggestions .suggestion:last-child .content {
   border-radius: 0 0 4px 4px;
 }
-form .skin {
+form .item {
   position: relative;
   overflow: hidden;
-  padding: 15px;
+  padding: 15px 15px 30px;
 }
-form .skin.starter img {
+form .item.starter img {
   width: 100%;
 }
-form .skin.starter label {
+form .item.starter label {
   top: -5px;
 }
-form .skin.starter .large-image {
+form .item.starter .extended-portrait {
   top: 0;
   right: 15px;
   position: absolute;
 }
-form .skin:not(.starter) img {
-  width: 75%;
+form .item:not(.starter) img {
+  width: 170px;
   height: 170px;
   border-radius: 50%;
   top: 15px;
   position: relative;
   object-fit: cover;
 }
-form .skin:not(.starter) label {
+form .item:not(.starter) label {
   padding: 5px 0;
   top: 25px;
-  margin-bottom: 0;
+  margin: 0 auto;
+  cursor: pointer;
+}
+form .item:not(.starter) label[contenteditable] {
   cursor: text;
 }
-form .skin:not(.starter) label:empty::before {
+form .item:not(.starter) label:empty::before {
   color: rgba(0, 236, 152, 0.3);
   content: attr(data-text);
 }
-form .skin label {
+form .item label {
   position: relative;
 }
-form .skin .close {
+form .item .close {
   color: #fff;
   top: 0;
   right: 15px;

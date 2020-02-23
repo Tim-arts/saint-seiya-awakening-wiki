@@ -13,16 +13,16 @@
             skinImageValue = cloudinary.url(removeUrl, {fetch_format: "auto", quality: "auto", secure: true});
         }
     } else {
-        skinImageValue = cloudinary.url("saints/default_skin.png", {fetch_format: "auto", quality: "auto", secure: true});
+        skinImageValue = cloudinary.url("saints/default-skin.png", {fetch_format: "auto", quality: "auto", secure: true});
     }
 %>
 
-<div class="col-2 skin text-center mb-2<%= starterValue %>" data-name="<%= skinName %>">
+<div class="col-2 skin item text-center mb-2<%= starterValue %>" data-name="<%= skinName %>">
     <div class="element-container">
         <% if (starter) { %>
-            <div class="large-image">
-                <label for="large-image-checkbox" class="small mb-0 pointer">Crop</label>
-                <input type="checkbox" id="large-image-checkbox" class="pointer" />
+            <div class="extended-portrait">
+                <label for="extended-portrait-checkbox" class="small mb-0 pointer">Crop</label>
+                <input type="checkbox" id="extended-portrait-checkbox" class="pointer" />
             </div>
             <input type="file" id="skin-<%= index %>" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png" multiple>
         <% } %>

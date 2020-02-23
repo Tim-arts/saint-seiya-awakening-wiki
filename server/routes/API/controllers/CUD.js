@@ -11,30 +11,31 @@ module.exports = (Model, type) => {
     return {
         create: function (req, res) {
             let data = req.body.data,
-            folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path;
+                folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path,
+                publicId = type === "saints" ? "portrait" : data.slug;
             
             /* Upload new image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
-                file: data.image,
-                public_id: data.slug,
+                file: data.portrait,
+                public_id: publicId,
                 folder: folder,
-                allowed_formats: "jpeg,jpg,png"
+                allowed_formats: "jpeg,jpg,png",
             });
-            
+    
             if (type === "saints") {
-                if (data.largeImage) {
+                if (data.extendedPortrait) {
                     helpers.uploadFileIntoCDN(cloudinary, {
-                        file: data.largeImage,
-                        public_id: "large-image",
+                        file: data.extendedPortrait,
+                        public_id: "extended-portrait",
                         folder: folder,
                         allowed_formats: "jpeg,jpg,png",
                     });
                 }
-    
-                if (data.veryLargeImage) {
+        
+                if (data.fullCharacter) {
                     helpers.uploadFileIntoCDN(cloudinary, {
-                        file: data.veryLargeImage,
-                        public_id: "very-large-image",
+                        file: data.fullCharacter,
+                        public_id: "full-character",
                         folder: folder,
                         allowed_formats: "jpeg,jpg,png",
                     });
@@ -48,7 +49,7 @@ module.exports = (Model, type) => {
             Model.create(helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural), (error, document) => {
                 if (error) {
                     console.log(error);
-                    res.json({
+                    return res.json({
                         error: true,
                         data: JSON.stringify(error)
                     });
@@ -68,30 +69,31 @@ module.exports = (Model, type) => {
         update: function (req, res) {
             let data = req.body.data,
                 folder = type === "saints" ? (global.utils.translations[type].path + data.slug + "/") : global.utils.translations[type].path,
-                immutableFields = ["_date", "_name"];
-        
+                publicId = type === "saints" ? "portrait" : data.slug,
+                removableFields = ["_date", "_name"];
+            
             /* Update image on CDN */
             helpers.uploadFileIntoCDN(cloudinary, {
-                file: data.image,
-                public_id: data.slug,
+                file: data.portrait,
+                public_id: publicId,
                 folder: folder,
                 allowed_formats: "jpeg,jpg,png",
             });
             
             if (type === "saints") {
-                if (data.largeImage) {
+                if (data.extendedPortrait) {
                     helpers.uploadFileIntoCDN(cloudinary, {
-                        file: data.largeImage,
-                        public_id: "large-image",
+                        file: data.extendedPortrait,
+                        public_id: "extended-portrait",
                         folder: folder,
                         allowed_formats: "jpeg,jpg,png",
                     });
                 }
                 
-                if (data.veryLargeImage) {
+                if (data.fullCharacter) {
                     helpers.uploadFileIntoCDN(cloudinary, {
-                        file: data.veryLargeImage,
-                        public_id: "very-large-image",
+                        file: data.fullCharacter,
+                        public_id: "full-character",
                         folder: folder,
                         allowed_formats: "jpeg,jpg,png",
                     });
@@ -101,8 +103,8 @@ module.exports = (Model, type) => {
             /* Upload translation files and skins on CDN */
             helpers.process(cloudinary, fs, http, path, data, global.utils.translations[type].cdn, global.utils.translations[type].singular, global.utils.translations[type].plural);
     
-            // Prevent immutable/readonly fields to be updated when an update occurs
-            immutableFields.forEach(field => {
+            // Remove fields to avoid an update on these specific field
+            removableFields.forEach(field => {
                 if (data[field]) delete data[field];
             });
             
@@ -111,14 +113,11 @@ module.exports = (Model, type) => {
                 {
                     _id: data._id
                 },
-                    helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural),
-                {
-                    upsert: true
-                },
+                helpers.formatData(data, global.utils.translations[type].singular, global.utils.translations[type].plural),
                 (error, document) => {
                     if (error) {
                         console.log(error);
-                        res.json({
+                        return res.json({
                             error: true,
                             data: JSON.stringify(error)
                         });
@@ -172,7 +171,7 @@ module.exports = (Model, type) => {
             }, (error, document) => {
                 if (error) {
                     console.log(error);
-                    res.json({
+                    return res.json({
                         error: true,
                         data: JSON.stringify(error)
                     });

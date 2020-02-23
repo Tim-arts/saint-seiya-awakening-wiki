@@ -2,7 +2,7 @@ require("./../base");
 
 import InputFile from "./../modules/InputFile";
 import CompositeImage from "./../modules/CompositeImages";
-import AddSkinThumbnail from "./../modules/AddSkinThumbnail";
+import AddAvatarThumbnail from "./../modules/AddAvatarThumbnail";
 import Modal from "./../../shared/modules/ModalResponse";
 import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";
 import CreateSkillsSuggestion from "./../modules/CreateSkillsSuggestion";
@@ -17,9 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let modalElement = document.getElementById("response-modal");
     let cosmosSuggestionElement = document.getElementById("cosmos-suggestions");
     let skillsSuggestionsElement = document.getElementById("skills-suggestions");
-    let compositeAvatarElement = document.getElementById("composite-avatar-container");
-    let compositeLargeAvatarElement = document.getElementById("composite-large-avatar-container");
-    let compositeVeryLargeAvatarElement = document.getElementById("composite-very-large-avatar-container");
     
     let  _data = (() => {
         let isUpdate = formElement.hasAttribute("data-update"),
@@ -67,36 +64,42 @@ document.addEventListener("DOMContentLoaded", () => {
         img: avatarImgElement,
         size: 256
     });
-    let CompositeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeAvatarElement, {
-        size: 256
-    });
-    let CompositeLargeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeLargeAvatarElement, {
-        size: 256,
-        crop: {x: 60, y: 39, w: 136, h: 177}
-    });
-    let CompositeVeryLargeAvatarConstructor = new CompositeImage(InputFile, helpers.updateThumbnail, compositeVeryLargeAvatarElement, {
-        size: 1024
-    });
     let ModalConstructor = new Modal(modalElement);
     let CosmosConstructor = new CreateCosmosSuggestion(cosmosSuggestionElement);
     let SkillsConstructor = new CreateSkillsSuggestion(skillsSuggestionsElement);
-    
-    let skinsContainer = (() => {
-        let skins = document.getElementById("skins"),
-            container = skins.querySelector(".skins"),
-            input = skins.querySelector(".skin.starter input[type='file']"),
-            img = skins.querySelector(".skin.starter img");
-        
-        new AddSkinThumbnail({
-            container : container,
-            input: input,
-            img: img,
+    let portraitConstructor = (() => {
+        return new AddAvatarThumbnail({
+            parent : "avatar-container",
             size: 256,
             helpers: helpers,
             modal: ModalConstructor
         });
-        
-        return container;
+    })();
+    let extendedPortraitConstructor = (() => {
+        return new AddAvatarThumbnail({
+            parent : "extended-portrait-container",
+            size: 256,
+            crop: true,
+            helpers: helpers,
+            modal: ModalConstructor
+        });
+    })();
+    let fullCharacterConstructor = (() => {
+        return new AddAvatarThumbnail({
+            parent: "full-character-container",
+            size: 256,
+            helpers: helpers,
+            modal: ModalConstructor
+        });
+    })();
+    let skinsConstructor = (() => {
+        return new AddAvatarThumbnail({
+            parent: "skins",
+            size: 1024,
+            library: true,
+            helpers: helpers,
+            modal: ModalConstructor
+        });
     })();
     
     /* Events */
@@ -134,14 +137,15 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             "slug": helpers.convertToSlug(document.getElementById("en-name").value, /["._' ]/g),
             "slug_underscore": helpers.convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
-            "image": (() => {
-                let value = CompositeAvatarConstructor.getValue();
+            "portrait": (() => {
+                let value = portraitConstructor.getValue();
                 if (value) return value;
                 
                 return avatarImgElement.src === helpers.constants.urls.saint ? null : AvatarConstructor.options.img.src;
             })(),
-            "largeImage": CompositeLargeAvatarConstructor.getValue(),
-            "veryLargeImage": CompositeVeryLargeAvatarConstructor.getValue(),
+            "extendedPortrait": extendedPortraitConstructor.getValue(),
+            "fullCharacter": fullCharacterConstructor.getValue(),
+            "skins": skinsConstructor.getValue(),
             "arayashiki": (() => {
                 let container = document.getElementById("arayashiki-attributes");
                 let letterElements = Array.from(container.querySelectorAll(".letter"));
@@ -183,19 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "c-def": document.getElementById("characteristic-c.def").value,
                     "speed": document.getElementById("characteristic-speed").value
                 }
-            ],
-            "skins": (() => {
-                let array = [];
-                
-                Array.from(skinsContainer.querySelectorAll(".skin:not(.starter)")).map(e => {
-                    array.push({
-                        "name": e.getAttribute("data-name"),
-                        "img": e.querySelector("img").src
-                    })
-                });
-                
-                return array;
-            })()
+            ]
         };
         
         $.post(formElement.getAttribute("action"), {

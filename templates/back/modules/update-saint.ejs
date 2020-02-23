@@ -18,7 +18,7 @@
             en: __({phrase: saint.comment, locale: 'en'}),
             fr: __({phrase: saint.comment, locale: 'fr'})
         },
-        image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/" + saint.slug + ".png", {
+        image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/portrait.png", {
             fetch_format: "auto", quality: "auto", secure: true
         }) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
         ranks: () => {
@@ -408,68 +408,35 @@
 
     <div class="e-s-4"></div>
 
-    <%-
-        include("partials/composite-images", {
-            title: "Composite an image <span class='small'>(avatar only)</span>",
-            maxSize: "256kb",
-            ids: {
-                block: "composite-avatar-container",
-                avatar: {
-                    input: "composite-avatar-input",
-                    image: "composite-avatar-image"
-                },
-                mask: {
-                    input: "composite-avatar-mask-input",
-                    image: "composite-avatar-mask-image"
-                },
-                result: "composite-avatar-result",
-                process: "composite-avatar-process"
-            },
-            url: locals.saint ? ("saints/" + saint.slug + "/" + saint.slug + ".png") : "resources/composite-images/image-mask-result.png"
-        })
-    %>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="h5 mt-0">Ajouter des avatars</h2>
+        </div>
+        <%-
+            include("partials/add-avatar-thumbnail", {
+                id: "avatar-container",
+                key: locals.saint ? (saint.slug + "/portrait") : "default-portrait",
+                labelName: "Portrait <span class='small'>(max: 256kb)</span>"
+            })
+        %>
 
-    <%-
-        include("partials/composite-images", {
-            title: "Composite an image <span class='small'>(avatar with an extended bottom)</span>",
-            maxSize: "256kb",
-            ids: {
-                block: "composite-large-avatar-container",
-                avatar: {
-                    input: "composite-large-avatar-input",
-                    image: "composite-large-avatar-image"
-                },
-                mask: {
-                    input: "composite-large-avatar-mask-input",
-                    image: "composite-large-avatar-mask-image"
-                },
-                result: "composite-large-avatar-result",
-                process: "composite-large-avatar-process"
-            },
-            url: locals.saint ? ("saints/" + saint.slug + "/large-image.png") : "resources/composite-images/image-mask-result.png"
-        })
-    %>
+        <%-
+            include("partials/add-avatar-thumbnail", {
+                id: "extended-portrait-container",
+                key: locals.saint ? (saint.slug + "/extended-portrait") : "default-extended-portrait",
+                crop: true,
+                labelName: "Portrait étendu <span class='small'>(max: 256kb)</span>"
+            })
+        %>
 
-    <%-
-        include("partials/composite-images", {
-            title: "Composite an image <span class='small'>(very large avatar)</span>",
-            maxSize: "1mo",
-            ids: {
-                block: "composite-very-large-avatar-container",
-                avatar: {
-                    input: "composite-very-large-avatar-input",
-                    image: "composite-very-large-avatar-image"
-                },
-                mask: {
-                    input: "composite-very-large-avatar-mask-input",
-                    image: "composite-very-large-avatar-mask-image"
-                },
-                result: "composite-very-large-avatar-result",
-                process: "composite-very-large-avatar-process"
-            },
-            url: locals.saint ? ("saints/" + saint.slug + "/very-large-image.png") : "resources/composite-images/image-mask-result.png"
-        })
-    %>
+        <%-
+            include("partials/add-avatar-thumbnail", {
+                id: "full-character-container",
+                key: locals.saint ? (saint.slug + "/full-character") : "default-full-character",
+                labelName: "Personnage complet <span class='small'>(max: 1mo)</span>"
+            })
+        %>
+    </div>
 
     <%- include("partials/add-skins-thumbnail") %>
 

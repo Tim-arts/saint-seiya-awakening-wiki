@@ -1,0 +1,10 @@
+<%
+    let cropValue = locals.crop ? "data-crop=true" : "";
+    let avatar = cloudinary.url("saints/" + key + ".png", {fetch_format: "auto", quality: "auto", secure: true});
+%>
+
+<div id="<%= id %>" class="col-4 avatar item text-center mt-2" <%= cropValue %>>
+    <input type="file" id="<%= key %>-avatar" name="custom-file" class="not-visible" accept=".jpg, .jpeg, .png" multiple>
+    <img src="<%= avatar %>" class="img-fluid img big object-fit-contain pointer" alt="Avatar" />
+    <label for="<%= key %>-avatar" class="d-block" data-text="Avatar name"><%- labelName %></label>
+</div>
