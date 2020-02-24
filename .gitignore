@@ -22,3 +22,4 @@ node_modules/
 # Folders that should not be on the git repository
 node_modules
 database-saves
+public/dist
