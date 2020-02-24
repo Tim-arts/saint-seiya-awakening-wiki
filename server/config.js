@@ -10,6 +10,8 @@ const xss = require('xss-clean');
 const app = express();
 const router = express.Router();
 
+require("./copyFiles");
+
 const routes = require("./routes");
 const cloudinary = require("./cloudinary");
 const locales = require("./locales")(i18n);
