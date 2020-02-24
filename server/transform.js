@@ -26,5 +26,3 @@ folders.forEach(folder => {
             });
     });
 });
-
-module.exports = browserify;

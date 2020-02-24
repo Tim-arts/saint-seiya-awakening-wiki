@@ -1,7 +1,10 @@
 const i18n = require("i18n");
 global = Object.assign(global, require("./global")(i18n));
 
-const dotenv = require('dotenv').config();
+require('dotenv').config();
+require("./copyFiles");
+require("./transform");
+
 const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
@@ -10,12 +13,9 @@ const xss = require('xss-clean');
 const app = express();
 const router = express.Router();
 
-require("./copyFiles");
-
 const routes = require("./routes");
 const cloudinary = require("./cloudinary");
 const locales = require("./locales")(i18n);
-const transform = require("./transform");
 const cookies = require("./cookies")(router, i18n);
 
 /* Security */
