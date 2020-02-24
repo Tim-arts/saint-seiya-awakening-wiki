@@ -1,0 +1,19 @@
+<%
+    if (typeof news === 'undefined') locals.news = false;
+
+    let form;
+    if (locals.news) {
+        form = "<form id='update-news' method='POST' action='../../api/news/update' data-update='true'>";
+    } else {
+        form = "<form id='update-news' method='POST' action='../api/news/create'>";
+    }
+
+    let newsData = {
+
+    };
+%>
+
+<%- form %>
+
+</form>
+

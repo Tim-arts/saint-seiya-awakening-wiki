@@ -33,6 +33,11 @@ browserify(["js/back/views/update-saint.js"])
     .bundle()
     .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/update-saint.js"));
 
+browserify(["js/back/views/update-news.js"])
+    .transform("babelify")
+    .bundle()
+    .pipe(fs.createWriteStream(global.utils.dirPath + "public/dist/back/js/update-news.js"));
+
 browserify(["js/back/views/manage-elements.js"])
     .transform("babelify")
     .bundle()
