@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
     className: "saint",
     onSelect: function onSelect(saint) {
       var imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
-          imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/" + saint.slug + ".png";
+          imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/portrait.png";
       this.input.value = saint._name;
       this.input.setAttribute("data-serialize", saint._id);
 
@@ -490,7 +490,7 @@ module.exports = {
     urls: {
       skill: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/skills/default.png",
       cosmo: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/cosmos/default.png",
-      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/default.png"
+      saint: "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/v1/saints/default-portrait.png"
     }
   },
   generateUuidv4: function generateUuidv4() {
@@ -647,7 +647,7 @@ module.exports = {
         image = document.createElement("img");
 
     if (subfolder) {
-      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + data.slug + "/" + data.slug + ".png";
+      image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + data.slug + "/portrait.png";
     } else {
       image.src = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/skills/" + data.slug + ".png";
     }

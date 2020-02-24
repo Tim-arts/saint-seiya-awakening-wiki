@@ -12,6 +12,10 @@ const addSaint = require("./add-saint");
 const editSaint = require("./edit-saint");
 const manageSaints = require("./manage-saints");
 
+const addNews = require("./add-news");
+const editNews = require("./edit-news");
+const manageNews = require("./manage-news");
+
 module.exports = {
     home,
     
@@ -25,5 +29,9 @@ module.exports = {
     
     addSaint,
     editSaint,
-    manageSaints
+    manageSaints,
+    
+    addNews,
+    editNews,
+    manageNews
 };

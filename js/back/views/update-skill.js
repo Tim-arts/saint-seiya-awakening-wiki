@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
         className: "saint",
         onSelect: function (saint) {
             let imageElement = this.input.parentElement.parentElement.querySelector("img.not-input-file"),
-                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/" + saint.slug + ".png";
+                imageSrc = "https://res.cloudinary.com/dowdeo3ja/image/upload/f_auto,q_auto/saints/" + saint.slug + "/portrait.png";
             
             this.input.value = saint._name;
             this.input.setAttribute("data-serialize", saint._id);

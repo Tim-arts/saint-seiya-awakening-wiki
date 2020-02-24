@@ -20,7 +20,7 @@
         },
         image: locals.saint ? cloudinary.url("saints/" + saint.slug + "/portrait.png", {
             fetch_format: "auto", quality: "auto", secure: true
-        }) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+        }) : cloudinary.url("saints/default-portrait.png", {fetch_format: "auto", quality: "auto", secure: true}),
         ranks: () => {
             for (let i = 0, count = ranks.length; i < count; i++) {
                 let cleanType = convertToSlug(ranks[i], /[ ]/g),

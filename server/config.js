@@ -45,6 +45,7 @@ app.use('/api', routes.API.saints());
 app.use('/api', routes.API.tags());
 app.use('/api', routes.API.skills());
 app.use('/api', routes.API.cosmos());
+app.use('/api', routes.API.news());
 app.use('/api', routes.API.controllers());
 /* API Partials */
 app.use('/api', routes.API.partials.addSkillSuggestionPriority());
@@ -72,6 +73,10 @@ app.use('/back', routes.back.manageSkills());
 app.use('/back', routes.back.addSaint());
 app.use('/back', routes.back.editSaint());
 app.use('/back', routes.back.manageSaints());
+
+app.use('/back', routes.back.addNews());
+app.use('/back', routes.back.editNews());
+app.use('/back', routes.back.manageNews());
 
 /* 404 */
 app.use(function (req, res) {

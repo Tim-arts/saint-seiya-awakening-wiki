@@ -66,12 +66,12 @@
         cost: locals.skill ? skill.cost : "",
         linked_saint_id: {
             name: locals.skill && locals.linked_saint ? __(linked_saint._name) : "",
-            avatar: locals.skill && locals.linked_saint ? cloudinary.url("saints/" + linked_saint.slug + "/portrait.png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+            avatar: locals.skill && locals.linked_saint ? cloudinary.url("saints/" + linked_saint.slug + "/portrait.png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default-portrait.png", {fetch_format: "auto", quality: "auto", secure: true}),
             serialize: locals.skill && locals.linked_saint ? linked_saint._id : ""
         },
         awakening_skill_id: {
             name: locals.skill && locals.awakening_skill ? __(awakening_skill._name) : "",
-            avatar: locals.skill && locals.awakening_skill ? cloudinary.url("skills/" + awakening_skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("saints/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
+            avatar: locals.skill && locals.awakening_skill ? cloudinary.url("skills/" + awakening_skill.slug + ".png", {fetch_format: "auto", quality: "auto", secure: true}) : cloudinary.url("skills/default.png", {fetch_format: "auto", quality: "auto", secure: true}),
             serialize: locals.skill && locals.awakening_skill ? awakening_skill._id : ""
         },
         is_passive: locals.skill ? skill.is_passive: "",
