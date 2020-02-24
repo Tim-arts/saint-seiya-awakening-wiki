@@ -57,4 +57,7 @@ To handle fixtures:
 - Mix of the both above, will remove and load the new fixtures
 > npm run fixtures
 
+To change a key of all documents in a collection:
+> db.<collectionName>.update({}, {$rename:{"oldName":"newName"}}, false, true);
+
 **Warning**: Please **save** the database (using the **mongodump** command) before performing any operation.

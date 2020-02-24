@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "image": (() => {
                 return avatarElement.src === constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
             })(),
-            "exclusive_cn": !!document.getElementById("exclusive-cn").checked
+            "cn_exclusive": !!document.getElementById("cn-exclusive").checked
         };
         
         if (!hasChanged) {

@@ -64,7 +64,8 @@ const saints = {
             {
                 name: String
             }
-        ]
+        ],
+        sea_exclusive: Boolean
     }
 };
 

@@ -187,7 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     "c-def": document.getElementById("characteristic-c.def").value,
                     "speed": document.getElementById("characteristic-speed").value
                 }
-            ]
+            ],
+            "sea_exclusive": !!document.getElementById("sea-exclusive").checked
         };
         
         $.post(formElement.getAttribute("action"), {

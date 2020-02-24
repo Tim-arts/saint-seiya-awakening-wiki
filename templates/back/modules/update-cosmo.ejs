@@ -144,7 +144,7 @@
                 }
             }
         },
-        exclusive_cn: locals.cosmo ? cosmo.exclusive_cn : ""
+        cn_exclusive: locals.cosmo ? cosmo.cn_exclusive : ""
     };
 %>
 
@@ -274,8 +274,8 @@
     <div class="form-group row mb-4">
         <%= cosmoData.obtainment_system() %>
         <div class="col-6 mt-4">
-            <input type="checkbox" id="exclusive-cn" name="exclusive-cn" <%= cosmoData.exclusive_cn ? "checked='true'" : "" %> />
-            <label for="exclusive-cn" class="ml-1">Only on chinese version</label>
+            <input type="checkbox" id="cn-exclusive" <%= cosmoData.cn_exclusive ? "checked='true'" : "" %> />
+            <label for="cn-exclusive" class="ml-1">Only on chinese version</label>
         </div>
     </div>
 

@@ -63,7 +63,7 @@ const cosmos = {
             },
             shop: Boolean
         },
-        exclusive_cn: Boolean
+        cn_exclusive: Boolean
     }
 };
 

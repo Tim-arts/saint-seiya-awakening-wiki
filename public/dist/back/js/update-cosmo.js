@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "image": function () {
         return avatarElement.src === _helpers.constants.urls.cosmo ? null : InputFileConstructor.options.img.src;
       }(),
-      "exclusive_cn": !!document.getElementById("exclusive-cn").checked
+      "cn_exclusive": !!document.getElementById("cn-exclusive").checked
     };
 
     if (!hasChanged) {
