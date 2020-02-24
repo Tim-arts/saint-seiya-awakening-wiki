@@ -25,17 +25,17 @@ let data = (() => {
 %>
 <%- include("./../layout/head", {head: data.head}) %>
 
-<body>
-<section class="wrapper">
-    <%- include("./../layout/menu", {data: data}) %>
+    <body>
+        <section class="wrapper">
+            <%- include("./../layout/menu", {data: data}) %>
 
-    <div id="content">
-        <div class="container-fluid">
-            <%- include("./../modules/update-news", {data: data}) %>
-        </div>
-    </div>
-    <%- include("./../modules/button-go-top") %>
-</section>
-<%- include("./../modules/modal/response", {data: responseModalData}) %>
-</body>
+            <div id="content">
+                <div class="container-fluid">
+                    <%- include("./../modules/update-news", {data: data}) %>
+                </div>
+            </div>
+            <%- include("./../modules/button-go-top") %>
+        </section>
+        <%- include("./../modules/modal/response", {data: responseModalData}) %>
+    </body>
 </html>

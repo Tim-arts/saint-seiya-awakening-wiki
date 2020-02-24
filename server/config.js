@@ -1,7 +1,7 @@
 const i18n = require("i18n");
 global = Object.assign(global, require("./global")(i18n));
 
-require('dotenv').config();
+require("dotenv").config();
 require("./copyFiles");
 require("./transform");
 

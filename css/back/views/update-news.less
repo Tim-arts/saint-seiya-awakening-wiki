@@ -1,2 +1,12 @@
 @import "../global";
 @import "../modules/update-system";
+@import "../modules/tinymce/menus";
+
+/*
+ * Configure the z-index of the editor UI, so when inside a Bootstrap
+ * modal, it will be rendered over the modal.
+ */
+:root {
+    --ck-z-default: 100;
+    --ck-z-modal: calc( var(--ck-z-default) + 999 );
+}
