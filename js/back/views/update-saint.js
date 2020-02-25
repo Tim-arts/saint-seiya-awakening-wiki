@@ -1,7 +1,6 @@
 require("./../base");
 
 import InputFile from "./../modules/InputFile";
-import CompositeImage from "./../modules/CompositeImages";
 import AddAvatarThumbnail from "./../modules/AddAvatarThumbnail";
 import Modal from "./../../shared/modules/ModalResponse";
 import CreateCosmosSuggestion from "./../modules/CreateCosmosSuggestion";

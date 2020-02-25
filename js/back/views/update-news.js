@@ -3,7 +3,6 @@ require("./../base");
 import Tinymce from "tinymce";
 import "tinymce/plugins/autoresize";
 import "tinymce/plugins/fullscreen";
-import "tinymce/plugins/autolink";
 import "tinymce/plugins/link";
 import "tinymce/plugins/anchor";
 import "tinymce/plugins/insertdatetime";
@@ -13,14 +12,11 @@ import "tinymce/plugins/table";
 import "tinymce/plugins/searchreplace";
 import "tinymce/plugins/visualchars";
 import "tinymce/plugins/visualblocks";
-import "tinymce/plugins/wordcount";
-import "tinymce/plugins/paste";
 import "tinymce/plugins/preview";
 import "tinymce/plugins/hr";
 import "tinymce/plugins/imagetools";
 import "tinymce/plugins/autosave";
 import "tinymce/plugins/template";
-import "tinymce/plugins/help";
 import "tinymce/plugins/nonbreaking";
 import "tinymce/plugins/save";
 import "tinymce/plugins/lists";
@@ -28,23 +24,24 @@ import "tinymce/plugins/contextmenu";
 import "tinymce/plugins/directionality";
 import "tinymce/plugins/textcolor";
 import "tinymce/plugins/colorpicker";
-import "tinymce/plugins/textpattern";
-
 import "tinymce/themes/silver";
+
+import Modal from "./../../shared/modules/ModalResponse";
+import HandlerForm from "./../modules/HandlerForm";
 
 document.addEventListener("DOMContentLoaded", () => {
     let uploadElement = document.getElementById("upload");
+    let formElement = document.getElementById("update-news");
+    let modalElement = document.getElementById("response-modal");
     
-    Tinymce.init({
-        selector: "#news-fr",
+    let applicationsId = ["#news-fr", "#news-en"];
+    let options = {
         content_css: "../../../css/back/modules/tinymce/iframe.css",
         paste_data_images: true,
-        plugins: 'preview searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image' +
-            ' link media template table hr nonbreaking anchor insertdatetime lists wordcount ' +
-            ' imagetools textpattern help autolink',
+        plugins: 'preview searchreplace autosave save directionality visualblocks visualchars fullscreen image' +
+            ' link media template table hr nonbreaking anchor insertdatetime lists imagetools',
         toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |' +
             '  numlist bullist | forecolor backcolor removeformat | fullscreen preview save | insertfile image media template link anchor | ltr rtl',
-        image_advtab: true,
         file_picker_callback: function(callback) {
             triggerUpload(callback).then(result => {
                 console.log(result);
@@ -52,36 +49,40 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         file_picker_types: "image",
         images_upload_url: "",
-        height: 600,
+        height: 400,
         image_caption: true,
-        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-        toolbar_drawer: 'sliding',
-        contextmenu: "link image imagetools table"
-    });
-    Tinymce.init({
-        selector: "#news-en",
-        content_css: "../../../css/back/modules/tinymce/iframe.css",
-        paste_data_images: true,
-        plugins: 'preview searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image' +
-            ' link media template table hr nonbreaking anchor insertdatetime lists wordcount ' +
-            ' imagetools textpattern help autolink',
-        toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |' +
-            '  numlist bullist | forecolor backcolor removeformat | fullscreen preview save | insertfile image media template link anchor | ltr rtl',
-        image_advtab: true,
-        file_picker_callback: function(callback) {
-            triggerUpload(callback).then(result => {
-                console.log(result);
-            });
-        },
-        file_picker_types: "image",
-        images_upload_url: "",
-        height: 600,
-        image_caption: true,
-        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-        toolbar_drawer: 'sliding',
-        contextmenu: "link image imagetools table"
+        contextmenu: "link image imagetools table",
+        templates: [
+            {title: 'Template 1', description: 'Some desc 1', content: 'My content'}
+        ]
+    };
+    
+    /* Constructors */
+    let ModalConstructor = new Modal(modalElement);
+    let HandlerFormConstructor = new HandlerForm(formElement, {
+        type: "news",
+        modal: ModalConstructor
     });
     
+    // Add event to leave fullscreen when pressing ESC
+    applicationsId.forEach(id => {
+        let iframeId = (id.substr(1) + "_ifr");
+        
+        Tinymce.init(Object.assign({selector: id}, options));
+        
+        document.getElementById(iframeId).contentWindow.addEventListener("keydown", function (e) {
+            HandlerFormConstructor.hasChanged = true;
+            
+            let keyCode = (e.keyCode ? e.keyCode : e.which);
+            let toggleFullScreenElement = document.querySelector(".tox.tox-fullscreen button[type='button'][aria-label='Fullscreen']");
+            
+            if (keyCode === 27 && toggleFullScreenElement) {
+                toggleFullScreenElement.click();
+            }
+        });
+    });
+    
+    /* Functions */
     async function triggerUpload (callback) {
         function fetch () {
             return new Promise(resolve => {
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         callback(e.target.result, {
                             alt: file.name
                         });
-            
+                        
                         resolve(e.target.result);
                     };
                     reader.readAsDataURL(file);
