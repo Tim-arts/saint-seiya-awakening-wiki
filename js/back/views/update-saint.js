@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
-            "lastUpdateTime": Date.now(),
+            "last_update_time": Date.now(),
             "comment": {
                 "en": document.getElementById("en-comment").value,
                 "fr": document.getElementById("fr-comment").value

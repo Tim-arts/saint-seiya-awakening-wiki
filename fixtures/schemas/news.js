@@ -9,10 +9,10 @@ const news = {
             type: String,
             unique: true
         },
-        lastUpdateTime: {
+        last_update_time: {
             type: "date"
         },
-        comment: String,
+        post: String,
         slug: {
             type: String,
             unique: true

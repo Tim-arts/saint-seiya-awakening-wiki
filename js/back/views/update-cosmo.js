@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "en": document.getElementById("en-name").value,
                 "fr": document.getElementById("fr-name").value
             },
-            "lastUpdateTime": Date.now(),
+            "last_update_time": Date.now(),
             "slug": convertToSlug(document.getElementById("en-name").value, /["._' ]/g, "-"),
             "slug_underscore": convertToSlug(document.getElementById("en-name").value, /["-.' ]/g, "_"),
             "description": {

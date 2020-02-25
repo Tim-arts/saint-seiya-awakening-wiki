@@ -9,7 +9,7 @@ const cosmos = {
             type: String,
             unique: true
         },
-        lastUpdateTime: {
+        last_update_time: {
             type: "date"
         },
         description: String,

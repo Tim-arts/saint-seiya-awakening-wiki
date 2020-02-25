@@ -129,11 +129,16 @@ export default class HandlerForm {
         return {
             _id: id,
             _name: id,
+            _date: Date.now(),
             title: {
                 fr: document.getElementById("fr-title").value,
                 en: document.getElementById("en-title").value
             },
-            _date: Date.now()
+            post: {
+                fr: document.getElementById("news-fr").value,
+                en: document.getElementById("news-en").value
+            },
+            last_update_time: Date.now()
         }
     }
 }

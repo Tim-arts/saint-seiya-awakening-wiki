@@ -11,7 +11,7 @@ const saints = {
             type: String,
             unique: true
         },
-        lastUpdateTime: {
+        last_update_time: {
             type: "date"
         },
         slug: {

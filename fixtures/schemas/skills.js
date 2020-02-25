@@ -9,7 +9,7 @@ const skills = {
             type: String,
             unique: true
         },
-        lastUpdateTime: {
+        last_update_time: {
             type: "date"
         },
         type: {
