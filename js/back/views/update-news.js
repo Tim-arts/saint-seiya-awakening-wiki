@@ -53,6 +53,29 @@ document.addEventListener("DOMContentLoaded", () => {
         contextmenu: "link image imagetools table",
         templates: [
             {title: "Template 1", description: "Some desc 1", content: "My content"}
+        ],
+        color_map: [
+            "#f6e5a1", "Gold",
+            "#00EC98", "Green",
+            "#822EFF", "Purple Regular",
+            "#BBBBF4", "Grey Light 1",
+            "#3f476e", "Grey Light 2",
+            "#BEA0E7", "Purple Light",
+    
+            '#BFEDD2', 'Light Green',
+            '#FBEEB8', 'Light Yellow',
+            '#F8CAC6', 'Light Red',
+            '#ECCAFA', 'Light Purple',
+            '#C2E0F4', 'Light Blue',
+    
+            '#ECF0F1', 'Light Gray',
+            '#CED4D9', 'Medium Gray',
+            '#95A5A6', 'Gray',
+            '#7E8C8D', 'Dark Gray',
+            '#34495E', 'Navy Blue',
+    
+            '#000000', 'Black',
+            '#ffffff', 'White'
         ]
     };
     
