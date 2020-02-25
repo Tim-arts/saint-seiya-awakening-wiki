@@ -9,7 +9,19 @@
     }
 
     let newsData = {
-        title: locals.news ? "Modification de : <span class='text-green'>" + __(news._name) + "</span>" : data.head.title
+        title: locals.news ? "Modification de : <span class='text-green'>" + __(news._name) + "</span>" : data.head.title,
+        _name: {
+            en: locals.cosmo ? __({phrase: news._name, locale: 'en'}) : "",
+            fr: locals.cosmo ? __({phrase: news._name, locale: 'fr'}) : ""
+        },
+        users: () => {
+            users.forEach(user => {
+                let cleanUser = convertToSlug(user, /[ ]/g);
+                %>
+                    <option id="user-<%= cleanUser %>" value="<%= cleanUser %>"><%= user %></option>
+                <%
+            });
+        }
     };
 %>
 
@@ -20,6 +32,28 @@
                 <i class="material-icons"><%= data.icon %></i>
                 <span class="ml-2"><%- newsData.title %></span>
             </h1>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <label for="fr-name">Titre (FR)</label>
+                    <input type="text" id="fr-title" name="fr-title" placeholder="Ex: Nouveau personnage : Hypnos !" class="form-control" minlength="3" <%= locals.news ? "readonly" : "" %> value="<%= newsData._name.fr %>" />
+                </div>
+                <div class="col-6">
+                    <label for="en-name">Titre (EN) <span class="font-weight-bold text-error">*</span></label>
+                    <input type="text" id="en-title" name="en-title" placeholder="Ex: Nouveau personnage : Hypnos !" class="form-control" minlength="3" <%= locals.news ? "readonly" : "" %> value="<%= newsData._name.en %>" required />
+                </div>
+            </div>
+        </div>
+        <div class="col-3 offset-3">
+            <label for="users">User</label>
+            <select id="users" class="custom-select form-control">
+                <option value="">Choose an user</option>
+                <%= newsData.users() %>
+            </select>
         </div>
     </div>
 

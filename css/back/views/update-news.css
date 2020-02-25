@@ -1101,6 +1101,71 @@ form .item .close {
   will-change: color;
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+.tinymce-initialized.tox-tinymce {
+  border: none;
+  border-radius: 4px;
+}
+.tinymce-initialized.tox-tinymce .tox-menubar {
+  background: #15151d;
+}
+.tinymce-initialized.tox-tinymce .tox-menubar button {
+  color: #fff;
+}
+.tinymce-initialized.tox-tinymce:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+  border-right-color: #00EC98;
+}
+.tinymce-initialized.tox-tinymce .tox-menubar + .tox-toolbar,
+.tinymce-initialized.tox-tinymce .tox-menubar + .tox-toolbar-overlord .tox-toolbar__primary {
+  border-top-color: #00EC98;
+}
+.tinymce-initialized.tox-tinymce .tox-toolbar-overlord,
+.tinymce-initialized.tox-tinymce .tox-toolbar,
+.tinymce-initialized.tox-tinymce .tox-toolbar__overflow,
+.tinymce-initialized.tox-tinymce .tox-toolbar__primary {
+  background: #15151d;
+}
+.tinymce-initialized.tox-tinymce .tox-toolbar-overlord {
+  border-bottom: 1px solid #00EC98;
+}
+.tinymce-initialized.tox-tinymce .tox-statusbar {
+  background-color: #15151d;
+  border-top-color: #00EC98;
+  padding: 15px;
+}
+.tinymce-initialized.tox-tinymce .tox-statusbar a,
+.tinymce-initialized.tox-tinymce .tox-statusbar__path-item,
+.tinymce-initialized.tox-tinymce .tox-statusbar__wordcount {
+  color: #fff;
+}
+.tinymce-initialized.tox-tinymce .tox-statusbar__resize-handle {
+  padding: 5px;
+}
+.tinymce-initialized.tox-tinymce .tox-statusbar__resize-handle svg {
+  fill: #fff;
+}
+.tinymce-initialized.tox-tinymce .tox-tbtn {
+  background: none;
+  color: rgba(255, 255, 255, 0.5);
+}
+.tinymce-initialized.tox-tinymce .tox-tbtn svg,
+.tinymce-initialized.tox-tinymce .tox-tbtn--enabled svg,
+.tinymce-initialized.tox-tinymce .tox-tbtn--enabled:hover {
+  fill: rgba(255, 255, 255, 0.5);
+}
+.tinymce-initialized.tox-tinymce .tox-statusbar__branding {
+  display: none;
+}
+.tox .tox-collection__item-label p,
+.tox .tox-collection__item-label h1,
+.tox .tox-collection__item-label h2,
+.tox .tox-collection__item-label h3,
+.tox .tox-collection__item-label h4,
+.tox .tox-collection__item-label h5,
+.tox .tox-collection__item-label h6,
+.tox .tox-collection__item-label pre {
+  color: #222f3e !important;
+  background-color: transparent !important;
+}
 /*
  * Configure the z-index of the editor UI, so when inside a Bootstrap
  * modal, it will be rendered over the modal.

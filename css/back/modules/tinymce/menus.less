@@ -1,0 +1,70 @@
+.tinymce-initialized.tox-tinymce {
+    border: none;
+    border-radius: @radius-default;
+
+    .tox-menubar {
+        background: @grey-dark-2;
+
+        button {
+            color: @white;
+        }
+    }
+
+    &:not([dir=rtl]) {
+        .tox-toolbar__group:not(:last-of-type) {
+            border-right-color: @success;
+        }
+    }
+
+    .tox-menubar+.tox-toolbar, .tox-menubar+.tox-toolbar-overlord .tox-toolbar__primary {
+        border-top-color: @success;
+    }
+
+    .tox-toolbar-overlord, .tox-toolbar, .tox-toolbar__overflow, .tox-toolbar__primary {
+        background: @grey-dark-2;
+    }
+
+    .tox-toolbar-overlord {
+        border-bottom: 1px solid @success;
+    }
+
+    .tox-statusbar {
+        background-color: @grey-dark-2;
+        border-top-color: @success;
+        padding: 15px;
+    }
+
+    .tox-statusbar a, .tox-statusbar__path-item, .tox-statusbar__wordcount {
+        color: @white;
+    }
+
+    .tox-statusbar__resize-handle {
+        padding: 5px;
+
+        svg {
+            fill: @white;
+        }
+    }
+
+    .tox-tbtn {
+        background: none;
+        color: @white-alpha-5;
+
+        svg, &--enabled svg, &--enabled:hover {
+            fill: @white-alpha-5;
+        }
+    }
+
+    .tox-statusbar__branding {
+        .hide();
+    }
+}
+
+.tox {
+    .tox-collection__item-label {
+        p, h1, h2, h3, h4, h5, h6, pre {
+            color: #222f3e !important;
+            background-color: transparent !important;
+        }
+    }
+}

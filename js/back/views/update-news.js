@@ -5,7 +5,6 @@ import "tinymce/plugins/autoresize";
 import "tinymce/plugins/fullscreen";
 import "tinymce/plugins/link";
 import "tinymce/plugins/anchor";
-import "tinymce/plugins/insertdatetime";
 import "tinymce/plugins/image";
 import "tinymce/plugins/media";
 import "tinymce/plugins/table";
@@ -38,10 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let options = {
         content_css: "../../../css/back/modules/tinymce/iframe.css",
         paste_data_images: true,
-        plugins: 'preview searchreplace autosave save directionality visualblocks visualchars fullscreen image' +
-            ' link media template table hr nonbreaking anchor insertdatetime lists imagetools',
-        toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |' +
-            '  numlist bullist | forecolor backcolor removeformat | fullscreen preview save | insertfile image media template link anchor | ltr rtl',
+        plugins: "preview searchreplace autosave save directionality visualblocks visualchars fullscreen image" +
+            " link media template table hr nonbreaking anchor lists imagetools",
+        toolbar: "undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |" +
+            "  numlist bullist | forecolor backcolor removeformat | fullscreen preview save | insertfile image media template link anchor | ltr rtl",
         file_picker_callback: function(callback) {
             triggerUpload(callback).then(result => {
                 console.log(result);
@@ -53,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         image_caption: true,
         contextmenu: "link image imagetools table",
         templates: [
-            {title: 'Template 1', description: 'Some desc 1', content: 'My content'}
+            {title: "Template 1", description: "Some desc 1", content: "My content"}
         ]
     };
     
@@ -68,7 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     applicationsId.forEach(id => {
         let iframeId = (id.substr(1) + "_ifr");
         
-        Tinymce.init(Object.assign({selector: id}, options));
+        Tinymce.init(Object.assign({selector: id}, options)).then(result => {
+            result[0].editorContainer.classList.add("tinymce-initialized");
+        });
         
         document.getElementById(iframeId).contentWindow.addEventListener("keydown", function (e) {
             HandlerFormConstructor.hasChanged = true;
@@ -78,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (keyCode === 27 && toggleFullScreenElement) {
                 toggleFullScreenElement.click();
+                
+                e.preventDefault();
             }
         });
     });

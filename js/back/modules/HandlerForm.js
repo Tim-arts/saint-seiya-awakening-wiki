@@ -66,7 +66,7 @@ export default class HandlerForm {
             }
         
             $.post(this.getAttribute("action"), {
-                data: _this.getData(this.options.type)
+                data: _this.getData(this.options.type, _data._id)
             }, (response) => {
                 if (response.error) {
                     _this.options.modal.show({
@@ -92,42 +92,48 @@ export default class HandlerForm {
         
     };
     
-    getData (type) {
+    getData (type, id) {
         switch (type) {
             case "cosmos":
-                return this.getCosmoData();
+                return this.getCosmoData(id);
             case "skills":
-                return this.getSkillData();
+                return this.getSkillData(id);
             case "saints":
-                return this.getSaintData();
+                return this.getSaintData(id);
             case "news":
-                return this.getNewsData();
+                return this.getNewsData(id);
             default:
                 console.log(type + " isn't recognized!");
         }
     }
     
-    getCosmoData () {
+    getCosmoData (id) {
         return {
         
         }
     }
     
-    getSkillData () {
+    getSkillData (id) {
         return {
         
         }
     }
     
-    getSaintData () {
+    getSaintData (id) {
         return {
         
         }
     }
     
-    getNewsData () {
+    getNewsData (id) {
         return {
-        
+            _id: id,
+            _name: id,
+            title: {
+                fr: document.getElementById("fr-title").value,
+                en: document.getElementById("en-title").value
+            },
+            _date: Date.now()
         }
     }
 }
