@@ -146,6 +146,16 @@ module.exports = {
                 }
                 
                 break;
+            case "news":
+                let post = data.slug_underscore + "_" + singularType + "_post";
+    
+                enTranslation[[name]] = data._name.en;
+                frTranslation[[name]] = data._name.fr;
+                
+                enTranslation[[post]] = data.post.en;
+                frTranslation[[post]] = data.post.fr;
+                
+                break;
             default:
                 console.log("Type isn't recognized!");
         }
@@ -198,6 +208,10 @@ module.exports = {
                         data.skills_suggestions[i].comment = data.slug_underscore + "_" + singularType + "_comment_skills_suggestion_" + i;
                     });
                 }
+                
+                break;
+            case "news":
+                data.post = data.slug_underscore + "_" + singularType + "_post";
                 
                 break;
             default:

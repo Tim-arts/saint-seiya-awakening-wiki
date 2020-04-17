@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let formElement = document.getElementById("update-news");
     let modalElement = document.getElementById("response-modal");
     
-    let applicationsId = ["#news-fr", "#news-en"];
+    let applicationsId = ["#fr-news", "#en-news"];
     let options = {
         content_css: "../../../css/back/modules/tinymce/iframe.css",
         paste_data_images: true,

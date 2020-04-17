@@ -5,11 +5,13 @@ const router = express.Router();
 const CosmoModel = require("./../../../fixtures/models/cosmos");
 const SkillModel = require("./../../../fixtures/models/skills");
 const SaintModel = require("./../../../fixtures/models/saints");
+const NewsModel = require("./../../../fixtures/models/news");
 
 // Require controllers modules
 const cosmo_controller = require("./controllers/CUD")(CosmoModel, "cosmos");
 const skill_controller = require("./controllers/CUD")(SkillModel,"skills");
 const saint_controller = require("./controllers/CUD")(SaintModel, "saints");
+const news_controller = require("./controllers/CUD")(NewsModel, "news");
 
 module.exports = function () {
     // Route: /back/cosmo/create
@@ -38,6 +40,15 @@ module.exports = function () {
     
     // Route: /back/saint/delete
     router.post('/saint/delete', saint_controller.delete);
+    
+    // Route: /back/news/create
+    router.post('/news/create', news_controller.create);
+    
+    // Route: /back/news/update
+    router.post('/news/update', news_controller.update);
+    
+    // Route: /back/news/delete
+    router.post('/news/delete', news_controller.delete);
     
     return router;
 };

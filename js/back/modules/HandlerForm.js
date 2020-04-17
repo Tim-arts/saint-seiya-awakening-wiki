@@ -1,4 +1,4 @@
-import { generateUuidv4 } from "./../../shared/helpers";
+import { convertToSlug, generateUuidv4 } from "./../../shared/helpers";
 
 export default class HandlerForm {
     constructor(el, options) {
@@ -37,7 +37,7 @@ export default class HandlerForm {
             } else {
                 data._id = generateUuidv4();
                 data.messageAction = () => {
-                    this.options.show({
+                    this.options.modal.show({
                         message: "successfullyAdded",
                         title: "Success!",
                         backdrop: "static",
@@ -54,7 +54,7 @@ export default class HandlerForm {
         
         this.el.addEventListener("submit", function (e) {
             e.preventDefault();
-        
+            
             if (!_this.hasChanged) {
                 _this.options.modal.show({
                     message: "noChanges",
@@ -64,9 +64,9 @@ export default class HandlerForm {
             
                 return;
             }
-        
+            
             $.post(this.getAttribute("action"), {
-                data: _this.getData(this.options.type, _data._id)
+                data: _this.getData(_this.options.type, _data._id)
             }, (response) => {
                 if (response.error) {
                     _this.options.modal.show({
@@ -84,6 +84,9 @@ export default class HandlerForm {
             });
         });
     
+        this.el.addEventListener("input", () => {
+            _this.hasChanged = true;
+        });
         window.onbeforeunload = () => {
             if (_this.hasChanged) {
                 return true;
@@ -128,17 +131,19 @@ export default class HandlerForm {
     getNewsData (id) {
         return {
             _id: id,
-            _name: id,
-            _date: Date.now(),
-            title: {
+            _name: {
                 fr: document.getElementById("fr-title").value,
                 en: document.getElementById("en-title").value
             },
+            _date: Date.now(),
+            slug: convertToSlug(document.getElementById("en-title").value, "-"),
+            slug_underscore: convertToSlug(document.getElementById("en-title").value, "_"),
             post: {
-                fr: document.getElementById("news-fr").value,
-                en: document.getElementById("news-en").value
+                fr: document.getElementById("fr-news").value,
+                en: document.getElementById("en-news").value
             },
-            last_update_time: Date.now()
+            last_update_time: Date.now(),
+            user: document.getElementById("users").value
         }
     }
 }

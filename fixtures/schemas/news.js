@@ -20,7 +20,8 @@ const news = {
         slug_underscore: {
             type: String,
             unique: true
-        }
+        },
+        user: String
     }
 };
 
